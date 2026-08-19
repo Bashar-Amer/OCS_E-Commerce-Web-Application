@@ -1,0 +1,109 @@
+@{
+    ViewData["Title"] = "Order Invoice Receipt";
+    string orderId = ViewBag.OrderId ?? "ORD-849201";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/pages/invoice.css" asp-append-version="true" />
+}
+
+<section class="py-5 bg-light">
+    <div class="container py-4">
+        <div class="d-flex justify-content-between align-items-center mb-4 btn-print-hide">
+            <a asp-controller="Shop" asp-action="Index" class="btn btn-outline-secondary btn-sm"><i class="bi bi-arrow-left me-1"></i> Back to Shop</a>
+            <button type="button" class="btn btn-barrameru btn-sm" onclick="window.print()"><i class="bi bi-printer-fill me-1"></i> Print Invoice</button>
+        </div>
+
+        <div class="invoice-card bg-white p-4 p-md-5">
+            <div class="d-flex justify-content-between align-items-start border-bottom pb-4 mb-4">
+                <div>
+                    <img src="~/images/Logo_Barrameru.png" alt="Barrameru" style="height: 48px;" class="mb-3">
+                    <p class="small text-muted mb-0">Jln Cempaka Wangi No 22<br>Jakarta - Indonesia<br>+6221 2002 2012</p>
+                </div>
+                <div class="text-end">
+                    <h3 class="fw-bold text-secondary mb-1">INVOICE</h3>
+                    <div class="text-muted small">Order ID: <span id="invOrderNumber" class="fw-bold text-dark">#@orderId</span></div>
+                    <div class="text-muted small">Date: <span id="invOrderDate">August 19, 2026</span></div>
+                    <span class="badge bg-success mt-2">PAID / APPROVED</span>
+                </div>
+            </div>
+
+            <div class="row g-4 mb-4">
+                <div class="col-sm-6">
+                    <h6 class="fw-bold text-secondary mb-2">Billed To:</h6>
+                    <div id="invCustomerName" class="fw-bold">John Doe</div>
+                    <div id="invCustomerAddress" class="small text-muted">124 Mountain Trail Rd, Denver, CO 80201</div>
+                    <div id="invCustomerEmail" class="small text-muted">john.doe@example.com</div>
+                </div>
+                <div class="col-sm-6 text-sm-end">
+                    <h6 class="fw-bold text-secondary mb-2">Payment Method:</h6>
+                    <div class="small text-muted">Direct Bank / Credit Card</div>
+                    <div class="small text-muted">Status: Completed</div>
+                </div>
+            </div>
+
+            <div class="table-responsive mb-4">
+                <table class="table table-bordered align-middle">
+                    <thead class="table-light">
+                        <tr class="small fw-bold text-secondary">
+                            <th>Item Description</th>
+                            <th class="text-center" style="width: 15%;">Unit Price</th>
+                            <th class="text-center" style="width: 15%;">Qty</th>
+                            <th class="text-end" style="width: 20%;">Line Total</th>
+                        </tr>
+                    </thead>
+                    <tbody id="invoiceItemsBody">
+                        <tr>
+                            <td>
+                                <strong>Black Binoculars</strong>
+                                <div class="small text-muted">Knives & Tools</div>
+                            </td>
+                            <td class="text-center">$65.00</td>
+                            <td class="text-center">1</td>
+                            <td class="text-end fw-bold">$65.00</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Yellow Tent</strong>
+                                <div class="small text-muted">Tent & Accesories</div>
+                            </td>
+                            <td class="text-center">$65.00</td>
+                            <td class="text-center">1</td>
+                            <td class="text-end fw-bold">$65.00</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Camouflage Backpack</strong>
+                                <div class="small text-muted">Bags & Pack</div>
+                            </td>
+                            <td class="text-center">$140.00</td>
+                            <td class="text-center">1</td>
+                            <td class="text-end fw-bold">$140.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="row justify-content-end">
+                <div class="col-md-5">
+                    <div class="d-flex justify-content-between py-1 border-bottom small">
+                        <span>Subtotal:</span>
+                        <span id="invSubtotal" class="fw-bold">$270.00</span>
+                    </div>
+                    <div class="d-flex justify-content-between py-1 border-bottom small">
+                        <span>Shipping (Insured Courier):</span>
+                        <span class="text-success fw-bold">FREE</span>
+                    </div>
+                    <div class="d-flex justify-content-between py-2 border-bottom">
+                        <strong class="fs-5 text-secondary">Total Paid:</strong>
+                        <strong id="invTotal" class="fs-5 text-teal" style="color: #5E959F;">$270.00</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="~/js/pages/invoice.js" asp-append-version="true"></script>
+}

@@ -1,0 +1,21 @@
+/* ==========================================================================
+   PAGE: CONTACT US (Contact.cshtml)
+   ========================================================================== */
+
+.contact-icon-box {
+  background-color: var(--primary);
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+}
+
+.contact-form-box {
+  max-width: 850px;
+  margin: 0 auto;
+  background: var(--white);
+  border: 1px solid #eaeaea;
+  padding: 40px;
+}

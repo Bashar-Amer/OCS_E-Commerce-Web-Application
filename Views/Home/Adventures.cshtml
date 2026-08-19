@@ -1,0 +1,125 @@
+@{
+    ViewData["Title"] = "Activity & Adventures";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/pages/adventures.css" asp-append-version="true" />
+}
+
+<!-- Hero Banner (Matches adventures.jpg) -->
+<section class="inner-hero-banner" style="background-image: url('/images/orange-tourist-tent-illuminated-from-inside-stands-in-mountains-above-clouds.jpg');">
+    <div class="inner-hero-overlay"></div>
+    <div class="container position-relative">
+        <div class="inner-hero-content">
+            <div class="breadcrumbs">HOME / ADVENTURES</div>
+            <h1>Activity & Adventures</h1>
+            <div class="sub-text">Get your backpack ready!</div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 1: Explore Activities (6 photos 3x2) -->
+<section class="py-5 bg-white text-center">
+    <div class="container py-4">
+        <span class="sub-badge text-teal">Select Your Activity</span>
+        <h2 class="fw-bold mb-5">Explore Activities</h2>
+
+        <div class="row g-4 mb-4">
+            <div class="col-md-6 activity-grid-item">
+                <img src="~/images/spending-time-by-the-campfire.jpg" alt="Campfire" class="img-fluid w-100">
+            </div>
+            <div class="col-md-6 activity-grid-item">
+                <img src="~/images/paddling-kayaker-on-the-scenic-lake.jpg" alt="Kayaker" class="img-fluid w-100">
+            </div>
+            <div class="col-md-6 activity-grid-item">
+                <img src="~/images/group-of-mountain-bikers-riding-on-road-outdoors-in-winter-.jpg" alt="Mountain Bikers" class="img-fluid w-100">
+            </div>
+            <div class="col-md-6 activity-grid-item">
+                <img src="~/images/happy-couple-sitting-on-paddleboards-at-lake.jpg" alt="Paddleboards" class="img-fluid w-100">
+            </div>
+            <div class="col-md-6 activity-grid-item">
+                <img src="~/images/group-of-friends-with-backpacks-doing-trekking-excursion-on-mountain.jpg" alt="Trekking" class="img-fluid w-100">
+            </div>
+            <div class="col-md-6 activity-grid-item">
+                <img src="~/images/happy-asian-young-travellers-with-4wd-drive-car-off-road-in-forest--e1664201038495.jpg" alt="4WD Offroad" class="img-fluid w-100">
+            </div>
+        </div>
+
+        <a asp-controller="Shop" asp-action="Index" class="btn btn-barrameru">EXPLORE MORE</a>
+    </div>
+</section>
+
+<!-- Section 2: Camp with your friends, build some memories Banner -->
+<section style="background-image: url('/images/friends-in-sweaters-during-the-outdoor-recreation.jpg'); background-size: cover; background-position: center; padding: 90px 0; text-align: center; position: relative;">
+    <div style="position: absolute; inset: 0; background: rgba(21, 42, 41, 0.78);"></div>
+    <div class="container position-relative text-white" style="z-index: 2;">
+        <span class="sub-badge text-white">Enjoy The Activities</span>
+        <h2 class="text-white fw-bold mb-3" style="font-size: 2.4rem;">Camp with your friends, build some memories</h2>
+        <p class="text-white-50 small mb-4 mx-auto" style="max-width: 550px;">
+            Lacinia bibendum curae maximus molestie tempor urna. Proin augue efficitur fermentum gravida duis pretium integer consectetur est ac sodales.
+        </p>
+        <a asp-controller="Shop" asp-action="Index" class="btn btn-barrameru">
+            DISCOVER MORE <i class="bi bi-chevron-right small ms-1"></i>
+        </a>
+    </div>
+</section>
+
+<!-- Section 3: Why Choose Us / Discover your real existence -->
+<section class="py-5 bg-white">
+    <div class="container py-4">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6">
+                <span class="sub-badge text-teal">Why Choose Us</span>
+                <h2 class="fw-bold mb-3" style="font-size: 2.2rem;">Discover your real existence</h2>
+                <p class="text-muted small mb-4">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.
+                </p>
+                <div class="mb-3">
+                    <h6 class="fw-bold text-secondary mb-1"><i class="bi bi-check2 text-primary me-2"></i> Original Product</h6>
+                    <p class="text-muted small ps-4 mb-0">In sollicitudin metus fames lacus rutrum eget. Pede consectetur in pharetra massa orci.</p>
+                </div>
+                <div class="mb-3">
+                    <h6 class="fw-bold text-secondary mb-1"><i class="bi bi-check2 text-primary me-2"></i> Easy Payment</h6>
+                    <p class="text-muted small ps-4 mb-0">In sollicitudin metus fames lacus rutrum eget. Pede consectetur in pharetra massa orci.</p>
+                </div>
+                <div class="mb-3">
+                    <h6 class="fw-bold text-secondary mb-1"><i class="bi bi-check2 text-primary me-2"></i> Professional Expert</h6>
+                    <p class="text-muted small ps-4 mb-0">In sollicitudin metus fames lacus rutrum eget. Pede consectetur in pharetra massa orci.</p>
+                </div>
+            </div>
+            <div class="col-lg-6 position-relative">
+                <img src="~/images/high-angle-view-of-confident-couple-climbing-mountain-e1664201089286.jpg" alt="Climbers" class="img-fluid w-100" style="height: 400px; object-fit: cover;">
+                <div class="bg-white p-3 shadow position-absolute top-0 end-0 m-4 d-flex align-items-center gap-3 border">
+                    <div class="fs-2 fw-bold text-secondary">4.8</div>
+                    <div>
+                        <div class="text-warning small"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+                        <div class="small text-muted fw-bold">From Google Business</div>
+                        <div class="text-muted" style="font-size: 10px;">(729 Reviews)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 4: Testimonials -->
+<section style="background-image: url('/images/tourist-sitting-phu-sub-lek-viewpoint-sunset-lopburi-thailand-e1664089245105.jpg'); background-size: cover; background-position: center; min-height: 440px; display: flex; align-items: center; position: relative;">
+    <div style="position: absolute; inset: 0; background: rgba(21, 42, 41, 0.85);"></div>
+    <div class="container position-relative" style="z-index: 2;">
+        <div class="row">
+            <div class="col-lg-6 text-white border p-4 p-md-5" style="border-color: rgba(255,255,255,0.2) !important;">
+                <span class="sub-badge text-white">Testimonials</span>
+                <h2 class="text-white fw-bold mb-3">What They Say</h2>
+                <p class="fst-italic text-white-50 mb-4" style="font-size: 15px;">
+                    "We've seen amazing results already. I wish I would have thought of it first. Barrameru should be nominated for service of the year. Great Job!"
+                </p>
+                <div class="fw-bold text-white small">Sara G. Helvey</div>
+                <div class="text-white-50 small">Teacher</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="~/js/pages/adventures.js" asp-append-version="true"></script>
+}

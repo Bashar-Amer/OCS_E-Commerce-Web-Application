@@ -1,0 +1,16 @@
+/* ==========================================================================
+   PAGE: INVOICE (Invoice.cshtml)
+   ========================================================================== */
+
+.invoice-card {
+  background: var(--white);
+  border: 1px solid #eaeaea;
+  padding: 40px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+}
+
+@media print {
+  body { background: #fff; }
+  header, footer, .floating-newsletter-wrap, .btn-print-hide { display: none !important; }
+  .invoice-card { border: none; box-shadow: none; padding: 0; }
+}

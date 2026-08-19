@@ -1,0 +1,85 @@
+@{
+    ViewData["Title"] = "My Cart";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/pages/cart.css" asp-append-version="true" />
+}
+
+<!-- Hero Banner (Matches barrameru-v1-cart-page.jpg) -->
+<section class="inner-hero-banner" style="background-image: url('/images/orange-tourist-tent-illuminated-from-inside-stands-in-mountains-above-clouds.jpg');">
+    <div class="inner-hero-overlay"></div>
+    <div class="container position-relative">
+        <div class="inner-hero-content">
+            <div class="breadcrumbs">HOME / SHOP / CART</div>
+            <h1>My Cart</h1>
+            <div class="sub-text">Don't forget to double check your order</div>
+        </div>
+    </div>
+</section>
+
+<!-- Cart Main Section -->
+<section class="py-5 bg-white">
+    <div class="container py-4">
+        <div class="row g-5">
+            <!-- Left: Cart Table & Coupon -->
+            <div class="col-lg-8">
+                <div class="table-responsive">
+                    <table class="table align-middle">
+                        <thead class="border-bottom">
+                            <tr class="text-secondary small fw-bold">
+                                <th style="width: 5%;"></th>
+                                <th style="width: 45%;">Product</th>
+                                <th style="width: 15%;">Price</th>
+                                <th style="width: 15%;">Quantity</th>
+                                <th style="width: 20%;">Subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cartTableBodyExact">
+                            <!-- Injected dynamically via JS to match sample: Black Binoculars ($65), Yellow Tent ($65), Camouflage Backpack ($140) = $270.00 -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="mt-3 mb-5">
+                    <button type="button" class="btn btn-sm text-secondary fw-semibold rounded-0 px-3 py-2" style="background-color: #d8b4a6; color: #fff !important;" onclick="window.renderCartPage()">
+                        UPDATE CART
+                    </button>
+                </div>
+
+                <!-- Coupon Box -->
+                <div class="d-flex gap-2" style="max-width: 450px;">
+                    <input type="text" id="cartCouponInput" class="form-control rounded-0" placeholder="Coupon code">
+                    <button type="button" class="btn btn-barrameru flex-shrink-0" id="btnCartApplyCoupon">APPLY COUPON</button>
+                </div>
+            </div>
+
+            <!-- Right: Cart Totals Box -->
+            <div class="col-lg-4">
+                <div class="cart-totals-box">
+                    <h5 class="fw-bold mb-4">Cart Totals</h5>
+                    
+                    <div class="d-flex justify-content-between py-2 border-bottom small">
+                        <span class="fw-bold text-secondary">Subtotal</span>
+                        <span id="cartSubtotalVal" class="fw-bold text-secondary">$270.00</span>
+                    </div>
+
+                    <div class="d-flex justify-content-between py-3 mb-4 border-bottom">
+                        <span class="fw-bold text-secondary">Total</span>
+                        <strong id="cartTotalVal" class="fw-bold text-secondary fs-5">$270.00</strong>
+                    </div>
+
+                    <div class="d-grid">
+                        <a asp-controller="Checkout" asp-action="Index" class="btn btn-barrameru py-2">
+                            Proceed to Checkout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="~/js/pages/cart.js" asp-append-version="true"></script>
+}

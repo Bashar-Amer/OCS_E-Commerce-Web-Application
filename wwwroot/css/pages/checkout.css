@@ -1,0 +1,17 @@
+/* ==========================================================================
+   PAGE: CHECKOUT (Index.cshtml)
+   ========================================================================== */
+
+.checkout-box {
+  background: var(--white);
+  border: 1px solid #eaeaea;
+  padding: 24px;
+}
+
+.checkout-item-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #f1f1f1;
+  font-size: 13px;
+}

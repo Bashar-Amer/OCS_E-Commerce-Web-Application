@@ -1,0 +1,154 @@
+@{
+    ViewData["Title"] = "Checkout";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/pages/checkout.css" asp-append-version="true" />
+}
+
+<!-- Hero Banner (Matches barrameru-v1-checkout-page.jpg) -->
+<section class="inner-hero-banner" style="background-image: url('/images/orange-tourist-tent-illuminated-from-inside-stands-in-mountains-above-clouds.jpg');">
+    <div class="inner-hero-overlay"></div>
+    <div class="container position-relative">
+        <div class="inner-hero-content">
+            <div class="breadcrumbs">HOME / SHOP / CHECKOUT</div>
+            <h1>Checkout</h1>
+            <div class="sub-text">Don't forget to double check your order</div>
+        </div>
+    </div>
+</section>
+
+<!-- Checkout Main Section -->
+<section class="py-5 bg-white">
+    <div class="container py-4">
+        <form id="exactCheckoutForm">
+            <div class="row g-5">
+                <!-- Left: Billing Details -->
+                <div class="col-lg-7">
+                    <h5 class="fw-bold mb-4 text-secondary">Billing Details</h5>
+
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label small fw-semibold text-secondary">First Name <span class="text-danger">*</span></label>
+                            <input type="text" id="chkFirstName" class="form-control rounded-0" required placeholder="First Name" value="John">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label small fw-semibold text-secondary">Last Name <span class="text-danger">*</span></label>
+                            <input type="text" id="chkLastName" class="form-control rounded-0" required placeholder="Last Name" value="Doe">
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label small fw-semibold text-secondary">Company Name (optional)</label>
+                            <input type="text" class="form-control rounded-0" placeholder="Company Name">
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label small fw-semibold text-secondary">Country / Region <span class="text-danger">*</span></label>
+                            <select class="form-select rounded-0">
+                                <option selected>United States (US)</option>
+                                <option>United Kingdom (UK)</option>
+                                <option>Canada</option>
+                                <option>Australia</option>
+                                <option>Germany</option>
+                            </select>
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label small fw-semibold text-secondary">Street address <span class="text-danger">*</span></label>
+                            <input type="text" id="chkStreet" class="form-control rounded-0 mb-2" required placeholder="House number and street name" value="124 Mountain Trail Rd">
+                            <input type="text" class="form-control rounded-0" placeholder="Apartment, suite, unit, etc. (optional)" value="Apt 4B">
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label small fw-semibold text-secondary">Town / City <span class="text-danger">*</span></label>
+                            <input type="text" id="chkCity" class="form-control rounded-0" required placeholder="Town / City" value="Denver">
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label small fw-semibold text-secondary">State <span class="text-danger">*</span></label>
+                            <select class="form-select rounded-0">
+                                <option selected>California</option>
+                                <option>Colorado</option>
+                                <option>Washington</option>
+                                <option>Oregon</option>
+                            </select>
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label small fw-semibold text-secondary">ZIP Code <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control rounded-0" required placeholder="ZIP Code" value="80201">
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label small fw-semibold text-secondary">Phone <span class="text-danger">*</span></label>
+                            <input type="tel" id="chkPhone" class="form-control rounded-0" required placeholder="Phone" value="+1 555-019-2834">
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label small fw-semibold text-secondary">Email Address <span class="text-danger">*</span></label>
+                            <input type="email" id="chkEmail" class="form-control rounded-0" required placeholder="Email Address" value="john.doe@example.com">
+                        </div>
+
+                        <div class="col-12 mt-4">
+                            <label class="form-label small fw-semibold text-secondary">Order Notes (optional)</label>
+                            <textarea class="form-control rounded-0" rows="3" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Your Order Box -->
+                <div class="col-lg-5">
+                    <div class="checkout-box mb-4">
+                        <h5 class="fw-bold mb-3 text-secondary">Your Order</h5>
+
+                        <div class="d-flex justify-content-between pb-2 border-bottom small fw-bold text-secondary">
+                            <span>Product</span>
+                            <span>Subtotal</span>
+                        </div>
+
+                        <div id="checkoutOrderItemsList">
+                            <!-- Dynamically loaded via checkout.js -->
+                        </div>
+
+                        <div class="d-flex justify-content-between py-2 border-bottom small">
+                            <span class="fw-bold text-secondary">Subtotal</span>
+                            <span id="chkSubtotal" class="fw-bold text-secondary">$270.00</span>
+                        </div>
+
+                        <div class="d-flex justify-content-between py-3 border-bottom">
+                            <span class="fw-bold text-secondary">Total</span>
+                            <strong id="chkTotal" class="fw-bold text-secondary fs-5">$270.00</strong>
+                        </div>
+                    </div>
+
+                    <!-- Coupon Banner Box -->
+                    <div class="border p-3 mb-4 bg-light small">
+                        <strong>Have a coupon?</strong> <a href="javascript:void(0)" class="text-teal text-decoration-underline" style="color: #5E959F;" onclick="document.getElementById('couponCollapse').classList.toggle('show')">Click here to enter your coupon code</a>
+                        <div class="collapse mt-2" id="couponCollapse">
+                            <div class="input-group">
+                                <input type="text" class="form-control form-control-sm rounded-0" placeholder="Coupon Code">
+                                <button class="btn btn-sm btn-barrameru" type="button">Apply</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Payment Notice & Place Order Button -->
+                    <div class="checkout-box">
+                        <p class="small text-muted mb-3">
+                            Sorry, it seems that there are no available payment methods for your state. Please contact us if you require assistance or wish to make alternate arrangements.
+                        </p>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-barrameru py-2">
+                                PLACE ORDER
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="~/js/pages/checkout.js" asp-append-version="true"></script>
+}

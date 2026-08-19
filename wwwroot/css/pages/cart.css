@@ -1,0 +1,15 @@
+/* ==========================================================================
+   PAGE: CART (Index.cshtml)
+   ========================================================================== */
+
+.cart-item-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--secondary);
+}
+
+.cart-totals-box {
+  background: var(--white);
+  border: 1px solid #eaeaea;
+  padding: 24px;
+}

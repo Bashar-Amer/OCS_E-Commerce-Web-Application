@@ -1,0 +1,151 @@
+@{
+    ViewData["Title"] = "Our Team";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/pages/team.css" asp-append-version="true" />
+}
+
+<!-- Hero Banner (Matches team.jpg) -->
+<section class="inner-hero-banner" style="background-image: url('/images/orange-tourist-tent-illuminated-from-inside-stands-in-mountains-above-clouds.jpg');">
+    <div class="inner-hero-overlay"></div>
+    <div class="container position-relative">
+        <div class="inner-hero-content">
+            <div class="breadcrumbs">HOME / TEAM</div>
+            <h1>Our Team</h1>
+            <div class="sub-text">Get your backpack ready!</div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 1: Team Works -->
+<section class="py-5 bg-white">
+    <div class="container py-4">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-5">
+                <span class="sub-badge text-teal">Team Works</span>
+                <h2 class="fw-bold mb-3" style="font-size: 2.2rem; line-height: 1.2;">
+                    With great teamwork, comes great success!
+                </h2>
+                <p class="text-muted small mb-4">
+                    Commodo arcu vivamus porta metus urna nisi pretium ultrices. Felis iaculis accumsan in sagittis consectetuer. Hac sit lacinia sagittis consectetur sed sem dictumst.
+                </p>
+                <a asp-controller="Home" asp-action="About" class="btn btn-barrameru">DISCOVER MORE</a>
+            </div>
+
+            <div class="col-lg-7">
+                <div class="position-relative">
+                    <img src="~/images/group-of-smiling-friends-hiking-with-backpacks-outdoors-travel-tourism-hike-and-people-concept.jpg" alt="Hiking Group" class="img-fluid w-100" style="height: 380px; object-fit: cover;">
+                    <div class="bg-white p-3 shadow position-absolute top-0 start-0 m-4 border text-center" style="min-width: 130px;">
+                        <h3 class="fw-bold mb-0 text-teal" style="color: #5E959F;">20+</h3>
+                        <div class="small fw-bold text-muted" style="font-size: 10px;">YEARS OF EXPERIENCE</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 2: Meet The Team (8 members on dark slate) -->
+<section class="team-section-dark text-center text-white">
+    <div class="container">
+        <h2 class="text-white fw-bold mb-5">Meet The Team</h2>
+        <div class="row g-4">
+            <div class="col-lg-3 col-6">
+                <div class="team-card-box">
+                    <img src="~/images/Man1-e1664201497878.jpg" alt="Heidi B. Smith">
+                    <h6>Heidi B. Smith</h6>
+                    <span>Founder</span>
+                </div>
+            </div>
+            <div class="col-lg-3 col-6">
+                <div class="team-card-box">
+                    <img src="~/images/Woman1-e1664201437817.jpg" alt="Debora Currey">
+                    <h6>Debora Currey</h6>
+                    <span>Co-Founder</span>
+                </div>
+            </div>
+            <div class="col-lg-3 col-6">
+                <div class="team-card-box">
+                    <img src="~/images/Man2-e1664201483980.jpg" alt="Dan Rodriguez">
+                    <h6>Dan Rodriguez</h6>
+                    <span>Store Manager</span>
+                </div>
+            </div>
+            <div class="col-lg-3 col-6">
+                <div class="team-card-box">
+                    <img src="~/images/Woman2-e1664201425282.jpg" alt="Jaclyn Pritchard">
+                    <h6>Jaclyn Pritchard</h6>
+                    <span>Marketing</span>
+                </div>
+            </div>
+
+            <!-- Row 2 -->
+            <div class="col-lg-3 col-6">
+                <div class="team-card-box">
+                    <img src="~/images/Woman3-e1664201412760.jpg" alt="Trisha Emerson">
+                    <h6>Trisha Emerson</h6>
+                    <span>Sales</span>
+                </div>
+            </div>
+            <div class="col-lg-3 col-6">
+                <div class="team-card-box">
+                    <img src="~/images/Man3-e1664201470248.jpg" alt="Michael Ashman">
+                    <h6>Michael Ashman</h6>
+                    <span>Sales</span>
+                </div>
+            </div>
+            <div class="col-lg-3 col-6">
+                <div class="team-card-box">
+                    <img src="~/images/Woman4-e1664201382381.jpg" alt="Christina Dery">
+                    <h6>Christina Dery</h6>
+                    <span>Trip Planner</span>
+                </div>
+            </div>
+            <div class="col-lg-3 col-6">
+                <div class="team-card-box">
+                    <img src="~/images/Man4-e1664201448957.jpg" alt="Phillip Morgan">
+                    <h6>Phillip Morgan</h6>
+                    <span>Tourist Guide</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 3: Camp with your friends, build some memories -->
+<section style="background-image: url('/images/friends-in-sweaters-during-the-outdoor-recreation.jpg'); background-size: cover; background-position: center; padding: 90px 0; text-align: center; position: relative;">
+    <div style="position: absolute; inset: 0; background: rgba(21, 42, 41, 0.78);"></div>
+    <div class="container position-relative text-white" style="z-index: 2;">
+        <span class="sub-badge text-white">Enjoy The Activities</span>
+        <h2 class="text-white fw-bold mb-3" style="font-size: 2.4rem;">Camp with your friends, build some memories</h2>
+        <p class="text-white-50 small mb-4 mx-auto" style="max-width: 550px;">
+            Lacinia bibendum curae maximus molestie tempor urna. Proin augue efficitur fermentum gravida duis pretium integer consectetur est ac sodales.
+        </p>
+        <a asp-controller="Shop" asp-action="Index" class="btn btn-barrameru">
+            DISCOVER MORE <i class="bi bi-chevron-right small ms-1"></i>
+        </a>
+    </div>
+</section>
+
+<!-- Section 4: Interested in joining our team? -->
+<section class="py-5 bg-white">
+    <div class="container py-3">
+        <div class="p-4 p-md-5 border rounded-0 bg-light d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-4">
+            <div>
+                <span class="sub-badge text-teal">Join Us</span>
+                <h3 class="fw-bold mb-0">Interested in joining our team?</h3>
+            </div>
+            <div class="text-muted small" style="max-width: 420px;">
+                Nisl rutrum aliquam hac gravida molestie luctus. Lobortis nisl interdum iaculis purus ut tortor hac. A habitasse ante ex magna vestibulum.
+            </div>
+            <div>
+                <a asp-controller="Home" asp-action="Contact" class="btn btn-barrameru flex-shrink-0">CONTACT US</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="~/js/pages/team.js" asp-append-version="true"></script>
+}

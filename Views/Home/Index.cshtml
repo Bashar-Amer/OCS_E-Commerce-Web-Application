@@ -1,0 +1,561 @@
+@{
+    ViewData["Title"] = "Outdoor Adventure & Camping Store";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/pages/home.css" asp-append-version="true" />
+}
+
+<!-- 1. Hero Banner (Matches homepage.jpg) -->
+<section style="background-image: url('/images/friends-in-sweaters-during-the-outdoor-recreation.jpg'); background-size: cover; background-position: center; min-height: 640px; display: flex; align-items: center; position: relative;">
+    <div style="position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,0,0,0.1) 0%, rgba(21,42,41,0.6) 50%, rgba(21,42,41,0.85) 100%);"></div>
+    <div class="container position-relative" style="z-index: 2;">
+        <div class="row justify-content-end">
+            <div class="col-lg-6 col-md-8 text-white">
+                <h1 class="text-white fw-bold mb-3" style="font-size: 3.2rem; line-height: 1.15;">
+                    Plan Your<br>Adventure, Plan<br>Your Camp
+                </h1>
+                <p class="text-white-50 mb-4" style="font-size: 13px; max-width: 440px;">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.
+                </p>
+                <a asp-controller="Shop" asp-action="Index" class="btn btn-barrameru">
+                    DISCOVER MORE <i class="bi bi-chevron-right small ms-1"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 2. Two Promo Cards -->
+<section class="py-5 bg-white">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="promo-banner-card rounded-0" style="background-image: url('/images/top-view-of-travel-equipment-for-a-mountain-trip-e1664201262219.jpg');">
+                    <div class="promo-banner-content">
+                        <h4>Super Sale Up to OFF 50%</h4>
+                        <p>Lorem ipsum dolor sit amet consectetur adipiscing elit dolor</p>
+                        <a asp-controller="Shop" asp-action="Index" class="btn btn-barrameru-outline">SHOP NOW</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="promo-banner-card rounded-0" style="background-image: url('/images/panoramic-shot-of-two-young-tourists-looking-at-geographic-map-on-grey-background-e1664119398628.jpg');">
+                    <div class="promo-banner-content">
+                        <h4>Get The Best Deal for Almost Everything</h4>
+                        <p>Lorem ipsum dolor sit amet consectetur adipiscing elit dolor</p>
+                        <a asp-controller="Shop" asp-action="Index" class="btn btn-barrameru-outline">SHOP NOW</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 3. Explore Our Products (4 products) -->
+<section class="pb-5 bg-white">
+    <div class="container">
+        <h2 class="mb-4 text-start fw-bold" style="font-size: 1.8rem;">Explore Our Products</h2>
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6">
+                <div class="template-product-card">
+                    <span class="template-sale-tag">Sale!</span>
+                    <img src="~/images/blue-hiking-backpack-with-fitness-mat-isolated-on-2021-09-03-13-40-43-utc-1.jpg" alt="Trekking Backpack" class="template-product-img">
+                    <div>
+                        <h6 class="template-product-title"><a href="/Shop/Details/9">Trekking Backpack</a></h6>
+                        <div class="template-product-price">
+                            <span class="old-price">$185.00</span> $150.00
+                        </div>
+                    </div>
+                    <button class="btn btn-template-add-cart" onclick="BarrameruStore.addToCart(9, 1)">Add to cart</button>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="template-product-card">
+                    <span class="template-sale-tag">Sale!</span>
+                    <img src="~/images/tourist-with-a-backpack-against-the-sky-panorama.jpg" alt="Brown Ankle High Men Boots" class="template-product-img">
+                    <div>
+                        <h6 class="template-product-title"><a href="/Shop/Details/10">Brown Ankle High Men Boots</a></h6>
+                        <div class="template-product-price">
+                            <span class="old-price">$135.00</span> $125.00
+                        </div>
+                    </div>
+                    <button class="btn btn-template-add-cart" onclick="BarrameruStore.addToCart(10, 1)">Add to cart</button>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="template-product-card">
+                    <span class="template-sale-tag">Sale!</span>
+                    <img src="~/images/spending-time-by-the-campfire.jpg" alt="Metal Water Bottle" class="template-product-img">
+                    <div>
+                        <h6 class="template-product-title"><a href="/Shop/Details/11">Metal Water Bottle</a></h6>
+                        <div class="template-product-price">
+                            <span class="old-price">$65.00</span> $60.00
+                        </div>
+                    </div>
+                    <button class="btn btn-template-add-cart" onclick="BarrameruStore.addToCart(11, 1)">Add to cart</button>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="template-product-card">
+                    <span class="template-sale-tag">Sale!</span>
+                    <img src="~/images/paddling-kayaker-on-the-scenic-lake.jpg" alt="Portable Charcoal Grill" class="template-product-img">
+                    <div>
+                        <h6 class="template-product-title"><a href="/Shop/Details/12">Portable Charcoal Grill</a></h6>
+                        <div class="template-product-price">
+                            <span class="old-price">$120.00</span> $100.00
+                        </div>
+                    </div>
+                    <button class="btn btn-template-add-cart" onclick="BarrameruStore.addToCart(12, 1)">Add to cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 4. Discover Your Real Existence Wide Dark Banner -->
+<section style="background-image: url('/images/orange-tourist-tent-illuminated-from-inside-stands-in-mountains-above-clouds.jpg'); background-size: cover; background-position: center; padding: 70px 0; text-align: center; position: relative;">
+    <div style="position: absolute; inset: 0; background: rgba(21, 42, 41, 0.75);"></div>
+    <div class="container position-relative text-white" style="z-index: 2;">
+        <h2 class="text-white fw-bold mb-2">Discover Your Real Existence</h2>
+        <p class="text-white-50 small mb-4">Lorem ipsum dolor sit amet consectetur adipiscing elit dolor</p>
+        <a asp-controller="Home" asp-action="About" class="btn btn-barrameru-outline">MORE INFO</a>
+    </div>
+</section>
+
+<!-- 5. Who We Are Section -->
+<section class="py-5 bg-white">
+    <div class="container py-4">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-5">
+                <span class="sub-badge text-teal">Who We Are</span>
+                <h2 class="fw-bold mb-3" style="font-size: 2.2rem; line-height: 1.2;">
+                    More than an adventure, its a way of life
+                </h2>
+                <p class="text-muted small mb-3">
+                    Fermentum scelerisque efficitur nostra sociosqu augue elementum litora suscipit dui malesuada. Purus volutpat arcu felis vel libero luctus metus integer.
+                </p>
+                <p class="text-muted small mb-4">
+                    Enim scelerisque si leo amet vitae cras penatibus semper ornare commodo vestibulum.
+                </p>
+                <a asp-controller="Home" asp-action="About" class="btn btn-barrameru">DISCOVER MORE</a>
+            </div>
+
+            <div class="col-lg-7">
+                <div class="row g-3">
+                    <div class="col-sm-6">
+                        <img src="~/images/back-view-of-a-couple-of-hikers-with-backpack.jpg" alt="Hikers" class="img-fluid w-100" style="height: 380px; object-fit: cover;">
+                    </div>
+                    <div class="col-sm-6 d-flex flex-column justify-content-between">
+                        <img src="~/images/spending-time-by-the-campfire.jpg" alt="Campfire" class="img-fluid w-100 mb-3" style="height: 190px; object-fit: cover;">
+                        <div class="quote-box-white flex-grow-1">
+                            <div class="quote-mark-teal">“</div>
+                            <div class="quote-text-script">
+                                Fill your life with adventures, not things. Have stories to tell not stuff to show.
+                            </div>
+                            <small class="fw-bold text-muted">Heidi B. Smith</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 6. Go Adventure Banner -->
+<section style="background-image: url('/images/tourist-with-a-backpack-against-the-sky-panorama.jpg'); background-size: cover; background-position: center; min-height: 480px; display: flex; align-items: center; position: relative;">
+    <div style="position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,0,0,0.1) 0%, rgba(21, 42, 41, 0.7) 40%, rgba(21, 42, 41, 0.88) 100%);"></div>
+    <div class="container position-relative" style="z-index: 2;">
+        <div class="row justify-content-end">
+            <div class="col-lg-6 col-md-8 text-white">
+                <span class="sub-badge text-white">Go Adventure</span>
+                <h2 class="text-white fw-bold mb-3" style="font-size: 2.5rem;">
+                    Free your spirit, break the chains, Go camp!
+                </h2>
+                <p class="text-white-50 small mb-4">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.
+                </p>
+                <a asp-controller="Shop" asp-action="Index" class="btn btn-barrameru">
+                    DISCOVER MORE <i class="bi bi-chevron-right small ms-1"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 7. Explore Activities Grid (4 photos) -->
+<section class="py-5 bg-white text-center">
+    <div class="container py-4">
+        <span class="sub-badge text-teal">Select Your Activity</span>
+        <h2 class="fw-bold mb-5">Explore Activities</h2>
+
+        <div class="row g-4 mb-4">
+            <div class="col-md-6">
+                <img src="~/images/spending-time-by-the-campfire.jpg" alt="Campfire Friends" class="img-fluid w-100" style="height: 260px; object-fit: cover;">
+            </div>
+            <div class="col-md-6">
+                <img src="~/images/paddling-kayaker-on-the-scenic-lake.jpg" alt="Kayaker" class="img-fluid w-100" style="height: 260px; object-fit: cover;">
+            </div>
+            <div class="col-md-6">
+                <img src="~/images/group-of-friends-with-backpacks-doing-trekking-excursion-on-mountain.jpg" alt="Trekking" class="img-fluid w-100" style="height: 260px; object-fit: cover;">
+            </div>
+            <div class="col-md-6">
+                <img src="~/images/happy-asian-young-travellers-with-4wd-drive-car-off-road-in-forest--e1664201038495.jpg" alt="4WD Adventure" class="img-fluid w-100" style="height: 260px; object-fit: cover;">
+            </div>
+        </div>
+
+        <a asp-controller="Home" asp-action="Adventures" class="btn btn-barrameru">EXPLORE MORE</a>
+    </div>
+</section>
+
+<!-- 8. Stats Counter Strip -->
+<section class="stats-counter-strip" style="background-image: url('/images/43.jpg');">
+    <div class="container position-relative" style="z-index: 2;">
+        <div class="row text-center g-4">
+            <div class="col-6 col-md-3">
+                <h2 class="text-white fw-bold mb-1">20+ Yrs</h2>
+                <span class="small text-uppercase font-monospace text-white-50">OF EXPERIENCE</span>
+            </div>
+            <div class="col-6 col-md-3">
+                <h2 class="text-white fw-bold mb-1">17-Acre</h2>
+                <span class="small text-uppercase font-monospace text-white-50">OUTDOOR AREA</span>
+            </div>
+            <div class="col-6 col-md-3">
+                <h2 class="text-white fw-bold mb-1">14K+</h2>
+                <span class="small text-uppercase font-monospace text-white-50">PRODUCT SOLD</span>
+            </div>
+            <div class="col-6 col-md-3">
+                <h2 class="text-white fw-bold mb-1">97%</h2>
+                <span class="small text-uppercase font-monospace text-white-50">HAPPY CUSTOMER</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 9. New Aquipment for Your Adventure (8 products 4x2) -->
+<section class="py-5 bg-white text-center">
+    <div class="container py-4">
+        <span class="sub-badge text-teal">New Arrival</span>
+        <h2 class="fw-bold mb-5">New Aquipment for Your Adventure</h2>
+
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6">
+                <div class="template-product-card">
+                    <span class="template-sale-tag">Sale!</span>
+                    <img src="~/images/top-view-of-travel-equipment-for-a-mountain-trip-e1664201262219.jpg" alt="Black Folding Stool" class="template-product-img">
+                    <div>
+                        <h6 class="template-product-title"><a href="/Shop/Details/1">Black Folding Stool</a></h6>
+                        <div class="template-product-rating"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+                        <div class="template-product-price"><span class="old-price">$58.00</span> $45.00</div>
+                    </div>
+                    <button class="btn btn-template-add-cart" onclick="BarrameruStore.addToCart(1, 1)">Add to cart</button>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="template-product-card">
+                    <span class="template-sale-tag">Sale!</span>
+                    <img src="~/images/orange-tourist-tent-illuminated-from-inside-stands-in-mountains-above-clouds.jpg" alt="Yellow Tent" class="template-product-img">
+                    <div>
+                        <h6 class="template-product-title"><a href="/Shop/Details/2">Yellow Tent</a></h6>
+                        <div class="template-product-rating"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+                        <div class="template-product-price"><span class="old-price">$70.00</span> $65.00</div>
+                    </div>
+                    <button class="btn btn-template-add-cart" onclick="BarrameruStore.addToCart(2, 1)">Add to cart</button>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="template-product-card">
+                    <span class="template-sale-tag">Sale!</span>
+                    <img src="~/images/camping-in-steppe.jpg" alt="Camping Bed" class="template-product-img">
+                    <div>
+                        <h6 class="template-product-title"><a href="/Shop/Details/3">Camping Bed</a></h6>
+                        <div class="template-product-rating"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+                        <div class="template-product-price"><span class="old-price">$40.00</span> $35.00</div>
+                    </div>
+                    <button class="btn btn-template-add-cart" onclick="BarrameruStore.addToCart(3, 1)">Add to cart</button>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="template-product-card">
+                    <img src="~/images/sandy-field-in-desert-of-egypt.jpg" alt="Orange Camping Mat" class="template-product-img">
+                    <div>
+                        <h6 class="template-product-title"><a href="/Shop/Details/4">Orange Camping Mat</a></h6>
+                        <div class="template-product-price mt-3">$20.00</div>
+                    </div>
+                    <button class="btn btn-template-add-cart" onclick="BarrameruStore.addToCart(4, 1)">Add to cart</button>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="template-product-card">
+                    <span class="template-sale-tag">Sale!</span>
+                    <img src="~/images/43.jpg" alt="Folding Knife" class="template-product-img">
+                    <div>
+                        <h6 class="template-product-title"><a href="/Shop/Details/5">Folding Knife</a></h6>
+                        <div class="template-product-price mt-3"><span class="old-price">$30.00</span> $25.00</div>
+                    </div>
+                    <button class="btn btn-template-add-cart" onclick="BarrameruStore.addToCart(5, 1)">Add to cart</button>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="template-product-card">
+                    <img src="~/images/panoramic-shot-of-two-young-tourists-looking-at-geographic-map-on-grey-background-e1664119398628.jpg" alt="Flashlight" class="template-product-img">
+                    <div>
+                        <h6 class="template-product-title"><a href="/Shop/Details/6">Flashlight</a></h6>
+                        <div class="template-product-rating"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star"></i></div>
+                        <div class="template-product-price">$50.00</div>
+                    </div>
+                    <button class="btn btn-template-add-cart" onclick="BarrameruStore.addToCart(6, 1)">Add to cart</button>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="template-product-card">
+                    <span class="template-sale-tag">Sale!</span>
+                    <img src="~/images/high-angle-view-of-confident-couple-climbing-mountain-e1664201089286.jpg" alt="Black Binoculars" class="template-product-img">
+                    <div>
+                        <h6 class="template-product-title"><a href="/Shop/Details/7">Black Binoculars</a></h6>
+                        <div class="template-product-price mt-3"><span class="old-price">$75.00</span> $65.00</div>
+                    </div>
+                    <button class="btn btn-template-add-cart" onclick="BarrameruStore.addToCart(7, 1)">Add to cart</button>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="template-product-card">
+                    <span class="template-sale-tag">Sale!</span>
+                    <img src="~/images/tourist-sitting-phu-sub-lek-viewpoint-sunset-lopburi-thailand-e1664089245105.jpg" alt="Compass" class="template-product-img">
+                    <div>
+                        <h6 class="template-product-title"><a href="/Shop/Details/8">Compass</a></h6>
+                        <div class="template-product-rating"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+                        <div class="template-product-price"><span class="old-price">$55.00</span> $50.00</div>
+                    </div>
+                    <button class="btn btn-template-add-cart" onclick="BarrameruStore.addToCart(8, 1)">Add to cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 10. Why Choose Us / Discover your real existence -->
+<section class="py-5 bg-white">
+    <div class="container py-4">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6">
+                <span class="sub-badge text-teal">Why Choose Us</span>
+                <h2 class="fw-bold mb-3" style="font-size: 2.2rem;">Discover your real existence</h2>
+                <p class="text-muted small mb-4">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.
+                </p>
+
+                <div class="mb-3">
+                    <h6 class="fw-bold text-secondary mb-1"><i class="bi bi-check2 text-primary me-2"></i> Original Product</h6>
+                    <p class="text-muted small ps-4 mb-0">In sollicitudin metus fames lacus rutrum eget. Pede consectetur in pharetra massa orci.</p>
+                </div>
+                <div class="mb-3">
+                    <h6 class="fw-bold text-secondary mb-1"><i class="bi bi-check2 text-primary me-2"></i> Easy Payment</h6>
+                    <p class="text-muted small ps-4 mb-0">In sollicitudin metus fames lacus rutrum eget. Pede consectetur in pharetra massa orci.</p>
+                </div>
+                <div class="mb-3">
+                    <h6 class="fw-bold text-secondary mb-1"><i class="bi bi-check2 text-primary me-2"></i> Professional Expert</h6>
+                    <p class="text-muted small ps-4 mb-0">In sollicitudin metus fames lacus rutrum eget. Pede consectetur in pharetra massa orci.</p>
+                </div>
+            </div>
+
+            <div class="col-lg-6 position-relative">
+                <img src="~/images/high-angle-view-of-confident-couple-climbing-mountain-e1664201089286.jpg" alt="Climbers" class="img-fluid w-100" style="height: 440px; object-fit: cover;">
+                <div class="bg-white p-3 shadow position-absolute top-0 end-0 m-4 d-flex align-items-center gap-3 border">
+                    <div class="fs-2 fw-bold text-secondary">4.8</div>
+                    <div>
+                        <div class="text-warning small"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+                        <div class="small text-muted fw-bold">From Google Business</div>
+                        <div class="text-muted" style="font-size: 10px;">(729 Reviews)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 11. Camp with your friends, build some memories Banner -->
+<section style="background-image: url('/images/friends-in-sweaters-during-the-outdoor-recreation.jpg'); background-size: cover; background-position: center; padding: 90px 0; text-align: center; position: relative;">
+    <div style="position: absolute; inset: 0; background: rgba(21, 42, 41, 0.78);"></div>
+    <div class="container position-relative text-white" style="z-index: 2;">
+        <span class="sub-badge text-white">Enjoy The Activities</span>
+        <h2 class="text-white fw-bold mb-3" style="font-size: 2.4rem;">Camp with your friends, build some memories</h2>
+        <p class="text-white-50 small mb-4 mx-auto" style="max-width: 550px;">
+            Lacinia bibendum curae maximus molestie tempor urna. Proin augue efficitur fermentum gravida duis pretium integer consectetur est ac sodales.
+        </p>
+        <a asp-controller="Home" asp-action="Adventures" class="btn btn-barrameru">
+            DISCOVER MORE <i class="bi bi-chevron-right small ms-1"></i>
+        </a>
+    </div>
+</section>
+
+<!-- 12. Frequently Asked Questions -->
+<section class="py-5 bg-white">
+    <div class="container py-4">
+        <div class="row g-5">
+            <div class="col-lg-5">
+                <span class="sub-badge text-teal">FAQs</span>
+                <h2 class="fw-bold mb-3">Frequently Asked Questions</h2>
+                <p class="text-muted small mb-4">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.
+                </p>
+                <img src="~/images/blue-hiking-backpack-with-fitness-mat-isolated-on-2021-09-03-13-40-43-utc-1.jpg" alt="Backpack & Boots" class="img-fluid" style="max-height: 280px; object-fit: contain;">
+            </div>
+
+            <div class="col-lg-7">
+                <div class="accordion" id="homeFaqs">
+                    <div class="accordion-item border rounded-0 mb-3">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button fw-bold text-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                1. Where Can I Find Information?
+                            </button>
+                        </h2>
+                        <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#homeFaqs">
+                            <div class="accordion-body text-muted small">
+                                Cubilia porttitor metus scelerisque torquent vestibulum ac id ultrices ex congue montes. In turpis laoreet morbi vivamus eleifend pellentesque vulputate scelerisque.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item border rounded-0 mb-3">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed fw-bold text-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                2. What Are Your Terms And Conditions?
+                            </button>
+                        </h2>
+                        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#homeFaqs">
+                            <div class="accordion-body text-muted small">
+                                Lorem ipsum dolor sit amet consectetur adipiscing elit dolor.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item border rounded-0 mb-3">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed fw-bold text-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                3. Do you ship internationaly?
+                            </button>
+                        </h2>
+                        <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#homeFaqs">
+                            <div class="accordion-body text-muted small">
+                                Yes, we offer insured worldwide courier shipping on all camping orders.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item border rounded-0 mb-3">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed fw-bold text-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                                4. Can I Buy Directly From The Factory?
+                            </button>
+                        </h2>
+                        <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#homeFaqs">
+                            <div class="accordion-body text-muted small">
+                                All our products are available directly through this online store hub.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item border rounded-0 mb-3">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed fw-bold text-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+                                5. What Kinds of Payment Do You Accept?
+                            </button>
+                        </h2>
+                        <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#homeFaqs">
+                            <div class="accordion-body text-muted small">
+                                We accept Visa, MasterCard, Maestro, JCB, PayPal, and Cash on Delivery.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item border rounded-0 mb-3">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed fw-bold text-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#faq6">
+                                6. When do I receive my order?
+                            </button>
+                        </h2>
+                        <div id="faq6" class="accordion-collapse collapse" data-bs-parent="#homeFaqs">
+                            <div class="accordion-body text-muted small">
+                                Standard delivery arrives within 2 to 4 business days.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 13. Testimonials Dark Banner -->
+<section style="background-image: url('/images/tourist-sitting-phu-sub-lek-viewpoint-sunset-lopburi-thailand-e1664089245105.jpg'); background-size: cover; background-position: center; min-height: 440px; display: flex; align-items: center; position: relative;">
+    <div style="position: absolute; inset: 0; background: rgba(21, 42, 41, 0.85);"></div>
+    <div class="container position-relative" style="z-index: 2;">
+        <div class="row">
+            <div class="col-lg-6 text-white border p-4 p-md-5" style="border-color: rgba(255,255,255,0.2) !important;">
+                <span class="sub-badge text-white">Testimonials</span>
+                <h2 class="text-white fw-bold mb-3">What They Say</h2>
+                <p class="fst-italic text-white-50 mb-4" style="font-size: 15px;">
+                    "We've seen amazing results already. I wish I would have thought of it first. Barrameru should be nominated for service of the year. Great Job!"
+                </p>
+                <div class="fw-bold text-white small">Sara C. Helvey</div>
+                <div class="text-white-50 small">Teacher</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 14. Latest Article (4 blog cards) -->
+<section class="py-5 bg-white">
+    <div class="container py-4">
+        <span class="sub-badge text-teal">From Our Blog</span>
+        <h2 class="fw-bold mb-4">Latest Article</h2>
+
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6">
+                <div class="blog-card-item">
+                    <img src="~/images/spending-time-by-the-campfire.jpg" alt="Campfire">
+                    <div class="blog-card-body">
+                        <span class="blog-tag-badge">NATURE</span>
+                        <h6 class="blog-card-title"><a href="#">How To Build An Upside Down Campfire</a></h6>
+                        <p class="small text-muted mb-3">Volutpat molestie platea consectetur libero a adipiscing lorem viverra ut dis...</p>
+                        <div class="text-muted" style="font-size: 11px;">September 22, 2022 / No Comments</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="blog-card-item">
+                    <img src="~/images/camping-in-steppe.jpg" alt="Tents">
+                    <div class="blog-card-body">
+                        <span class="blog-tag-badge">TIPS</span>
+                        <h6 class="blog-card-title"><a href="#">Tents vs Hammocks – Which One is Right For You?</a></h6>
+                        <p class="small text-muted mb-3">Volutpat molestie platea consectetur libero a adipiscing lorem viverra ut dis...</p>
+                        <div class="text-muted" style="font-size: 11px;">September 22, 2022 / No Comments</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="blog-card-item">
+                    <img src="~/images/group-of-friends-with-backpacks-doing-trekking-excursion-on-mountain.jpg" alt="Friends">
+                    <div class="blog-card-body">
+                        <span class="blog-tag-badge">CAMPING STORY</span>
+                        <h6 class="blog-card-title"><a href="#">Don't Let Adventure Go By the Wayside</a></h6>
+                        <p class="small text-muted mb-3">Volutpat molestie platea consectetur libero a adipiscing lorem viverra ut dis...</p>
+                        <div class="text-muted" style="font-size: 11px;">September 22, 2022 / No Comments</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="blog-card-item">
+                    <img src="~/images/tourist-with-a-backpack-against-the-sky-panorama.jpg" alt="Backpack Guide">
+                    <div class="blog-card-body">
+                        <span class="blog-tag-badge">EQUIPMENT</span>
+                        <h6 class="blog-card-title"><a href="#">How to Pack a Hiking Backpack For All Day Comfort</a></h6>
+                        <p class="small text-muted mb-3">Volutpat molestie platea consectetur libero a adipiscing lorem viverra ut dis...</p>
+                        <div class="text-muted" style="font-size: 11px;">September 22, 2022 / No Comments</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="~/js/pages/home.js" asp-append-version="true"></script>
+}

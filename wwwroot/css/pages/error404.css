@@ -1,0 +1,20 @@
+/* ==========================================================================
+   PAGE: 404 ERROR (Error404.cshtml)
+   ========================================================================== */
+
+.error-404-hero {
+  background-image: url('/images/austria-tyrol-tannheimer-tal-young-couple-resting-on-hiking-tour.jpg');
+  background-size: cover;
+  background-position: center center;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.error-404-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(0,0,0,0.1) 0%, rgba(21, 42, 41, 0.4) 40%, rgba(21, 42, 41, 0.85) 100%);
+}

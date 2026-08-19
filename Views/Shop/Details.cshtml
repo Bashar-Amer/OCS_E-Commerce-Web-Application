@@ -1,0 +1,209 @@
+@{
+    ViewData["Title"] = "Yellow Tent - Single Product";
+    int productId = ViewBag.ProductId ?? 2;
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/pages/product-details.css" asp-append-version="true" />
+}
+
+<!-- Hero Banner (Matches barrameru-v1-single-product.jpg) -->
+<section class="inner-hero-banner" style="background-image: url('/images/orange-tourist-tent-illuminated-from-inside-stands-in-mountains-above-clouds.jpg');">
+    <div class="inner-hero-overlay"></div>
+    <div class="container position-relative">
+        <div class="inner-hero-content">
+            <div class="breadcrumbs">HOME / SHOP</div>
+            <h1 id="detailsPageTitle">Yellow Tent</h1>
+            <div class="sub-text" id="detailsPageSubTitle">Tent & Accesories</div>
+        </div>
+    </div>
+</section>
+
+<!-- Product Summary Section -->
+<section class="py-5 bg-white">
+    <div class="container py-4">
+        <div class="row g-5">
+            <!-- Left Info Column -->
+            <div class="col-lg-6">
+                <h1 class="fw-bold mb-2 text-secondary" id="prodTitle" style="font-size: 2.3rem;">Yellow Tent</h1>
+                <div class="d-flex align-items-center gap-2 mb-3">
+                    <div class="text-warning small">
+                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                    </div>
+                    <span class="text-muted small">(1 customer review)</span>
+                </div>
+
+                <p class="text-muted small mb-4" id="prodDesc">
+                    Massa aliquet justo egestas primis suspendisse amet dapibus netus facilisis class montes. Phasellus commodo ultrices integer pellentesque aptent condimentum odio lacus. Mattis elit aenean placerat adipiscing lectus nibh nunc ad scelerisque turpis cubilia.
+                </p>
+
+                <div class="fs-4 fw-bold mb-4" style="color: #5E959F;">
+                    <span class="text-dark me-2">Price:</span>
+                    <span class="text-muted text-decoration-line-through fs-5 fw-normal me-2" id="prodOldPrice">$70.00</span>
+                    <span id="prodPrice">$65.00</span>
+                </div>
+
+                <!-- Add to cart & Wishlist -->
+                <div class="d-flex align-items-center gap-3 mb-4">
+                    <input type="number" id="detailQtyInput" class="form-control rounded-0 text-center" value="1" min="1" style="width: 65px; height: 44px;">
+                    <button type="button" class="btn btn-barrameru" id="btnAddToCartMain">ADD TO CART</button>
+                    <a href="javascript:void(0)" class="text-dark small fw-bold" id="btnWishlistMain"><i class="bi bi-heart me-1"></i> Whishlist</a>
+                    <a href="javascript:void(0)" class="text-muted small"><i class="bi bi-share me-1"></i> Share</a>
+                </div>
+
+                <div class="small text-muted border-top pt-3 mb-4">
+                    <div class="mb-1"><strong>SKU:</strong> <span id="prodSku">0001015-BRO</span></div>
+                    <div class="mb-1"><strong>Category:</strong> <span id="prodCategory">Tent & Accesories</span></div>
+                    <div><strong>Tags:</strong> <span>Adventure, Camping, Outdoor</span></div>
+                </div>
+
+                <!-- Secure Payment Box -->
+                <div class="border p-3 rounded-0 bg-light d-flex align-items-start gap-3">
+                    <i class="bi bi-shield-check fs-2 text-teal" style="color: #5E959F;"></i>
+                    <div>
+                        <h6 class="fw-bold mb-1">Secure & Easy Payment</h6>
+                        <p class="text-muted small mb-0">Lectus hac tortor congue habitasse consectetur. Nibh id sapien libero mollis vehicula nostra accumsan potenti cras imperdiet.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Gallery Column -->
+            <div class="col-lg-6">
+                <div class="border p-4 text-center position-relative mb-3 bg-white">
+                    <button class="btn btn-sm btn-light position-absolute top-0 end-0 m-3 border-0"><i class="bi bi-search"></i></button>
+                    <img id="mainDetailImg" src="/images/orange-tourist-tent-illuminated-from-inside-stands-in-mountains-above-clouds.jpg" alt="Product" class="img-fluid" style="max-height: 380px; object-fit: contain;">
+                </div>
+                <!-- 4 Thumbnails Strip -->
+                <div class="row g-2" id="detailThumbnailsRow">
+                    <div class="col-3">
+                        <img src="~/images/orange-tourist-tent-illuminated-from-inside-stands-in-mountains-above-clouds.jpg" alt="Thumb 1" class="img-fluid border p-1 detail-thumb-active" style="height: 80px; width: 100%; object-fit: contain; cursor: pointer;">
+                    </div>
+                    <div class="col-3">
+                        <img src="~/images/top-view-of-travel-equipment-for-a-mountain-trip-e1664201262219.jpg" alt="Thumb 2" class="img-fluid border p-1" style="height: 80px; width: 100%; object-fit: contain; cursor: pointer;">
+                    </div>
+                    <div class="col-3">
+                        <img src="~/images/sandy-field-in-desert-of-egypt.jpg" alt="Thumb 3" class="img-fluid border p-1" style="height: 80px; width: 100%; object-fit: contain; cursor: pointer;">
+                    </div>
+                    <div class="col-3">
+                        <img src="~/images/camping-in-steppe.jpg" alt="Thumb 4" class="img-fluid border p-1" style="height: 80px; width: 100%; object-fit: contain; cursor: pointer;">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Description / Additional Info / Reviews Tabs -->
+        <div class="mt-5 pt-4 border-top">
+            <ul class="nav nav-tabs border-0 gap-2 mb-4" role="tablist">
+                <li class="nav-item">
+                    <button class="nav-link active rounded-0 fw-bold text-dark border px-4 py-2" data-bs-toggle="tab" data-bs-target="#tabDesc" type="button">Description</button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link rounded-0 fw-bold text-muted border px-4 py-2" data-bs-toggle="tab" data-bs-target="#tabAddInfo" type="button">Additional information</button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link rounded-0 fw-bold text-muted border px-4 py-2" data-bs-toggle="tab" data-bs-target="#tabReviews" type="button">Reviews (1)</button>
+                </li>
+            </ul>
+
+            <div class="tab-content border p-4 bg-white">
+                <div class="tab-pane fade show active" id="tabDesc">
+                    <h5 class="fw-bold mb-3">Description</h5>
+                    <p class="text-muted small">
+                        Interdum quis dignissim nisi lacinia dolor per luctus odio penatibus nostra letius. Scelerisque penatibus facilisis tortor ac tincidunt dui proin nam inceptos ultrices quisque. Tortor finibus sem vulputate lacus sapien letius ultricies lorem. Natoque sociosqu adipiscing volutpat integer mollis tempus scelerisque cubilia litora. Ultrices dictum sodales turpis euismod etiam ultricies quis consectetur mauris. Fames auctor maecenas inceptos sem aenean vitae. Mattis conubia ante sed condimentum quisque.
+                    </p>
+                    <p class="text-muted small">
+                        Sagittis luctus integer primis orci vestibulum mollis non. Nibh fermentum quis fusce elit volutpat maximus aliquam sollicitudin potenti montes. Iaculis integer dui si maecenas ex tellus etiam sagittis duis amet dolor. Torquent quisque tempor penatibus parturient nascetur donec tincidunt dapibus. Proin nostra curabitur ut fringilla tempus dictum pharetra commodo molestie dolor. Praesent nulla viverra aptent sociosqu nascetur eget lectus commodo tristique est litora. Mauris dapibus turpis imperdiet nam molestie erat fusce a facilisis ut.
+                    </p>
+                </div>
+                <div class="tab-pane fade" id="tabAddInfo">
+                    <table class="table table-bordered small">
+                        <tr><th style="width: 30%;">Weight</th><td>2.5 kg</td></tr>
+                        <tr><th>Dimensions</th><td>210 × 140 × 110 cm</td></tr>
+                        <tr><th>Capacity</th><td>2 - 3 Person</td></tr>
+                    </table>
+                </div>
+                <div class="tab-pane fade" id="tabReviews">
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <div class="text-warning"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+                        <strong>Alex H.</strong> <span class="text-muted small">- August 10, 2022</span>
+                    </div>
+                    <p class="small text-muted">"Excellent camping tent, set up took 5 minutes and withstands wind easily."</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Related Products Section -->
+        <div class="mt-5 pt-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h3 class="fw-bold mb-0">Related Products</h3>
+                <a asp-controller="Shop" asp-action="Index" class="btn btn-barrameru btn-sm">ALL PRODUCTS</a>
+            </div>
+
+            <div class="row g-4">
+                <!-- Left Vertical Banner -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="p-4 text-white text-center position-relative h-100" style="background-image: url('/images/paddling-kayaker-on-the-scenic-lake.jpg'); background-size: cover; min-height: 280px; display: flex; flex-direction: column; justify-content: center;">
+                        <div style="position: absolute; inset: 0; background: rgba(21,42,41,0.75);"></div>
+                        <div class="position-relative" style="z-index: 2;">
+                            <h5 class="text-white fw-bold mb-2">Discover Your Real Existence</h5>
+                            <p class="text-white-50" style="font-size: 11px;">Lorem ipsum dolor sit amet consectetur adipiscing elit dolor</p>
+                            <a href="/Home/About" class="btn btn-barrameru-outline btn-sm">MORE INFO</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4 Related Products -->
+                <div class="col-lg-9">
+                    <div class="row g-3">
+                        <div class="col-md-3 col-6">
+                            <div class="template-product-card">
+                                <img src="~/images/sandy-field-in-desert-of-egypt.jpg" alt="Orange Camping Mat" class="template-product-img">
+                                <div>
+                                    <h6 class="template-product-title"><a href="/Shop/Details/4">Orange Camping Mat</a></h6>
+                                    <div class="template-product-price mt-3">$20.00</div>
+                                </div>
+                                <button class="btn btn-template-add-cart" onclick="BarrameruStore.addToCart(4, 1)">Add to cart</button>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-6">
+                            <div class="template-product-card">
+                                <span class="template-sale-tag">Sale!</span>
+                                <img src="~/images/high-angle-view-of-confident-couple-climbing-mountain-e1664201089286.jpg" alt="Black Binoculars" class="template-product-img">
+                                <div>
+                                    <h6 class="template-product-title"><a href="/Shop/Details/7">Black Binoculars</a></h6>
+                                    <div class="template-product-price mt-3"><span class="old-price">$75.00</span> $65.00</div>
+                                </div>
+                                <button class="btn btn-template-add-cart" onclick="BarrameruStore.addToCart(7, 1)">Add to cart</button>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-6">
+                            <div class="template-product-card">
+                                <img src="~/images/spending-time-by-the-campfire.jpg" alt="Tin Cups" class="template-product-img">
+                                <div>
+                                    <h6 class="template-product-title"><a href="/Shop/Details/11">Tin Cups</a></h6>
+                                    <div class="template-product-price mt-3">$35.00</div>
+                                </div>
+                                <button class="btn btn-template-add-cart" onclick="BarrameruStore.addToCart(11, 1)">Add to cart</button>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-6">
+                            <div class="template-product-card">
+                                <span class="template-sale-tag">Sale!</span>
+                                <img src="~/images/top-view-of-travel-equipment-for-a-mountain-trip-e1664201262219.jpg" alt="Gas Can" class="template-product-img">
+                                <div>
+                                    <h6 class="template-product-title"><a href="/Shop/Details/3">Gas Can</a></h6>
+                                    <div class="template-product-price mt-3"><span class="old-price">$45.00</span> $35.00</div>
+                                </div>
+                                <button class="btn btn-template-add-cart" onclick="BarrameruStore.addToCart(3, 1)">Add to cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="~/js/pages/product-details.js" asp-append-version="true"></script>
+}

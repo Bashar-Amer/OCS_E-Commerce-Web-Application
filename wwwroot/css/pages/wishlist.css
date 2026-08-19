@@ -1,0 +1,15 @@
+/* ==========================================================================
+   PAGE: WISHLIST (Index.cshtml)
+   ========================================================================== */
+
+.wishlist-stock-in {
+  color: #10B981;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.wishlist-stock-out {
+  color: #EF4444;
+  font-weight: 600;
+  font-size: 12px;
+}

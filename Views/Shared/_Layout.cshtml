@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Barrameru Outdoor Adventure, Camping & Store</title>
+    
+    <!-- Google Fonts: Montserrat & Rock Salt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=Rock+Salt&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap 5 CSS -->
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    
+    <!-- Global Base Stylesheet -->
+    <link rel="stylesheet" href="~/css/barrameru-global.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+    <!-- Page-Specific Stylesheet Section -->
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+<body>
+    <!-- Top Header Navigation Bar (Matches barrameru-v1-header.jpg) -->
+    <header class="header-barrameru">
+        <div class="container position-relative">
+            <div class="header-inner">
+                <!-- Left Nav Items -->
+                <nav class="d-none d-lg-block">
+                    <ul class="nav-links-left">
+                        <li><a asp-controller="Home" asp-action="Index">HOME</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">SHOP <i class="bi bi-chevron-down small ms-1"></i></a>
+                            <ul class="dropdown-menu rounded-0 shadow-sm border-0 mt-2">
+                                <li><a class="dropdown-item small py-2 fw-semibold" asp-controller="Shop" asp-action="Index">Shop Catalog</a></li>
+                                <li><a class="dropdown-item small py-2 fw-semibold" href="/Shop/Details/2">Single Product</a></li>
+                                <li><a class="dropdown-item small py-2 fw-semibold" asp-controller="Cart" asp-action="Index">Cart Page</a></li>
+                                <li><a class="dropdown-item small py-2 fw-semibold" asp-controller="Checkout" asp-action="Index">Checkout Page</a></li>
+                            </ul>
+                        </li>
+                        <li><a asp-controller="Home" asp-action="Adventures">ADVENTURES</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">PAGES <i class="bi bi-chevron-down small ms-1"></i></a>
+                            <ul class="dropdown-menu rounded-0 shadow-sm border-0 mt-2">
+                                <li><a class="dropdown-item small py-2 fw-semibold" asp-controller="Home" asp-action="About">About Us</a></li>
+                                <li><a class="dropdown-item small py-2 fw-semibold" asp-controller="Home" asp-action="Team">Our Team</a></li>
+                                <li><a class="dropdown-item small py-2 fw-semibold" asp-controller="Home" asp-action="Faqs">FAQs</a></li>
+                                <li><a class="dropdown-item small py-2 fw-semibold" asp-controller="Home" asp-action="Contact">Contact Us</a></li>
+                                <li><a class="dropdown-item small py-2 fw-semibold" asp-controller="Home" asp-action="Error404">404 Error Page</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+
+                <!-- Mobile Hamburger Toggle -->
+                <button class="navbar-toggler d-lg-none border-0 bg-transparent" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileNavOffcanvas">
+                    <i class="bi bi-list fs-2 text-dark"></i>
+                </button>
+
+                <!-- Centered Logo Badge (with curved bottom cutout) -->
+                <div class="header-center-logo">
+                    <a asp-controller="Home" asp-action="Index">
+                        <img src="~/images/Logo_Barrameru.png" alt="Barrameru Outdoor Adventure" />
+                    </a>
+                </div>
+
+                <!-- Right Actions: Phone + Search + Cart + User -->
+                <div class="header-right-actions">
+                    <span class="header-phone-text d-none d-md-inline-flex">
+                        <i class="bi bi-telephone-fill small"></i> : +6221-2002-2012
+                    </span>
+                    <span class="text-muted d-none d-md-inline">|</span>
+                    <button type="button" class="header-icon-link bg-transparent border-0" data-bs-toggle="modal" data-bs-target="#searchModal" title="Search">
+                        <i class="bi bi-search"></i>
+                    </button>
+                    <a asp-controller="Cart" asp-action="Index" class="header-icon-link text-decoration-none" title="Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart">
+                        <i class="bi bi-cart3"></i>
+                        <span class="header-cart-badge cart-badge-count">3</span>
+                    </a>
+                    <div class="dropdown">
+                        <button class="header-icon-link bg-transparent border-0" type="button" data-bs-toggle="dropdown" title="Account">
+                            <i class="bi bi-person"></i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end rounded-0 shadow-sm border-0 mt-2">
+                            <li><a class="dropdown-item small py-2" asp-area="Identity" asp-page="/Account/Login">Sign In</a></li>
+                            <li><a class="dropdown-item small py-2" asp-area="Identity" asp-page="/Account/Register">Register</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item small py-2" asp-controller="Wishlist" asp-action="Index">My Wishlist</a></li>
+                            <li><a class="dropdown-item small py-2" asp-controller="Order" asp-action="Invoice">Sample Invoice</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Offcanvas Menu -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileNavOffcanvas">
+        <div class="offcanvas-header border-bottom">
+            <img src="~/images/Logo_Barrameru.png" alt="Barrameru" style="height: 38px;">
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul class="list-unstyled">
+                <li class="py-2 border-bottom"><a class="fw-bold text-dark" asp-controller="Home" asp-action="Index">HOME</a></li>
+                <li class="py-2 border-bottom"><a class="fw-bold text-dark" asp-controller="Shop" asp-action="Index">SHOP CATALOG</a></li>
+                <li class="py-2 border-bottom"><a class="fw-bold text-dark" asp-controller="Home" asp-action="Adventures">ADVENTURES</a></li>
+                <li class="py-2 border-bottom"><a class="fw-bold text-dark" asp-controller="Home" asp-action="About">ABOUT US</a></li>
+                <li class="py-2 border-bottom"><a class="fw-bold text-dark" asp-controller="Home" asp-action="Team">OUR TEAM</a></li>
+                <li class="py-2 border-bottom"><a class="fw-bold text-dark" asp-controller="Home" asp-action="Faqs">FAQS</a></li>
+                <li class="py-2 border-bottom"><a class="fw-bold text-dark" asp-controller="Home" asp-action="Contact">CONTACT US</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Search Modal -->
+    <div class="modal fade" id="searchModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-0 p-4">
+                <div class="modal-header border-0 p-0 mb-3">
+                    <h5 class="modal-title fw-bold">Search Outdoor Gear</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-0">
+                    <form asp-controller="Shop" asp-action="Index" method="get">
+                        <div class="input-group">
+                            <input type="text" name="search" class="form-control rounded-0" placeholder="Type keywords (e.g. Tent, Backpack, Boots)..." autofocus>
+                            <button class="btn btn-barrameru" type="submit">SEARCH</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Offcanvas Mini Cart -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasCart" style="width: 360px;">
+        <div class="offcanvas-header bg-dark text-white">
+            <h6 class="offcanvas-title text-white mb-0"><i class="bi bi-cart3 me-2"></i> Shopping Cart</h6>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body d-flex flex-column p-4">
+            <div id="miniCartEmpty" class="text-center my-auto" style="display: none;">
+                <i class="bi bi-bag-x text-muted" style="font-size: 3rem;"></i>
+                <h6 class="mt-3">Your cart is empty!</h6>
+                <a asp-controller="Shop" asp-action="Index" class="btn btn-barrameru mt-2 btn-sm">Shop Products</a>
+            </div>
+            <div id="miniCartItemsContainer" class="flex-grow-1 overflow-auto">
+                <!-- Dynamic items -->
+            </div>
+            <div class="border-top pt-3 mt-auto">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="fw-bold">Subtotal:</span>
+                    <strong id="miniCartSubtotal" class="fs-5 text-teal" style="color: #5E959F;">$270.00</strong>
+                </div>
+                <div class="d-grid gap-2">
+                    <a asp-controller="Cart" asp-action="Index" class="btn btn-outline-secondary rounded-0 btn-sm">View Cart</a>
+                    <a asp-controller="Checkout" asp-action="Index" class="btn btn-barrameru btn-sm">Checkout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main View Content -->
+    <main role="main">
+        @RenderBody()
+    </main>
+
+    <!-- Floating Newsletter & Footer (Matches barrameru-v1-footer.jpg) -->
+    <div class="container floating-newsletter-wrap">
+        <div class="floating-newsletter-card">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-3 mb-lg-0">
+                    <h5 class="fw-bold text-secondary mb-0">Subscribe to our newsletter to get latest news on your inbox</h5>
+                </div>
+                <div class="col-lg-6">
+                    <form class="newsletter-form d-flex gap-2">
+                        <input type="email" class="form-control newsletter-input-field flex-grow-1" placeholder="Enter your email" required>
+                        <button type="submit" class="btn btn-barrameru flex-shrink-0">SUBMIT <i class="bi bi-caret-right-fill small"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer-exact-dark" style="background-image: url('/images/mountains-in-colorado.jpg'); background-size: cover; background-position: center; position: relative;">
+        <div style="position: absolute; inset: 0; background: rgba(21, 42, 41, 0.94); z-index: 1;"></div>
+        <div class="container position-relative" style="z-index: 2;">
+            <div class="row g-4">
+                <!-- Col 1: Logo + Bio -->
+                <div class="col-lg-3 col-md-6">
+                    <img src="~/images/Logo_Barrameru_2.png" alt="Barrameru" style="height: 42px; margin-bottom: 16px;" onerror="this.src='/images/Logo_Barrameru.png'">
+                    <p class="small text-white-50 mb-3">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.
+                    </p>
+                    <div class="footer-social-bar">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-behance"></i></a>
+                    </div>
+                </div>
+
+                <!-- Col 2: Customer Service -->
+                <div class="col-lg-3 col-md-6">
+                    <h6 class="footer-exact-title">Customer Service</h6>
+                    <ul class="footer-exact-links">
+                        <li><a asp-area="Identity" asp-page="/Account/Manage/Index">My Account</a></li>
+                        <li><a asp-controller="Order" asp-action="Invoice">Order History</a></li>
+                        <li><a href="#">Newsletter</a></li>
+                        <li><a asp-controller="Shop" asp-action="Index">Brands</a></li>
+                        <li><a href="#">Gift Voucher</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Useful Links -->
+                <div class="col-lg-3 col-md-6">
+                    <h6 class="footer-exact-title">Useful Links</h6>
+                    <ul class="footer-exact-links">
+                        <li><a asp-controller="Home" asp-action="About">About Us</a></li>
+                        <li><a asp-controller="Home" asp-action="Contact">Contact</a></li>
+                        <li><a asp-controller="Home" asp-action="Adventures">Adventures</a></li>
+                        <li><a asp-controller="Home" asp-action="Privacy">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Use</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: Reach Us -->
+                <div class="col-lg-3 col-md-6">
+                    <h6 class="footer-exact-title">Reach Us</h6>
+                    <p class="small text-white-50 mb-2"><i class="bi bi-geo-alt-fill text-primary me-2"></i> Jln Cempaka Wangi No 22 Jakarta - Indonesia</p>
+                    <p class="small text-white-50 mb-2"><i class="bi bi-telephone-fill text-primary me-2"></i> +6221 2002 2012</p>
+                    <p class="small text-white-50 mb-0"><i class="bi bi-envelope-fill text-primary me-2"></i> hello@yourdomain.tld</p>
+                </div>
+            </div>
+
+            <!-- Copyright & Payment Cards -->
+            <div class="footer-copyright-bar d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+                <div class="small text-white-50">
+                    Copyright &copy; 2022 Barrameru, All rights reserved. Present by MoxCreative
+                </div>
+                <div class="d-flex gap-2">
+                    <img src="~/images/Visa.jpg" alt="Visa" class="bg-white p-1 rounded" style="height: 22px;">
+                    <img src="~/images/Mastercard.jpg" alt="Mastercard" class="bg-white p-1 rounded" style="height: 22px;">
+                    <img src="~/images/Maestro.jpg" alt="Maestro" class="bg-white p-1 rounded" style="height: 22px;">
+                    <img src="~/images/JCB.jpg" alt="JCB" class="bg-white p-1 rounded" style="height: 22px;">
+                    <img src="~/images/Paypal.jpg" alt="Paypal" class="bg-white p-1 rounded" style="height: 22px;">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <!-- Global Store & Shared Scripts -->
+    <script src="~/js/cart-store.js" asp-append-version="true"></script>
+    <script src="~/js/barrameru-global.js" asp-append-version="true"></script>
+
+    <!-- Page-Specific Script Section -->
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

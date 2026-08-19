@@ -1,0 +1,199 @@
+@{
+    ViewData["Title"] = "Shop Products";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/pages/shop.css" asp-append-version="true" />
+}
+
+<!-- Inner Page Hero Banner (Matches barrameru-v1-shop.jpg) -->
+<section class="inner-hero-banner" style="background-image: url('/images/orange-tourist-tent-illuminated-from-inside-stands-in-mountains-above-clouds.jpg');">
+    <div class="inner-hero-overlay"></div>
+    <div class="container position-relative">
+        <div class="inner-hero-content">
+            <div class="breadcrumbs">HOME / SHOP</div>
+            <h1>SHOP</h1>
+            <div class="sub-text">Products</div>
+        </div>
+    </div>
+</section>
+
+<!-- Two Promo Cards on Shop Page -->
+<section class="py-5 bg-white">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="promo-banner-card rounded-0" style="background-image: url('/images/top-view-of-travel-equipment-for-a-mountain-trip-e1664201262219.jpg');">
+                    <div class="promo-banner-content">
+                        <h4>Super Sale Up to OFF 50%</h4>
+                        <p>Lorem ipsum dolor sit amet consectetur adipiscing elit dolor</p>
+                        <a href="/Shop" class="btn btn-barrameru-outline">SHOP NOW</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="promo-banner-card rounded-0" style="background-image: url('/images/panoramic-shot-of-two-young-tourists-looking-at-geographic-map-on-grey-background-e1664119398628.jpg');">
+                    <div class="promo-banner-content">
+                        <h4>Get The Best Deal for Almost Everything</h4>
+                        <p>Lorem ipsum dolor sit amet consectetur adipiscing elit dolor</p>
+                        <a href="/Shop" class="btn btn-barrameru-outline">SHOP NOW</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Main Shop Grid & Sidebar -->
+<section class="pb-5 bg-white">
+    <div class="container">
+        <div class="row g-4">
+            <!-- Left Sidebar -->
+            <div class="col-lg-3">
+                <div class="mb-4">
+                    <div class="input-group">
+                        <input type="text" id="shopSearchInput" class="form-control rounded-0" placeholder="Search Products" value="@ViewBag.SearchQuery">
+                        <button class="btn btn-outline-secondary rounded-0" type="button" id="btnShopSearch"><i class="bi bi-search"></i></button>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <h5 class="fw-bold mb-3">Categories</h5>
+                    <ul class="list-unstyled">
+                        <li class="py-1"><a href="javascript:void(0)" class="shop-cat-filter text-dark small" data-cat="all">↗ All Equipment</a></li>
+                        <li class="py-1"><a href="javascript:void(0)" class="shop-cat-filter text-dark small" data-cat="Bags & Pack">↗ Bags & Pack</a></li>
+                        <li class="py-1"><a href="javascript:void(0)" class="shop-cat-filter text-dark small" data-cat="Camp Kitchen">↗ Camp Kitchen</a></li>
+                        <li class="py-1"><a href="javascript:void(0)" class="shop-cat-filter text-dark small" data-cat="Knives & Tools">↗ Knives & Tools</a></li>
+                        <li class="py-1"><a href="javascript:void(0)" class="shop-cat-filter text-dark small" data-cat="Tent & Accesories">↗ Tent & Accesories</a></li>
+                    </ul>
+                </div>
+
+                <div class="mb-4">
+                    <h5 class="fw-bold mb-3">Trending Items</h5>
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <img src="~/images/spending-time-by-the-campfire.jpg" alt="Metal Water Bottle" style="width: 48px; height: 48px; object-fit: cover;">
+                        <div>
+                            <h6 class="mb-0 small fw-bold"><a href="/Shop/Details/11">Metal Water Bottle</a></h6>
+                            <small class="text-teal" style="color: #5E959F;"><span class="text-muted text-decoration-line-through">$65.00</span> $60.00</small>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <img src="~/images/paddling-kayaker-on-the-scenic-lake.jpg" alt="Portable Charcoal Grill" style="width: 48px; height: 48px; object-fit: cover;">
+                        <div>
+                            <h6 class="mb-0 small fw-bold"><a href="/Shop/Details/12">Portable Charcoal Grill</a></h6>
+                            <small class="text-teal" style="color: #5E959F;"><span class="text-muted text-decoration-line-through">$120.00</span> $100.00</small>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <img src="~/images/43.jpg" alt="Folding Knife" style="width: 48px; height: 48px; object-fit: cover;">
+                        <div>
+                            <h6 class="mb-0 small fw-bold"><a href="/Shop/Details/5">Folding Knife</a></h6>
+                            <small class="text-teal" style="color: #5E959F;"><span class="text-muted text-decoration-line-through">$30.00</span> $25.00</small>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <img src="~/images/blue-hiking-backpack-with-fitness-mat-isolated-on-2021-09-03-13-40-43-utc-1.jpg" alt="Trekking Backpack" style="width: 48px; height: 48px; object-fit: cover;">
+                        <div>
+                            <h6 class="mb-0 small fw-bold"><a href="/Shop/Details/9">Trekking Backpack</a></h6>
+                            <small class="text-teal" style="color: #5E959F;"><span class="text-muted text-decoration-line-through">$155.00</span> $150.00</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-4 text-white text-center position-relative" style="background-image: url('/images/paddling-kayaker-on-the-scenic-lake.jpg'); background-size: cover; min-height: 250px; display: flex; flex-direction: column; justify-content: center;">
+                    <div style="position: absolute; inset: 0; background: rgba(21,42,41,0.75);"></div>
+                    <div class="position-relative" style="z-index: 2;">
+                        <h5 class="text-white fw-bold mb-2">Discover Your Real Existence</h5>
+                        <p class="text-white-50" style="font-size: 11px;">Lorem ipsum dolor sit amet consectetur adipiscing elit dolor</p>
+                        <a href="/Home/About" class="btn btn-barrameru-outline btn-sm">MORE INFO</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Products Grid -->
+            <div class="col-lg-9">
+                <div class="d-flex justify-content-end mb-4">
+                    <select id="shopSortingSelect" class="form-select form-select-sm rounded-0" style="width: 170px;">
+                        <option value="default">Default sorting</option>
+                        <option value="price-asc">Sort by price: low to high</option>
+                        <option value="price-desc">Sort by price: high to low</option>
+                        <option value="rating">Sort by average rating</option>
+                    </select>
+                </div>
+
+                <div class="row g-3" id="exactShopGrid">
+                    <!-- Dynamic rendering from shop.js -->
+                </div>
+
+                <div class="d-flex justify-content-center gap-2 mt-5">
+                    <span class="btn btn-sm btn-dark rounded-0 px-3">1</span>
+                    <a href="javascript:void(0)" class="btn btn-sm btn-outline-secondary rounded-0 px-3">2</a>
+                    <a href="javascript:void(0)" class="btn btn-sm btn-outline-secondary rounded-0 px-3">→</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Bottom: Go Adventure Banner -->
+<section style="background-image: url('/images/tourist-with-a-backpack-against-the-sky-panorama.jpg'); background-size: cover; background-position: center; min-height: 440px; display: flex; align-items: center; position: relative;">
+    <div style="position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,0,0,0.1) 0%, rgba(21, 42, 41, 0.7) 40%, rgba(21, 42, 41, 0.88) 100%);"></div>
+    <div class="container position-relative" style="z-index: 2;">
+        <div class="row justify-content-end">
+            <div class="col-lg-6 col-md-8 text-white">
+                <span class="sub-badge text-white">Go Adventure</span>
+                <h2 class="text-white fw-bold mb-3" style="font-size: 2.3rem;">
+                    Free your spirit, break the chains, Go camp!
+                </h2>
+                <p class="text-white-50 small mb-4">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.
+                </p>
+                <a asp-controller="Shop" asp-action="Index" class="btn btn-barrameru">
+                    DISCOVER MORE <i class="bi bi-chevron-right small ms-1"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Bottom: Discover your real existence (Why Choose Us) -->
+<section class="py-5 bg-white">
+    <div class="container py-4">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6">
+                <span class="sub-badge text-teal">Why Choose Us</span>
+                <h2 class="fw-bold mb-3" style="font-size: 2.2rem;">Discover your real existence</h2>
+                <p class="text-muted small mb-4">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.
+                </p>
+                <div class="mb-3">
+                    <h6 class="fw-bold text-secondary mb-1"><i class="bi bi-check2 text-primary me-2"></i> Original Product</h6>
+                    <p class="text-muted small ps-4 mb-0">In sollicitudin metus fames lacus rutrum eget. Pede consectetur in pharetra massa orci.</p>
+                </div>
+                <div class="mb-3">
+                    <h6 class="fw-bold text-secondary mb-1"><i class="bi bi-check2 text-primary me-2"></i> Easy Payment</h6>
+                    <p class="text-muted small ps-4 mb-0">In sollicitudin metus fames lacus rutrum eget. Pede consectetur in pharetra massa orci.</p>
+                </div>
+                <div class="mb-3">
+                    <h6 class="fw-bold text-secondary mb-1"><i class="bi bi-check2 text-primary me-2"></i> Professional Expert</h6>
+                    <p class="text-muted small ps-4 mb-0">In sollicitudin metus fames lacus rutrum eget. Pede consectetur in pharetra massa orci.</p>
+                </div>
+            </div>
+            <div class="col-lg-6 position-relative">
+                <img src="~/images/high-angle-view-of-confident-couple-climbing-mountain-e1664201089286.jpg" alt="Climbers" class="img-fluid w-100" style="height: 400px; object-fit: cover;">
+                <div class="bg-white p-3 shadow position-absolute top-0 end-0 m-4 d-flex align-items-center gap-3 border">
+                    <div class="fs-2 fw-bold text-secondary">4.8</div>
+                    <div>
+                        <div class="text-warning small"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+                        <div class="small text-muted fw-bold">From Google Business</div>
+                        <div class="text-muted" style="font-size: 10px;">(729 Reviews)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="~/js/pages/shop.js" asp-append-version="true"></script>
+}

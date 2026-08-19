@@ -1,0 +1,46 @@
+@{
+    ViewData["Title"] = "My Wishlist";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/pages/wishlist.css" asp-append-version="true" />
+}
+
+<!-- Hero Banner -->
+<section class="inner-hero-banner" style="background-image: url('/images/orange-tourist-tent-illuminated-from-inside-stands-in-mountains-above-clouds.jpg');">
+    <div class="inner-hero-overlay"></div>
+    <div class="container position-relative">
+        <div class="inner-hero-content">
+            <div class="breadcrumbs">HOME / WISHLIST</div>
+            <h1>My Wishlist</h1>
+            <div class="sub-text">Saved outdoor gear for your next hike</div>
+        </div>
+    </div>
+</section>
+
+<!-- Wishlist Content -->
+<section class="py-5 bg-white">
+    <div class="container py-4">
+        <div class="table-responsive">
+            <table class="table align-middle">
+                <thead class="border-bottom">
+                    <tr class="text-secondary small fw-bold">
+                        <th style="width: 5%;"></th>
+                        <th style="width: 10%;">Image</th>
+                        <th style="width: 40%;">Product Name</th>
+                        <th style="width: 15%;">Unit Price</th>
+                        <th style="width: 15%;">Stock Status</th>
+                        <th style="width: 15%;">Action</th>
+                    </tr>
+                </thead>
+                <tbody id="wishlistTableBody">
+                    <!-- Loaded dynamically via wishlist.js -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="~/js/pages/wishlist.js" asp-append-version="true"></script>
+}

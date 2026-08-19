@@ -1,0 +1,1313 @@
+{
+    "manifest_version": "1.0.21",
+    "title": "Barrameru - Template Kit for Outdoor Adventure, Camping & Store",
+    "page_builder": "elementor",
+    "kit_version": "1.0.0",
+    "templates": [
+        {
+            "name": "Global Kit Styles",
+            "screenshot": "screenshots\/global-kit-styles.jpg",
+            "source": "templates\/global.json",
+            "preview_url": "https:\/\/fullkit.moxcreative.com",
+            "type": "section",
+            "category": "page",
+            "metadata": {
+                "template_type": "global-styles",
+                "include_in_zip": "1",
+                "elementor_pro_required": "1",
+                "additional_template_information": [
+                    "These are the global theme styles configured through the Elementor Theme Styles area."
+                ]
+            },
+            "elementor_pro_required": true
+        },
+        {
+            "name": "Adventures",
+            "screenshot": "screenshots\/adventures.jpg",
+            "source": "templates\/adventures.json",
+            "preview_url": "https:\/\/fullkit.moxcreative.com\/barrameru\/template-kit\/adventures\/",
+            "type": "page",
+            "category": "page",
+            "metadata": {
+                "template_type": "single-page",
+                "include_in_zip": "1",
+                "elementor_pro_required": "1"
+            },
+            "elementor_pro_required": true
+        },
+        {
+            "name": "About Us",
+            "screenshot": "screenshots\/about-us.jpg",
+            "source": "templates\/about-us.json",
+            "preview_url": "https:\/\/fullkit.moxcreative.com\/barrameru\/template-kit\/about-us\/",
+            "type": "page",
+            "category": "page",
+            "metadata": {
+                "template_type": "single-page",
+                "include_in_zip": "1",
+                "elementor_pro_required": "1"
+            },
+            "elementor_pro_required": true
+        },
+        {
+            "name": "Team",
+            "screenshot": "screenshots\/team.jpg",
+            "source": "templates\/team.json",
+            "preview_url": "https:\/\/fullkit.moxcreative.com\/barrameru\/template-kit\/team\/",
+            "type": "page",
+            "category": "page",
+            "metadata": {
+                "template_type": "single-page",
+                "include_in_zip": "1",
+                "elementor_pro_required": "1"
+            },
+            "elementor_pro_required": true
+        },
+        {
+            "name": "FAQs",
+            "screenshot": "screenshots\/faqs.jpg",
+            "source": "templates\/faqs.json",
+            "preview_url": "https:\/\/fullkit.moxcreative.com\/barrameru\/template-kit\/faqs\/",
+            "type": "page",
+            "category": "page",
+            "metadata": {
+                "template_type": "single-page",
+                "include_in_zip": "1",
+                "elementor_pro_required": "1"
+            },
+            "elementor_pro_required": true
+        },
+        {
+            "name": "Contact Us",
+            "screenshot": "screenshots\/contact-us.jpg",
+            "source": "templates\/contact-us.json",
+            "preview_url": "https:\/\/fullkit.moxcreative.com\/barrameru\/template-kit\/contact-us\/",
+            "type": "page",
+            "category": "page",
+            "metadata": {
+                "template_type": "single-page",
+                "include_in_zip": "1",
+                "elementor_pro_required": "1"
+            },
+            "elementor_pro_required": true
+        },
+        {
+            "name": "Homepage",
+            "screenshot": "screenshots\/homepage.jpg",
+            "source": "templates\/homepage.json",
+            "preview_url": "https:\/\/fullkit.moxcreative.com\/barrameru\/template-kit\/homepage\/",
+            "type": "section",
+            "category": "page",
+            "metadata": {
+                "template_type": "single-home",
+                "include_in_zip": "1",
+                "elementor_pro_required": "1"
+            },
+            "elementor_pro_required": true
+        },
+        {
+            "name": "Barrameru V1 - Checkout Page",
+            "screenshot": "screenshots\/barrameru-v1-checkout-page.jpg",
+            "source": "templates\/barrameru-v1-checkout-page.json",
+            "preview_url": "https:\/\/fullkit.moxcreative.com\/barrameru\/?elementor_library=barrameru-v1-checkout-page",
+            "type": "single-page",
+            "category": "page",
+            "metadata": {
+                "template_type": "single-page",
+                "include_in_zip": "1",
+                "elementor_pro_required": "1",
+                "elementor_library_type": "single-page",
+                "elementor_pro_conditions": [
+                    "include\/singular\/page\/13"
+                ],
+                "additional_template_information": [
+                    "This is a \"Single Page\" template for Elementor Pro.",
+                    "This template will display on: Page #13."
+                ]
+            },
+            "elementor_pro_required": true
+        },
+        {
+            "name": "Barrameru V1 - Cart Page",
+            "screenshot": "screenshots\/barrameru-v1-cart-page.jpg",
+            "source": "templates\/barrameru-v1-cart-page.json",
+            "preview_url": "https:\/\/fullkit.moxcreative.com\/barrameru\/?elementor_library=barrameru-v1-cart-page",
+            "type": "single-page",
+            "category": "page",
+            "metadata": {
+                "template_type": "single-page",
+                "include_in_zip": "1",
+                "elementor_pro_required": "1",
+                "elementor_library_type": "single-page",
+                "elementor_pro_conditions": [
+                    "include\/singular\/page\/12"
+                ],
+                "additional_template_information": [
+                    "This is a \"Single Page\" template for Elementor Pro.",
+                    "This template will display on: Page #12."
+                ]
+            },
+            "elementor_pro_required": true
+        },
+        {
+            "name": "Barrameru V1 - Single Product",
+            "screenshot": "screenshots\/barrameru-v1-single-product.jpg",
+            "source": "templates\/barrameru-v1-single-product.json",
+            "preview_url": "https:\/\/fullkit.moxcreative.com\/barrameru\/?elementor_library=barrameru-v1-single-product",
+            "type": "product",
+            "category": "page",
+            "metadata": {
+                "template_type": "single-product",
+                "include_in_zip": "1",
+                "elementor_pro_required": "1",
+                "elementor_library_type": "product",
+                "elementor_pro_conditions": [
+                    "include\/product"
+                ],
+                "additional_template_information": [
+                    "This is a \"Product\" template for Elementor Pro.",
+                    "This template will display on: Products."
+                ]
+            },
+            "elementor_pro_required": true
+        },
+        {
+            "name": "Barrameru V1 - Shop",
+            "screenshot": "screenshots\/barrameru-v1-shop.jpg",
+            "source": "templates\/barrameru-v1-shop.json",
+            "preview_url": "https:\/\/fullkit.moxcreative.com\/barrameru\/?elementor_library=barrameru-v1-shop",
+            "type": "product-archive",
+            "category": "page",
+            "metadata": {
+                "template_type": "archive-product",
+                "include_in_zip": "1",
+                "elementor_pro_required": "1",
+                "elementor_library_type": "product-archive",
+                "elementor_pro_conditions": [
+                    "include\/product_archive"
+                ],
+                "additional_template_information": [
+                    "This is a \"Product Archive\" template for Elementor Pro.",
+                    "This template will display on: All Product Archives."
+                ]
+            },
+            "elementor_pro_required": true
+        },
+        {
+            "name": "Barrameru V1 - 404 Page",
+            "screenshot": "screenshots\/barrameru-v1-404-page.jpg",
+            "source": "templates\/barrameru-v1-404-page.json",
+            "preview_url": "https:\/\/fullkit.moxcreative.com\/barrameru\/?elementor_library=barrameru-v1-404-page",
+            "type": "error-404",
+            "category": "page",
+            "metadata": {
+                "template_type": "single-404",
+                "include_in_zip": "1",
+                "elementor_pro_required": "1",
+                "elementor_library_type": "error-404",
+                "elementor_pro_conditions": [
+                    "include\/singular\/not_found404"
+                ],
+                "additional_template_information": [
+                    "This is a \"Error 404\" template for Elementor Pro.",
+                    "This template will display on: 404 Page."
+                ]
+            },
+            "elementor_pro_required": true
+        },
+        {
+            "name": "Barrameru V1 - Single Blog",
+            "screenshot": "screenshots\/barrameru-v1-single-blog.jpg",
+            "source": "templates\/barrameru-v1-single-blog.json",
+            "preview_url": "https:\/\/fullkit.moxcreative.com\/barrameru\/?elementor_library=barrameru-v1-single-blog",
+            "type": "single-post",
+            "category": "page",
+            "metadata": {
+                "template_type": "single-post",
+                "include_in_zip": "1",
+                "elementor_pro_required": "1",
+                "elementor_library_type": "single-post",
+                "elementor_pro_conditions": [
+                    "include\/singular\/post"
+                ],
+                "additional_template_information": [
+                    "This is a \"Single Post\" template for Elementor Pro.",
+                    "This template will display on: Posts."
+                ]
+            },
+            "elementor_pro_required": true
+        },
+        {
+            "name": "Barrameru V1 - Blog",
+            "screenshot": "screenshots\/barrameru-v1-blog.jpg",
+            "source": "templates\/barrameru-v1-blog.json",
+            "preview_url": "https:\/\/fullkit.moxcreative.com\/barrameru\/?elementor_library=barrameru-v1-blog",
+            "type": "archive",
+            "category": "page",
+            "metadata": {
+                "template_type": "archive-blog",
+                "include_in_zip": "1",
+                "elementor_pro_required": "1",
+                "elementor_library_type": "archive",
+                "elementor_pro_conditions": [
+                    "include\/archive"
+                ],
+                "additional_template_information": [
+                    "This is a \"Archive\" template for Elementor Pro.",
+                    "This template will display on: All Archives."
+                ]
+            },
+            "elementor_pro_required": true
+        },
+        {
+            "name": "Barrameru V1 - Footer",
+            "screenshot": "screenshots\/barrameru-v1-footer.jpg",
+            "source": "templates\/barrameru-v1-footer.json",
+            "preview_url": "https:\/\/fullkit.moxcreative.com\/barrameru\/?elementor_library=barrameru-v1-footer",
+            "type": "footer",
+            "category": "section",
+            "metadata": {
+                "template_type": "section-footer",
+                "include_in_zip": "1",
+                "elementor_pro_required": "1",
+                "elementor_library_type": "footer",
+                "elementor_pro_conditions": [
+                    "include\/general"
+                ],
+                "additional_template_information": [
+                    "This is a \"Footer\" template for Elementor Pro.",
+                    "This template will display on: Entire Site."
+                ]
+            },
+            "elementor_pro_required": true
+        },
+        {
+            "name": "Barrameru V1 - Header",
+            "screenshot": "screenshots\/barrameru-v1-header.jpg",
+            "source": "templates\/barrameru-v1-header.json",
+            "preview_url": "https:\/\/fullkit.moxcreative.com\/barrameru\/?elementor_library=barrameru-v1-header",
+            "type": "header",
+            "category": "section",
+            "metadata": {
+                "template_type": "section-header",
+                "include_in_zip": "1",
+                "elementor_pro_required": "1",
+                "elementor_library_type": "header",
+                "elementor_pro_conditions": [
+                    "include\/general"
+                ],
+                "additional_template_information": [
+                    "This is a \"Header\" template for Elementor Pro.",
+                    "This template will display on: Entire Site."
+                ]
+            },
+            "elementor_pro_required": true
+        }
+    ],
+    "required_plugins": [
+        {
+            "name": "Elementor Pro",
+            "version": "3.7.1",
+            "file": "elementor-pro\/elementor-pro.php",
+            "author": "Elementor.com"
+        },
+        {
+            "name": "Envato Elements",
+            "version": "2.0.11",
+            "file": "envato-elements\/envato-elements.php",
+            "author": "Envato"
+        },
+        {
+            "name": "Skyboot Custom Icons for Elementor - Elementor Icons library",
+            "version": "1.0.5",
+            "file": "skyboot-custom-icons-for-elementor\/skyboot-custom-icons-for-elementor.php",
+            "author": "Skybootstrap"
+        },
+        {
+            "name": "WooCommerce",
+            "version": "6.9.2",
+            "file": "woocommerce\/woocommerce.php",
+            "author": "Automattic"
+        }
+    ],
+    "images": [
+        {
+            "filename": "orange-tourist-tent-illuminated-from-inside-stands-in-mountains-above-clouds.jpg",
+            "thumbnail_url": "https:\/\/fullkit.moxcreative.com\/barrameru\/wp-content\/uploads\/sites\/18\/2022\/09\/orange-tourist-tent-illuminated-from-inside-stands-in-mountains-above-clouds-800x151.jpg",
+            "templates": [
+                {
+                    "source": "templates\/adventures.json",
+                    "name": "Adventures"
+                },
+                {
+                    "source": "templates\/about-us.json",
+                    "name": "About Us"
+                },
+                {
+                    "source": "templates\/team.json",
+                    "name": "Team"
+                },
+                {
+                    "source": "templates\/faqs.json",
+                    "name": "FAQs"
+                },
+                {
+                    "source": "templates\/contact-us.json",
+                    "name": "Contact Us"
+                },
+                {
+                    "source": "templates\/homepage.json",
+                    "name": "Homepage"
+                },
+                {
+                    "source": "templates\/barrameru-v1-checkout-page.json",
+                    "name": "Barrameru V1 - Checkout Page"
+                },
+                {
+                    "source": "templates\/barrameru-v1-cart-page.json",
+                    "name": "Barrameru V1 - Cart Page"
+                },
+                {
+                    "source": "templates\/barrameru-v1-single-product.json",
+                    "name": "Barrameru V1 - Single Product"
+                },
+                {
+                    "source": "templates\/barrameru-v1-shop.json",
+                    "name": "Barrameru V1 - Shop"
+                },
+                {
+                    "source": "templates\/barrameru-v1-single-blog.json",
+                    "name": "Barrameru V1 - Single Blog"
+                },
+                {
+                    "source": "templates\/barrameru-v1-blog.json",
+                    "name": "Barrameru V1 - Blog"
+                }
+            ],
+            "filesize": 42071,
+            "dimensions": [
+                1280,
+                241
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "no",
+            "image_urls": "https:\/\/elements.envato.com\/image-PYE47N6"
+        },
+        {
+            "filename": "43.jpg",
+            "thumbnail_url": "https:\/\/fullkit.moxcreative.com\/barrameru\/wp-content\/uploads\/sites\/18\/2022\/09\/43-800x600.jpg",
+            "templates": [
+                {
+                    "source": "templates\/adventures.json",
+                    "name": "Adventures"
+                },
+                {
+                    "source": "templates\/about-us.json",
+                    "name": "About Us"
+                },
+                {
+                    "source": "templates\/team.json",
+                    "name": "Team"
+                },
+                {
+                    "source": "templates\/homepage.json",
+                    "name": "Homepage"
+                },
+                {
+                    "source": "templates\/barrameru-v1-single-product.json",
+                    "name": "Barrameru V1 - Single Product"
+                },
+                {
+                    "source": "templates\/barrameru-v1-blog.json",
+                    "name": "Barrameru V1 - Blog"
+                }
+            ],
+            "filesize": 137938,
+            "dimensions": [
+                1280,
+                960
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "no",
+            "image_urls": "https:\/\/elements.envato.com\/bundle-white-textures-vol1-x50-N8Q28SJ"
+        },
+        {
+            "filename": "friends-in-sweaters-during-the-outdoor-recreation.jpg",
+            "thumbnail_url": "https:\/\/fullkit.moxcreative.com\/barrameru\/wp-content\/uploads\/sites\/18\/2022\/09\/friends-in-sweaters-during-the-outdoor-recreation-800x534.jpg",
+            "templates": [
+                {
+                    "source": "templates\/adventures.json",
+                    "name": "Adventures"
+                },
+                {
+                    "source": "templates\/about-us.json",
+                    "name": "About Us"
+                },
+                {
+                    "source": "templates\/team.json",
+                    "name": "Team"
+                },
+                {
+                    "source": "templates\/homepage.json",
+                    "name": "Homepage"
+                }
+            ],
+            "filesize": 217414,
+            "dimensions": [
+                1280,
+                854
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "yes",
+            "image_urls": "https:\/\/elements.envato.com\/image-2GZ783X"
+        },
+        {
+            "filename": "paddling-kayaker-on-the-scenic-lake.jpg",
+            "thumbnail_url": "https:\/\/fullkit.moxcreative.com\/barrameru\/wp-content\/uploads\/sites\/18\/2022\/09\/paddling-kayaker-on-the-scenic-lake-800x520.jpg",
+            "templates": [
+                {
+                    "source": "templates\/adventures.json",
+                    "name": "Adventures"
+                },
+                {
+                    "source": "templates\/about-us.json",
+                    "name": "About Us"
+                },
+                {
+                    "source": "templates\/homepage.json",
+                    "name": "Homepage"
+                }
+            ],
+            "filesize": 123782,
+            "dimensions": [
+                1280,
+                831
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "yes",
+            "image_urls": "https:\/\/elements.envato.com\/image-CK9FAGS"
+        },
+        {
+            "filename": "group-of-mountain-bikers-riding-on-road-outdoors-in-winter-.jpg",
+            "thumbnail_url": "https:\/\/fullkit.moxcreative.com\/barrameru\/wp-content\/uploads\/sites\/18\/2022\/09\/group-of-mountain-bikers-riding-on-road-outdoors-in-winter--800x533.jpg",
+            "templates": [
+                {
+                    "source": "templates\/adventures.json",
+                    "name": "Adventures"
+                }
+            ],
+            "filesize": 109061,
+            "dimensions": [
+                1280,
+                853
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "yes",
+            "image_urls": "https:\/\/elements.envato.com\/image-H5HMCA3"
+        },
+        {
+            "filename": "happy-couple-sitting-on-paddleboards-at-lake.jpg",
+            "thumbnail_url": "https:\/\/fullkit.moxcreative.com\/barrameru\/wp-content\/uploads\/sites\/18\/2022\/09\/happy-couple-sitting-on-paddleboards-at-lake-800x534.jpg",
+            "templates": [
+                {
+                    "source": "templates\/adventures.json",
+                    "name": "Adventures"
+                }
+            ],
+            "filesize": 161515,
+            "dimensions": [
+                1280,
+                854
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "yes",
+            "image_urls": "https:\/\/elements.envato.com\/image-449B49S"
+        },
+        {
+            "filename": "group-of-friends-with-backpacks-doing-trekking-excursion-on-mountain.jpg",
+            "thumbnail_url": "https:\/\/fullkit.moxcreative.com\/barrameru\/wp-content\/uploads\/sites\/18\/2022\/09\/group-of-friends-with-backpacks-doing-trekking-excursion-on-mountain-800x505.jpg",
+            "templates": [
+                {
+                    "source": "templates\/adventures.json",
+                    "name": "Adventures"
+                },
+                {
+                    "source": "templates\/about-us.json",
+                    "name": "About Us"
+                },
+                {
+                    "source": "templates\/homepage.json",
+                    "name": "Homepage"
+                }
+            ],
+            "filesize": 143856,
+            "dimensions": [
+                1280,
+                808
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "yes",
+            "image_urls": "https:\/\/elements.envato.com\/image-4CSEX4B"
+        },
+        {
+            "filename": "happy-asian-young-travellers-with-4wd-drive-car-off-road-in-forest--e1664201038495.jpg",
+            "thumbnail_url": "https:\/\/fullkit.moxcreative.com\/barrameru\/wp-content\/uploads\/sites\/18\/2022\/09\/happy-asian-young-travellers-with-4wd-drive-car-off-road-in-forest--e1664201038495-800x534.jpg",
+            "templates": [
+                {
+                    "source": "templates\/adventures.json",
+                    "name": "Adventures"
+                },
+                {
+                    "source": "templates\/about-us.json",
+                    "name": "About Us"
+                },
+                {
+                    "source": "templates\/homepage.json",
+                    "name": "Homepage"
+                }
+            ],
+            "filesize": 229010,
+            "dimensions": [
+                1080,
+                721
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "yes",
+            "image_urls": "https:\/\/elements.envato.com\/image-95M4VLY"
+        },
+        {
+            "filename": "3771157_76827.jpg",
+            "thumbnail_url": "https:\/\/fullkit.moxcreative.com\/barrameru\/wp-content\/uploads\/sites\/18\/2022\/09\/3771157_76827-800x500.jpg",
+            "templates": [
+                {
+                    "source": "templates\/adventures.json",
+                    "name": "Adventures"
+                },
+                {
+                    "source": "templates\/homepage.json",
+                    "name": "Homepage"
+                },
+                {
+                    "source": "templates\/barrameru-v1-shop.json",
+                    "name": "Barrameru V1 - Shop"
+                }
+            ],
+            "filesize": 47200,
+            "dimensions": [
+                1280,
+                800
+            ],
+            "image_source": "cc0",
+            "person_or_place": "no",
+            "image_urls": "https:\/\/www.freepik.com\/free-vector\/worldwide-connection-gray-background-illustration-vector_3771157.htm"
+        },
+        {
+            "filename": "Google-Rating.jpg",
+            "thumbnail_url": "https:\/\/fullkit.moxcreative.com\/barrameru\/wp-content\/uploads\/sites\/18\/2022\/09\/Google-Rating-800x252.jpg",
+            "templates": [
+                {
+                    "source": "templates\/adventures.json",
+                    "name": "Adventures"
+                },
+                {
+                    "source": "templates\/homepage.json",
+                    "name": "Homepage"
+                },
+                {
+                    "source": "templates\/barrameru-v1-shop.json",
+                    "name": "Barrameru V1 - Shop"
+                }
+            ],
+            "filesize": 86694,
+            "dimensions": [
+                865,
+                273
+            ],
+            "image_source": "self_created",
+            "person_or_place": "no",
+            "image_urls": ""
+        },
+        {
+            "filename": "high-angle-view-of-confident-couple-climbing-mountain-e1664201089286.jpg",
+            "thumbnail_url": "https:\/\/fullkit.moxcreative.com\/barrameru\/wp-content\/uploads\/sites\/18\/2022\/09\/high-angle-view-of-confident-couple-climbing-mountain-800x1200.jpg",
+            "templates": [
+                {
+                    "source": "templates\/adventures.json",
+                    "name": "Adventures"
+                },
+                {
+                    "source": "templates\/homepage.json",
+                    "name": "Homepage"
+                },
+                {
+                    "source": "templates\/barrameru-v1-shop.json",
+                    "name": "Barrameru V1 - Shop"
+                }
+            ],
+            "filesize": 115004,
+            "dimensions": [
+                720,
+                1080
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "yes",
+            "image_urls": "https:\/\/elements.envato.com\/image-5GFGXLD"
+        },
+        {
+            "filename": "tourist-sitting-phu-sub-lek-viewpoint-sunset-lopburi-thailand-e1664089245105.jpg",
+            "thumbnail_url": "https:\/\/fullkit.moxcreative.com\/barrameru\/wp-content\/uploads\/sites\/18\/2022\/09\/tourist-sitting-phu-sub-lek-viewpoint-sunset-lopburi-thailand-e1664089245105-800x550.jpg",
+            "templates": [
+                {
+                    "source": "templates\/adventures.json",
+                    "name": "Adventures"
+                },
+                {
+                    "source": "templates\/homepage.json",
+                    "name": "Homepage"
+                }
+            ],
+            "filesize": 142807,
+            "dimensions": [
+                1233,
+                847
+            ],
+            "image_source": "cc0",
+            "person_or_place": "no",
+            "image_urls": "https:\/\/www.freepik.com\/free-photo\/tourist-sitting-phu-sub-lek-viewpoint-sunset-lopburi-thailand_23404855.htm#page=2&query=mountain%20adventure&position=34&from_view=search"
+        },
+        {
+            "filename": "fog-in-the-forest.jpg",
+            "thumbnail_url": "https:\/\/fullkit.moxcreative.com\/barrameru\/wp-content\/uploads\/sites\/18\/2022\/09\/fog-in-the-forest-800x533.jpg",
+            "templates": [
+                {
+                    "source": "templates\/about-us.json",
+                    "name": "About Us"
+                },
+                {
+                    "source": "templates\/team.json",
+                    "name": "Team"
+                },
+                {
+                    "source": "templates\/contact-us.json",
+                    "name": "Contact Us"
+                },
+                {
+                    "source": "templates\/homepage.json",
+                    "name": "Homepage"
+                }
+            ],
+            "filesize": 114885,
+            "dimensions": [
+                1280,
+                853
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "no",
+            "image_urls": "https:\/\/elements.envato.com\/image-YQHYYZB"
+        },
+        {
+            "filename": "back-view-of-a-couple-of-hikers-with-backpack.jpg",
+            "thumbnail_url": "https:\/\/fullkit.moxcreative.com\/barrameru\/wp-content\/uploads\/sites\/18\/2022\/09\/back-view-of-a-couple-of-hikers-with-backpack-800x450.jpg",
+            "templates": [
+                {
+                    "source": "templates\/about-us.json",
+                    "name": "About Us"
+                },
+                {
+                    "source": "templates\/homepage.json",
+                    "name": "Homepage"
+                }
+            ],
+            "filesize": 107094,
+            "dimensions": [
+                1280,
+                720
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "yes",
+            "image_urls": "https:\/\/elements.envato.com\/image-XXAWQT8"
+        },
+        {
+            "filename": "spending-time-by-the-campfire.jpg",
+            "thumbnail_url": "https:\/\/fullkit.moxcreative.com\/barrameru\/wp-content\/uploads\/sites\/18\/2022\/09\/spending-time-by-the-campfire-800x533.jpg",
+            "templates": [
+                {
+                    "source": "templates\/about-us.json",
+                    "name": "About Us"
+                },
+                {
+                    "source": "templates\/homepage.json",
+                    "name": "Homepage"
+                }
+            ],
+            "filesize": 165698,
+            "dimensions": [
+                1280,
+                853
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "yes",
+            "image_urls": "https:\/\/elements.envato.com\/image-AHZ25WE"
+        },
+        {
+            "filename": "sandy-field-in-desert-of-egypt.jpg",
+            "thumbnail_url": "https:\/\/fullkit.moxcreative.com\/barrameru\/wp-content\/uploads\/sites\/18\/2022\/09\/sandy-field-in-desert-of-egypt-800x410.jpg",
+            "templates": [
+                {
+                    "source": "templates\/about-us.json",
+                    "name": "About Us"
+                },
+                {
+                    "source": "templates\/homepage.json",
+                    "name": "Homepage"
+                }
+            ],
+            "filesize": 196284,
+            "dimensions": [
+                1280,
+                657
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "no",
+            "image_urls": "https:\/\/elements.envato.com\/image-P2Q3GR4"
+        },
+        {
+            "filename": "tourist-with-a-backpack-against-the-sky-panorama.jpg",
+            "thumbnail_url": "https:\/\/fullkit.moxcreative.com\/barrameru\/wp-content\/uploads\/sites\/18\/2022\/09\/tourist-with-a-backpack-against-the-sky-panorama-800x412.jpg",
+            "templates": [
+                {
+                    "source": "templates\/about-us.json",
+                    "name": "About Us"
+                },
+                {
+                    "source": "templates\/faqs.json",
+                    "name": "FAQs"
+                },
+                {
+                    "source": "templates\/homepage.json",
+                    "name": "Homepage"
+                },
+                {
+                    "source": "templates\/barrameru-v1-shop.json",
+                    "name": "Barrameru V1 - Shop"
+                }
+            ],
+            "filesize": 86728,
+            "dimensions": [
+                1280,
+                659
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "yes",
+            "image_urls": "https:\/\/elements.envato.com\/image-DEMVWLK"
+        },
+        {
+            "filename": "Man2-e1664201483980.jpg",
+            "thumbnail_url": "https:\/\/fullkit.moxcreative.com\/barrameru\/wp-content\/uploads\/sites\/18\/2022\/09\/Man2-e1664201483980-800x1067.jpg",
+            "templates": [
+                {
+                    "source": "templates\/about-us.json",
+                    "name": "About Us"
+                },
+                {
+                    "source": "templates\/team.json",
+                    "name": "Team"
+                }
+            ],
+            "filesize": 210314,
+            "dimensions": [
+                1080,
+                1440
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "yes",
+            "image_urls": "https:\/\/elements.envato.com\/bearded-man-posing-isolated-over-white-wall-backgr-CEZVA2K"
+        },
+        {
+            "filename": "Woman3-e1664201412760.jpg",
+            "thumbnail_url": "https:\/\/fullkit.moxcreative.com\/barrameru\/wp-content\/uploads\/sites\/18\/2022\/09\/Woman3-e1664201412760-800x1067.jpg",
+            "templates": [
+                {
+                    "source": "templates\/about-us.json",
+                    "name": "About Us"
+                },
+                {
+                    "source": "templates\/team.json",
+                    "name": "Team"
+                }
+            ],
+            "filesize": 159836,
+            "dimensions": [
+                1080,
+                1440
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "yes",
+            "image_urls": "https:\/\/elements.envato.com\/close-up-portrait-of-yong-woman-casual-portrait-in-4GXSHHV"
+        },
+        {
+            "filename": "Man1-e1664201497878.jpg",
+            "thumbnail_url": "https:\/\/fullkit.moxcreative.com\/barrameru\/wp-content\/uploads\/sites\/18\/2022\/09\/Man1-e1664201497878-800x1067.jpg",
+            "templates": [
+                {
+                    "source": "templates\/about-us.json",
+                    "name": "About Us"
+                },
+                {
+                    "source": "templates\/team.json",
+                    "name": "Team"
+                }
+            ],
+            "filesize": 162126,
+            "dimensions": [
+                1080,
+                1440
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "yes",
+            "image_urls": "https:\/\/elements.envato.com\/fitness-instructor-posing-P222PPE"
+        },
+        {
+            "filename": "Woman1-e1664201437817.jpg",
+            "thumbnail_url": "https:\/\/fullkit.moxcreative.com\/barrameru\/wp-content\/uploads\/sites\/18\/2022\/09\/Woman1-e1664201437817-800x1067.jpg",
+            "templates": [
+                {
+                    "source": "templates\/about-us.json",
+                    "name": "About Us"
+                },
+                {
+                    "source": "templates\/team.json",
+                    "name": "Team"
+                }
+            ],
+            "filesize": 169143,
+            "dimensions": [
+                1080,
+                1440
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "yes",
+            "image_urls": "https:\/\/elements.envato.com\/young-woman-portrait-BQ77PFX"
+        },
+        {
+            "filename": "group-of-smiling-friends-hiking-with-backpacks-outdoors-travel-tourism-hike-and-people-concept.jpg",
+            "thumbnail_url": "https:\/\/fullkit.moxcreative.com\/barrameru\/wp-content\/uploads\/sites\/18\/2022\/09\/group-of-smiling-friends-hiking-with-backpacks-outdoors-travel-tourism-hike-and-people-concept-800x534.jpg",
+            "templates": [
+                {
+                    "source": "templates\/team.json",
+                    "name": "Team"
+                }
+            ],
+            "filesize": 139255,
+            "dimensions": [
+                1280,
+                854
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "yes",
+            "image_urls": "https:\/\/elements.envato.com\/image-3EQHJSS"
+        },
+        {
+            "filename": "Woman4-e1664201382381.jpg",
+            "thumbnail_url": "https:\/\/fullkit.moxcreative.com\/barrameru\/wp-content\/uploads\/sites\/18\/2022\/09\/Woman4-e1664201382381-800x1067.jpg",
+            "templates": [
+                {
+                    "source": "templates\/team.json",
+                    "name": "Team"
+                }
+            ],
+            "filesize": 214705,
+            "dimensions": [
+                1080,
+                1440
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "yes",
+            "image_urls": "https:\/\/elements.envato.com\/cute-teenage-ginger-girl-with-combed-hair-and-beau-QXGXK9V"
+        },
+        {
+            "filename": "Man3-e1664201470248.jpg",
+            "thumbnail_url": "https:\/\/fullkit.moxcreative.com\/barrameru\/wp-content\/uploads\/sites\/18\/2022\/09\/Man3-e1664201470248-800x1067.jpg",
+            "templates": [
+                {
+                    "source": "templates\/team.json",
+                    "name": "Team"
+                }
+            ],
+            "filesize": 226321,
+            "dimensions": [
+                1080,
+                1440
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "yes",
+            "image_urls": "https:\/\/elements.envato.com\/casual-man-portrait-TCFPHS9"
+        },
+        {
+            "filename": "Woman2-e1664201425282.jpg",
+            "thumbnail_url": "https:\/\/fullkit.moxcreative.com\/barrameru\/wp-content\/uploads\/sites\/18\/2022\/09\/Woman2-e1664201425282-800x1067.jpg",
+            "templates": [
+                {
+                    "source": "templates\/team.json",
+                    "name": "Team"
+                }
+            ],
+            "filesize": 159998,
+            "dimensions": [
+                1080,
+                1440
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "yes",
+            "image_urls": "https:\/\/elements.envato.com\/beautiful-smiling-african-american-female-with-cri-NB8DUN6"
+        },
+        {
+            "filename": "Man4-e1664201448957.jpg",
+            "thumbnail_url": "https:\/\/fullkit.moxcreative.com\/barrameru\/wp-content\/uploads\/sites\/18\/2022\/09\/Man4-e1664201448957-800x1067.jpg",
+            "templates": [
+                {
+                    "source": "templates\/team.json",
+                    "name": "Team"
+                }
+            ],
+            "filesize": 211940,
+            "dimensions": [
+                1080,
+                1440
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "yes",
+            "image_urls": "https:\/\/elements.envato.com\/waist-up-portrait-of-calm-and-successful-young-bus-W5FWBWU"
+        },
+        {
+            "filename": "12063968_4861242.jpg",
+            "thumbnail_url": "https:\/\/fullkit.moxcreative.com\/barrameru\/wp-content\/uploads\/sites\/18\/2022\/09\/12063968_4861242-800x533.jpg",
+            "templates": [
+                {
+                    "source": "templates\/team.json",
+                    "name": "Team"
+                },
+                {
+                    "source": "templates\/barrameru-v1-single-blog.json",
+                    "name": "Barrameru V1 - Single Blog"
+                }
+            ],
+            "filesize": 114222,
+            "dimensions": [
+                3000,
+                2000
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "no",
+            "image_urls": "https:\/\/elements.envato.com\/image-4861242"
+        },
+        {
+            "filename": "blue-hiking-backpack-with-fitness-mat-isolated-on-2021-09-03-13-40-43-utc-1.jpg",
+            "thumbnail_url": "https:\/\/fullkit.moxcreative.com\/barrameru\/wp-content\/uploads\/sites\/18\/2022\/09\/blue-hiking-backpack-with-fitness-mat-isolated-on-2021-09-03-13-40-43-utc-1-800x799.jpg",
+            "templates": [
+                {
+                    "source": "templates\/faqs.json",
+                    "name": "FAQs"
+                },
+                {
+                    "source": "templates\/homepage.json",
+                    "name": "Homepage"
+                }
+            ],
+            "filesize": 195797,
+            "dimensions": [
+                1280,
+                1278
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "no",
+            "image_urls": "https:\/\/elements.envato.com\/blue-hiking-backpack-with-fitness-mat-isolated-on--KEL5LXD"
+        },
+        {
+            "filename": "camping-in-steppe.jpg",
+            "thumbnail_url": "https:\/\/fullkit.moxcreative.com\/barrameru\/wp-content\/uploads\/sites\/18\/2022\/09\/camping-in-steppe-800x472.jpg",
+            "templates": [
+                {
+                    "source": "templates\/homepage.json",
+                    "name": "Homepage"
+                }
+            ],
+            "filesize": 203541,
+            "dimensions": [
+                1280,
+                755
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "no",
+            "image_urls": "https:\/\/elements.envato.com\/image-PW3T26Q"
+        },
+        {
+            "filename": "wepik-photo-mode-2022821-01047-1.png",
+            "thumbnail_url": "https:\/\/fullkit.moxcreative.com\/barrameru\/wp-content\/uploads\/sites\/18\/2022\/09\/wepik-photo-mode-2022821-01047-1-800x887.png",
+            "templates": [
+                {
+                    "source": "templates\/homepage.json",
+                    "name": "Homepage"
+                }
+            ],
+            "filesize": 412779,
+            "dimensions": [
+                1126,
+                1249
+            ],
+            "image_source": "cc0",
+            "person_or_place": "no",
+            "image_urls": "https:\/\/www.freepik.com\/free-photo\/lost-tourists-finding-way_1190492.htm#page=7&query=adventurer&position=47&from_view=search"
+        },
+        {
+            "filename": "top-view-of-travel-equipment-for-a-mountain-trip-e1664201262219.jpg",
+            "thumbnail_url": "https:\/\/fullkit.moxcreative.com\/barrameru\/wp-content\/uploads\/sites\/18\/2022\/09\/top-view-of-travel-equipment-for-a-mountain-trip-e1664201262219-800x533.jpg",
+            "templates": [
+                {
+                    "source": "templates\/homepage.json",
+                    "name": "Homepage"
+                },
+                {
+                    "source": "templates\/barrameru-v1-shop.json",
+                    "name": "Barrameru V1 - Shop"
+                },
+                {
+                    "source": "templates\/barrameru-v1-single-blog.json",
+                    "name": "Barrameru V1 - Single Blog"
+                }
+            ],
+            "filesize": 212781,
+            "dimensions": [
+                1080,
+                720
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "no",
+            "image_urls": "https:\/\/elements.envato.com\/image-EYJDJX4"
+        },
+        {
+            "filename": "panoramic-shot-of-two-young-tourists-looking-at-geographic-map-on-grey-background-e1664119398628.jpg",
+            "thumbnail_url": "https:\/\/fullkit.moxcreative.com\/barrameru\/wp-content\/uploads\/sites\/18\/2022\/09\/panoramic-shot-of-two-young-tourists-looking-at-geographic-map-on-grey-background-e1664119398628-800x413.jpg",
+            "templates": [
+                {
+                    "source": "templates\/homepage.json",
+                    "name": "Homepage"
+                },
+                {
+                    "source": "templates\/barrameru-v1-shop.json",
+                    "name": "Barrameru V1 - Shop"
+                }
+            ],
+            "filesize": 97654,
+            "dimensions": [
+                1200,
+                620
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "yes",
+            "image_urls": "https:\/\/elements.envato.com\/image-8R3C8YG"
+        },
+        {
+            "filename": "emerald-lake-in-autumn-at-the-yoho-national-park-alberta-canada-men-by-the-emerald-lake-canada-e1664201303308.jpg",
+            "thumbnail_url": "https:\/\/fullkit.moxcreative.com\/barrameru\/wp-content\/uploads\/sites\/18\/2022\/09\/emerald-lake-in-autumn-at-the-yoho-national-park-alberta-canada-men-by-the-emerald-lake-canada-800x1035.jpg",
+            "templates": [
+                {
+                    "source": "templates\/barrameru-v1-single-product.json",
+                    "name": "Barrameru V1 - Single Product"
+                },
+                {
+                    "source": "templates\/barrameru-v1-shop.json",
+                    "name": "Barrameru V1 - Shop"
+                }
+            ],
+            "filesize": 111398,
+            "dimensions": [
+                720,
+                932
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "yes",
+            "image_urls": "https:\/\/elements.envato.com\/image-CZ42SQB"
+        },
+        {
+            "filename": "austria-tyrol-tannheimer-tal-young-couple-resting-on-hiking-tour.jpg",
+            "thumbnail_url": "https:\/\/fullkit.moxcreative.com\/barrameru\/wp-content\/uploads\/sites\/18\/2022\/09\/austria-tyrol-tannheimer-tal-young-couple-resting-on-hiking-tour-800x534.jpg",
+            "templates": [
+                {
+                    "source": "templates\/barrameru-v1-404-page.json",
+                    "name": "Barrameru V1 - 404 Page"
+                }
+            ],
+            "filesize": 180325,
+            "dimensions": [
+                1280,
+                854
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "yes",
+            "image_urls": "https:\/\/elements.envato.com\/image-GMUL7F3"
+        },
+        {
+            "filename": "Team_5.jpg",
+            "thumbnail_url": "https:\/\/fullkit.moxcreative.com\/barrameru\/wp-content\/uploads\/sites\/18\/2022\/09\/Team_5.jpg",
+            "templates": [
+                {
+                    "source": "templates\/barrameru-v1-single-blog.json",
+                    "name": "Barrameru V1 - Single Blog"
+                }
+            ],
+            "filesize": 168173,
+            "dimensions": [
+                400,
+                400
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "yes",
+            "image_urls": "https:\/\/elements.envato.com\/handsome-millennial-guy-with-smartphone-KMYQCV2"
+        },
+        {
+            "filename": "mountains-in-colorado.jpg",
+            "thumbnail_url": "https:\/\/fullkit.moxcreative.com\/barrameru\/wp-content\/uploads\/sites\/18\/2022\/09\/mountains-in-colorado-800x533.jpg",
+            "templates": [
+                {
+                    "source": "templates\/barrameru-v1-footer.json",
+                    "name": "Barrameru V1 - Footer"
+                }
+            ],
+            "filesize": 183223,
+            "dimensions": [
+                1280,
+                853
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "no",
+            "image_urls": "https:\/\/elements.envato.com\/image-KCVC62U"
+        },
+        {
+            "filename": "Logo_Barrameru_2.png",
+            "thumbnail_url": "https:\/\/fullkit.moxcreative.com\/barrameru\/wp-content\/uploads\/sites\/18\/2022\/09\/Logo_Barrameru_2.png",
+            "templates": [
+                {
+                    "source": "templates\/barrameru-v1-footer.json",
+                    "name": "Barrameru V1 - Footer"
+                }
+            ],
+            "filesize": 8446,
+            "dimensions": [
+                308,
+                154
+            ],
+            "image_source": "cc0",
+            "person_or_place": "no",
+            "image_urls": "https:\/\/www.freepik.com\/free-vector\/mountain-travel-logo_9586209.htm#query=mountain%20logo&position=0&from_view=search"
+        },
+        {
+            "filename": "Visa.jpg",
+            "thumbnail_url": "https:\/\/fullkit.moxcreative.com\/barrameru\/wp-content\/uploads\/sites\/18\/2022\/09\/Visa.jpg",
+            "templates": [
+                {
+                    "source": "templates\/barrameru-v1-footer.json",
+                    "name": "Barrameru V1 - Footer"
+                }
+            ],
+            "filesize": 18710,
+            "dimensions": [
+                300,
+                200
+            ],
+            "image_source": "cc0",
+            "person_or_place": "no",
+            "image_urls": "https:\/\/card-logo.com\/"
+        },
+        {
+            "filename": "Mastercard.jpg",
+            "thumbnail_url": "https:\/\/fullkit.moxcreative.com\/barrameru\/wp-content\/uploads\/sites\/18\/2022\/09\/Mastercard.jpg",
+            "templates": [
+                {
+                    "source": "templates\/barrameru-v1-footer.json",
+                    "name": "Barrameru V1 - Footer"
+                }
+            ],
+            "filesize": 17422,
+            "dimensions": [
+                300,
+                200
+            ],
+            "image_source": "cc0",
+            "person_or_place": "no",
+            "image_urls": "https:\/\/card-logo.com\/"
+        },
+        {
+            "filename": "Maestro.jpg",
+            "thumbnail_url": "https:\/\/fullkit.moxcreative.com\/barrameru\/wp-content\/uploads\/sites\/18\/2022\/09\/Maestro.jpg",
+            "templates": [
+                {
+                    "source": "templates\/barrameru-v1-footer.json",
+                    "name": "Barrameru V1 - Footer"
+                }
+            ],
+            "filesize": 17125,
+            "dimensions": [
+                300,
+                200
+            ],
+            "image_source": "cc0",
+            "person_or_place": "no",
+            "image_urls": "https:\/\/card-logo.com\/"
+        },
+        {
+            "filename": "JCB.jpg",
+            "thumbnail_url": "https:\/\/fullkit.moxcreative.com\/barrameru\/wp-content\/uploads\/sites\/18\/2022\/09\/JCB.jpg",
+            "templates": [
+                {
+                    "source": "templates\/barrameru-v1-footer.json",
+                    "name": "Barrameru V1 - Footer"
+                }
+            ],
+            "filesize": 20185,
+            "dimensions": [
+                300,
+                200
+            ],
+            "image_source": "cc0",
+            "person_or_place": "no",
+            "image_urls": "https:\/\/card-logo.com\/"
+        },
+        {
+            "filename": "Paypal.jpg",
+            "thumbnail_url": "https:\/\/fullkit.moxcreative.com\/barrameru\/wp-content\/uploads\/sites\/18\/2022\/09\/Paypal.jpg",
+            "templates": [
+                {
+                    "source": "templates\/barrameru-v1-footer.json",
+                    "name": "Barrameru V1 - Footer"
+                }
+            ],
+            "filesize": 19634,
+            "dimensions": [
+                300,
+                200
+            ],
+            "image_source": "cc0",
+            "person_or_place": "no",
+            "image_urls": "https:\/\/card-logo.com\/"
+        },
+        {
+            "filename": "Logo_Barrameru.png",
+            "thumbnail_url": "https:\/\/fullkit.moxcreative.com\/barrameru\/wp-content\/uploads\/sites\/18\/2022\/09\/Logo_Barrameru.png",
+            "templates": [
+                {
+                    "source": "templates\/barrameru-v1-header.json",
+                    "name": "Barrameru V1 - Header"
+                }
+            ],
+            "filesize": 12258,
+            "dimensions": [
+                308,
+                154
+            ],
+            "image_source": "cc0",
+            "person_or_place": "no",
+            "image_urls": "https:\/\/www.freepik.com\/free-vector\/mountain-travel-logo_9586209.htm#query=mountain%20logo&position=0&from_view=search"
+        }
+    ]
+}

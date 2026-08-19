@@ -1,0 +1,30 @@
+@{
+    ViewData["Title"] = "404 / Page Not Found";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/pages/error404.css" asp-append-version="true" />
+}
+
+<!-- 404 Full Screen Banner (Matches barrameru-v1-404-page.jpg) -->
+<section class="error-404-hero">
+    <div class="container position-relative" style="z-index: 2;">
+        <div class="row justify-content-end">
+            <div class="col-lg-6 col-md-8 text-white text-end">
+                <h1 class="text-white fw-bold mb-3" style="font-size: 3rem;">
+                    404 / Page Not<br>Found
+                </h1>
+                <p class="text-white-50 small mb-4 ms-auto" style="max-width: 440px;">
+                    The page you are looking for no longer exists. Perhaps you can return back to the site's homepage and see if you can find what you are looking for.
+                </p>
+                <a asp-controller="Home" asp-action="Index" class="btn btn-barrameru">
+                    BACK TO HOMEPAGE <i class="bi bi-house-door-fill ms-1 small"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="~/js/pages/error404.js" asp-append-version="true"></script>
+}

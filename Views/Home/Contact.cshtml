@@ -1,0 +1,118 @@
+@{
+    ViewData["Title"] = "Contact Us";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/pages/contact.css" asp-append-version="true" />
+}
+
+<!-- Hero Banner (Matches contact-us.jpg) -->
+<section class="inner-hero-banner" style="background-image: url('/images/orange-tourist-tent-illuminated-from-inside-stands-in-mountains-above-clouds.jpg');">
+    <div class="inner-hero-overlay"></div>
+    <div class="container position-relative">
+        <div class="inner-hero-content">
+            <div class="breadcrumbs">HOME / CONTACT US</div>
+            <h1>Contact Us</h1>
+            <div class="sub-text">Get your backpack ready!</div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 1: Get Contact Details & Map -->
+<section class="py-5 bg-white">
+    <div class="container py-4">
+        <div class="row g-5 align-items-center">
+            <!-- Left Info -->
+            <div class="col-lg-5">
+                <h2 class="fw-bold mb-3" style="font-size: 2.2rem;">Get Contact<br>Details</h2>
+                <p class="text-muted small mb-4">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                </p>
+
+                <!-- Store Location -->
+                <div class="d-flex align-items-center gap-3 mb-4">
+                    <div class="contact-icon-box">
+                        <i class="bi bi-geo-alt-fill fs-5"></i>
+                    </div>
+                    <div>
+                        <h6 class="fw-bold mb-0 text-secondary">Store Location</h6>
+                        <small class="text-muted">In Cempaka Wangi No 22 Jakarta - Indonesia</small>
+                    </div>
+                </div>
+
+                <!-- Phone -->
+                <div class="d-flex align-items-center gap-3 mb-4">
+                    <div class="contact-icon-box">
+                        <i class="bi bi-telephone-fill fs-5"></i>
+                    </div>
+                    <div>
+                        <h6 class="fw-bold mb-0 text-secondary">Phone</h6>
+                        <small class="text-muted">+6221.2002.2012<br>+6221.2002.2021</small>
+                    </div>
+                </div>
+
+                <!-- Mail Address -->
+                <div class="d-flex align-items-center gap-3 mb-4">
+                    <div class="contact-icon-box">
+                        <i class="bi bi-envelope-fill fs-5"></i>
+                    </div>
+                    <div>
+                        <h6 class="fw-bold mb-0 text-secondary">Mail Address</h6>
+                        <small class="text-muted">hello@yourdomain.tld<br>support@yourdomain.tld</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Map -->
+            <div class="col-lg-7">
+                <div class="border rounded-0 overflow-hidden shadow-sm" style="height: 380px;">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d198059.4924037748!2d-0.381776505078125!3d51.528735199999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487604ce3941eb1f%3A0x1a5342fdf089de62!2sLondon%20Eye!5e0!3m2!1sen!2sus!4v1692440000000!5m2!1sen!2sus" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: Drop us a line Form Box -->
+        <div class="mt-5 contact-form-box shadow-sm">
+            <div class="text-center mb-4">
+                <h2 class="fw-bold mb-2">Drop us a line</h2>
+                <p class="text-muted small mx-auto" style="max-width: 500px;">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.
+                </p>
+            </div>
+
+            <form id="contactDropLineForm">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label small fw-semibold text-secondary">Name</label>
+                        <input type="text" class="form-control rounded-0" placeholder="Name" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label small fw-semibold text-secondary">Phone</label>
+                        <input type="tel" class="form-control rounded-0" placeholder="Phone">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label small fw-semibold text-secondary">Email</label>
+                        <input type="email" class="form-control rounded-0" placeholder="Email" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label small fw-semibold text-secondary">Subject</label>
+                        <input type="text" class="form-control rounded-0" placeholder="Subject">
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label small fw-semibold text-secondary">Message</label>
+                        <textarea class="form-control rounded-0" rows="4" placeholder="Message" required></textarea>
+                    </div>
+                    <div class="col-12 mt-4">
+                        <button type="submit" class="btn btn-barrameru w-100 py-3">
+                            SEND MY MESSAGE
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="~/js/pages/contact.js" asp-append-version="true"></script>
+}
