@@ -1,0 +1,322 @@
+@model CampTravelGear.Models.Order
+
+@{
+    ViewData["Title"] = $"Order #{Model.Id} Details";
+    var customerName = Model.User?.FullName ?? Model.User?.UserName ?? "Guest Customer";
+    var customerEmail = Model.User?.Email ?? "N/A";
+    var customerPhone = Model.User?.PhoneNumber ?? "No phone provided";
+    var status = Model.Status ?? "Processing";
+    var payment = Model.Payments?.FirstOrDefault();
+}
+
+<!-- Top Navigation & Actions -->
+<div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+    <div>
+        <div class="d-flex align-items-center gap-2 mb-1">
+            <a asp-action="Index" class="btn-admin-outline py-1 px-2" style="font-size: 11.5px;">
+                <i class="bi bi-arrow-left me-1"></i> Back to Orders
+            </a>
+            <span class="text-muted small">|</span>
+            <span class="text-muted small" style="font-size: 11.5px;">
+                Placed on @Model.OrderDate.ToString("MMMM dd, yyyy - hh:mm tt")
+            </span>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+            <h1 class="h4 fw-bold mb-0" style="color: var(--admin-text-main);">Order #@Model.Id</h1>
+            @if (status.Equals("Completed", StringComparison.OrdinalIgnoreCase))
+            {
+                <span class="admin-badge admin-badge-success">
+                    <i class="bi bi-check2-circle"></i> Completed
+                </span>
+            }
+            else if (status.Equals("Cancelled", StringComparison.OrdinalIgnoreCase))
+            {
+                <span class="admin-badge admin-badge-danger">
+                    <i class="bi bi-x-circle"></i> Cancelled
+                </span>
+            }
+            else
+            {
+                <span class="admin-badge admin-badge-warning">
+                    <i class="bi bi-arrow-repeat"></i> Processing
+                </span>
+            }
+        </div>
+    </div>
+
+    <!-- Print / Invoice Action -->
+    <div class="d-flex align-items-center gap-2">
+        <button type="button" class="btn-admin-outline py-1 px-3" onclick="window.print()" style="font-size: 12px;">
+            <i class="bi bi-printer me-1"></i> Print Invoice
+        </button>
+    </div>
+</div>
+
+<div class="row g-3">
+    <!-- Left Column: Itemized Products & Financial Breakdown -->
+    <div class="col-lg-8">
+        <!-- Order Items Card -->
+        <div class="admin-card mb-3">
+            <div class="admin-card-header py-2 px-3">
+                <div class="admin-card-title" style="font-size: 13.5px;">
+                    <i class="bi bi-box-seam text-primary"></i>
+                    <span>Purchased Equipment</span>
+                    <span class="admin-badge admin-badge-teal ms-1">@(Model.OrderItems?.Count ?? 0) Items</span>
+                </div>
+            </div>
+
+            <div class="admin-table-wrapper">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Product Details</th>
+                            <th style="width: 100px; text-align: right;">Unit Price</th>
+                            <th style="width: 70px; text-align: center;">Qty</th>
+                            <th style="width: 110px; text-align: right;">Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.OrderItems != null && Model.OrderItems.Any())
+                        {
+                            @foreach (var item in Model.OrderItems)
+                            {
+                                var productImg = item.Product?.ProductImages?.FirstOrDefault(img => img.IsMain)?.ImageUrl
+                                                 ?? item.Product?.ProductImages?.FirstOrDefault()?.ImageUrl;
+                                var lineTotal = item.UnitPrice * item.Quantity;
+
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <div class="rounded border bg-light d-flex align-items-center justify-content-center overflow-hidden flex-shrink-0" style="width: 44px; height: 44px;">
+                                                @if (!string.IsNullOrEmpty(productImg))
+                                                {
+                                                    <img src="@productImg" alt="@(item.Product?.Name ?? "Product")" style="width: 100%; height: 100%; object-fit: cover;" />
+                                                }
+                                                else
+                                                {
+                                                    <i class="bi bi-image text-muted"></i>
+                                                }
+                                            </div>
+                                            <div>
+                                                @if (item.Product != null)
+                                                {
+                                                    <a asp-controller="Products" asp-action="Edit" asp-route-id="@item.ProductId" class="fw-bold text-decoration-none d-block" style="color: var(--admin-text-main); font-size: 12.5px;">
+                                                        @item.Product.Name
+                                                    </a>
+                                                    <span class="text-muted small" style="font-size: 11px;">
+                                                        SKU #@item.ProductId
+                                                    </span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="fw-bold text-muted" style="font-size: 12.5px;">Product #@item.ProductId</span>
+                                                }
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td style="text-align: right; font-size: 12.5px; color: var(--admin-text-muted);">
+                                        $@item.UnitPrice.ToString("F2")
+                                    </td>
+                                    <td style="text-align: center; font-weight: 600; font-size: 12.5px;">
+                                        ×@item.Quantity
+                                    </td>
+                                    <td style="text-align: right; font-weight: 700; color: var(--admin-primary); font-size: 13px;">
+                                        $@lineTotal.ToString("F2")
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="4" class="text-center py-3 text-muted small">
+                                    No item records found for this order.
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Financial Summary Box -->
+            <div class="p-3 border-top bg-light d-flex justify-content-end">
+                <div style="min-width: 260px;">
+                    <div class="d-flex justify-content-between mb-1 small" style="font-size: 12px;">
+                        <span class="text-muted">Subtotal:</span>
+                        <span class="fw-semibold text-dark">$@Model.TotalAmount.ToString("F2")</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-1 small" style="font-size: 12px;">
+                        <span class="text-muted">Estimated Shipping:</span>
+                        <span class="text-success fw-semibold">FREE</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2 small" style="font-size: 12px;">
+                        <span class="text-muted">Taxes & Fees:</span>
+                        <span class="fw-semibold text-dark">$0.00</span>
+                    </div>
+                    <div class="d-flex justify-content-between pt-2 border-top">
+                        <span class="fw-bold" style="color: var(--admin-text-main); font-size: 13.5px;">Grand Total:</span>
+                        <span class="fw-bold fs-5" style="color: var(--admin-primary); line-height: 1;">
+                            $@Model.TotalAmount.ToString("F2")
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Column: Status Updater, Customer Info, Address, Payment -->
+    <div class="col-lg-4">
+        <!-- 1. Update Fulfillment Status Card -->
+        <div class="admin-card mb-3">
+            <div class="admin-card-header py-2 px-3">
+                <div class="admin-card-title" style="font-size: 13px;">
+                    <i class="bi bi-sliders text-primary"></i>
+                    <span>Fulfillment Status</span>
+                </div>
+            </div>
+            <div class="admin-card-body p-3">
+                <form asp-action="Edit" method="post">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="id" value="@Model.Id" />
+
+                    <div class="admin-form-group mb-2">
+                        <label class="admin-form-label mb-1">Current Order Status</label>
+                        <select name="status" class="admin-form-control" style="cursor: pointer;">
+                            <option value="Processing" selected="@(status.Equals("Processing", StringComparison.OrdinalIgnoreCase) ? "selected" : null)">
+                                ⏳ Processing
+                            </option>
+                            <option value="Completed" selected="@(status.Equals("Completed", StringComparison.OrdinalIgnoreCase) ? "selected" : null)">
+                                ✅ Completed
+                            </option>
+                            <option value="Cancelled" selected="@(status.Equals("Cancelled", StringComparison.OrdinalIgnoreCase) ? "selected" : null)">
+                                ❌ Cancelled
+                            </option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn-admin-primary w-100 justify-content-center py-2 mt-2" style="font-size: 12px;">
+                        <i class="bi bi-arrow-repeat"></i> Update Status
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- 2. Customer Information Card -->
+        <div class="admin-card mb-3">
+            <div class="admin-card-header py-2 px-3">
+                <div class="admin-card-title" style="font-size: 13px;">
+                    <i class="bi bi-person text-primary"></i>
+                    <span>Customer Details</span>
+                </div>
+            </div>
+            <div class="admin-card-body p-3">
+                <div class="d-flex align-items-center gap-2 mb-2 pb-2 border-bottom">
+                    <div class="rounded-circle d-flex align-items-center justify-content-center fw-bold text-white flex-shrink-0" 
+                         style="width: 36px; height: 36px; background-color: var(--admin-primary); font-size: 13px;">
+                        @(customerName.Length > 0 ? customerName[0].ToString().ToUpper() : "U")
+                    </div>
+                    <div>
+                        <span class="fw-bold d-block text-truncate" style="color: var(--admin-text-main); font-size: 12.5px;">
+                            @customerName
+                        </span>
+                        <span class="admin-badge admin-badge-teal" style="font-size: 10px;">Registered Customer</span>
+                    </div>
+                </div>
+
+                <div class="mb-2">
+                    <span class="text-muted small d-block" style="font-size: 11px;">Email Address</span>
+                    <a href="mailto:@customerEmail" class="fw-semibold text-decoration-none text-dark small" style="font-size: 11.5px;">
+                        <i class="bi bi-envelope me-1 text-muted"></i>@customerEmail
+                    </a>
+                </div>
+
+                <div>
+                    <span class="text-muted small d-block" style="font-size: 11px;">Phone Number</span>
+                    <span class="fw-semibold text-dark small" style="font-size: 11.5px;">
+                        <i class="bi bi-telephone me-1 text-muted"></i>@customerPhone
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Delivery / Shipping Address Card -->
+        <div class="admin-card mb-3">
+            <div class="admin-card-header py-2 px-3">
+                <div class="admin-card-title" style="font-size: 13px;">
+                    <i class="bi bi-geo-alt text-primary"></i>
+                    <span>Shipping Address</span>
+                </div>
+            </div>
+            <div class="admin-card-body p-3">
+                @if (Model.Address != null)
+                {
+                    <p class="fw-semibold mb-1 text-dark small" style="font-size: 12px;">
+                        <i class="bi bi-building me-1 text-muted"></i>@Model.Address.FullAddress
+                    </p>
+                    <p class="text-muted small mb-0" style="font-size: 11.5px;">
+                        <i class="bi bi-map me-1"></i>@Model.Address.City
+                    </p>
+                }
+                else
+                {
+                    <span class="text-muted small" style="font-size: 11.5px;">
+                        <i class="bi bi-info-circle me-1"></i>No delivery address recorded.
+                    </span>
+                }
+            </div>
+        </div>
+
+        <!-- 4. Payment Information Card -->
+        <div class="admin-card">
+            <div class="admin-card-header py-2 px-3">
+                <div class="admin-card-title" style="font-size: 13px;">
+                    <i class="bi bi-credit-card text-primary"></i>
+                    <span>Payment Information</span>
+                </div>
+            </div>
+            <div class="admin-card-body p-3">
+                @if (payment != null)
+                {
+                    <div class="d-flex justify-content-between align-items-center mb-2 pb-2 border-bottom">
+                        <span class="text-muted small" style="font-size: 11px;">Payment Method</span>
+                        <span class="fw-bold small text-dark" style="font-size: 11.5px;">
+                            <i class="bi bi-credit-card-2-front me-1 text-primary"></i>@payment.PaymentMethod
+                        </span>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center mb-2 pb-2 border-bottom">
+                        <span class="text-muted small" style="font-size: 11px;">Payment Status</span>
+                        @if (payment.Status.Equals("Completed", StringComparison.OrdinalIgnoreCase) || payment.Status.Equals("Paid", StringComparison.OrdinalIgnoreCase))
+                        {
+                            <span class="admin-badge admin-badge-success">
+                                <i class="bi bi-check2-circle"></i> Paid ($@payment.Amount.ToString("F2"))
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="admin-badge admin-badge-warning">
+                                <i class="bi bi-hourglass-split"></i> @payment.Status ($@payment.Amount.ToString("F2"))
+                            </span>
+                        }
+                    </div>
+                    @if (!string.IsNullOrEmpty(payment.TransactionId))
+                    {
+                        <div>
+                            <span class="text-muted small d-block" style="font-size: 11px;">Transaction ID</span>
+                            <code class="small text-secondary" style="font-size: 11px;">@payment.TransactionId</code>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <span class="text-muted small" style="font-size: 11.5px;">
+                        <i class="bi bi-cash-coin me-1"></i>Cash on Delivery / Direct Payment
+                    </span>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/admin/orders.js" asp-append-version="true"></script>
+}

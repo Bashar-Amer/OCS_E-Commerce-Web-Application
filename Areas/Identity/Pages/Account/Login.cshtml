@@ -15,7 +15,7 @@
     <!-- Section 1 (Left): Welcoming & Adventure Pane (Full Height) -->
     <div class="auth-split-left">
         <div>
-            <a asp-controller="Home" asp-action="Index">
+            <a asp-area="" asp-controller="Home" asp-action="Index">
                 <img src="~/images/Logo_Barrameru.png" alt="Barrameru" class="auth-welcome-logo" />
             </a>
             <span class="brand-tag">
@@ -53,7 +53,7 @@
         <!-- Internal Top Navigation Inside Right Pane -->
         <div class="auth-internal-nav">
             <div></div>
-            <a asp-controller="Home" asp-action="Index" class="auth-box-back-btn">
+            <a asp-area="" asp-controller="Home" asp-action="Index" class="auth-box-back-btn">
                 <span class="btn-icon-circle"><i class="bi bi-arrow-left"></i></span>
                 <span>Back to Store</span>
             </a>
@@ -122,14 +122,14 @@
 
             <!-- Demo Credentials Helper for Quick Testing -->
             <div class="demo-accounts-box">
-                <div class="fw-bold text-secondary mb-2 d-flex align-items-center gap-1">
-                    <i class="bi bi-key-fill text-primary"></i> Demo Test Accounts (Click to Fill):
+                <div class="fw-bold text-secondary mb-2 d-flex align-items-center gap-1" style="font-size: 12px;">
+                    <i class="bi bi-lightning-charge-fill text-warning"></i> 1-Click Instant Demo Login:
                 </div>
                 <div class="d-flex flex-wrap gap-2">
-                    <button type="button" class="demo-account-pill text-start" data-email="admin@barrameru.com" data-pass="Admin@123!">
+                    <button type="button" class="demo-account-pill text-start" data-email="admin@barrameru.com" data-pass="Admin@123!" title="Instant Sign In as Admin">
                         <i class="bi bi-shield-lock-fill text-primary me-1"></i> <strong>Admin:</strong> admin@barrameru.com
                     </button>
-                    <button type="button" class="demo-account-pill text-start" data-email="john.doe@example.com" data-pass="Customer@123!">
+                    <button type="button" class="demo-account-pill text-start" data-email="john.doe@example.com" data-pass="Customer@123!" title="Instant Sign In as Customer">
                         <i class="bi bi-person-fill text-teal me-1"></i> <strong>Customer:</strong> john.doe@example.com
                     </button>
                 </div>

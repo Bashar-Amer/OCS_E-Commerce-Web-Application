@@ -22,7 +22,7 @@ public class Order
 
     [Required]
     [StringLength(50)]
-    public string Status { get; set; } = OrderStatus.Pending.ToString();
+    public string Status { get; set; } = OrderStatus.Processing.ToString();
 
     [Column(TypeName = "decimal(18,2)")]
     public decimal TotalAmount { get; set; }

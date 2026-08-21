@@ -1,0 +1,93 @@
+@using CampTravelGear.Helpers
+@model IPaginatedList
+
+@{
+    if (Model == null || Model.TotalCount == 0)
+    {
+        return;
+    }
+
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+
+    // Retain current query parameters except 'page'
+    var routeData = new Dictionary<string, string>();
+    foreach (var key in Context.Request.Query.Keys)
+    {
+        if (!string.IsNullOrEmpty(key) && key.ToLower() != "page")
+        {
+            routeData[key] = Context.Request.Query[key].ToString();
+        }
+    }
+
+    string GetPageUrl(int pageNumber)
+    {
+        var queryParams = new Dictionary<string, string>(routeData);
+        queryParams["page"] = pageNumber.ToString();
+        var queryString = string.Join("&", queryParams.Select(kvp => $"{kvp.Key}={Uri.EscapeDataString(kvp.Value)}"));
+        return $"{Context.Request.Path}?{queryString}";
+    }
+}
+
+<div class="admin-table-footer">
+    <div class="admin-table-info">
+        Showing <strong>@Model.StartItemIndex</strong> to <strong>@Model.EndItemIndex</strong> of <strong>@Model.TotalCount</strong> entries
+    </div>
+
+    @if (Model.TotalPages > 1)
+    {
+        <nav aria-label="Table navigation">
+            <ul class="admin-pagination">
+                <!-- Previous Button -->
+                <li class="page-item @prevDisabled">
+                    <a class="page-link" href="@(Model.HasPreviousPage ? GetPageUrl(Model.PageIndex - 1) : "#")" aria-label="Previous">
+                        <i class="bi bi-chevron-left"></i>
+                    </a>
+                </li>
+
+                <!-- Page Numbers -->
+                @{
+                    int startPage = Math.Max(1, Model.PageIndex - 2);
+                    int endPage = Math.Min(Model.TotalPages, Model.PageIndex + 2);
+
+                    if (startPage > 1)
+                    {
+                        <li class="page-item">
+                            <a class="page-link" href="@GetPageUrl(1)">1</a>
+                        </li>
+                        if (startPage > 2)
+                        {
+                            <li class="page-item disabled"><span class="page-link">…</span></li>
+                        }
+                    }
+
+                    for (int i = startPage; i <= endPage; i++)
+                    {
+                        var activeClass = i == Model.PageIndex ? "active" : "";
+                        <li class="page-item @activeClass">
+                            <a class="page-link" href="@GetPageUrl(i)">@i</a>
+                        </li>
+                    }
+
+                    if (endPage < Model.TotalPages)
+                    {
+                        if (endPage < Model.TotalPages - 1)
+                        {
+                            <li class="page-item disabled"><span class="page-link">…</span></li>
+                        }
+                        <li class="page-item">
+                            <a class="page-link" href="@GetPageUrl(Model.TotalPages)">@Model.TotalPages</a>
+                        </li>
+                    }
+                }
+
+                <!-- Next Button -->
+                <li class="page-item @nextDisabled">
+                    <a class="page-link" href="@(Model.HasNextPage ? GetPageUrl(Model.PageIndex + 1) : "#")" aria-label="Next">
+                        <i class="bi bi-chevron-right"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    }
+</div>

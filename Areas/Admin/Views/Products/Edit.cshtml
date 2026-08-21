@@ -1,0 +1,238 @@
+@model CampTravelGear.Models.Product
+
+@{
+    ViewData["Title"] = "Edit Product";
+    var categories = ViewBag.categories as List<CampTravelGear.Models.Category> ?? new List<CampTravelGear.Models.Category>();
+}
+
+<div class="mb-3">
+    <div class="d-flex align-items-center gap-2 mb-1">
+        <a asp-action="Index" class="btn-admin-outline py-1 px-2" style="font-size: 11.5px;">
+            <i class="bi bi-arrow-left me-1"></i> Back to Products
+        </a>
+    </div>
+    <h1 class="h4 fw-bold mb-1" style="color: var(--admin-text-main);">Edit Product</h1>
+    <p class="text-muted small mb-0" style="font-size: 12px;">Modify pricing, inventory, category, and photos for <strong class="text-dark">@Model.Name</strong>.</p>
+</div>
+
+<form asp-action="Edit" method="post" enctype="multipart/form-data">
+    @Html.AntiForgeryToken()
+
+    <!-- Hidden Fields -->
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="CreatedAt" />
+    <input type="hidden" asp-for="IsDeleted" />
+    <input type="hidden" name="selectedNewImageIndex" id="selectedNewImageIndexInput" value="" />
+
+    <div class="row g-3">
+        <!-- Main Form Column -->
+        <div class="col-lg-8 col-xl-7">
+            <div class="admin-card">
+                <div class="admin-card-header py-2 px-3">
+                    <div class="admin-card-title" style="font-size: 13.5px;">
+                        <i class="bi bi-pencil-square text-primary"></i>
+                        <span>Product Information</span>
+                    </div>
+                    <span class="admin-badge admin-badge-teal">Product #@Model.Id</span>
+                </div>
+
+                <div class="admin-card-body p-3">
+                    <!-- Validation Summary -->
+                    @if (!ViewData.ModelState.IsValid)
+                    {
+                        <div asp-validation-summary="All" class="alert alert-danger rounded-0 small py-1 px-2 mb-2" role="alert"></div>
+                    }
+
+                    <!-- Product Name -->
+                    <div class="admin-form-group mb-3">
+                        <label asp-for="Name" class="admin-form-label">
+                            Product Title <span class="text-danger">*</span>
+                        </label>
+                        <div class="admin-input-group">
+                            <div class="input-icon-box">
+                                <i class="bi bi-tag-fill"></i>
+                            </div>
+                            <input asp-for="Name" class="admin-form-control" placeholder="e.g. 4-Person Expedition Dome Tent" autocomplete="off" />
+                        </div>
+                        <span asp-validation-for="Name" class="text-danger small mt-1 d-block" style="font-size: 11.5px;"></span>
+                    </div>
+
+                    <!-- Category Assignment -->
+                    <div class="admin-form-group mb-3">
+                        <label asp-for="CategoryId" class="admin-form-label">
+                            Category <span class="text-danger">*</span>
+                        </label>
+                        <select asp-for="CategoryId" class="admin-form-control" style="cursor: pointer;">
+                            <option value="">-- Select a Category --</option>
+                            @foreach (var cat in categories)
+                            {
+                                <option value="@cat.Id" selected="@(Model.CategoryId == cat.Id ? "selected" : null)">
+                                    @cat.Name
+                                </option>
+                            }
+                        </select>
+                        <span asp-validation-for="CategoryId" class="text-danger small mt-1 d-block" style="font-size: 11.5px;"></span>
+                    </div>
+
+                    <!-- Price & Stock (Row) -->
+                    <div class="row g-2 mb-3">
+                        <div class="col-sm-6">
+                            <label asp-for="Price" class="admin-form-label">
+                                Price ($ USD) <span class="text-danger">*</span>
+                            </label>
+                            <div class="admin-input-group">
+                                <div class="input-icon-box">
+                                    <i class="bi bi-currency-dollar"></i>
+                                </div>
+                                <input asp-for="Price" type="number" step="0.01" min="0" class="admin-form-control" />
+                            </div>
+                            <span asp-validation-for="Price" class="text-danger small mt-1 d-block" style="font-size: 11.5px;"></span>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label asp-for="Stock" class="admin-form-label">
+                                Current Stock Quantity <span class="text-danger">*</span>
+                            </label>
+                            <div class="admin-input-group">
+                                <div class="input-icon-box">
+                                    <i class="bi bi-stack"></i>
+                                </div>
+                                <input asp-for="Stock" type="number" min="0" class="admin-form-control" />
+                            </div>
+                            <span asp-validation-for="Stock" class="text-danger small mt-1 d-block" style="font-size: 11.5px;"></span>
+                        </div>
+                    </div>
+
+                    <!-- Upload Additional Images -->
+                    <div class="admin-form-group mb-3">
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                            <label class="admin-form-label mb-0">
+                                Upload Additional Images <span class="text-muted fw-normal">(PNG, JPG, WEBP)</span>
+                            </label>
+                            <span class="text-muted small" style="font-size: 11px;">
+                                <i class="bi bi-info-circle text-primary"></i> Click any uploaded photo to set as Cover
+                            </span>
+                        </div>
+
+                        <div class="admin-file-dropzone" id="imageDropzone">
+                            <input type="file" name="imageFiles" id="productImageFilesInput" class="d-none" multiple accept="image/png, image/jpeg, image/webp, image/gif" />
+                            <div class="text-center py-3 px-2" style="cursor: pointer;" onclick="document.getElementById('productImageFilesInput').click()">
+                                <i class="bi bi-cloud-arrow-up fs-3 text-primary d-block mb-1"></i>
+                                <span class="fw-semibold small d-block text-dark">Click to browse or drag & drop new photos</span>
+                                <span class="text-muted small" style="font-size: 11px;">Add more images to this product</span>
+                            </div>
+                        </div>
+                        <!-- Live Image Preview Grid -->
+                        <div id="imagePreviewContainer" class="d-flex flex-wrap gap-2 mt-2" style="display: none !important;"></div>
+                    </div>
+
+                    <!-- Description -->
+                    <div class="admin-form-group mb-3">
+                        <label asp-for="Description" class="admin-form-label">Product Description</label>
+                        <textarea asp-for="Description" class="form-control" rows="3" style="font-size: 13px; border: 1.5px solid var(--admin-border-color); border-radius: var(--admin-radius);"></textarea>
+                        <span asp-validation-for="Description" class="text-danger small mt-1 d-block" style="font-size: 11.5px;"></span>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="d-flex align-items-center gap-2 pt-2 border-top mt-3">
+                        <button type="submit" class="btn-admin-primary">
+                            <i class="bi bi-check2-circle"></i> Save Changes
+                        </button>
+                        <a asp-action="Index" class="btn-admin-outline">
+                            Cancel
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Metadata & Gallery Column -->
+        <div class="col-lg-4 col-xl-5">
+            <!-- Product Images Preview Card with Main Selection -->
+            <div class="admin-card mb-3">
+                <div class="admin-card-header py-2 px-3">
+                    <div class="admin-card-title" style="font-size: 13px;">
+                        <i class="bi bi-images text-primary"></i>
+                        <span>Existing Photos</span>
+                        <span class="admin-badge admin-badge-teal ms-1">@(Model.ProductImages?.Count ?? 0)</span>
+                    </div>
+                </div>
+                <div class="admin-card-body p-3">
+                    @if (Model.ProductImages != null && Model.ProductImages.Any())
+                    {
+                        <p class="text-muted small mb-2" style="font-size: 11px;">
+                            <i class="bi bi-hand-index-thumb text-primary me-1"></i> Click any photo below to set as the <strong>Main Cover</strong> photo:
+                        </p>
+                        <div class="d-flex flex-wrap gap-2">
+                            @foreach (var img in Model.ProductImages)
+                            {
+                                <div class="existing-image-card @(img.IsMain ? "is-main" : "")" 
+                                     onclick="selectExistingMainImage(this, 'radio_main_@img.Id')" 
+                                     title="Click to set as Main Cover">
+                                    <input type="radio" name="selectedExistingImageId" value="@img.Id" id="radio_main_@img.Id" class="d-none" @(img.IsMain ? "checked" : "") />
+                                    <img src="@img.ImageUrl" alt="@Model.Name" />
+                                    <span class="existing-main-badge">@(img.IsMain ? "★ Main Cover" : "Set Cover")</span>
+                                    <button type="button" class="btn-delete-existing" onclick="confirmRemoveImage(event, @img.Id)" title="Delete this photo">
+                                        <i class="bi bi-x"></i>
+                                    </button>
+                                </div>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="text-muted small text-center py-2" style="font-size: 11.5px;">
+                            <i class="bi bi-image fs-4 d-block mb-1 text-muted opacity-50"></i>
+                            No images currently attached.
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <!-- Metadata Card -->
+            <div class="admin-card">
+                <div class="admin-card-header py-2 px-3">
+                    <div class="admin-card-title" style="font-size: 13px;">
+                        <i class="bi bi-info-circle text-primary"></i>
+                        <span>Inventory Details</span>
+                    </div>
+                </div>
+                <div class="admin-card-body p-3">
+                    <div class="mb-2 pb-2 border-bottom">
+                        <div class="text-muted small mb-1" style="font-size: 11px;">Current Inventory Status</div>
+                        @if (Model.Stock > 10)
+                        {
+                            <span class="admin-badge admin-badge-success">
+                                <i class="bi bi-check2-circle"></i> In Stock (@Model.Stock units)
+                            </span>
+                        }
+                        else if (Model.Stock > 0)
+                        {
+                            <span class="admin-badge admin-badge-warning">
+                                <i class="bi bi-exclamation-circle"></i> Low Stock (@Model.Stock units)
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="admin-badge admin-badge-danger">
+                                <i class="bi bi-x-circle"></i> Out of Stock
+                            </span>
+                        }
+                    </div>
+                    <div>
+                        <div class="text-muted small mb-1" style="font-size: 11px;">Created On</div>
+                        <div class="fw-semibold small" style="color: var(--admin-text-main); font-size: 11.5px;">
+                            <i class="bi bi-calendar3 me-1 text-muted"></i>
+                            @Model.CreatedAt.ToString("MMM dd, yyyy - hh:mm tt")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/js/admin/products.js" asp-append-version="true"></script>
+}
