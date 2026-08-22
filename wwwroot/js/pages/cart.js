@@ -36,13 +36,20 @@ window.renderCartPage = async function () {
             </td>
             <td>
                 <div class="d-flex align-items-center gap-3">
-                    <img src="${item.imageUrl}" alt="${item.productName}" style="width: 44px; height: 44px; object-fit: contain;">
+                    <img src="${item.imageUrl}" alt="${item.productName}" style="width: 44px;
+                    height: 44px; object-fit: contain;"
+                    onerror="this.onerror=null; this.src='/images/placeholder.png'"
+                    >
                     <span class="cart-item-title">${item.productName}</span>
                 </div>
             </td>
             <td class="small text-secondary">$${item.unitPrice.toFixed(2)}</td>
             <td>
-                <input type="number" class="form-control form-control-sm text-center rounded-0" style="width: 60px;" value="${item.quantity}" min="1" onchange="BarrameruStore.updateCartQuantity(${item.id}, this.value)">
+                <input type="number" class="form-control form-control-sm text-center rounded-0 cart-qty-input"
+                       style="width: 60px;"
+                       data-id="${item.id}" 
+                       value="${item.quantity}" 
+                       min="1">
             </td>
             <td class="small fw-bold text-secondary">$${(item.unitPrice * item.quantity).toFixed(2)}</td>
         </tr>

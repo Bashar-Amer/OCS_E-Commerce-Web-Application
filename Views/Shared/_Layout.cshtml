@@ -25,6 +25,11 @@
 
     <!-- Page-Specific Stylesheet Section -->
     @await RenderSectionAsync("Styles", required: false)
+
+    <script>
+        window.isUserAuthenticated = @User.Identity.IsAuthenticated.ToString().ToLower();
+    </script>
+
 </head>
 <body>
     <!-- Top Header Navigation Bar (Matches barrameru-v1-header.jpg) -->
@@ -161,7 +166,7 @@
                 </div>
                 <div class="d-grid gap-2">
                     <a asp-controller="Cart" asp-action="Index" class="btn btn-outline-secondary rounded-0 btn-sm">View Cart</a>
-                    <a asp-controller="Checkout" asp-action="Index" class="btn btn-barrameru btn-sm">Checkout</a>
+                    <a asp-controller="Order" asp-action="Checkout" class="btn btn-barrameru btn-sm">Checkout</a>
                 </div>
             </div>
         </div>

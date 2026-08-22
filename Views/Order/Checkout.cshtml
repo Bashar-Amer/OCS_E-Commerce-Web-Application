@@ -6,6 +6,10 @@
     <link rel="stylesheet" href="~/css/pages/checkout.css" asp-append-version="true" />
 }
 
+@using CampTravelGear.DTOs
+@model CheckoutDto?
+
+
 <!-- Hero Banner (Matches barrameru-v1-checkout-page.jpg) -->
 <section class="inner-hero-banner" style="background-image: url('/images/orange-tourist-tent-illuminated-from-inside-stands-in-mountains-above-clouds.jpg');">
     <div class="inner-hero-overlay"></div>
@@ -21,78 +25,75 @@
 <!-- Checkout Main Section -->
 <section class="py-5 bg-white">
     <div class="container py-4">
-        <form id="exactCheckoutForm">
+        <form id="exactCheckoutForm" asp-controller="Order" asp-action="" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="row g-5">
                 <!-- Left: Billing Details -->
                 <div class="col-lg-7">
                     <h5 class="fw-bold mb-4 text-secondary">Billing Details</h5>
 
                     <div class="row g-3">
-                        <div class="col-md-6">
+                        @* <div class="col-md-6">
                             <label class="form-label small fw-semibold text-secondary">First Name <span class="text-danger">*</span></label>
-                            <input type="text" id="chkFirstName" class="form-control rounded-0" required placeholder="First Name" value="John">
-                        </div>
+                            <input type="text" id="chkFirstName" class="form-control rounded-0" required placeholder="First Name" value="">
+                        </div> *@
                         <div class="col-md-6">
-                            <label class="form-label small fw-semibold text-secondary">Last Name <span class="text-danger">*</span></label>
-                            <input type="text" id="chkLastName" class="form-control rounded-0" required placeholder="Last Name" value="Doe">
+                            <label asp-for="FullName" class="form-label small fw-semibold text-secondary">Full Name <span class="text-danger">*</span></label>
+                            <input asp-for="FullName" type="text" id="chkLastName" class="form-control rounded-0" required placeholder="Full Name">
+                            <span asp-validation-for="FullName" class="text-danger"></span>
                         </div>
 
-                        <div class="col-12">
+                        @* <div class="col-12">
                             <label class="form-label small fw-semibold text-secondary">Company Name (optional)</label>
                             <input type="text" class="form-control rounded-0" placeholder="Company Name">
-                        </div>
+                        </div> *@
 
-                        <div class="col-12">
-                            <label class="form-label small fw-semibold text-secondary">Country / Region <span class="text-danger">*</span></label>
-                            <select class="form-select rounded-0">
-                                <option selected>United States (US)</option>
-                                <option>United Kingdom (UK)</option>
-                                <option>Canada</option>
-                                <option>Australia</option>
-                                <option>Germany</option>
+                        @* <div class="col-12">
+                            <label class="form-label small fw-semibold text-secondary">Country <span class="text-danger">*</span></label>
+                            <select id="countrySelect" class="form-select rounded-0">
+                                <option selected disabled>Select a country</option>
                             </select>
+                        </div> *@
+
+                        <div class="col-12">
+                            <label asp-for="FullAddress" class="form-label small fw-semibold text-secondary">Full address <span class="text-danger">*</span></label>
+                            @* <input type="text" id="chkStreet" class="form-control rounded-0 mb-2" required placeholder="House number and street name" value=""> *@
+                            <input asp-for="FullAddress" type="text" class="form-control rounded-0" placeholder="Address" value="">
+                            <span asp-validation-for="FullAddress" class="text-danger"></span>
                         </div>
 
                         <div class="col-12">
-                            <label class="form-label small fw-semibold text-secondary">Street address <span class="text-danger">*</span></label>
-                            <input type="text" id="chkStreet" class="form-control rounded-0 mb-2" required placeholder="House number and street name" value="124 Mountain Trail Rd">
-                            <input type="text" class="form-control rounded-0" placeholder="Apartment, suite, unit, etc. (optional)" value="Apt 4B">
+                            <label asp-for="City" class="form-label small fw-semibold text-secondary">City <span class="text-danger">*</span></label>
+                            <input asp-for="City" type="text" id="chkCity" class="form-control rounded-0" required placeholder="City" value="">
+                            <span asp-validation-for="City" class="text-danger"></span>
                         </div>
 
-                        <div class="col-12">
-                            <label class="form-label small fw-semibold text-secondary">Town / City <span class="text-danger">*</span></label>
-                            <input type="text" id="chkCity" class="form-control rounded-0" required placeholder="Town / City" value="Denver">
-                        </div>
-
-                        <div class="col-12">
+                        @* <div class="col-12">
                             <label class="form-label small fw-semibold text-secondary">State <span class="text-danger">*</span></label>
-                            <select class="form-select rounded-0">
-                                <option selected>California</option>
-                                <option>Colorado</option>
-                                <option>Washington</option>
-                                <option>Oregon</option>
+                            <select id="citySelect" class="form-select rounded-0">
+                                <option selected disabled>Select country first...</option>
                             </select>
-                        </div>
+                        </div> *@
 
-                        <div class="col-12">
+                        @* <div class="col-12">
                             <label class="form-label small fw-semibold text-secondary">ZIP Code <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control rounded-0" required placeholder="ZIP Code" value="80201">
-                        </div>
+                            <input type="text" class="form-control rounded-0" required placeholder="ZIP Code" value="">
+                        </div> *@
 
-                        <div class="col-12">
+                        @* <div class="col-12">
                             <label class="form-label small fw-semibold text-secondary">Phone <span class="text-danger">*</span></label>
-                            <input type="tel" id="chkPhone" class="form-control rounded-0" required placeholder="Phone" value="+1 555-019-2834">
-                        </div>
+                            <input type="tel" id="chkPhone" class="form-control rounded-0" required placeholder="Phone" value="">
+                        </div> *@
 
-                        <div class="col-12">
+                        @* <div class="col-12">
                             <label class="form-label small fw-semibold text-secondary">Email Address <span class="text-danger">*</span></label>
-                            <input type="email" id="chkEmail" class="form-control rounded-0" required placeholder="Email Address" value="john.doe@example.com">
-                        </div>
+                            <input type="email" id="chkEmail" class="form-control rounded-0" required placeholder="Email Address" value="">
+                        </div> *@
 
-                        <div class="col-12 mt-4">
+                        @* <div class="col-12 mt-4">
                             <label class="form-label small fw-semibold text-secondary">Order Notes (optional)</label>
                             <textarea class="form-control rounded-0" rows="3" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
-                        </div>
+                        </div> *@
                     </div>
                 </div>
 
@@ -112,12 +113,12 @@
 
                         <div class="d-flex justify-content-between py-2 border-bottom small">
                             <span class="fw-bold text-secondary">Subtotal</span>
-                            <span id="chkSubtotal" class="fw-bold text-secondary">$270.00</span>
+                            <span id="chkSubtotal" class="fw-bold text-secondary">$@(ViewBag.Total ?? 0)</span>
                         </div>
 
                         <div class="d-flex justify-content-between py-3 border-bottom">
                             <span class="fw-bold text-secondary">Total</span>
-                            <strong id="chkTotal" class="fw-bold text-secondary fs-5">$270.00</strong>
+                            <strong id="chkTotal" class="fw-bold text-secondary fs-5">$@(ViewBag.Total ?? 0)</strong>
                         </div>
                     </div>
 
@@ -134,9 +135,9 @@
 
                     <!-- Payment Notice & Place Order Button -->
                     <div class="checkout-box">
-                        <p class="small text-muted mb-3">
+                        @* <p class="small text-muted mb-3">
                             Sorry, it seems that there are no available payment methods for your state. Please contact us if you require assistance or wish to make alternate arrangements.
-                        </p>
+                        </p> *@
                         <div class="d-grid">
                             <button type="submit" class="btn btn-barrameru py-2">
                                 PLACE ORDER

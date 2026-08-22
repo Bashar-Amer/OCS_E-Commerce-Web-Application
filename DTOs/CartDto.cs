@@ -15,9 +15,9 @@
         public string ImageUrl { get; set; }
     }
 
-    public class UpdateCartItemDto
+    public class CartUpdateDto
     {
-        public int CartItemId { get; set; }
+        public int Id { get; set; }
         public int Quantity { get; set; }
     }
 }

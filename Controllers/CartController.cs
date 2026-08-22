@@ -1,11 +1,13 @@
 ﻿using CampTravelGear.Data;
 using CampTravelGear.DTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace CampTravelGear.Controllers;
 
+[Authorize]
 public class CartController : Controller
 {
     private readonly UserManager<ApplicationUser> _userManager;
@@ -17,38 +19,51 @@ public class CartController : Controller
         _dbContext = dbContext;
     }
 
+    [AllowAnonymous]
     public async Task<IActionResult> Index()
     {
         string? userId = _userManager.GetUserId(User);
         if (userId != null)
         {
-            var userCart = await _dbContext.Carts
-                .Include(c => c.CartItems).ToListAsync();
-            return View(userCart.Count);
+            var userCart = await _dbContext.Carts.FirstOrDefaultAsync(c=>c.UserId == userId);
+            if (userCart != null)
+            {
+                await _dbContext.Entry(userCart).Collection(c => c.CartItems).LoadAsync();
+                var data = (id: userCart.Id,count: userCart.CartItems.Count);
+                return View(data);
+            }
         }
-        return View();
+        return View((id: 0, count: 0));
     }
 
     [HttpPost]
-    public async Task<IActionResult> Update([FromBody] UpdateCartItemDto updateDto)
+    public async Task<IActionResult> UpdateAll([FromBody] List<CartUpdateDto> updates)
     {
-        string? userId = _userManager.GetUserId(User);
+        if (updates == null || !updates.Any())
+        {
+            return BadRequest("No items provided for update.");
+        }
 
-        if (userId == null)
-            return Unauthorized();
-
-        var item = await _dbContext.CartItems.FindAsync(updateDto.CartItemId);
-        if (item == null)
-            return NotFound();
-
-        await _dbContext.Entry(item).Reference(i => i.Cart).LoadAsync();
-        if (item?.Cart?.UserId != userId)
-            return Forbid();
-
-        item.Quantity = updateDto.Quantity;
-        await _dbContext.SaveChangesAsync();
-
-        return Ok();
+        if (User.Identity.IsAuthenticated)
+        {
+            foreach (var update in updates)
+            {
+                var cartItem = await _dbContext.CartItems.FindAsync(update.Id);
+                if (cartItem != null)
+                {
+                    if (update.Quantity <= 0)
+                    {
+                        _dbContext.CartItems.Remove(cartItem);
+                    }
+                    else
+                    {
+                        cartItem.Quantity = update.Quantity;
+                    }
+                }
+            }
+            await _dbContext.SaveChangesAsync();
+        }
+        return Ok(new { success = true });
     }
 
     [HttpGet]
