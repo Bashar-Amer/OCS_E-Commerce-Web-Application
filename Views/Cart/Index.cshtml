@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="~/css/pages/cart.css" asp-append-version="true" />
 }
 
+@model int?
+
 <!-- Hero Banner (Matches barrameru-v1-cart-page.jpg) -->
 <section class="inner-hero-banner" style="background-image: url('/images/orange-tourist-tent-illuminated-from-inside-stands-in-mountains-above-clouds.jpg');">
     <div class="inner-hero-overlay"></div>
@@ -70,9 +72,17 @@
                     </div>
 
                     <div class="d-grid">
-                        <a asp-controller="Checkout" asp-action="Index" class="btn btn-barrameru py-2">
-                            Proceed to Checkout
-                        </a>
+                        @if(Model == 0 || Model == null){
+                            <a asp-controller="Checkout" asp-action="Index" class="btn btn-barrameru py-2">
+                                Proceed to Checkout
+                            </a>
+                        }
+                        else
+                        {
+                            <a class="btn btn-barrameru py-2 disabled" >
+                                Proceed to Checkout
+                            </a>
+                        }
                     </div>
                 </div>
             </div>
