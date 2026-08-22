@@ -1,0 +1,403 @@
+@model (CampTravelGear.Helpers.PaginatedList<CampTravelGear.Models.Review> Reviews, CampTravelGear.Helpers.PaginatedList<CampTravelGear.Models.Testimonial> Testimonials)
+
+@{
+    ViewData["Title"] = "Reviews & Moderation";
+}
+
+<!-- Page Header -->
+<div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+    <div>
+        <h1 class="h4 fw-bold mb-1" style="color: var(--admin-text-main);">Reviews & Moderation</h1>
+        <p class="text-muted small mb-0" style="font-size: 12px;">Approve or reject customer product ratings and community testimonials.</p>
+    </div>
+
+    <!-- Segmented Navigation Tabs -->
+    <div class="admin-segmented-tabs" id="moderationTabs" role="tablist">
+        <button class="nav-link active" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews-pane" type="button" role="tab" aria-controls="reviews-pane" aria-selected="true">
+            <i class="bi bi-star-fill text-warning"></i>
+            <span>Product Reviews</span>
+            <span class="admin-badge ms-1">@Model.Reviews.TotalCount</span>
+        </button>
+        <button class="nav-link" id="testimonials-tab" data-bs-toggle="tab" data-bs-target="#testimonials-pane" type="button" role="tab" aria-controls="testimonials-pane" aria-selected="false">
+            <i class="bi bi-chat-square-quote-fill"></i>
+            <span>Store Testimonials</span>
+            <span class="admin-badge admin-badge-teal ms-1">@Model.Testimonials.TotalCount</span>
+        </button>
+    </div>
+</div>
+
+<!-- Tabs Content -->
+<div class="tab-content" id="moderationTabContent">
+    <!-- TAB 1: PRODUCT REVIEWS -->
+    <div class="tab-pane fade show active" id="reviews-pane" role="tabpanel" aria-labelledby="reviews-tab" tabindex="0">
+        <div class="admin-card">
+            <div class="admin-card-header py-2 px-3">
+                <div class="admin-card-title" style="font-size: 13.5px;">
+                    <i class="bi bi-star-half text-primary"></i>
+                    <span>Customer Product Reviews</span>
+                </div>
+
+                <div class="admin-search-input">
+                    <i class="bi bi-search"></i>
+                    <input type="text" id="reviewSearchInput" placeholder="Filter by product, customer, or comment..." />
+                </div>
+            </div>
+
+            <div class="admin-table-wrapper">
+                <table class="admin-table align-middle">
+                    <thead>
+                        <tr>
+                            <th style="width: 220px;">Product</th>
+                            <th style="width: 170px;">Customer</th>
+                            <th style="width: 120px;">Rating</th>
+                            <th>Review Comment</th>
+                            <th style="width: 110px;">Status</th>
+                            <th style="width: 120px; text-align: right;">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="reviewsTableBody">
+                        @if (Model.Reviews != null && Model.Reviews.Any())
+                        {
+                            @foreach (var review in Model.Reviews)
+                            {
+                                var customerName = review.User?.FullName ?? review.User?.UserName ?? "Customer";
+                                var productImg = review.Product?.ProductImages?.FirstOrDefault(img => img.IsMain)?.ImageUrl
+                                                 ?? review.Product?.ProductImages?.FirstOrDefault()?.ImageUrl;
+                                var status = review.Status ?? "Pending";
+                                var rating = review.Rating ?? 5;
+
+                                <tr class="review-row">
+                                    <!-- Product Column -->
+                                    <td class="review-product-cell">
+                                        <div class="d-flex align-items-center gap-2">
+                                            <div class="rounded border bg-light d-flex align-items-center justify-content-center overflow-hidden flex-shrink-0" style="width: 40px; height: 40px;">
+                                                @if (!string.IsNullOrEmpty(productImg))
+                                                {
+                                                    <img src="@productImg" alt="" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                                                    <div class="align-items-center justify-content-center w-100 h-100 bg-light text-muted" style="display: none;">
+                                                        <i class="bi bi-image small"></i>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <i class="bi bi-image text-muted small"></i>
+                                                }
+                                            </div>
+                                            <div>
+                                                @if (review.Product != null)
+                                                {
+                                                    <a asp-controller="Products" asp-action="Edit" asp-route-id="@review.ProductId" class="fw-bold text-decoration-none d-block text-truncate" style="color: var(--admin-text-main); font-size: 12.5px; max-width: 160px;" title="@review.Product.Name">
+                                                        @review.Product.Name
+                                                    </a>
+                                                    <span class="text-muted small" style="font-size: 11px;">SKU #@review.ProductId</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="text-muted small">Product #@review.ProductId</span>
+                                                }
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <!-- Customer Column -->
+                                    <td class="review-customer-cell">
+                                        <div class="d-flex align-items-center gap-2">
+                                            <div class="rounded-circle d-flex align-items-center justify-content-center fw-bold text-white flex-shrink-0" 
+                                                 style="width: 28px; height: 28px; background-color: var(--admin-primary); font-size: 11px;">
+                                                @(customerName.Length > 0 ? customerName[0].ToString().ToUpper() : "U")
+                                            </div>
+                                            <span class="fw-bold text-truncate" style="color: var(--admin-text-main); font-size: 12px; max-width: 125px;" title="@customerName">
+                                                @customerName
+                                            </span>
+                                        </div>
+                                    </td>
+
+                                    <!-- Golden Stars Rating -->
+                                    <td>
+                                        <div class="d-flex align-items-center gap-1 text-warning" style="font-size: 12px;">
+                                            @for (int i = 1; i <= 5; i++)
+                                            {
+                                                if (i <= rating)
+                                                {
+                                                    <i class="bi bi-star-fill"></i>
+                                                }
+                                                else
+                                                {
+                                                    <i class="bi bi-star text-muted opacity-50"></i>
+                                                }
+                                            }
+                                        </div>
+                                        <span class="text-muted small d-block mt-0" style="font-size: 10.5px;">@rating / 5 Stars</span>
+                                    </td>
+
+                                    <!-- Comment Text -->
+                                    <td class="review-comment-cell">
+                                        <p class="mb-1 text-dark" style="font-size: 12px; line-height: 1.4;">
+                                            “@review.Comment”
+                                        </p>
+                                        <span class="text-muted" style="font-size: 10.5px;">
+                                            <i class="bi bi-calendar3 me-1"></i>@review.CreatedAt.ToString("MMM dd, yyyy")
+                                        </span>
+                                    </td>
+
+                                    <!-- Status Badge -->
+                                    <td>
+                                        @if (status.Equals("Accepted", StringComparison.OrdinalIgnoreCase))
+                                        {
+                                            <span class="admin-badge admin-badge-success">
+                                                <i class="bi bi-check2-circle"></i> Approved
+                                            </span>
+                                        }
+                                        else if (status.Equals("Rejected", StringComparison.OrdinalIgnoreCase))
+                                        {
+                                            <span class="admin-badge admin-badge-danger">
+                                                <i class="bi bi-x-circle"></i> Rejected
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span class="admin-badge admin-badge-warning">
+                                                <i class="bi bi-hourglass-split"></i> Pending
+                                            </span>
+                                        }
+                                    </td>
+
+                                    <!-- Vertical Moderation Actions -->
+                                    <td style="text-align: right;">
+                                        <div class="btn-mod-vertical-group">
+                                            @if (status.Equals("Pending", StringComparison.OrdinalIgnoreCase))
+                                            {
+                                                <!-- Top: Approve -->
+                                                <form id="approveReviewForm_@review.Id" asp-action="ReviewEdit" asp-route-id="@review.Id" asp-route-status="@CampTravelGear.Models.AdminResponse.Accepted" method="post" class="d-inline">
+                                                    @Html.AntiForgeryToken()
+                                                    <button type="button" class="btn-mod btn-mod-approve" 
+                                                            onclick="confirmModerationAction('approveReviewForm_@review.Id', 'Accept', 'Review')" 
+                                                            title="Approve Review">
+                                                        <i class="bi bi-check2"></i> Approve
+                                                    </button>
+                                                </form>
+
+                                                <!-- Bottom: Reject -->
+                                                <form id="rejectReviewForm_@review.Id" asp-action="ReviewEdit" asp-route-id="@review.Id" asp-route-status="@CampTravelGear.Models.AdminResponse.Rejected" method="post" class="d-inline">
+                                                    @Html.AntiForgeryToken()
+                                                    <button type="button" class="btn-mod btn-mod-reject" 
+                                                            onclick="confirmModerationAction('rejectReviewForm_@review.Id', 'Reject', 'Review')" 
+                                                            title="Reject Review">
+                                                        <i class="bi bi-x"></i> Reject
+                                                    </button>
+                                                </form>
+                                            }
+                                            else if (status.Equals("Accepted", StringComparison.OrdinalIgnoreCase))
+                                            {
+                                                <form id="rejectReviewForm_@review.Id" asp-action="ReviewEdit" asp-route-id="@review.Id" asp-route-status="@CampTravelGear.Models.AdminResponse.Rejected" method="post" class="d-inline">
+                                                    @Html.AntiForgeryToken()
+                                                    <button type="button" class="btn-mod btn-mod-reject" 
+                                                            onclick="confirmModerationAction('rejectReviewForm_@review.Id', 'Reject', 'Review')" 
+                                                            title="Revoke Approval">
+                                                        <i class="bi bi-x"></i> Reject
+                                                    </button>
+                                                </form>
+                                            }
+                                            else
+                                            {
+                                                <form id="approveReviewForm_@review.Id" asp-action="ReviewEdit" asp-route-id="@review.Id" asp-route-status="@CampTravelGear.Models.AdminResponse.Accepted" method="post" class="d-inline">
+                                                    @Html.AntiForgeryToken()
+                                                    <button type="button" class="btn-mod btn-mod-approve" 
+                                                            onclick="confirmModerationAction('approveReviewForm_@review.Id', 'Accept', 'Review')" 
+                                                            title="Re-approve Review">
+                                                        <i class="bi bi-check2"></i> Approve
+                                                    </button>
+                                                </form>
+                                            }
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="6" class="text-center py-4 text-muted small">
+                                    <i class="bi bi-chat-square-dots fs-3 d-block mb-1 text-muted opacity-50"></i>
+                                    No customer product reviews submitted yet.
+                                </td>
+                            </tr>
+                        }
+                        <tr id="noReviewMatchRow" style="display: none;">
+                            <td colspan="6" class="text-center py-3 text-muted small">
+                                <i class="bi bi-search me-1"></i> No matching product reviews found.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Reviews Pagination Partial -->
+            <partial name="_AdminPagination" model="Model.Reviews" />
+        </div>
+    </div>
+
+    <!-- TAB 2: STORE TESTIMONIALS -->
+    <div class="tab-pane fade" id="testimonials-pane" role="tabpanel" aria-labelledby="testimonials-tab" tabindex="0">
+        <div class="admin-card">
+            <div class="admin-card-header py-2 px-3">
+                <div class="admin-card-title" style="font-size: 13.5px;">
+                    <i class="bi bi-chat-heart text-primary"></i>
+                    <span>Storefront Testimonials</span>
+                </div>
+
+                <div class="admin-search-input">
+                    <i class="bi bi-search"></i>
+                    <input type="text" id="testimonialSearchInput" placeholder="Filter testimonials by author or quote..." />
+                </div>
+            </div>
+
+            <div class="admin-table-wrapper">
+                <table class="admin-table align-middle">
+                    <thead>
+                        <tr>
+                            <th style="width: 200px;">Author / Customer</th>
+                            <th>Testimonial Quote</th>
+                            <th style="width: 140px;">Submitted On</th>
+                            <th style="width: 110px;">Status</th>
+                            <th style="width: 120px; text-align: right;">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="testimonialsTableBody">
+                        @if (Model.Testimonials != null && Model.Testimonials.Any())
+                        {
+                            @foreach (var testimonial in Model.Testimonials)
+                            {
+                                var author = testimonial.Name ?? testimonial.User?.FullName ?? "Customer";
+                                var status = testimonial.Status ?? "Pending";
+
+                                <tr class="testimonial-row">
+                                    <!-- Author Column -->
+                                    <td class="testimonial-author-cell">
+                                        <div class="d-flex align-items-center gap-2">
+                                            <div class="rounded-circle d-flex align-items-center justify-content-center fw-bold text-white flex-shrink-0" 
+                                                 style="width: 32px; height: 32px; background-color: var(--admin-accent-teal); font-size: 11px;">
+                                                @(author.Length > 0 ? author[0].ToString().ToUpper() : "T")
+                                            </div>
+                                            <div>
+                                                <span class="fw-bold d-block text-truncate" style="color: var(--admin-text-main); font-size: 12.5px; max-width: 150px;" title="@author">
+                                                    @author
+                                                </span>
+                                                <span class="text-muted small" style="font-size: 10.5px;">Community Member</span>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <!-- Content Column -->
+                                    <td class="testimonial-content-cell">
+                                        <p class="mb-0 text-dark" style="font-size: 12px; font-style: italic; line-height: 1.4;">
+                                            “@testimonial.Content”
+                                        </p>
+                                    </td>
+
+                                    <!-- Submission Date -->
+                                    <td>
+                                        <span class="text-muted small" style="font-size: 11.5px;">
+                                            <i class="bi bi-calendar3 me-1"></i>@testimonial.CreatedAt.ToString("MMM dd, yyyy")
+                                        </span>
+                                    </td>
+
+                                    <!-- Status Badge -->
+                                    <td>
+                                        @if (status.Equals("Accepted", StringComparison.OrdinalIgnoreCase))
+                                        {
+                                            <span class="admin-badge admin-badge-success">
+                                                <i class="bi bi-check2-circle"></i> Approved
+                                            </span>
+                                        }
+                                        else if (status.Equals("Rejected", StringComparison.OrdinalIgnoreCase))
+                                        {
+                                            <span class="admin-badge admin-badge-danger">
+                                                <i class="bi bi-x-circle"></i> Rejected
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span class="admin-badge admin-badge-warning">
+                                                <i class="bi bi-hourglass-split"></i> Pending
+                                            </span>
+                                        }
+                                    </td>
+
+                                    <!-- Vertical Moderation Actions -->
+                                    <td style="text-align: right;">
+                                        <div class="btn-mod-vertical-group">
+                                            @if (status.Equals("Pending", StringComparison.OrdinalIgnoreCase))
+                                            {
+                                                <form id="approveTestimonialForm_@testimonial.Id" asp-action="TestimonialsEdit" asp-route-id="@testimonial.Id" asp-route-status="@CampTravelGear.Models.AdminResponse.Accepted" method="post" class="d-inline">
+                                                    @Html.AntiForgeryToken()
+                                                    <button type="button" class="btn-mod btn-mod-approve" 
+                                                            onclick="confirmModerationAction('approveTestimonialForm_@testimonial.Id', 'Accept', 'Testimonial')" 
+                                                            title="Approve Testimonial">
+                                                        <i class="bi bi-check2"></i> Approve
+                                                    </button>
+                                                </form>
+
+                                                <form id="rejectTestimonialForm_@testimonial.Id" asp-action="TestimonialsEdit" asp-route-id="@testimonial.Id" asp-route-status="@CampTravelGear.Models.AdminResponse.Rejected" method="post" class="d-inline">
+                                                    @Html.AntiForgeryToken()
+                                                    <button type="button" class="btn-mod btn-mod-reject" 
+                                                            onclick="confirmModerationAction('rejectTestimonialForm_@testimonial.Id', 'Reject', 'Testimonial')" 
+                                                            title="Reject Testimonial">
+                                                        <i class="bi bi-x"></i> Reject
+                                                    </button>
+                                                </form>
+                                            }
+                                            else if (status.Equals("Accepted", StringComparison.OrdinalIgnoreCase))
+                                            {
+                                                <form id="rejectTestimonialForm_@testimonial.Id" asp-action="TestimonialsEdit" asp-route-id="@testimonial.Id" asp-route-status="@CampTravelGear.Models.AdminResponse.Rejected" method="post" class="d-inline">
+                                                    @Html.AntiForgeryToken()
+                                                    <button type="button" class="btn-mod btn-mod-reject" 
+                                                            onclick="confirmModerationAction('rejectTestimonialForm_@testimonial.Id', 'Reject', 'Testimonial')" 
+                                                            title="Revoke Approval">
+                                                        <i class="bi bi-x"></i> Reject
+                                                    </button>
+                                                </form>
+                                            }
+                                            else
+                                            {
+                                                <form id="approveTestimonialForm_@testimonial.Id" asp-action="TestimonialsEdit" asp-route-id="@testimonial.Id" asp-route-status="@CampTravelGear.Models.AdminResponse.Accepted" method="post" class="d-inline">
+                                                    @Html.AntiForgeryToken()
+                                                    <button type="button" class="btn-mod btn-mod-approve" 
+                                                            onclick="confirmModerationAction('approveTestimonialForm_@testimonial.Id', 'Accept', 'Testimonial')" 
+                                                            title="Re-approve Testimonial">
+                                                        <i class="bi bi-check2"></i> Approve
+                                                    </button>
+                                                </form>
+                                            }
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="5" class="text-center py-4 text-muted small">
+                                    <i class="bi bi-chat-quote fs-3 d-block mb-1 text-muted opacity-50"></i>
+                                    No community testimonials submitted yet.
+                                </td>
+                            </tr>
+                        }
+                        <tr id="noTestimonialMatchRow" style="display: none;">
+                            <td colspan="5" class="text-center py-3 text-muted small">
+                                <i class="bi bi-search me-1"></i> No matching testimonials found.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Testimonials Pagination Partial -->
+            <partial name="_AdminPagination" model="Model.Testimonials" />
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/admin/reviews.js" asp-append-version="true"></script>
+}

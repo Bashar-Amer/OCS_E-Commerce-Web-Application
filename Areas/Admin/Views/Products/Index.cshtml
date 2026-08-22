@@ -1,0 +1,169 @@
+@model CampTravelGear.Helpers.PaginatedList<CampTravelGear.Models.Product>
+
+@{
+    ViewData["Title"] = "Products";
+    var categories = ViewBag.categories as List<CampTravelGear.Models.Category> ?? new List<CampTravelGear.Models.Category>();
+    int? selectedCategory = ViewBag.selectedCategory as int?;
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+    <div>
+        <h1 class="h4 fw-bold mb-1" style="color: var(--admin-text-main);">Product Inventory</h1>
+        <p class="text-muted small mb-0" style="font-size: 12px;">Manage equipment, pricing, stock levels, and category assignments.</p>
+    </div>
+    <a asp-action="Create" class="btn-admin-primary">
+        <i class="bi bi-plus-lg"></i>
+        <span>Add New Product</span>
+    </a>
+</div>
+
+<!-- Product Table Card -->
+<div class="admin-card">
+    <div class="admin-card-header py-2 px-3">
+        <div class="d-flex align-items-center gap-2 flex-wrap">
+            <div class="admin-card-title" style="font-size: 13.5px;">
+                <i class="bi bi-box-seam text-primary"></i>
+                <span>All Products</span>
+                <span class="admin-badge admin-badge-teal ms-1">@Model.TotalCount Total</span>
+            </div>
+
+            <!-- Category Filter Dropdown -->
+            <div class="ms-2">
+                <select id="productCategoryFilter" class="form-select form-select-sm py-1 px-2 text-secondary" style="font-size: 12px; height: 32px; border-radius: var(--admin-radius);">
+                    <option value="">All Categories</option>
+                    @foreach (var cat in categories)
+                    {
+                        <option value="@cat.Id" selected="@(selectedCategory == cat.Id ? "selected" : null)">
+                            @cat.Name
+                        </option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="admin-search-input">
+            <i class="bi bi-search"></i>
+            <input type="text" id="productSearchInput" placeholder="Filter by product name or ID..." />
+        </div>
+    </div>
+
+    <div class="admin-table-wrapper">
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th style="width: 65px;">ID</th>
+                    <th>Product</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                    <th style="width: 110px; text-align: right;">Actions</th>
+                </tr>
+            </thead>
+            <tbody id="productsTableBody">
+                @if (Model != null && Model.Any())
+                {
+                    @foreach (var product in Model)
+                    {
+                        var mainImg = product.ProductImages?.FirstOrDefault(img => img.IsMain)?.ImageUrl 
+                                      ?? product.ProductImages?.FirstOrDefault()?.ImageUrl;
+
+                        <tr class="product-row" data-category-id="@product.CategoryId">
+                            <td class="product-id-cell fw-bold text-muted">#@product.Id</td>
+                            <td class="product-name-cell">
+                                <div class="d-flex align-items-center gap-2">
+                                    <div class="rounded border bg-light d-flex align-items-center justify-content-center overflow-hidden flex-shrink-0" style="width: 36px; height: 36px;">
+                                        @if (!string.IsNullOrEmpty(mainImg))
+                                        {
+                                            <img src="@mainImg" alt="@product.Name" style="width: 100%; height: 100%; object-fit: cover;" />
+                                        }
+                                        else
+                                        {
+                                            <i class="bi bi-image text-muted small"></i>
+                                        }
+                                    </div>
+                                    <div>
+                                        <span class="fw-bold d-block" style="color: var(--admin-text-main); line-height: 1.2;">@product.Name</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="badge bg-light text-dark border" style="font-size: 11px; font-weight: 600;">
+                                    <i class="bi bi-tag text-muted me-1"></i>@(product.Category?.Name ?? "Uncategorized")
+                                </span>
+                            </td>
+                            <td>
+                                <span class="fw-bold" style="color: var(--admin-primary); font-size: 13px;">
+                                    $@product.Price.ToString("F2")
+                                </span>
+                            </td>
+                            <td>
+                                @if (product.Stock > 10)
+                                {
+                                    <span class="admin-badge admin-badge-success">
+                                        <i class="bi bi-check2-circle"></i> @product.Stock in stock
+                                    </span>
+                                }
+                                else if (product.Stock > 0)
+                                {
+                                    <span class="admin-badge admin-badge-warning">
+                                        <i class="bi bi-exclamation-circle"></i> Low: @product.Stock
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="admin-badge admin-badge-danger">
+                                        <i class="bi bi-x-circle"></i> Out of Stock
+                                    </span>
+                                }
+                            </td>
+                            <td style="text-align: right;">
+                                <div class="d-inline-flex gap-1">
+                                    <!-- Edit Action -->
+                                    <a asp-action="Edit" asp-route-id="@product.Id" class="btn-action-icon" title="Edit Product">
+                                        <i class="bi bi-pencil-fill"></i>
+                                    </a>
+
+                                    <!-- Delete Action (SweetAlert) -->
+                                    <button type="button" class="btn-action-icon btn-action-delete" 
+                                            onclick="confirmAdminDelete('deleteProductForm_@product.Id', '@product.Name')" 
+                                            title="Delete Product">
+                                        <i class="bi bi-trash3-fill"></i>
+                                    </button>
+
+                                    <!-- Hidden Anti-Forgery Form for Delete -->
+                                    <form id="deleteProductForm_@product.Id" asp-action="Remove" asp-route-id="@product.Id" method="post" class="d-none">
+                                        @Html.AntiForgeryToken()
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="6" class="text-center py-4">
+                            <div class="text-muted">
+                                <i class="bi bi-box-seam fs-2 d-block mb-1 text-muted opacity-50"></i>
+                                <p class="fw-semibold mb-1 small">No products found.</p>
+                                <a asp-action="Create" class="btn btn-sm btn-outline-primary mt-1" style="font-size: 11.5px;">Add Your First Product</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+                <tr id="noProductMatchRow" style="display: none;">
+                    <td colspan="6" class="text-center py-3 text-muted small">
+                        <i class="bi bi-search me-1"></i> No matching products found for your search query.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Standard Reusable Pagination Partial -->
+    <partial name="_AdminPagination" model="Model" />
+</div>
+
+@section Scripts {
+    <script src="~/js/admin/products.js" asp-append-version="true"></script>
+}

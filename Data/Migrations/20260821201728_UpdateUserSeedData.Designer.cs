@@ -4,6 +4,7 @@ using CampTravelGear.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CampTravelGear.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260821201728_UpdateUserSeedData")]
+    partial class UpdateUserSeedData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -994,32 +997,24 @@ namespace CampTravelGear.Data.Migrations
                         new
                         {
                             Id = 2,
+                            ApprovedAt = new DateTime(2026, 8, 15, 15, 0, 0, 0, DateTimeKind.Utc),
                             Comment = "Incredible build quality and very comfortable back padding for multi-day treks.",
                             CreatedAt = new DateTime(2026, 8, 15, 14, 0, 0, 0, DateTimeKind.Utc),
                             ProductId = 9,
-                            Rating = 4,
-                            Status = "Pending",
+                            Rating = 5,
+                            Status = "Accepted",
                             UserId = "user-cust-002"
                         },
                         new
                         {
                             Id = 3,
-                            Comment = "Arrived with a slight scratch on the outer lens cap.",
+                            ApprovedAt = new DateTime(2026, 8, 16, 13, 0, 0, 0, DateTimeKind.Utc),
+                            Comment = "Great optics and clear focus for wildlife watching.",
                             CreatedAt = new DateTime(2026, 8, 16, 11, 0, 0, 0, DateTimeKind.Utc),
                             ProductId = 7,
-                            Rating = 2,
-                            Status = "Rejected",
+                            Rating = 4,
+                            Status = "Accepted",
                             UserId = "user-cust-003"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Comment = "Super warm down sleeping bag for sub-zero mountain nights. Highly recommended!",
-                            CreatedAt = new DateTime(2026, 8, 20, 9, 30, 0, 0, DateTimeKind.Utc),
-                            ProductId = 14,
-                            Rating = 5,
-                            Status = "Pending",
-                            UserId = "user-cust-001"
                         });
                 });
 
@@ -1068,29 +1063,21 @@ namespace CampTravelGear.Data.Migrations
                         {
                             Id = 1,
                             ApprovedAt = new DateTime(2026, 7, 21, 10, 0, 0, 0, DateTimeKind.Utc),
-                            Content = "We've seen amazing results already. Barrameru should be nominated for outdoor brand of the year. Great customer service!",
+                            Content = "We've seen amazing results already. I wish I would have thought of it first. Barrameru should be nominated for service of the year. Great Job!",
                             CreatedAt = new DateTime(2026, 7, 20, 9, 0, 0, 0, DateTimeKind.Utc),
-                            Name = "Sara G. Helvey",
+                            Name = "Sara C. Helvey",
                             Status = "Accepted",
                             UserId = "user-cust-002"
                         },
                         new
                         {
                             Id = 2,
+                            ApprovedAt = new DateTime(2026, 7, 26, 14, 0, 0, 0, DateTimeKind.Utc),
                             Content = "The best camping gear store I have ever used. Fast delivery and authentic rugged equipment.",
                             CreatedAt = new DateTime(2026, 7, 25, 11, 0, 0, 0, DateTimeKind.Utc),
                             Name = "John Doe",
-                            Status = "Pending",
+                            Status = "Accepted",
                             UserId = "user-cust-001"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Content = "Spam test message or irrelevant feedback.",
-                            CreatedAt = new DateTime(2026, 7, 28, 16, 0, 0, 0, DateTimeKind.Utc),
-                            Name = "Alex Hunter",
-                            Status = "Rejected",
-                            UserId = "user-cust-003"
                         });
                 });
 

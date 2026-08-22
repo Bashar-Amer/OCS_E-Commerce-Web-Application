@@ -1,0 +1,96 @@
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
+@inject SignInManager<ApplicationUser> SignInManager
+
+@{
+    var currentUser = await UserManager.GetUserAsync(User);
+    var displayName = currentUser?.FullName ?? User.Identity?.Name ?? "Administrator";
+}
+
+<aside class="admin-sidebar">
+    <!-- Brand Logo -->
+    <a asp-area="Admin" asp-controller="Dashboard" asp-action="Index" class="admin-sidebar-brand">
+        <img src="~/images/Logo_Barrameru.png" alt="Barrameru" />
+        <div class="brand-title">
+            BARRAMERU
+            <span class="brand-subtitle">ADMIN PORTAL</span>
+        </div>
+    </a>
+
+    <!-- Navigation Menu -->
+    <div class="admin-sidebar-nav">
+        <!-- Section: Overview -->
+        <div class="admin-nav-section-title">Overview</div>
+        <ul class="admin-nav-list">
+            <li class="admin-nav-item">
+                <a asp-area="Admin" asp-controller="Dashboard" asp-action="Index" class="admin-nav-link">
+                    <i class="bi bi-speedometer2"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+        </ul>
+
+        <!-- Section: Catalog -->
+        <div class="admin-nav-section-title">Catalog & Inventory</div>
+        <ul class="admin-nav-list">
+            <li class="admin-nav-item">
+                <a asp-area="Admin" asp-controller="Categories" asp-action="Index" class="admin-nav-link">
+                    <i class="bi bi-tags-fill"></i>
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li class="admin-nav-item">
+                <a asp-area="Admin" asp-controller="Products" asp-action="Index" class="admin-nav-link">
+                    <i class="bi bi-box-seam-fill"></i>
+                    <span>Products</span>
+                </a>
+            </li>
+        </ul>
+
+        <!-- Section: Sales & Accounts -->
+        <div class="admin-nav-section-title">Sales & Members</div>
+        <ul class="admin-nav-list">
+            <li class="admin-nav-item">
+                <a asp-area="Admin" asp-controller="Orders" asp-action="Index" class="admin-nav-link">
+                    <i class="bi bi-receipt-cutoff"></i>
+                    <span>Orders</span>
+                </a>
+            </li>
+            <li class="admin-nav-item">
+                <a asp-area="Admin" asp-controller="Users" asp-action="Index" class="admin-nav-link">
+                    <i class="bi bi-people-fill"></i>
+                    <span>Registered Users</span>
+                </a>
+            </li>
+        </ul>
+
+        <!-- Section: Content & Moderation -->
+        <div class="admin-nav-section-title">Content & Moderation</div>
+        <ul class="admin-nav-list">
+            <li class="admin-nav-item">
+                <a asp-area="Admin" asp-controller="Reviews" asp-action="Index" class="admin-nav-link">
+                    <i class="bi bi-chat-square-quote-fill"></i>
+                    <span>Reviews & Feedback</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Sidebar Bottom User Details -->
+    <div class="admin-sidebar-footer">
+        <div class="admin-user-info">
+            <div class="admin-user-avatar">
+                @(displayName.Length > 0 ? displayName[0].ToString().ToUpper() : "A")
+            </div>
+            <div class="admin-user-details">
+                <span class="admin-user-name text-truncate" style="max-width: 130px;">@displayName</span>
+                <span class="admin-user-role">Administrator</span>
+            </div>
+        </div>
+        <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post" class="d-inline">
+            <button type="submit" class="btn btn-link text-white-50 p-0 fs-5" title="Sign Out">
+                <i class="bi bi-box-arrow-right"></i>
+            </button>
+        </form>
+    </div>
+</aside>

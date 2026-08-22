@@ -1,0 +1,220 @@
+@model CampTravelGear.Helpers.PaginatedList<CampTravelGear.Models.Order>
+
+@{
+    ViewData["Title"] = "Orders";
+}
+
+<!-- Page Header -->
+<div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+    <div>
+        <h1 class="h4 fw-bold mb-1" style="color: var(--admin-text-main);">Order Management</h1>
+        <p class="text-muted small mb-0" style="font-size: 12px;">Track, manage, and update customer order fulfillment statuses.</p>
+    </div>
+</div>
+
+<!-- Order Table Card -->
+<div class="admin-card">
+    <div class="admin-card-header py-2 px-3">
+        <div class="d-flex align-items-center gap-2 flex-wrap">
+            <div class="admin-card-title" style="font-size: 13.5px;">
+                <i class="bi bi-receipt-cutoff text-primary"></i>
+                <span>All Orders</span>
+                <span class="admin-badge admin-badge-teal ms-1">@Model.TotalCount Total</span>
+            </div>
+
+            <!-- Quick Status Filter -->
+            <div class="ms-2">
+                <select id="orderStatusFilter" class="form-select form-select-sm py-1 px-2 text-secondary" style="font-size: 12px; height: 32px; border-radius: var(--admin-radius); cursor: pointer;">
+                    <option value="">All Statuses</option>
+                    <option value="Processing">Processing</option>
+                    <option value="Completed">Completed</option>
+                    <option value="Cancelled">Cancelled</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="admin-search-input">
+            <i class="bi bi-search"></i>
+            <input type="text" id="orderSearchInput" placeholder="Filter by Order #, customer name, email..." />
+        </div>
+    </div>
+
+    <div class="admin-table-wrapper">
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th style="width: 75px;">Order</th>
+                    <th>Customer</th>
+                    <th>Date & Time</th>
+                    <th>Items</th>
+                    <th>Total ($)</th>
+                    <th>Status</th>
+                    <th style="width: 140px; text-align: right;">Actions</th>
+                </tr>
+            </thead>
+            <tbody id="ordersTableBody">
+                @if (Model != null && Model.Any())
+                {
+                    @foreach (var order in Model)
+                    {
+                        var customerName = order.User?.FullName ?? order.User?.UserName ?? "Guest Customer";
+                        var customerEmail = order.User?.Email ?? "No email";
+                        var itemCount = order.OrderItems?.Sum(oi => oi.Quantity) ?? order.OrderItems?.Count ?? 0;
+                        var status = order.Status ?? "Processing";
+
+                        <tr class="order-row" data-status="@status">
+                            <!-- Order ID -->
+                            <td class="order-id-cell">
+                                <a asp-action="Details" asp-route-id="@order.Id" class="fw-bold text-decoration-none" style="color: var(--admin-primary); font-size: 12.5px;">
+                                    #@order.Id
+                                </a>
+                            </td>
+
+                            <!-- Customer Info -->
+                            <td class="order-customer-cell">
+                                <div class="d-flex align-items-center gap-2">
+                                    <div class="rounded-circle d-flex align-items-center justify-content-center fw-bold text-white flex-shrink-0" 
+                                         style="width: 30px; height: 30px; background-color: var(--admin-primary); font-size: 11px;">
+                                        @(customerName.Length > 0 ? customerName[0].ToString().ToUpper() : "U")
+                                    </div>
+                                    <div>
+                                        <span class="fw-bold d-block text-truncate" style="color: var(--admin-text-main); font-size: 12px; max-width: 170px;">
+                                            @customerName
+                                        </span>
+                                        <span class="text-muted d-block text-truncate" style="font-size: 11px; max-width: 170px;">
+                                            @customerEmail
+                                        </span>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <!-- Order Date -->
+                            <td>
+                                <span class="text-muted small" style="font-size: 11.5px;">
+                                    <i class="bi bi-calendar3 me-1"></i>
+                                    @order.OrderDate.ToString("MMM dd, yyyy")
+                                    <span class="d-block text-muted opacity-75" style="font-size: 10.5px;">
+                                        @order.OrderDate.ToString("hh:mm tt")
+                                    </span>
+                                </span>
+                            </td>
+
+                            <!-- Total Items -->
+                            <td>
+                                <span class="badge bg-light text-dark border" style="font-size: 11px; font-weight: 600;">
+                                    <i class="bi bi-box me-1 text-muted"></i>@itemCount @(itemCount == 1 ? "item" : "items")
+                                </span>
+                            </td>
+
+                            <!-- Total Price -->
+                            <td>
+                                <span class="fw-bold" style="color: var(--admin-primary); font-size: 13px;">
+                                    $@order.TotalAmount.ToString("F2")
+                                </span>
+                            </td>
+
+                            <!-- Order Status Badge -->
+                            <td>
+                                @if (status.Equals("Completed", StringComparison.OrdinalIgnoreCase))
+                                {
+                                    <span class="admin-badge admin-badge-success">
+                                        <i class="bi bi-check2-circle"></i> Completed
+                                    </span>
+                                }
+                                else if (status.Equals("Cancelled", StringComparison.OrdinalIgnoreCase))
+                                {
+                                    <span class="admin-badge admin-badge-danger">
+                                        <i class="bi bi-x-circle"></i> Cancelled
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="admin-badge admin-badge-warning">
+                                        <i class="bi bi-arrow-repeat"></i> Processing
+                                    </span>
+                                }
+                            </td>
+
+                            <!-- Action Buttons -->
+                            <td style="text-align: right;">
+                                <div class="d-inline-flex align-items-center gap-1">
+                                    <!-- View Details Button -->
+                                    <a asp-action="Details" asp-route-id="@order.Id" class="btn-action-icon" title="View Order Details & Invoice">
+                                        <i class="bi bi-eye-fill"></i>
+                                    </a>
+
+                                    <!-- Quick Status Change Dropdown -->
+                                    <div class="dropdown d-inline-block">
+                                        <button class="btn-action-icon" type="button" data-bs-toggle="dropdown" aria-expanded="false" title="Quick Change Status">
+                                            <i class="bi bi-three-dots-vertical"></i>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0 py-1" style="font-size: 12px; border-radius: var(--admin-radius);">
+                                            <li><h6 class="dropdown-header py-1 text-muted" style="font-size: 10.5px;">Change Status</h6></li>
+                                            @if (!status.Equals("Processing", StringComparison.OrdinalIgnoreCase))
+                                            {
+                                                <li>
+                                                    <form id="statusForm_@(order.Id)_proc" asp-action="Edit" asp-route-id="@order.Id" asp-route-status="@CampTravelGear.Models.OrderStatus.Processing" method="post" class="d-inline">
+                                                        @Html.AntiForgeryToken()
+                                                        <button type="button" class="dropdown-item py-1 px-3" onclick="confirmOrderStatusChange('statusForm_@(order.Id)_proc', 'Processing', @order.Id)">
+                                                            <i class="bi bi-arrow-repeat text-warning me-2"></i> Mark as Processing
+                                                        </button>
+                                                    </form>
+                                                </li>
+                                            }
+                                            @if (!status.Equals("Completed", StringComparison.OrdinalIgnoreCase))
+                                            {
+                                                <li>
+                                                    <form id="statusForm_@(order.Id)_comp" asp-action="Edit" asp-route-id="@order.Id" asp-route-status="@CampTravelGear.Models.OrderStatus.Completed" method="post" class="d-inline">
+                                                        @Html.AntiForgeryToken()
+                                                        <button type="button" class="dropdown-item py-1 px-3" onclick="confirmOrderStatusChange('statusForm_@(order.Id)_comp', 'Completed', @order.Id)">
+                                                            <i class="bi bi-check2-circle text-success me-2"></i> Mark as Completed
+                                                        </button>
+                                                    </form>
+                                                </li>
+                                            }
+                                            @if (!status.Equals("Cancelled", StringComparison.OrdinalIgnoreCase))
+                                            {
+                                                <li>
+                                                    <form id="statusForm_@(order.Id)_canc" asp-action="Edit" asp-route-id="@order.Id" asp-route-status="@CampTravelGear.Models.OrderStatus.Cancelled" method="post" class="d-inline">
+                                                        @Html.AntiForgeryToken()
+                                                        <button type="button" class="dropdown-item py-1 px-3 text-danger" onclick="confirmOrderStatusChange('statusForm_@(order.Id)_canc', 'Cancelled', @order.Id)">
+                                                            <i class="bi bi-x-circle text-danger me-2"></i> Mark as Cancelled
+                                                        </button>
+                                                    </form>
+                                                </li>
+                                            }
+                                        </ul>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="7" class="text-center py-4">
+                            <div class="text-muted">
+                                <i class="bi bi-receipt fs-2 d-block mb-1 text-muted opacity-50"></i>
+                                <p class="fw-semibold mb-1 small">No orders recorded in the database yet.</p>
+                                <span class="text-muted small" style="font-size: 11px;">Customer purchases from the storefront will appear here.</span>
+                            </div>
+                        </td>
+                    </tr>
+                }
+                <tr id="noOrderMatchRow" style="display: none;">
+                    <td colspan="7" class="text-center py-3 text-muted small">
+                        <i class="bi bi-search me-1"></i> No matching orders found for your search query.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Standard Reusable Pagination Partial -->
+    <partial name="_AdminPagination" model="Model" />
+</div>
+
+@section Scripts {
+    <script src="~/js/admin/orders.js" asp-append-version="true"></script>
+}

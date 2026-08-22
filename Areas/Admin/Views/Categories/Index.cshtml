@@ -1,0 +1,108 @@
+@model CampTravelGear.Helpers.PaginatedList<CampTravelGear.Models.Category>
+
+@{
+    ViewData["Title"] = "Categories";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+    <div>
+        <h1 class="h4 fw-bold mb-1" style="color: var(--admin-text-main);">Category Management</h1>
+        <p class="text-muted small mb-0" style="font-size: 12px;">Organize and manage outdoor gear product categories.</p>
+    </div>
+    <a asp-action="Create" class="btn-admin-primary">
+        <i class="bi bi-plus-lg"></i>
+        <span>Add New Category</span>
+    </a>
+</div>
+
+<!-- Category Data Table Card -->
+<div class="admin-card">
+    <div class="admin-card-header py-2 px-3">
+        <div class="admin-card-title" style="font-size: 13.5px;">
+            <i class="bi bi-tags text-primary"></i>
+            <span>All Categories</span>
+            <span class="admin-badge admin-badge-teal ms-2">@Model.TotalCount Total</span>
+        </div>
+        <div class="admin-search-input">
+            <i class="bi bi-search"></i>
+            <input type="text" id="categorySearchInput" placeholder="Filter categories by name or ID..." />
+        </div>
+    </div>
+
+    <div class="admin-table-wrapper">
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th style="width: 70px;">ID</th>
+                    <th>Category Name</th>
+                    <th>Created Date</th>
+                    <th style="width: 120px; text-align: right;">Actions</th>
+                </tr>
+            </thead>
+            <tbody id="categoriesTableBody">
+                @if (Model != null && Model.Any())
+                {
+                    @foreach (var category in Model)
+                    {
+                        <tr class="category-row">
+                            <td class="category-id-cell fw-bold text-muted">#@category.Id</td>
+                            <td class="category-name-cell">
+                                <span class="fw-bold" style="color: var(--admin-text-main);">@category.Name</span>
+                            </td>
+                            <td>
+                                <span class="text-muted small">
+                                    <i class="bi bi-calendar3 me-1"></i>
+                                    @category.CreatedAt.ToString("MMM dd, yyyy")
+                                </span>
+                            </td>
+                            <td style="text-align: right;">
+                                <div class="d-inline-flex gap-1">
+                                    <!-- Edit Action -->
+                                    <a asp-action="Edit" asp-route-id="@category.Id" class="btn-action-icon" title="Edit Category">
+                                        <i class="bi bi-pencil-fill"></i>
+                                    </a>
+
+                                    <!-- Delete Action (SweetAlert) -->
+                                    <button type="button" class="btn-action-icon btn-action-delete" 
+                                            onclick="confirmAdminDelete('deleteForm_@category.Id', '@category.Name')" 
+                                            title="Delete Category">
+                                        <i class="bi bi-trash3-fill"></i>
+                                    </button>
+
+                                    <!-- Hidden Anti-Forgery Form for Delete -->
+                                    <form id="deleteForm_@category.Id" asp-action="Remove" asp-route-id="@category.Id" method="post" class="d-none">
+                                        @Html.AntiForgeryToken()
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="4" class="text-center py-4">
+                            <div class="text-muted">
+                                <i class="bi bi-inbox fs-2 d-block mb-1 text-muted opacity-50"></i>
+                                <p class="fw-semibold mb-1 small">No categories found in the database.</p>
+                                <a asp-action="Create" class="btn btn-sm btn-outline-primary mt-1" style="font-size: 11.5px;">Add Your First Category</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+                <tr id="noCategoryMatchRow" style="display: none;">
+                    <td colspan="4" class="text-center py-3 text-muted small">
+                        <i class="bi bi-search me-1"></i> No matching categories found for your search query.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Standard Reusable Pagination Partial -->
+    <partial name="_AdminPagination" model="Model" />
+</div>
+
+@section Scripts {
+    <script src="~/js/admin/categories.js" asp-append-version="true"></script>
+}

@@ -110,6 +110,7 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
             NormalizedEmail = "ADMIN@BARRAMERU.COM",
             EmailConfirmed = true,
             FullName = "Admin Administrator",
+            PhoneNumber = "+1 (555) 019-2834",
             PasswordHash = adminPasswordHash,
             SecurityStamp = "sec-stamp-admin-001",
             ConcurrencyStamp = "con-stamp-admin-001"
@@ -124,6 +125,7 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
             NormalizedEmail = "JOHN.DOE@EXAMPLE.COM",
             EmailConfirmed = true,
             FullName = "John Doe",
+            PhoneNumber = "+1 (555) 342-8901",
             PasswordHash = customerPasswordHash,
             SecurityStamp = "sec-stamp-john-001",
             ConcurrencyStamp = "con-stamp-john-001"
@@ -138,6 +140,7 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
             NormalizedEmail = "SARA.HELVEY@EXAMPLE.COM",
             EmailConfirmed = true,
             FullName = "Sara G. Helvey",
+            PhoneNumber = "+1 (555) 781-4329",
             PasswordHash = customerPasswordHash,
             SecurityStamp = "sec-stamp-sara-002",
             ConcurrencyStamp = "con-stamp-sara-002"
@@ -152,6 +155,7 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
             NormalizedEmail = "ALEX.H@EXAMPLE.COM",
             EmailConfirmed = true,
             FullName = "Alex Hunter",
+            PhoneNumber = "+1 (555) 629-1145",
             PasswordHash = customerPasswordHash,
             SecurityStamp = "sec-stamp-alex-003",
             ConcurrencyStamp = "con-stamp-alex-003"
@@ -386,7 +390,7 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
                 UserId = customerUser1Id,
                 AddressId = 1,
                 OrderDate = orderDate1,
-                Status = OrderStatus.Delivered.ToString(),
+                Status = OrderStatus.Completed.ToString(),
                 TotalAmount = 270.00m,
                 CreatedAt = orderDate1
             },
@@ -406,7 +410,7 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
                 UserId = customerUser3Id,
                 AddressId = 3,
                 OrderDate = orderDate3,
-                Status = OrderStatus.Pending.ToString(),
+                Status = OrderStatus.Cancelled.ToString(),
                 TotalAmount = 85.00m,
                 CreatedAt = orderDate3
             }
@@ -475,22 +479,33 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
                 Id = 2,
                 UserId = customerUser2Id,
                 ProductId = 9,
-                Rating = 5,
+                Rating = 4,
                 Comment = "Incredible build quality and very comfortable back padding for multi-day treks.",
-                Status = AdminResponse.Accepted.ToString(),
+                Status = AdminResponse.Pending.ToString(),
                 CreatedAt = new DateTime(2026, 8, 15, 14, 0, 0, DateTimeKind.Utc),
-                ApprovedAt = new DateTime(2026, 8, 15, 15, 0, 0, DateTimeKind.Utc)
+                ApprovedAt = null
             },
             new Review
             {
                 Id = 3,
                 UserId = customerUser3Id,
                 ProductId = 7,
-                Rating = 4,
-                Comment = "Great optics and clear focus for wildlife watching.",
-                Status = AdminResponse.Accepted.ToString(),
+                Rating = 2,
+                Comment = "Arrived with a slight scratch on the outer lens cap.",
+                Status = AdminResponse.Rejected.ToString(),
                 CreatedAt = new DateTime(2026, 8, 16, 11, 0, 0, DateTimeKind.Utc),
-                ApprovedAt = new DateTime(2026, 8, 16, 13, 0, 0, DateTimeKind.Utc)
+                ApprovedAt = null
+            },
+            new Review
+            {
+                Id = 4,
+                UserId = customerUser1Id,
+                ProductId = 14,
+                Rating = 5,
+                Comment = "Super warm down sleeping bag for sub-zero mountain nights. Highly recommended!",
+                Status = AdminResponse.Pending.ToString(),
+                CreatedAt = new DateTime(2026, 8, 20, 9, 30, 0, DateTimeKind.Utc),
+                ApprovedAt = null
             }
         );
 
@@ -500,8 +515,8 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
             {
                 Id = 1,
                 UserId = customerUser2Id,
-                Name = "Sara C. Helvey",
-                Content = "We've seen amazing results already. I wish I would have thought of it first. Barrameru should be nominated for service of the year. Great Job!",
+                Name = "Sara G. Helvey",
+                Content = "We've seen amazing results already. Barrameru should be nominated for outdoor brand of the year. Great customer service!",
                 Status = AdminResponse.Accepted.ToString(),
                 CreatedAt = new DateTime(2026, 7, 20, 9, 0, 0, DateTimeKind.Utc),
                 ApprovedAt = new DateTime(2026, 7, 21, 10, 0, 0, DateTimeKind.Utc)
@@ -512,9 +527,19 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
                 UserId = customerUser1Id,
                 Name = "John Doe",
                 Content = "The best camping gear store I have ever used. Fast delivery and authentic rugged equipment.",
-                Status = AdminResponse.Accepted.ToString(),
+                Status = AdminResponse.Pending.ToString(),
                 CreatedAt = new DateTime(2026, 7, 25, 11, 0, 0, DateTimeKind.Utc),
-                ApprovedAt = new DateTime(2026, 7, 26, 14, 0, 0, DateTimeKind.Utc)
+                ApprovedAt = null
+            },
+            new Testimonial
+            {
+                Id = 3,
+                UserId = customerUser3Id,
+                Name = "Alex Hunter",
+                Content = "Spam test message or irrelevant feedback.",
+                Status = AdminResponse.Rejected.ToString(),
+                CreatedAt = new DateTime(2026, 7, 28, 16, 0, 0, DateTimeKind.Utc),
+                ApprovedAt = null
             }
         );
 

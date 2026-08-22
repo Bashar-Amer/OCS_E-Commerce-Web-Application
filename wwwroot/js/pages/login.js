@@ -15,9 +15,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Demo account autofill buttons
+    // 1-Click Instant Demo Login (Autofill & Auto-Submit)
     const demoButtons = document.querySelectorAll('.demo-account-pill');
     const emailInput = document.getElementById('emailInput');
+    const loginForm = document.getElementById('accountLoginForm');
 
     demoButtons.forEach(btn => {
         btn.addEventListener('click', () => {
@@ -26,15 +27,12 @@ document.addEventListener('DOMContentLoaded', () => {
             if (emailInput && passwordInput) {
                 emailInput.value = email;
                 passwordInput.value = pass;
-                if (typeof Swal !== 'undefined') {
-                    Swal.fire({
-                        toast: true,
-                        position: 'top-end',
-                        icon: 'info',
-                        title: 'Filled demo credentials!',
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
+
+                if (loginForm) {
+                    btn.disabled = true;
+                    btn.style.opacity = '0.75';
+                    btn.innerHTML = `<span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span> Signing in...`;
+                    loginForm.submit();
                 }
             }
         });
