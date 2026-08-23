@@ -160,3 +160,45 @@
         .template-wishlist-btn.active i::before {
             content: "\f415";
         }
+
+.shop-sort {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.shop-sort-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #374151;
+    margin: 0;
+}
+
+.shop-sorting-select {
+    width: 210px;
+    height: 40px;
+    padding: 0 38px 0 14px;
+    border: 1px solid #d9e0e2;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #374151;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.25s ease;
+}
+
+    .shop-sorting-select:hover {
+        border-color: #5E959F;
+    }
+
+    .shop-sorting-select:focus {
+        border-color: #5E959F;
+        box-shadow: 0 0 0 3px rgba(94, 149, 159, 0.12);
+    }
+
+    .shop-sorting-select option {
+        color: #374151;
+        background: #fff;
+    }
