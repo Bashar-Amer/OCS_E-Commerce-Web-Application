@@ -1,118 +1,298 @@
 @{
     ViewData["Title"] = "Contact Us";
+
+    var isLoggedIn = User.Identity?.IsAuthenticated == true;
 }
 
 @section Styles {
     <link rel="stylesheet" href="~/css/pages/contact.css" asp-append-version="true" />
 }
 
-<!-- Hero Banner (Matches contact-us.jpg) -->
-<section class="inner-hero-banner" style="background-image: url('/images/orange-tourist-tent-illuminated-from-inside-stands-in-mountains-above-clouds.jpg');">
+<!-- =========================
+     HERO
+========================= -->
+<section class="inner-hero-banner"
+         style="background-image: url('/images/orange-tourist-tent-illuminated-from-inside-stands-in-mountains-above-clouds.jpg');">
+
     <div class="inner-hero-overlay"></div>
+
     <div class="container position-relative">
         <div class="inner-hero-content">
-            <div class="breadcrumbs">HOME / CONTACT US</div>
+
+            <div class="breadcrumbs">
+                HOME / CONTACT US
+            </div>
+
             <h1>Contact Us</h1>
-            <div class="sub-text">Get your backpack ready!</div>
+
+            <div class="sub-text">
+                Get your backpack ready!
+            </div>
+
         </div>
     </div>
 </section>
 
-<!-- Section 1: Get Contact Details & Map -->
-<section class="py-5 bg-white">
-    <div class="container py-4">
-        <div class="row g-5 align-items-center">
-            <!-- Left Info -->
+<!-- =========================
+     CONTACT SECTION
+========================= -->
+<section class="contact-section py-5">
+
+    <div class="container py-lg-5">
+
+        <div class="row g-5 align-items-start">
+
+            <!-- =========================
+                 LEFT : CONTACT INFORMATION
+            ========================= -->
             <div class="col-lg-5">
-                <h2 class="fw-bold mb-3" style="font-size: 2.2rem;">Get Contact<br>Details</h2>
-                <p class="text-muted small mb-4">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                </p>
 
-                <!-- Store Location -->
-                <div class="d-flex align-items-center gap-3 mb-4">
-                    <div class="contact-icon-box">
-                        <i class="bi bi-geo-alt-fill fs-5"></i>
-                    </div>
-                    <div>
-                        <h6 class="fw-bold mb-0 text-secondary">Store Location</h6>
-                        <small class="text-muted">In Cempaka Wangi No 22 Jakarta - Indonesia</small>
-                    </div>
-                </div>
+                <div class="contact-info">
 
-                <!-- Phone -->
-                <div class="d-flex align-items-center gap-3 mb-4">
-                    <div class="contact-icon-box">
-                        <i class="bi bi-telephone-fill fs-5"></i>
-                    </div>
-                    <div>
-                        <h6 class="fw-bold mb-0 text-secondary">Phone</h6>
-                        <small class="text-muted">+6221.2002.2012<br>+6221.2002.2021</small>
-                    </div>
-                </div>
+                    <span class="sub-badge text-teal">
+                        GET IN TOUCH
+                    </span>
 
-                <!-- Mail Address -->
-                <div class="d-flex align-items-center gap-3 mb-4">
-                    <div class="contact-icon-box">
-                        <i class="bi bi-envelope-fill fs-5"></i>
-                    </div>
-                    <div>
-                        <h6 class="fw-bold mb-0 text-secondary">Mail Address</h6>
-                        <small class="text-muted">hello@yourdomain.tld<br>support@yourdomain.tld</small>
-                    </div>
-                </div>
-            </div>
+                    <h2 class="contact-title">
+                        Let's Talk
+                        <span>Adventure</span>
+                    </h2>
 
-            <!-- Right Map -->
-            <div class="col-lg-7">
-                <div class="border rounded-0 overflow-hidden shadow-sm" style="height: 380px;">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d198059.4924037748!2d-0.381776505078125!3d51.528735199999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487604ce3941eb1f%3A0x1a5342fdf089de62!2sLondon%20Eye!5e0!3m2!1sen!2sus!4v1692440000000!5m2!1sen!2sus" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                </div>
-            </div>
-        </div>
+                    <p class="contact-description">
+                        Have a question about our camping gear, your order,
+                        or need some outdoor advice? We're always happy to help.
+                    </p>
 
-        <!-- Section 2: Drop us a line Form Box -->
-        <div class="mt-5 contact-form-box shadow-sm">
-            <div class="text-center mb-4">
-                <h2 class="fw-bold mb-2">Drop us a line</h2>
-                <p class="text-muted small mx-auto" style="max-width: 500px;">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.
-                </p>
-            </div>
 
-            <form id="contactDropLineForm">
-                <div class="row g-3">
-                    <div class="col-md-6">
-                        <label class="form-label small fw-semibold text-secondary">Name</label>
-                        <input type="text" class="form-control rounded-0" placeholder="Name" required>
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label small fw-semibold text-secondary">Phone</label>
-                        <input type="tel" class="form-control rounded-0" placeholder="Phone">
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label small fw-semibold text-secondary">Email</label>
-                        <input type="email" class="form-control rounded-0" placeholder="Email" required>
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label small fw-semibold text-secondary">Subject</label>
-                        <input type="text" class="form-control rounded-0" placeholder="Subject">
-                    </div>
-                    <div class="col-12">
-                        <label class="form-label small fw-semibold text-secondary">Message</label>
-                        <textarea class="form-control rounded-0" rows="4" placeholder="Message" required></textarea>
-                    </div>
-                    <div class="col-12 mt-4">
-                        <button type="submit" class="btn btn-barrameru w-100 py-3">
-                            SEND MY MESSAGE
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
+                    <!-- Contact Details -->
+                    <div class="contact-details mt-4">
+
+                        <!-- Location -->
+                        <div class="contact-item">
+
+                            <div class="contact-icon-box">
+                                <i class="bi bi-geo-alt-fill"></i>
+                            </div>
+
+                            <div>
+                                <h6>Our Location</h6>
+                                <p>Amman, Jordan</p>
+                            </div>
+
+                        </div>
+
+
+                    <!-- Phone -->
+<div class="contact-item">
+
+    <div class="contact-icon-box">
+        <i class="bi bi-telephone-fill"></i>
     </div>
+
+    <a href="tel:+962790000000"
+       class="contact-link">
+
+        <h6>Phone</h6>
+        <p>+962 7 9000 0000</p>
+
+    </a>
+
+</div>
+
+
+<!-- Email -->
+<div class="contact-item">
+
+    <div class="contact-icon-box">
+        <i class="bi bi-envelope-fill"></i>
+    </div>
+
+    <a href="mailto:Camping@camptravelgear.com"
+       class="contact-link">
+
+        <h6>Email Address</h6>
+        <p>Camping@camptravelgear.com</p>
+
+    </a>
+
+</div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =========================
+                 RIGHT : TESTIMONIAL FORM
+            ========================= -->
+            <div class="col-lg-7">
+
+                <div class="contact-form-box">
+
+                    <div class="mb-4">
+
+                        <span class="sub-badge text-teal">
+                            YOUR STORY MATTERS
+                        </span>
+
+                        <h2 class="fw-bold mt-2 mb-3">
+                            Share Your Experience
+                        </h2>
+
+                        <p class="text-muted">
+                            Tell us about your adventure and help fellow
+                            campers discover better outdoor experiences.
+                        </p>
+
+                    </div>
+
+                    <form id="testimonialForm"
+      asp-controller="Home"
+      asp-action="CreateTestimonial"
+      method="post"
+      data-logged-in="@isLoggedIn">
+
+    <div class="row g-3">
+
+        <!-- Name -->
+        <div class="col-12">
+
+            <label class="form-label">
+                Your Name
+            </label>
+
+            <input type="text"
+                   id="testimonialName"
+                   name="Name"
+                   class="form-control"
+                   placeholder="Enter your name"
+                   maxlength="150"
+                   required />
+
+        </div>
+
+
+        <!-- Experience -->
+        <div class="col-12">
+
+            <label class="form-label">
+                Your Experience
+            </label>
+
+            <textarea id="testimonialContent"
+                      name="Content"
+                      class="form-control"
+                      rows="5"
+                      maxlength="1000"
+                      placeholder="Tell us about your camping experience..."
+                      required></textarea>
+
+        </div>
+
+
+        <!-- Submit -->
+        <div class="col-12 mt-3">
+
+            <button type="submit"
+                    class="btn btn-barrameru">
+
+                <i class="bi bi-send-fill"></i>
+                SHARE MY EXPERIENCE
+
+            </button>
+
+        </div>
+
+    </div>
+
+</form>
+              
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
 </section>
 
+
+<!-- =========================
+     LOGIN REQUIRED MODAL
+========================= -->
+
+<div class="modal fade"
+     id="loginRequiredModal"
+     tabindex="-1"
+     aria-hidden="true">
+
+    <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal-content login-required-modal">
+
+            <div class="modal-body text-center p-5">
+
+                <div class="login-modal-icon">
+                    <i class="bi bi-person-lock"></i>
+                </div>
+
+                <h4>
+                    Login Required
+                </h4>
+
+                <p>
+                    You must login first to share your experience.
+                </p>
+
+                <div class="d-flex justify-content-center gap-2 mt-4">
+
+                    <button type="button"
+                            class="btn btn-cancel"
+                            data-bs-dismiss="modal">
+                        Cancel
+                    </button>
+
+                    <button type="button"
+                            id="loginRequiredBtn"
+                            class="btn btn-login">
+                        Login
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+@if (TempData["SuccessMessage"] != null)
+{
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            if (typeof Swal !== "undefined") {
+
+                Swal.fire({
+                    icon: "success",
+                    title: "Thank You!",
+                    text: "Your feedback has been submitted successfully!",
+                    confirmButtonText: "OK",
+                    confirmButtonColor: "#B67961",
+                    customClass: {
+                        title: "feedback-success-title"
+                    }
+                });
+
+            }
+        });
+    </script>
+}
 @section Scripts {
-    <script src="~/js/pages/contact.js" asp-append-version="true"></script>
+    <script src="~/js/pages/contact.js"
+            asp-append-version="true"></script>
 }

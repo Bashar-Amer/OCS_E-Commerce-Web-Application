@@ -1,46 +1,285 @@
+@model CampTravelGear.Models.Wishlist?
+
 @{
     ViewData["Title"] = "My Wishlist";
+    var isLoggedIn = User.Identity?.IsAuthenticated ?? false;
 }
-
-@section Styles {
-    <link rel="stylesheet" href="~/css/pages/wishlist.css" asp-append-version="true" />
-}
-
+<form id="wishlistAntiForgeryForm">
+    @Html.AntiForgeryToken()
+</form>
 <!-- Hero Banner -->
-<section class="inner-hero-banner" style="background-image: url('/images/orange-tourist-tent-illuminated-from-inside-stands-in-mountains-above-clouds.jpg');">
+<section class="inner-hero-banner"
+         style="background-image: url('/images/orange-tourist-tent-illuminated-from-inside-stands-in-mountains-above-clouds.jpg');">
+
     <div class="inner-hero-overlay"></div>
+
     <div class="container position-relative">
+
         <div class="inner-hero-content">
-            <div class="breadcrumbs">HOME / WISHLIST</div>
-            <h1>My Wishlist</h1>
-            <div class="sub-text">Saved outdoor gear for your next hike</div>
+
+            <div class="breadcrumbs">
+                HOME / WISHLIST
+            </div>
+
+            <h1>
+                My Wishlist
+            </h1>
+
+            <div class="sub-text">
+                Saved outdoor gear for your next adventure
+            </div>
+
         </div>
+
     </div>
+
 </section>
 
-<!-- Wishlist Content -->
+
+<!-- Wishlist -->
 <section class="py-5 bg-white">
+
     <div class="container py-4">
+
         <div class="table-responsive">
+
             <table class="table align-middle">
+
+                <!-- Header -->
                 <thead class="border-bottom">
+
                     <tr class="text-secondary small fw-bold">
+
                         <th style="width: 5%;"></th>
-                        <th style="width: 10%;">Image</th>
-                        <th style="width: 40%;">Product Name</th>
-                        <th style="width: 15%;">Unit Price</th>
-                        <th style="width: 15%;">Stock Status</th>
-                        <th style="width: 15%;">Action</th>
+
+                        <th style="width: 12%;">
+                            Image
+                        </th>
+
+                        <th style="width: 38%;">
+                            Product Name
+                        </th>
+
+                        <th style="width: 15%;">
+                            Unit Price
+                        </th>
+
+                        <th style="width: 15%;">
+                            Stock Status
+                        </th>
+
+                        <th style="width: 15%;">
+                            Action
+                        </th>
+
                     </tr>
+
                 </thead>
-                <tbody id="wishlistTableBody">
-                    <!-- Loaded dynamically via wishlist.js -->
+
+
+                <tbody id="wishlistTableBody" data-logged-in="@(User.Identity?.IsAuthenticated == true ? "true" : "false")">
+
+                    @if (isLoggedIn)
+                    {
+                        <!-- ==========================================
+                             LOGGED-IN USER
+                             Data comes from Database
+                        =========================================== -->
+
+                        @if (Model?.WishlistItems != null &&
+                            Model.WishlistItems.Any())
+                        {
+                            foreach (var item in Model.WishlistItems)
+                            {
+                                var product = item.Product;
+
+                                if (product == null)
+                                    continue;
+
+                                var image = product.ProductImages
+                                    .FirstOrDefault(x => x.IsMain)?.ImageUrl
+                                    ?? product.ProductImages
+                                    .FirstOrDefault()?.ImageUrl
+                                    ?? "/images/placeholder.jpg";
+
+                                <tr class="border-bottom">
+
+                                    <!-- Remove -->
+                                    <td>
+
+                                       <button type="button"
+        class="btn btn-sm text-danger border-0"
+        title="Remove from wishlist"
+        onclick="removeWishlistItem(@item.Id, this)">
+
+    <i class="bi bi-x-circle fs-5"></i>
+
+</button>
+
+                                    </td>
+
+
+                                    <!-- Image -->
+                                    <td>
+
+                                        <a href="/Shop/Details/@product.Id">
+
+                                            <img src="@image"
+                                                 alt="@product.Name"
+                                                 class="img-fluid"
+                                                 style="width: 65px;
+                                                        height: 65px;
+                                                        object-fit: contain;">
+
+                                        </a>
+
+                                    </td>
+
+
+                                    <!-- Product -->
+                                    <td>
+
+                                        <h6 class="mb-0 fw-bold">
+
+                                            <a href="/Shop/Details/@product.Id"
+                                               class="text-dark text-decoration-none">
+
+                                                @product.Name
+
+                                            </a>
+
+                                        </h6>
+
+                                    </td>
+
+
+                                    <!-- Price -->
+                                    <td>
+
+                                        <span class="fw-bold text-secondary">
+
+                                            @product.Price.ToString("C")
+
+                                        </span>
+
+                                    </td>
+
+
+                                    <!-- Stock -->
+                                    <td>
+
+                                        @if (product.Stock > 0)
+                                        {
+                                            <span class="text-success small">
+
+                                                <i class="bi bi-check-circle-fill me-1"></i>
+
+                                                In Stock
+
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-danger small">
+
+                                                <i class="bi bi-x-circle-fill me-1"></i>
+
+                                                Out of Stock
+
+                                            </span>
+                                        }
+
+                                    </td>
+
+
+                                    <!-- Action -->
+                                    <td>
+
+                                        @if (product.Stock > 0)
+                                        {
+                                            <button type="button"
+                                                    class="btn btn-barrameru btn-sm">
+
+                                                <i class="bi bi-cart3 me-1"></i>
+
+                                                Add to Cart
+
+                                            </button>
+                                        }
+                                        else
+                                        {
+                                            <button type="button"
+                                                    class="btn btn-secondary btn-sm"
+                                                    disabled>
+
+                                                Out of Stock
+
+                                            </button>
+                                        }
+
+                                    </td>
+
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+
+                                <td colspan="6"
+                                    class="text-center py-5">
+
+                                    <div class="py-4">
+
+                                        <i class="bi bi-heart fs-1 text-muted"></i>
+
+                                        <h5 class="fw-bold mt-3">
+                                            Your wishlist is empty
+                                        </h5>
+
+                                        <p class="text-muted small mb-4">
+                                            Save your favorite camping gear here.
+                                        </p>
+
+                                        <a href="/Shop"
+                                           class="btn btn-barrameru">
+
+                                            Explore Gear
+
+                                        </a>
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <!-- ==========================================
+                             GUEST USER
+                             Data comes from localStorage
+                        =========================================== -->
+
+                        <!-- wishlist.js will render here -->
+
+                    }
+
                 </tbody>
+
             </table>
+
         </div>
+
     </div>
+
 </section>
+
 
 @section Scripts {
-    <script src="~/js/pages/wishlist.js" asp-append-version="true"></script>
+
+    <script src="~/js/pages/wishlist.js"
+            asp-append-version="true"></script>
+
 }

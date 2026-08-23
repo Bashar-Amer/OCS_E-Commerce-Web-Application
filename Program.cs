@@ -23,6 +23,7 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
+builder.Services.AddSession();
 
 builder.Services.AddMemoryCache();
 builder.Services.AddHttpClient();
@@ -47,7 +48,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapStaticAssets();
-
+app.UseSession();
 // Map Area routes for Admin
 app.MapControllerRoute(
     name: "areas",

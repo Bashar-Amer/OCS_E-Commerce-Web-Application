@@ -19,3 +19,588 @@
   border: 1px solid #eaeaea;
   padding: 40px;
 }
+/* ==========================================================================
+   CONTACT PAGE - BARRAMERU THEME
+   ========================================================================== */
+
+
+/* =========================================
+   CONTACT SECTION
+========================================= */
+
+.contact-section {
+    background-color: var(--white);
+}
+
+
+/* =========================================
+   CONTACT INFORMATION
+========================================= */
+
+.contact-info {
+    padding: 10px 0 20px;
+}
+
+    .contact-info .sub-badge {
+        margin-bottom: 10px;
+    }
+
+
+/* =========================================
+   CONTACT TITLE
+========================================= */
+
+.contact-title {
+    font-family: var(--font-main);
+    color: var(--secondary);
+    font-size: 2.7rem;
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -1px;
+    margin: 12px 0 18px;
+}
+
+    .contact-title span {
+        color: var(--primary);
+    }
+
+
+/* =========================================
+   CONTACT DESCRIPTION
+========================================= */
+
+.contact-description {
+    max-width: 500px;
+    color: var(--text-muted);
+    font-family: var(--font-main);
+    font-size: 14px;
+    line-height: 1.8;
+    margin-bottom: 0;
+}
+
+
+/* =========================================
+   CONTACT DETAILS
+========================================= */
+
+.contact-details {
+    max-width: 450px;
+    margin-top: 30px;
+}
+
+
+/* =========================================
+   CONTACT ITEM
+========================================= */
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--border-color);
+    transition: var(--transition);
+}
+
+    .contact-item:first-child {
+        padding-top: 5px;
+    }
+
+    .contact-item:last-child {
+        border-bottom: none;
+    }
+
+
+/* =========================================
+   CONTACT ICON
+========================================= */
+
+.contact-icon-box {
+    width: 50px;
+    height: 50px;
+    min-width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(182, 121, 97, 0.10);
+    color: var(--primary);
+    transition: var(--transition);
+}
+
+    .contact-icon-box i {
+        font-size: 18px;
+    }
+
+.contact-item:hover .contact-icon-box {
+    background-color: var(--primary);
+    color: var(--white);
+}
+
+
+/* =========================================
+   CONTACT ITEM TEXT
+========================================= */
+
+.contact-item h6 {
+    font-family: var(--font-main);
+    color: var(--secondary);
+    font-size: 13px;
+    font-weight: 700;
+    margin: 0 0 4px;
+}
+
+.contact-item p {
+    color: var(--text-muted);
+    font-family: var(--font-main);
+    font-size: 12px;
+    line-height: 1.5;
+    margin: 0;
+}
+
+
+/* =========================================
+   CONTACT FORM BOX
+========================================= */
+
+.contact-form-box {
+    height: 100%;
+    background-color: var(--white);
+    border: 1px solid #eaeaea;
+    padding: 45px 45px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+    transition: var(--transition);
+}
+
+    .contact-form-box:hover {
+        border-color: #d8d8d8;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+    }
+
+
+    /* =========================================
+   FORM HEADER
+========================================= */
+
+    .contact-form-box .sub-badge {
+        color: var(--accent-teal);
+    }
+
+    .contact-form-box h2 {
+        font-family: var(--font-main);
+        color: var(--secondary);
+        font-size: 2rem;
+        font-weight: 700;
+        line-height: 1.2;
+        letter-spacing: -0.5px;
+        margin-top: 8px;
+        margin-bottom: 12px;
+    }
+
+    .contact-form-box > div > p {
+        color: var(--text-muted);
+        font-family: var(--font-main);
+        font-size: 13px;
+        line-height: 1.7;
+        margin-bottom: 0;
+    }
+
+
+    /* =========================================
+   FORM LABEL
+========================================= */
+
+    .contact-form-box .form-label {
+        display: block;
+        font-family: var(--font-main);
+        color: var(--secondary);
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 8px;
+    }
+
+
+    /* =========================================
+   FORM INPUT
+========================================= */
+
+    .contact-form-box .form-control {
+        width: 100%;
+        min-height: 48px;
+        background-color: var(--white);
+        border: 1px solid #d9d9d9;
+        border-radius: 0;
+        color: var(--text-main);
+        font-family: var(--font-main);
+        font-size: 13px;
+        padding: 11px 14px;
+        transition: var(--transition);
+    }
+
+
+        /* Placeholder */
+
+        .contact-form-box .form-control::placeholder {
+            color: #9ca3af;
+            font-size: 12px;
+        }
+
+
+        /* Focus */
+
+        .contact-form-box .form-control:focus {
+            background-color: var(--white);
+            border-color: var(--accent-teal);
+            box-shadow: 0 0 0 2px rgba(94, 149, 159, 0.10);
+            outline: none;
+        }
+
+
+    /* =========================================
+   TEXTAREA
+========================================= */
+
+    .contact-form-box textarea.form-control {
+        min-height: 140px;
+        resize: vertical;
+    }
+
+
+    /* =========================================
+   SUBMIT BUTTON
+========================================= */
+
+    .contact-form-box .btn-barrameru {
+        min-width: 250px;
+        padding: 13px 28px;
+        background-color: var(--primary) !important;
+        border: 1px solid var(--primary);
+        border-radius: 0;
+        color: var(--white) !important;
+        font-family: var(--font-main);
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+        transition: var(--transition);
+    }
+
+        .contact-form-box .btn-barrameru:hover {
+            background-color: var(--secondary) !important;
+            border-color: var(--secondary);
+            color: var(--white) !important;
+            transform: none;
+            box-shadow: none;
+        }
+
+
+        /* =========================================
+   BUTTON ICON
+========================================= */
+
+        .contact-form-box .btn-barrameru i {
+            font-size: 12px;
+        }
+
+
+    /* =========================================
+   FORM VALIDATION
+========================================= */
+
+    .contact-form-box .form-control:invalid:not(:placeholder-shown) {
+        border-color: #c77c6b;
+    }
+
+    .contact-form-box .form-control:valid:not(:placeholder-shown) {
+        border-color: #bfcfc9;
+    }
+
+
+/* =========================================
+   HERO SPACING
+========================================= */
+
+.contact-section > .container {
+    position: relative;
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 991px) {
+
+    .contact-title {
+        font-size: 2.4rem;
+    }
+
+    .contact-description {
+        max-width: 600px;
+    }
+
+    .contact-details {
+        max-width: 100%;
+    }
+
+    .contact-form-box {
+        padding: 40px 35px;
+    }
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 767px) {
+
+    .contact-section {
+        padding-top: 45px !important;
+        padding-bottom: 45px !important;
+    }
+
+    .contact-title {
+        font-size: 2.2rem;
+        letter-spacing: -0.5px;
+    }
+
+    .contact-description {
+        font-size: 13px;
+    }
+
+    .contact-details {
+        margin-top: 25px;
+    }
+
+    .contact-item {
+        padding: 16px 0;
+    }
+
+    .contact-icon-box {
+        width: 46px;
+        height: 46px;
+        min-width: 46px;
+    }
+
+        .contact-icon-box i {
+            font-size: 17px;
+        }
+
+    .contact-form-box {
+        padding: 35px 25px;
+    }
+
+        .contact-form-box h2 {
+            font-size: 1.8rem;
+        }
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 576px) {
+
+    .contact-title {
+        font-size: 2rem;
+    }
+
+    .contact-form-box {
+        padding: 30px 18px;
+    }
+
+        .contact-form-box h2 {
+            font-size: 1.7rem;
+        }
+
+        .contact-form-box .btn-barrameru {
+            width: 100%;
+            min-width: auto;
+        }
+
+    .contact-item {
+        gap: 14px;
+    }
+
+        .contact-item p {
+            font-size: 11px;
+        }
+}
+
+/* =========================================
+   LOGIN REQUIRED MODAL
+========================================= */
+
+.login-required-modal {
+    border: none;
+    border-radius: 18px;
+    overflow: hidden;
+    background: #ffffff;
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.18);
+}
+
+
+    /* Modal body */
+
+    .login-required-modal .modal-body {
+        padding: 45px 40px 40px;
+    }
+
+
+/* =========================================
+   ICON
+========================================= */
+
+.login-modal-icon {
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(182, 121, 97, 0.10);
+    color: #b67961;
+    font-size: 30px;
+    border: 1px solid rgba(182, 121, 97, 0.18);
+}
+
+
+/* =========================================
+   TITLE
+========================================= */
+
+.login-required-modal h4 {
+    margin: 0 0 12px;
+    font-size: 1.65rem;
+    font-weight: 700;
+    color: #B67961;
+}
+
+
+/* =========================================
+   DESCRIPTION
+========================================= */
+
+.login-required-modal p {
+    margin: 0 auto;
+    max-width: 430px;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #6c757d;
+}
+
+
+/* =========================================
+   BUTTONS
+========================================= */
+
+.login-required-modal .d-flex {
+    margin-top: 30px !important;
+}
+
+
+/* Cancel */
+
+.btn-cancel {
+    min-width: 115px;
+    padding: 11px 24px;
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+    background: #ffffff;
+    color: #555;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: all 0.25s ease;
+}
+
+    .btn-cancel:hover {
+        background: #f5f5f5;
+        border-color: #cfcfcf;
+        color: #333;
+        transform: translateY(-1px);
+    }
+
+.feedback-success-title {
+    color: #B67961 !important;
+}
+
+
+/* Login */
+
+.btn-login {
+    min-width: 115px;
+    padding: 11px 26px;
+    border: none;
+    border-radius: 8px;
+    background: #b67961;
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: all 0.25s ease;
+}
+
+    .btn-login:hover {
+        background: #a36650;
+        color: #ffffff;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(182, 121, 97, 0.25);
+    }
+
+
+/* =========================================
+   BOOTSTRAP MODAL BACKDROP
+========================================= */
+
+.modal-backdrop.show {
+    opacity: 0.65;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 576px) {
+
+    .login-required-modal {
+        margin: 15px;
+        border-radius: 16px;
+    }
+
+        .login-required-modal .modal-body {
+            padding: 35px 25px 30px;
+        }
+
+    .login-modal-icon {
+        width: 62px;
+        height: 62px;
+        font-size: 26px;
+        margin-bottom: 18px;
+    }
+
+    .login-required-modal h4 {
+        font-size: 1.4rem;
+    }
+
+    .login-required-modal p {
+        font-size: 0.9rem;
+    }
+
+    .login-required-modal .d-flex {
+        gap: 10px !important;
+    }
+
+    .btn-cancel,
+    .btn-login {
+        min-width: 105px;
+        padding: 10px 18px;
+    }
+}
