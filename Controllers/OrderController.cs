@@ -31,6 +31,7 @@ public class OrderController : Controller
             if (userCart != null)
             {
                 await _dbContext.Entry(userCart).Collection(c => c.CartItems).LoadAsync();
+
                 var total = userCart.CartItems.Sum(item => item.UnitPrice * item.Quantity);
                 ViewBag.Total = total;
                 return View(null);
@@ -42,6 +43,7 @@ public class OrderController : Controller
     [HttpPost]
     public async Task<IActionResult> Checkout(CheckoutDto userData)
     {
+        
         if (ModelState.IsValid)
         {
             string? userId = _userManager.GetUserId(User);
@@ -52,6 +54,9 @@ public class OrderController : Controller
                 {
                     await _dbContext.Entry(userCart).Collection(c => c.CartItems).LoadAsync();
 
+                    if (await CheckAndValidateCart(userCart.CartItems))
+                        return RedirectToAction("Checkout");
+                    
                     var total = userCart.CartItems.Sum(item => item.UnitPrice * item.Quantity);
 
                     var order = new Order
@@ -91,9 +96,20 @@ public class OrderController : Controller
         return View();
     }
 
-    [HttpPost]
-    public IActionResult payment()
+    [NonAction]
+    public async Task<bool> CheckAndValidateCart(ICollection<CartItem> items)
     {
-        return View();
+        if (items.Count < 0)
+            return false;
+        
+        foreach (var item in items)
+        {
+            await _dbContext.Entry(item).Reference(i => i.Product).LoadAsync();
+            if(item!.Product.Stock < 1)
+            {
+                _dbContext.CartItems.Remove(item);
+            }
+        }
+        return true;
     }
 }
