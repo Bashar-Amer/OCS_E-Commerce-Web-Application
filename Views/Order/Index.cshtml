@@ -1,0 +1,184 @@
+@model IEnumerable<CampTravelGear.Models.Order>
+@{
+    ViewData["Title"] = "My Order History";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/pages/orders.css" asp-append-version="true" />
+}
+
+<!-- Hero Banner (Matches Barrameru Customer Storefront Design System) -->
+<section class="inner-hero-banner" style="background-image: url('/images/orange-tourist-tent-illuminated-from-inside-stands-in-mountains-above-clouds.jpg');">
+    <div class="inner-hero-overlay"></div>
+    <div class="container position-relative">
+        <div class="inner-hero-content">
+            <div class="breadcrumbs">HOME / ACCOUNT / MY ORDERS</div>
+            <h1>Order History</h1>
+            <div class="sub-text">Track, view and manage your expedition gear purchases</div>
+        </div>
+    </div>
+</section>
+
+<!-- Order History Main Section -->
+<section class="py-5 bg-light">
+    <div class="container py-4">
+        <!-- Filter & Search Controls Bar -->
+        <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+            <!-- Filter Status Buttons -->
+            <div class="d-flex flex-wrap gap-1">
+                <button type="button" class="order-filter-btn active" data-filter="all">All Orders</button>
+                <button type="button" class="order-filter-btn" data-filter="Processing">Processing</button>
+                <button type="button" class="order-filter-btn" data-filter="Completed">Completed</button>
+                <button type="button" class="order-filter-btn" data-filter="Cancelled">Cancelled</button>
+            </div>
+
+            <!-- Live Search Bar -->
+            <div class="d-flex align-items-center" style="max-width: 320px; width: 100%;">
+                <div class="input-group">
+                    <span class="input-group-text bg-white border-end-0 rounded-0"><i class="bi bi-search text-muted"></i></span>
+                    <input type="text" id="orderSearchInput" class="form-control rounded-0 border-start-0" placeholder="Search orders or items..." />
+                </div>
+            </div>
+        </div>
+
+        <!-- Orders List Container -->
+        <div id="ordersListContainer">
+            @if (Model != null && Model.Any())
+            {
+                @foreach (var order in Model)
+                {
+                    var status = order.Status ?? "Processing";
+                    string badgeClass = "order-badge-processing";
+                    string iconClass = "bi-hourglass-split";
+
+                    if (status.Equals("Completed", StringComparison.OrdinalIgnoreCase))
+                    {
+                        badgeClass = "order-badge-completed";
+                        iconClass = "bi-check-circle-fill";
+                    }
+                    else if (status.Equals("Cancelled", StringComparison.OrdinalIgnoreCase))
+                    {
+                        badgeClass = "order-badge-cancelled";
+                        iconClass = "bi-x-circle-fill";
+                    }
+
+                    <div class="order-history-card mb-4" data-status="@status">
+                        <div class="order-header-box d-flex justify-content-between align-items-center flex-wrap gap-2">
+                            <div>
+                                <span class="fw-bold text-dark me-2">Order #@order.Id</span>
+                                <span class="text-muted small"><i class="bi bi-calendar3 me-1"></i>Placed on @order.OrderDate.ToString("MMMM dd, yyyy")</span>
+                            </div>
+                            <div class="d-flex align-items-center gap-3">
+                                <span class="@badgeClass">
+                                    <i class="bi @iconClass me-1"></i> @status
+                                </span>
+                                <span class="fw-bold text-dark fs-6">$@order.TotalAmount.ToString("F2")</span>
+                            </div>
+                        </div>
+
+                        <div class="p-4 bg-white">
+                            <div class="row g-4 align-items-center">
+                                <!-- Order Items List -->
+                                <div class="col-lg-8">
+                                    <div class="table-responsive">
+                                        <table class="table table-borderless align-middle mb-0">
+                                            <tbody>
+                                                @if (order.OrderItems != null && order.OrderItems.Any())
+                                                {
+                                                    @foreach (var item in order.OrderItems)
+                                                    {
+                                                        var img = item.Product?.ProductImages?.FirstOrDefault(pi => pi.IsMain)?.ImageUrl
+                                                                  ?? item.Product?.ProductImages?.FirstOrDefault()?.ImageUrl
+                                                                  ?? "/images/Logo_Barrameru.png";
+
+                                                        <tr class="border-bottom">
+                                                            <td style="width: 60px;">
+                                                                <img src="@img" alt="@(item.Product?.Name ?? "Item")" class="order-item-thumb" onerror="this.src='/images/Logo_Barrameru.png'" />
+                                                            </td>
+                                                            <td>
+                                                                <div class="fw-bold text-secondary small">@(item.Product?.Name ?? "Outdoor Equipment")</div>
+                                                                <div class="text-muted" style="font-size: 11.5px;">
+                                                                    @(item.Product?.Category?.Name ?? "General Gear") | Qty: @item.Quantity × $@item.UnitPrice.ToString("F2")
+                                                                </div>
+                                                            </td>
+                                                            <td class="text-end fw-bold text-dark small">
+                                                                $@((item.UnitPrice * item.Quantity).ToString("F2"))
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <tr>
+                                                        <td colspan="3" class="text-muted small py-2">
+                                                            No itemized records available for this order.
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <!-- Order Metadata & Actions -->
+                                <div class="col-lg-4 border-start-lg ps-lg-4">
+                                    <div class="mb-3">
+                                        <span class="text-muted small d-block text-uppercase fw-bold" style="font-size: 10.5px;">Delivery Destination:</span>
+                                        <span class="small text-dark fw-semibold d-block">
+                                            @if (order.Address != null && !string.IsNullOrEmpty(order.Address.FullAddress))
+                                            {
+                                                @($"{order.Address.FullAddress}, {order.Address.City}")
+                                            }
+                                            else
+                                            {
+                                                <span class="text-muted">Standard Delivery Address</span>
+                                            }
+                                        </span>
+                                    </div>
+                                    <div class="mb-3">
+                                        <span class="text-muted small d-block text-uppercase fw-bold" style="font-size: 10.5px;">Payment Status:</span>
+                                        <span class="small text-dark fw-semibold d-block">
+                                            <i class="bi bi-credit-card me-1 text-primary"></i> 
+                                            @(status.Equals("Completed", StringComparison.OrdinalIgnoreCase) ? "Paid / Verified" : status)
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <a asp-controller="Order" asp-action="Invoice" asp-route-id="@order.Id" class="btn btn-outline-secondary btn-sm w-100 rounded-0 py-2">
+                                            <i class="bi bi-receipt me-1"></i> View Receipt / Invoice
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <!-- Empty State when user has 0 orders -->
+                <div class="text-center py-5 bg-white border p-5">
+                    <i class="bi bi-bag-x fs-1 text-muted d-block mb-3 opacity-50"></i>
+                    <h5 class="fw-bold text-secondary">No Orders Placed Yet</h5>
+                    <p class="text-muted small mb-4">You haven't placed any expedition equipment orders yet.</p>
+                    <a asp-controller="Shop" asp-action="Index" class="btn btn-barrameru rounded-0 px-4 py-2">
+                        EXPLORE SHOP
+                    </a>
+                </div>
+            }
+        </div>
+
+        <!-- No Matching Orders Found Filter State -->
+        <div id="noOrdersFound" class="text-center py-5 bg-white border p-5" style="display: none;">
+            <i class="bi bi-search fs-1 text-muted d-block mb-3 opacity-50"></i>
+            <h5 class="fw-bold text-secondary">No Matching Orders Found</h5>
+            <p class="text-muted small mb-4">No order records matched your selected filter or search query.</p>
+            <a asp-controller="Shop" asp-action="Index" class="btn btn-barrameru rounded-0 px-4 py-2">
+                EXPLORE STORE
+            </a>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="~/js/pages/orders.js" asp-append-version="true"></script>
+}
