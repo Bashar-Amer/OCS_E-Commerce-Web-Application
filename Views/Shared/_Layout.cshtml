@@ -30,10 +30,6 @@
     <!-- Page-Specific Stylesheet Section -->
     @await RenderSectionAsync("Styles", required: false)
 
-    <script>
-        window.isUserAuthenticated = @User.Identity.IsAuthenticated.ToString().ToLower();
-    </script>
-
 </head>
 <body>
     <!-- Top Header Navigation Bar (Matches barrameru-v1-header.jpg) -->
@@ -343,6 +339,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
     <!-- Global Store & Shared Scripts -->
+    <script src="~/js/barrameru-catalog-data.js" asp-append-version="true"></script>
     <script src="~/js/cart-store.js" asp-append-version="true"></script>
     <script src="~/js/barrameru-global.js" asp-append-version="true"></script>
 
