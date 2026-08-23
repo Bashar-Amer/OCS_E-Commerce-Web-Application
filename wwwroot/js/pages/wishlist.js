@@ -189,7 +189,7 @@ window.renderWishlistPage = function () {
 
                 <a href="/Shop/Details/${item.id}">
 
-                    <img src="${item.image || '/images/placeholder.jpg'}"
+                    <img src="${item.image || '/images/placeholder.png'}"
                          alt="${item.name}"
                          class="img-fluid"
                          style="

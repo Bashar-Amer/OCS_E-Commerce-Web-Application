@@ -106,7 +106,7 @@
 
                                 <a href="/Shop/Details/@p.Id">
 
-                                    <img src="@(p.ImageUrl ?? "/images/placeholder.jpg")"
+                                    <img src="@(p.ImageUrl ?? "/images/placeholder.png")"
                                          alt="@p.Name"
                                          class="template-product-img"
                                          loading="lazy">
@@ -116,7 +116,7 @@
                                 <!-- Wishlist -->
                                 <button type="button"
                                         class="template-wishlist-btn" data-product-id="@p.Id"
-                                        onclick="BarrameruStore.toggleWishlist(@p.Id, { name: '@Html.Raw(System.Text.Encodings.Web.JavaScriptEncoder.Default.Encode(p.Name))', price: @p.Price, image: '@(p.ImageUrl ?? "/images/placeholder.jpg")' }, this)"
+                                        onclick="BarrameruStore.toggleWishlist(@p.Id, { name: '@Html.Raw(System.Text.Encodings.Web.JavaScriptEncoder.Default.Encode(p.Name))', price: @p.Price, image: '@(p.ImageUrl ?? "/images/placeholder.png")' }, this)"
                                         aria-label="Add to wishlist">
 
                                     <i class="bi bi-heart"></i>
@@ -172,7 +172,7 @@
                         <!-- Add To Cart -->
                         <button type="button"
                                 class="btn btn-template-add-cart"
-                                onclick="BarrameruStore.addToCart(@p.Id, 1, {name:'@p.Name',price:'@p.Price',image:'@(p.ImageUrl ?? "/images/placeholder.jpg")' },this)">
+                                onclick="BarrameruStore.addToCart(@p.Id, 1, {name:'@p.Name',price:'@p.Price',image:'@(p.ImageUrl ?? "/images/placeholder.png")' },this)">
 
                             <i class="bi bi-cart3 me-1"></i>
                             Add to cart
