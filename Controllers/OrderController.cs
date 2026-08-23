@@ -21,6 +21,23 @@ public class OrderController : Controller
         _dbContext = dbContext;
     }
 
+    public async Task<IActionResult> Index() {
+        string? userId = _userManager.GetUserId(User);
+        var orders = await _dbContext.Orders
+            .Where(o => o.UserId == userId)
+            .Include(o => o.Address)
+            .Include(o => o.OrderItems)
+                .ThenInclude(oi => oi.Product)
+                    .ThenInclude(p => p.ProductImages)
+            .Include(o => o.OrderItems)
+                .ThenInclude(oi => oi.Product)
+                    .ThenInclude(p => p.Category)
+            .Include(o => o.Payments)
+            .OrderByDescending(o => o.OrderDate)
+            .ToListAsync();
+
+        return View(orders);
+    }
 
     public async Task<IActionResult> Checkout()
     {
@@ -90,10 +107,24 @@ public class OrderController : Controller
         return View(userData);
     }
 
-    public IActionResult Invoice(int id)
+    public async Task<IActionResult> Invoice(int id)
     {
+        var order = await _dbContext.Orders
+            .Where(o => o.Id == id)
+            .Include(o => o.User)
+            .Include(o => o.Address)
+            .Include(o => o.OrderItems)
+                .ThenInclude(oi => oi.Product)
+                    .ThenInclude(p => p.ProductImages)
+            .Include(o => o.OrderItems)
+                .ThenInclude(oi => oi.Product)
+                    .ThenInclude(p => p.Category)
+            .Include(o => o.Payments)
+            .OrderByDescending(o => o.OrderDate)
+            .ToListAsync();
+
         ViewBag.OrderId = id.ToString();
-        return View();
+        return View(order);
     }
 
     [NonAction]

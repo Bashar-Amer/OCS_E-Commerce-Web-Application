@@ -191,15 +191,42 @@ document.addEventListener('DOMContentLoaded', () => {
         fileInput.files = dataTransfer.files;
     }
 
+    const allowedImageExtensions = ['.jpg', '.jpeg', '.png', '.webp', '.gif'];
+
+    function isImageFile(file) {
+        if (file.type && file.type.startsWith('image/')) return true;
+        const name = (file.name || '').toLowerCase();
+        return allowedImageExtensions.some(ext => name.endsWith(ext));
+    }
+
     function addFiles(newFiles) {
+        const invalidFiles = [];
+
         Array.from(newFiles).forEach(file => {
-            if (file.type.startsWith('image/')) {
+            if (isImageFile(file)) {
                 const exists = accumulatedFiles.some(f => f.name === file.name && f.size === file.size);
                 if (!exists) {
                     accumulatedFiles.push(file);
                 }
+            } else {
+                invalidFiles.push(file.name);
             }
         });
+
+        // Notify user immediately if non-image files were selected
+        if (invalidFiles.length > 0) {
+            if (typeof Swal !== 'undefined') {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Only Images Allowed',
+                    html: `Please upload <strong>image files only</strong> (.jpg, .jpeg, .png, .webp, .gif).<br><br><small class="text-danger">Rejected: ${invalidFiles.join(', ')}</small>`,
+                    confirmButtonColor: '#B67961'
+                });
+            } else {
+                alert(`Only image files (.jpg, .jpeg, .png, .webp, .gif) are allowed!\nRejected:\n- ${invalidFiles.join('\n- ')}`);
+            }
+        }
+
         updateFileInput();
         
         // If there are no existing photos and no main chosen, make first new photo main

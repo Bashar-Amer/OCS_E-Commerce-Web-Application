@@ -10,7 +10,24 @@
 }
 
 @media print {
-  body { background: #fff; }
-  header, footer, .floating-newsletter-wrap, .btn-print-hide { display: none !important; }
-  .invoice-card { border: none; box-shadow: none; padding: 0; }
+  body { 
+    background: #ffffff !important; 
+  }
+  
+  header, 
+  footer, 
+  nav, 
+  .navbar, 
+  .inner-hero-banner, 
+  .floating-newsletter-wrap, 
+  .btn-print-hide,
+  .d-print-none { 
+    display: none !important; 
+  }
+
+  .invoice-card { 
+    border: none !important; 
+    box-shadow: none !important; 
+    padding: 0 !important; 
+  }
 }

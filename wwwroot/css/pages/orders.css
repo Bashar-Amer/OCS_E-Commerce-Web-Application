@@ -1,0 +1,80 @@
+/* ==========================================================================
+   PAGE: CUSTOMER ORDER HISTORY (Index.cshtml)
+   ========================================================================== */
+
+.order-history-card {
+  background: var(--white);
+  border: 1px solid #EAEAEA;
+  transition: all 0.25s ease-in-out;
+}
+
+.order-history-card:hover {
+  border-color: #B67961;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.order-header-box {
+  background-color: #FAF5F3;
+  border-bottom: 1px solid #EAEAEA;
+  padding: 14px 20px;
+}
+
+.order-badge-completed {
+  background-color: #ECFDF5;
+  color: #065F46;
+  border: 1px solid #A7F3D0;
+  font-weight: 700;
+  font-size: 11.5px;
+  padding: 5px 12px;
+  border-radius: 4px;
+}
+
+.order-badge-processing {
+  background-color: #FFFBEB;
+  color: #92400E;
+  border: 1px solid #FDE68A;
+  font-weight: 700;
+  font-size: 11.5px;
+  padding: 5px 12px;
+  border-radius: 4px;
+}
+
+.order-badge-cancelled {
+  background-color: #FEF2F2;
+  color: #991B1B;
+  border: 1px solid #FECACA;
+  font-weight: 700;
+  font-size: 11.5px;
+  padding: 5px 12px;
+  border-radius: 4px;
+}
+
+.order-item-thumb {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border: 1px solid #E5E7EB;
+  border-radius: 4px;
+}
+
+.order-filter-btn {
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 16px;
+  border-radius: 0;
+  border: 1px solid #E5E7EB;
+  background: #FFFFFF;
+  color: #64748B;
+  transition: all 0.2s ease;
+}
+
+.order-filter-btn:hover {
+  border-color: #B67961;
+  color: #B67961;
+}
+
+.order-filter-btn.active {
+  background: #B67961;
+  border-color: #B67961;
+  color: #FFFFFF;
+}
