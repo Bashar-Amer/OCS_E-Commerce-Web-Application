@@ -201,8 +201,8 @@
                                         @if (product.Stock > 0)
                                         {
                                             <button type="button"
-                                                    class="btn btn-barrameru btn-sm">
-
+                                                    class="btn btn-barrameru btn-sm"
+                                                    onclick="BarrameruStore.addToCart(@product.Id, 1, { name: '@product.Name', price: '@product.Price', image: '@image' }, this)">
                                                 <i class="bi bi-cart3 me-1"></i>
 
                                                 Add to Cart

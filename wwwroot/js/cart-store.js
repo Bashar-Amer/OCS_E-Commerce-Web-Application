@@ -525,15 +525,29 @@ const BarrameruStore = {
         if (totalElem) totalElem.textContent = `$${totals.subtotal}`;
 
         container.innerHTML = cart.map(item => `
-      <div class="d-flex align-items-center gap-3 py-2 border-bottom">
-        <img src="${item.image}" alt="${item.name}" style="width: 50px; height: 50px; object-fit: contain; background: #fff;" class="border" onerror="this.src='/images/43.jpg';">
-        <div class="flex-grow-1">
-          <div class="small fw-bold text-secondary text-truncate" style="max-width: 180px;">${item.name}</div>
-          <div class="small text-muted">${item.quantity} × $${(parseFloat(item.price) || 0).toFixed(2)}</div>
+      <div class="mini-cart-item d-flex align-items-center gap-3 py-3 border-bottom">
+        <img src="${item.image}" alt="${item.name}" style="width: 52px; height: 52px; object-fit: contain; background: #fff;" class="border flex-shrink-0" onerror="this.src='/images/placeholder.jpg';">
+        <div class="flex-grow-1 min-w-0" style="min-width: 0;">
+          <div class="d-flex justify-content-between align-items-start gap-1">
+            <div class="small fw-bold text-secondary text-truncate" title="${item.name}">${item.name}</div>
+            <button class="btn btn-sm text-danger border-0 p-0 flex-shrink-0" onclick="BarrameruStore.removeFromCart(${item.id})" title="Remove item">
+              <i class="bi bi-x fs-5"></i>
+            </button>
+          </div>
+          <div class="small text-muted mb-1">$${(parseFloat(item.price) || 0).toFixed(2)} each</div>
+          <div class="d-flex justify-content-between align-items-center mt-1">
+            <div class="mini-cart-qty-ctrl d-inline-flex align-items-center">
+              <button type="button" class="mini-cart-qty-btn" onclick="BarrameruStore.updateCartQuantity(${item.id}, ${(item.quantity || 1) - 1})" title="Decrease quantity">
+                <i class="bi bi-dash"></i>
+              </button>
+              <span class="mini-cart-qty-val">${item.quantity || 1}</span>
+              <button type="button" class="mini-cart-qty-btn" onclick="BarrameruStore.updateCartQuantity(${item.id}, ${(item.quantity || 1) + 1})" title="Increase quantity">
+                <i class="bi bi-plus"></i>
+              </button>
+            </div>
+            <strong class="small text-dark">$${((parseFloat(item.price) || 0) * (item.quantity || 1)).toFixed(2)}</strong>
+          </div>
         </div>
-        <button class="btn btn-sm text-danger border-0" onclick="BarrameruStore.removeFromCart(${item.id})">
-          <i class="bi bi-x fs-5"></i>
-        </button>
       </div>
     `).join('');
     },
