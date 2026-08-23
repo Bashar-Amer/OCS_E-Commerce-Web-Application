@@ -256,7 +256,7 @@ window.renderWishlistPage = function () {
                 <button type="button"
                         class="btn btn-barrameru btn-sm"
                         onclick="
-                            BarrameruStore.addToCart(${item.id}, 1);
+                             BarrameruStore.addToCart(${item.id}, 1, { name: '${item.name}', price: ${item.price}, image: '${item.image}' });
                             BarrameruStore.toggleWishlist(${item.id});
                             window.renderWishlistPage();
                         ">

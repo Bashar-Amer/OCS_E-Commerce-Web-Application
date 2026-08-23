@@ -471,6 +471,139 @@ a:hover {
   margin-top: 40px;
 }
 
+/* ==========================================================================
+   OFFCANVAS MINI CART SLEEK STYLES & SCROLLBAR
+   ========================================================================== */
+.mini-cart-scroll {
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  scrollbar-width: thin;
+  scrollbar-color: #d6d3cb transparent;
+}
+
+.mini-cart-scroll::-webkit-scrollbar {
+  width: 5px;
+}
+
+.mini-cart-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.mini-cart-scroll::-webkit-scrollbar-thumb {
+  background-color: #d6d3cb;
+  border-radius: 4px;
+}
+
+.mini-cart-scroll::-webkit-scrollbar-thumb:hover {
+  background-color: #b8b5ab;
+}
+
+.mini-cart-item {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.mini-cart-qty-ctrl {
+  background-color: #f6f5f1;
+  border: 1px solid #e2dfd6;
+  border-radius: 4px;
+  height: 28px;
+  overflow: hidden;
+}
+
+.mini-cart-qty-btn {
+  border: none;
+  background: transparent;
+  color: #4a4a4a;
+  width: 26px;
+  height: 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0;
+}
+
+.mini-cart-qty-btn:hover {
+  background-color: #e6e3da;
+  color: var(--primary);
+}
+
+.mini-cart-qty-val {
+  font-size: 12px;
+  font-weight: 700;
+  min-width: 24px;
+  text-align: center;
+  color: #152A29;
+}
+
+/* ==========================================================================
+   SINGLE PRODUCT DETAILS QUANTITY STEPPER
+   ========================================================================== */
+.product-qty-stepper {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid #d5d1c8;
+  background: #ffffff;
+  height: 40px;
+  border-radius: 0px;
+  overflow: hidden;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.product-qty-stepper:focus-within {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(182, 121, 97, 0.15);
+}
+
+.product-qty-btn {
+  width: 28px;
+  height: 100%;
+  border: none;
+  background: #f6f5f1;
+  color: #444;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+  padding: 0;
+}
+
+.product-qty-btn:hover {
+  background-color: #e8e5dc;
+  color: var(--primary);
+}
+
+.product-qty-btn:active {
+  background-color: #dcd8ce;
+}
+
+.product-qty-input {
+  width: 38px;
+  height: 100%;
+  border: none;
+  background: transparent;
+  text-align: center;
+  font-weight: 700;
+  font-size: 13.5px;
+  font-family: var(--font-body);
+  color: #152A29;
+  outline: none;
+  -moz-appearance: textfield;
+  padding: 0;
+}
+
+.product-qty-input::-webkit-outer-spin-button,
+.product-qty-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 @media (max-width: 991px) {
   .header-center-logo { position: static; transform: none; box-shadow: none; padding: 0; border-radius: 0; }
   .floating-newsletter-wrap { margin-bottom: 20px; }
