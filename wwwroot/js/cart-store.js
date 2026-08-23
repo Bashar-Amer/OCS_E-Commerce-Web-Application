@@ -579,7 +579,7 @@ const BarrameruStore = {
 
         container.innerHTML = cart.map(item => `
       <div class="mini-cart-item d-flex align-items-center gap-3 py-3 border-bottom">
-        <img src="${item.image}" alt="${item.name}" style="width: 52px; height: 52px; object-fit: contain; background: #fff;" class="border flex-shrink-0" onerror="this.src='/images/placeholder.jpg';">
+        <img src="${item.image}" alt="${item.name}" style="width: 52px; height: 52px; object-fit: contain; background: #fff;" class="border flex-shrink-0" onerror="this.src='/images/placeholder.png';">
         <div class="flex-grow-1 min-w-0" style="min-width: 0;">
           <div class="d-flex justify-content-between align-items-start gap-1">
             <div class="small fw-bold text-secondary text-truncate" title="${item.name}">${item.name}</div>

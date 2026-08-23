@@ -82,7 +82,7 @@ public class ShopController : Controller
             Price = p.Price,
             ImageUrl = p.ProductImages.FirstOrDefault(img => img.IsMain)?.ImageUrl
            ?? p.ProductImages.FirstOrDefault()?.ImageUrl
-           ?? "/images/placeholder.jpg",
+           ?? "/images/placeholder.png",
             IsNew = p.CreatedAt >= DateTime.UtcNow.AddDays(-14),
             AverageRating = p.Reviews.Any(r => r.Rating.HasValue && r.Status == "Accepted")
                 ? Math.Round(p.Reviews.Where(r => r.Rating.HasValue && r.Status == "Accepted").Average(r => r.Rating!.Value), 1)

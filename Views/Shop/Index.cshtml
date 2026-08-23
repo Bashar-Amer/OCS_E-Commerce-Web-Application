@@ -137,7 +137,7 @@
 
                                             <a href="/Shop/Details/@p.Id">
 
-                                                <img src="@(p.ImageUrl ?? "/images/placeholder.jpg")"
+                                                <img src="@(p.ImageUrl ?? "/images/placeholder.png")"
                                                      alt="@p.Name"
                                                      class="template-product-img"
                                                      loading="lazy">
@@ -149,7 +149,7 @@
                                             <button type="button"
                                                     class="template-wishlist-btn"
                                                     data-product-id="@p.Id"
-                                                    onclick="BarrameruStore.toggleWishlist(@p.Id, { name: '@Html.Raw(System.Text.Encodings.Web.JavaScriptEncoder.Default.Encode(p.Name))', price: @p.Price, image: '@(p.ImageUrl ?? "/images/placeholder.jpg")' }, this)"
+                                                    onclick="BarrameruStore.toggleWishlist(@p.Id, { name: '@Html.Raw(System.Text.Encodings.Web.JavaScriptEncoder.Default.Encode(p.Name))', price: @p.Price, image: '@(p.ImageUrl ?? "/images/placeholder.png")' }, this)"
                                                     aria-label="Add to wishlist">
 
                                                 <i class="bi bi-heart"></i>

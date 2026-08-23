@@ -114,19 +114,19 @@ document.addEventListener('DOMContentLoaded', () => {
         btnUpdate.addEventListener('click', () => handleUpdateCartClick(btnUpdate));
     }
 
-    const btnCoupon = document.getElementById('btnCartApplyCoupon');
-    if (btnCoupon) {
-        btnCoupon.addEventListener('click', () => {
-            const input = document.getElementById('cartCouponInput');
-            const val = input ? input.value.trim() : '';
-            if (val) {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Coupon Applied!',
-                    text: `Coupon code "${escapeHtml(val)}" has been activated.`,
-                    confirmButtonColor: '#B67961'
-                });
-            }
-        });
-    }
+    // const btnCoupon = document.getElementById('btnCartApplyCoupon');
+    // if (btnCoupon) {
+    //     btnCoupon.addEventListener('click', () => {
+    //         const input = document.getElementById('cartCouponInput');
+    //         const val = input ? input.value.trim() : '';
+    //         if (val) {
+    //             Swal.fire({
+    //                 icon: 'success',
+    //                 title: 'Coupon Applied!',
+    //                 text: `Coupon code "${escapeHtml(val)}" has been activated.`,
+    //                 confirmButtonColor: '#B67961'
+    //             });
+    //         }
+    //     });
+    // }
 });
