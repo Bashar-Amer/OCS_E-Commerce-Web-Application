@@ -11,9 +11,76 @@
 }
 
 <!-- 1. Header / Hero Banner (Modern Camping & Outdoor Adventure) -->
-<section>
-</section>
+<section class="home-hero">
 
+    <div class="home-hero-media">
+        <img src="~/images/herosection.png"
+             alt="Camping gear in the mountains"
+             class="home-hero-img">
+        <div class="home-hero-overlay"></div>
+    </div>
+
+    <span class="home-hero-corner home-hero-corner-tl"></span>
+    <span class="home-hero-corner home-hero-corner-br"></span>
+
+    <div class="container position-relative">
+
+        <div class="home-hero-content">
+
+            <span class="home-hero-eyebrow">
+                CAMP • HIKE • EXPLORE
+            </span>
+
+            <h1 class="home-hero-title">
+                Adventure Starts<br>
+                With the Right Gear<span class="home-hero-dot">.</span>
+            </h1>
+
+            <p class="home-hero-text">
+                Discover reliable camping and outdoor gear made for
+                weekend escapes, mountain trails, and unforgettable adventures.
+            </p>
+
+            <div class="home-hero-actions">
+
+                <a asp-controller="Shop"
+                   asp-action="Index"
+                   class="btn-hero-primary">
+                    Shop Outdoor Gear
+                    <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+
+            <div class="home-hero-stats">
+
+                <div class="home-hero-stat">
+                    <strong>Quality</strong>
+                    <span>Gear you can rely on</span>
+                </div>
+
+                <div class="home-hero-stat">
+                    <strong>Outdoor</strong>
+                    <span>Built for every adventure</span>
+                </div>
+
+                <div class="home-hero-stat">
+                    <strong>30-Day</strong>
+                    <span>Easy returns</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <a href="#featured"
+       class="home-hero-scroll"
+       aria-label="Scroll to explore">
+        <span></span>
+    </a>
+
+</section>
 <!-- 2. New Arrivals -->
 <section class="py-5 bg-white text-center">
     <div class="container py-4">
@@ -280,9 +347,8 @@
 <!-- 8. Testimonials -->
 <section class="testimonial-section">
     <div class="testimonial-bg"
-         style="background-image: url('/images/tourist-sitting-phu-sub-lek-viewpoint-sunset-lopburi-thailand-e1664089245105.jpg');">
+         style="background-image: url('/images/back-view-of-a-couple-of-hikers-with-backpack.jpg');">
     </div>
-
     <div class="testimonial-overlay"></div>
 
     <div class="container position-relative text-white" style="z-index: 2;">

@@ -13,3 +13,172 @@
   font-weight: 600;
   font-size: 12px;
 }
+
+.table-responsive {
+    border: 1px solid #E9EAEC;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#wishlistTableBody,
+.table.align-middle {
+    margin-bottom: 0;
+}
+
+    /* Header */
+    .table.align-middle thead.border-bottom {
+        border-bottom: 1px solid #E9EAEC !important;
+    }
+
+    .table.align-middle thead tr {
+        background: #F7F8F9;
+    }
+
+    .table.align-middle thead th {
+        padding: 14px 16px;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: #6B7280;
+        border: none;
+        vertical-align: middle;
+    }
+
+    /* Rows */
+    .table.align-middle tbody tr {
+        transition: background 0.2s ease;
+    }
+
+        .table.align-middle tbody tr.border-bottom {
+            border-bottom: 1px solid #F0F1F2 !important;
+        }
+
+        .table.align-middle tbody tr:last-child {
+            border-bottom: none !important;
+        }
+
+        .table.align-middle tbody tr:hover {
+            background: #FAFBFB;
+        }
+
+    .table.align-middle td {
+        padding: 14px 16px;
+        vertical-align: middle;
+        border: none;
+    }
+
+        /* Remove button */
+        .table.align-middle td .btn.text-danger {
+            width: 32px;
+            height: 32px;
+            padding: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            color: #9CA3AF;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+
+            .table.align-middle td .btn.text-danger:hover {
+                background: #FEF2F2;
+                color: #DC2626;
+            }
+
+            .table.align-middle td .btn.text-danger i {
+                font-size: 16px;
+            }
+
+        /* Product image */
+        .table.align-middle td img.img-fluid {
+            border: 1px solid #EDEEF0;
+            border-radius: 8px;
+            padding: 4px;
+            background: #fff;
+        }
+
+    /* Product name */
+    .table.align-middle h6.fw-bold a {
+        font-size: 14px;
+        font-weight: 600;
+        transition: color 0.2s ease;
+    }
+
+        .table.align-middle h6.fw-bold a:hover {
+            color: var(--primary) !important;
+        }
+
+    /* Price */
+    .table.align-middle td span.fw-bold.text-secondary {
+        color: var(--primary) !important;
+        font-size: 14.5px;
+    }
+
+    /* Stock badges */
+    .table.align-middle td span.text-success.small,
+    .table.align-middle td span.text-danger.small {
+        display: inline-flex;
+        align-items: center;
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-size: 11px;
+        font-weight: 600;
+    }
+
+    .table.align-middle td span.text-success.small {
+        background: #ECFDF5;
+        color: #059669 !important;
+    }
+
+    .table.align-middle td span.text-danger.small {
+        background: #FEF2F2;
+        color: #DC2626 !important;
+    }
+
+    /* Action buttons */
+    .table.align-middle .btn-barrameru.btn-sm {
+        background: var(--primary);
+        border-color: var(--primary);
+        color: #fff;
+        font-size: 12px;
+        font-weight: 600;
+        padding: 7px 16px;
+        border-radius: 20px;
+        transition: filter 0.2s ease, transform 0.2s ease;
+    }
+
+        .table.align-middle .btn-barrameru.btn-sm:hover {
+            filter: brightness(0.92);
+            transform: translateY(-1px);
+        }
+
+    .table.align-middle .btn-secondary.btn-sm[disabled] {
+        background: #F3F4F6;
+        border-color: #F3F4F6;
+        color: #9CA3AF;
+        font-size: 12px;
+        font-weight: 600;
+        padding: 7px 16px;
+        border-radius: 20px;
+        opacity: 1;
+    }
+
+    /* Empty state */
+    .table.align-middle td[colspan] .bi-heart {
+        color: #D1D5DB;
+    }
+
+    .table.align-middle td[colspan] .btn-barrameru {
+        background: var(--primary);
+        border-color: var(--primary);
+        color: #fff;
+        padding: 9px 22px;
+        border-radius: 20px;
+        font-weight: 600;
+        font-size: 13px;
+    }
+
+        .table.align-middle td[colspan] .btn-barrameru:hover {
+            filter: brightness(0.92);
+        }
