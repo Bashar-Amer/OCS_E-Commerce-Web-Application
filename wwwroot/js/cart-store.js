@@ -344,6 +344,59 @@ const BarrameruStore = {
         if (typeof window.renderCartPage === 'function') window.renderCartPage();
     },
 
+    async updateAllCartQuantities() {
+        const inputs = document.querySelectorAll('.cart-qty-input');
+        const updates = Array.from(inputs)
+            .map(input => ({
+                id: parseInt(input.dataset.id),
+                quantity: parseInt(input.value) || 0
+            }))
+            .filter(u => !isNaN(u.id));
+
+        if (updates.length === 0) return;
+
+        if (this.isAuthenticated()) {
+            try {
+                const res = await fetch('/Cart/UpdateAll', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'RequestVerificationToken': this.getAntiForgeryToken()
+                    },
+                    body: JSON.stringify(updates.map(u => ({ Id: u.id, Quantity: u.quantity })))
+                });
+                if (res.ok) await this.fetchServerCart();
+            } catch (e) {
+                console.error('Error updating cart quantities:', e);
+            }
+        } else {
+            let cart = this.getGuestCart();
+            updates.forEach(u => {
+                if (u.quantity <= 0) {
+                    cart = cart.filter(i => i.id !== u.id);
+                } else {
+                    const item = cart.find(i => i.id === u.id);
+                    if (item) item.quantity = u.quantity;
+                }
+            });
+            this.saveGuestCart(cart);
+        }
+
+        if (typeof window.renderCartPage === 'function') {
+            window.renderCartPage();
+        }
+
+        if (typeof Swal !== 'undefined') {
+            Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 1600,
+                timerProgressBar: true
+            }).fire({ icon: 'success', title: 'Cart updated' });
+        }
+    },
+
     // Wishlist mutations
 
     async toggleWishlist(productId, metadata = null, btnElement = null) {
