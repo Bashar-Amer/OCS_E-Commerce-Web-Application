@@ -72,12 +72,7 @@ public class HomeController : Controller
         return View();
     }
 
-<<<<<<< HEAD
-    public IActionResult Contact()
-=======
-
     public async Task<IActionResult> Contact()
->>>>>>> 2dbdae6 (Update e-commerce features and UI)
     {
         // Check if user is logged in
         if (User.Identity?.IsAuthenticated == true)
@@ -131,9 +126,6 @@ public class HomeController : Controller
         return View();
     }
 
-<<<<<<< HEAD
-=======
-   
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> CreateTestimonial(Testimonial testimonial)
@@ -179,7 +171,6 @@ public class HomeController : Controller
         return RedirectToAction("Contact");
     }
 
->>>>>>> 2dbdae6 (Update e-commerce features and UI)
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error404()
     {
