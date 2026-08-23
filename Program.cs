@@ -38,8 +38,10 @@ if (app.Environment.IsDevelopment())
 else
 {
     app.UseExceptionHandler("/Home/Error404");
+
     app.UseHsts();
 }
+app.UseStatusCodePagesWithReExecute("/Home/Error404");
 
 app.UseHttpsRedirection();
 app.UseRouting();
@@ -60,6 +62,7 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
+
 
 app.MapRazorPages()
    .WithStaticAssets();

@@ -52,7 +52,11 @@
     <div class="auth-split-right">
         <!-- Internal Top Navigation Inside Right Pane -->
         <div class="auth-internal-nav">
-            <div></div>
+            <div class="d-lg-none">
+                <a asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="~/images/Logo_Barrameru.png" alt="Barrameru" style="height: 32px;" />
+                </a>
+            </div>
             <a asp-area="" asp-controller="Home" asp-action="Index" class="auth-box-back-btn">
                 <span class="btn-icon-circle"><i class="bi bi-arrow-left"></i></span>
                 <span>Back to Store</span>

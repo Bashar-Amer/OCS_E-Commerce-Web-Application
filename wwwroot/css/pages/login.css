@@ -323,7 +323,9 @@
   text-decoration: underline;
 }
 
-/* Responsive */
+/* ==========================================================================
+   RESPONSIVE OPTIMIZATIONS FOR MOBILE & TABLET
+   ========================================================================== */
 @media (max-width: 1199px) {
   .auth-split-left {
     padding: 24px 30px;
@@ -333,18 +335,58 @@
   }
 }
 
+/* Hide Hero Section on Mobile/Tablet (< 992px) for Instant Fast Form Access */
 @media (max-width: 991px) {
   .auth-fullscreen-split {
     flex-direction: column;
+    min-height: 100vh;
+    background-color: #ffffff;
   }
+
+  /* Completely hide the left hero pane on mobile/tablet */
   .auth-split-left {
-    flex: none;
-    min-height: auto;
-    padding: 30px 20px;
+    display: none !important;
   }
+
   .auth-split-right {
-    flex: none;
-    min-height: auto;
-    padding: 30px 20px;
+    flex: 1 0 100%;
+    width: 100%;
+    min-height: 100vh;
+    padding: 24px 18px;
+    justify-content: flex-start;
+  }
+
+  .auth-right-content-wrap {
+    max-width: 100%;
+    width: 100%;
+    padding: 10px 0 30px 0;
+  }
+
+  .auth-form-header h3 {
+    font-size: 1.5rem;
+  }
+
+  .demo-accounts-box .demo-account-pill {
+    width: 100%;
+    text-align: left;
+  }
+
+  .auth-btn-submit {
+    font-size: 13.5px;
+    padding: 12px 16px;
+  }
+}
+
+@media (max-width: 576px) {
+  .auth-split-right {
+    padding: 18px 14px;
+  }
+
+  .auth-right-content-wrap {
+    padding: 6px 0 20px 0;
+  }
+
+  .auth-internal-nav {
+    margin-bottom: 12px;
   }
 }

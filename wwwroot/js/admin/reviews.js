@@ -62,6 +62,62 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // 3. Tab Persistence across Pagination and Actions
+    const tabButtons = document.querySelectorAll('#moderationTabs button[data-bs-toggle="tab"]');
+    
+    // Save tab on click & update URL hash
+    tabButtons.forEach(btn => {
+        btn.addEventListener('shown.bs.tab', (e) => {
+            const targetId = e.target.getAttribute('id');
+            localStorage.setItem('active_moderation_tab', targetId);
+            if (history.replaceState) {
+                const targetPane = e.target.getAttribute('data-bs-target');
+                history.replaceState(null, null, targetPane);
+            }
+        });
+    });
+
+    // Restore tab on page load
+    const savedTabId = localStorage.getItem('active_moderation_tab');
+    const currentHash = window.location.hash;
+
+    let tabToActivate = null;
+    if (currentHash === '#testimonials-pane') {
+        tabToActivate = document.getElementById('testimonials-tab');
+    } else if (currentHash === '#reviews-pane') {
+        tabToActivate = document.getElementById('reviews-tab');
+    } else if (savedTabId) {
+        tabToActivate = document.getElementById(savedTabId);
+    }
+
+    if (tabToActivate && typeof bootstrap !== 'undefined' && bootstrap.Tab) {
+        const tabInstance = bootstrap.Tab.getOrCreateInstance(tabToActivate);
+        tabInstance.show();
+    }
+
+    // Ensure pagination links inside testimonials-pane retain hash & storage
+    const testimonialsPane = document.getElementById('testimonials-pane');
+    if (testimonialsPane) {
+        testimonialsPane.querySelectorAll('.admin-pagination a.page-link').forEach(link => {
+            const href = link.getAttribute('href');
+            if (href && href !== '#' && !href.includes('#')) {
+                link.setAttribute('href', href + '#testimonials-pane');
+            }
+            link.addEventListener('click', () => {
+                localStorage.setItem('active_moderation_tab', 'testimonials-tab');
+            });
+        });
+    }
+
+    const reviewsPane = document.getElementById('reviews-pane');
+    if (reviewsPane) {
+        reviewsPane.querySelectorAll('.admin-pagination a.page-link').forEach(link => {
+            link.addEventListener('click', () => {
+                localStorage.setItem('active_moderation_tab', 'reviews-tab');
+            });
+        });
+    }
 });
 
 /**

@@ -20,8 +20,12 @@ public class HomeController : Controller
     public async Task<IActionResult> Index()
     {
         var baseQuery = _context.Products
-            .Where(p => p.IsActive && !p.IsDeleted);
-
+    .Where(p =>
+        p.IsActive &&
+        !p.IsDeleted &&
+        p.Category != null &&
+        !p.Category.IsDeleted
+    );
         var vm = new HomeViewModel
         {
             // Genuinely correct: newest products by CreatedAt
@@ -170,10 +174,11 @@ public class HomeController : Controller
 
         return RedirectToAction("Contact");
     }
-
+    [Route("Home/Error404")]
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error404()
     {
+        Response.StatusCode = 404;
         return View();
     }
 }

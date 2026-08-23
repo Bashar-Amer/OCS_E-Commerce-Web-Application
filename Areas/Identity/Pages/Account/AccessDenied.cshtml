@@ -1,10 +1,60 @@
 @page
 @model AccessDeniedModel
 @{
-    ViewData["Title"] = "Access denied";
+    ViewData["Title"] = "403 Access Denied";
 }
 
-<header>
-    <h1 class="text-danger">@ViewData["Title"]</h1>
-    <p class="text-danger">You do not have access to this resource.</p>
-</header>
+<!-- Hero Banner (Matches Barrameru Storefront Design System) -->
+<section class="inner-hero-banner" style="background-image: url('/images/orange-tourist-tent-illuminated-from-inside-stands-in-mountains-above-clouds.jpg');">
+    <div class="inner-hero-overlay"></div>
+    <div class="container position-relative">
+        <div class="inner-hero-content">
+            <div class="breadcrumbs">HOME / ERROR / 403 ACCESS DENIED</div>
+            <h1>Access Denied</h1>
+            <div class="sub-text">Restricted expedition territory & management console</div>
+        </div>
+    </div>
+</section>
+
+<!-- Access Denied Card Section -->
+<section class="py-5 bg-light">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-7 col-md-9">
+                <div class="card border-0 shadow-sm p-4 p-md-5 text-center bg-white">
+                    <!-- Icon -->
+                    <div class="mb-4">
+                        <div class="d-inline-flex align-items-center justify-content-center rounded-circle" style="width: 88px; height: 88px; background-color: #FEF2F2; color: #EF4444; border: 2px solid #FECACA;">
+                            <i class="bi bi-shield-lock-fill" style="font-size: 40px;"></i>
+                        </div>
+                    </div>
+
+                    <!-- Heading & Subtitle -->
+                    <span class="badge bg-danger text-white px-3 py-1.5 mb-3 d-inline-block" style="font-size: 12px; letter-spacing: 1px; font-weight: 700; width: fit-content; margin: 0 auto;">
+                        HTTP 403 FORBIDDEN
+                    </span>
+                    <h2 class="fw-bold text-secondary mb-2" style="font-family: var(--font-heading);">
+                        Hold On, Explorer! Restricted Area Ahead
+                    </h2>
+                    <p class="text-muted small mb-4" style="line-height: 1.7; font-size: 13.5px;">
+                        You do not possess the required administrative credentials or permissions to access this management resource or portal. 
+                        If you believe this is an error, please ensure you are signed into an authorized administrator account.
+                    </p>
+
+                    <!-- Helpful Action Buttons -->
+                    <div class="d-flex flex-column flex-sm-row justify-content-center gap-3 pt-3 border-top">
+                        <a asp-area="" asp-controller="Shop" asp-action="Index" class="btn btn-barrameru rounded-0 px-4 py-2 text-decoration-none">
+                            <i class="bi bi-bag-fill me-1"></i> Explore Shop
+                        </a>
+                        <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary rounded-0 px-4 py-2 text-decoration-none">
+                            <i class="bi bi-house-door me-1"></i> Back to Home
+                        </a>
+                        <a asp-area="Identity" asp-page="/Account/Login" class="btn btn-outline-dark rounded-0 px-4 py-2 text-decoration-none">
+                            <i class="bi bi-box-arrow-in-right me-1"></i> Sign In as Admin
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
