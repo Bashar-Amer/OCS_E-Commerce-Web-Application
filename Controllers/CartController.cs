@@ -1,5 +1,6 @@
 ﻿using CampTravelGear.Data;
 using CampTravelGear.DTOs;
+using CampTravelGear.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -118,5 +119,47 @@ public class CartController : Controller
             return Json(cartDto);
         }
         return NotFound();
+    }
+
+    public async Task<IActionResult> AddItem(CartItemAddDto userData)
+    {
+        string? userId = _userManager.GetUserId(User);
+        if (userId == null) return Unauthorized();
+
+        if (!ModelState.IsValid) return BadRequest();
+
+        var cart = await _dbContext.Carts
+            .Include(c => c.CartItems)
+            .SingleOrDefaultAsync(c => c.UserId == userId);
+
+        if (cart == null)
+        {
+            cart = new Cart { UserId = userId };
+            _dbContext.Carts.Add(cart);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        var product = await _dbContext.Products.FindAsync(userData.ProductId);
+        if (product == null) return NotFound();
+
+        var item = cart.CartItems.FirstOrDefault(i => i.ProductId == product.Id);
+
+        if (item == null)
+        {
+            var newItem = new CartItem
+            {
+                CartId = cart.Id,
+                ProductId = product.Id,
+                Quantity = userData.Quantity,
+                UnitPrice = product.Price
+            };
+            _dbContext.CartItems.Add(newItem);
+        }
+        else
+            item.Quantity += userData.Quantity;
+        
+
+        await _dbContext.SaveChangesAsync();
+        return Ok(new { success = true });
     }
 }
