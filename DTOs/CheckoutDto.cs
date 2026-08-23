@@ -5,10 +5,6 @@ namespace CampTravelGear.DTOs
     public class CheckoutDto
     {
         [Required]
-        [StringLength(50)]
-        public required string FullName { get; set; }
-
-        [Required]
         [StringLength(255)]
         public required string FullAddress { get; set; }
 

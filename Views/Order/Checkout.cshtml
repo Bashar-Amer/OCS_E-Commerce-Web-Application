@@ -33,31 +33,9 @@
                     <h5 class="fw-bold mb-4 text-secondary">Billing Details</h5>
 
                     <div class="row g-3">
-                        @* <div class="col-md-6">
-                            <label class="form-label small fw-semibold text-secondary">First Name <span class="text-danger">*</span></label>
-                            <input type="text" id="chkFirstName" class="form-control rounded-0" required placeholder="First Name" value="">
-                        </div> *@
-                        <div class="col-md-6">
-                            <label asp-for="FullName" class="form-label small fw-semibold text-secondary">Full Name <span class="text-danger">*</span></label>
-                            <input asp-for="FullName" type="text" id="chkLastName" class="form-control rounded-0" required placeholder="Full Name">
-                            <span asp-validation-for="FullName" class="text-danger"></span>
-                        </div>
-
-                        @* <div class="col-12">
-                            <label class="form-label small fw-semibold text-secondary">Company Name (optional)</label>
-                            <input type="text" class="form-control rounded-0" placeholder="Company Name">
-                        </div> *@
-
-                        @* <div class="col-12">
-                            <label class="form-label small fw-semibold text-secondary">Country <span class="text-danger">*</span></label>
-                            <select id="countrySelect" class="form-select rounded-0">
-                                <option selected disabled>Select a country</option>
-                            </select>
-                        </div> *@
-
+                       
                         <div class="col-12">
                             <label asp-for="FullAddress" class="form-label small fw-semibold text-secondary">Full address <span class="text-danger">*</span></label>
-                            @* <input type="text" id="chkStreet" class="form-control rounded-0 mb-2" required placeholder="House number and street name" value=""> *@
                             <input asp-for="FullAddress" type="text" class="form-control rounded-0" placeholder="Address" value="">
                             <span asp-validation-for="FullAddress" class="text-danger"></span>
                         </div>
@@ -67,33 +45,6 @@
                             <input asp-for="City" type="text" id="chkCity" class="form-control rounded-0" required placeholder="City" value="">
                             <span asp-validation-for="City" class="text-danger"></span>
                         </div>
-
-                        @* <div class="col-12">
-                            <label class="form-label small fw-semibold text-secondary">State <span class="text-danger">*</span></label>
-                            <select id="citySelect" class="form-select rounded-0">
-                                <option selected disabled>Select country first...</option>
-                            </select>
-                        </div> *@
-
-                        @* <div class="col-12">
-                            <label class="form-label small fw-semibold text-secondary">ZIP Code <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control rounded-0" required placeholder="ZIP Code" value="">
-                        </div> *@
-
-                        @* <div class="col-12">
-                            <label class="form-label small fw-semibold text-secondary">Phone <span class="text-danger">*</span></label>
-                            <input type="tel" id="chkPhone" class="form-control rounded-0" required placeholder="Phone" value="">
-                        </div> *@
-
-                        @* <div class="col-12">
-                            <label class="form-label small fw-semibold text-secondary">Email Address <span class="text-danger">*</span></label>
-                            <input type="email" id="chkEmail" class="form-control rounded-0" required placeholder="Email Address" value="">
-                        </div> *@
-
-                        @* <div class="col-12 mt-4">
-                            <label class="form-label small fw-semibold text-secondary">Order Notes (optional)</label>
-                            <textarea class="form-control rounded-0" rows="3" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
-                        </div> *@
                     </div>
                 </div>
 
@@ -135,9 +86,6 @@
 
                     <!-- Payment Notice & Place Order Button -->
                     <div class="checkout-box">
-                        @* <p class="small text-muted mb-3">
-                            Sorry, it seems that there are no available payment methods for your state. Please contact us if you require assistance or wish to make alternate arrangements.
-                        </p> *@
                         <div class="d-grid">
                             <button type="submit" class="btn btn-barrameru py-2">
                                 PLACE ORDER
