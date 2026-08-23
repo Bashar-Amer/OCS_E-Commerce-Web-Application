@@ -20,8 +20,12 @@ public class HomeController : Controller
     public async Task<IActionResult> Index()
     {
         var baseQuery = _context.Products
-            .Where(p => p.IsActive && !p.IsDeleted);
-
+    .Where(p =>
+        p.IsActive &&
+        !p.IsDeleted &&
+        p.Category != null &&
+        !p.Category.IsDeleted
+    );
         var vm = new HomeViewModel
         {
             // Genuinely correct: newest products by CreatedAt

@@ -1,20 +1,23 @@
 ﻿using CampTravelGear.Data;
+using CampTravelGear.Models;
+using CampTravelGear.Models.ViewModels;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using CampTravelGear.Models.ViewModels;
 
 namespace CampTravelGear.Controllers;
 
 public class ShopController : Controller
 {
     private readonly ApplicationDbContext _context;
+    private readonly UserManager<ApplicationUser> _userManager;
     private const int PageSize = 12;
 
-    public ShopController(ApplicationDbContext context)
+    public ShopController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
     {
         _context = context;
+        _userManager = userManager;
     }
-
     public async Task<IActionResult> Index(string? category, string? search, string? sort, int page = 1)
     {
         var categories = await _context.Categories
@@ -33,11 +36,16 @@ public class ShopController : Controller
 
         // 2)  المنتجات
         var query = _context.Products
-            .Include(p => p.Category)
-            .Include(p => p.ProductImages)
-            .Include(p => p.Reviews)
-            .Where(p => p.IsActive && !p.IsDeleted)
-            .AsQueryable();
+    .Include(p => p.Category)
+    .Include(p => p.ProductImages)
+    .Include(p => p.Reviews)
+    .Where(p =>
+        p.IsActive &&
+        !p.IsDeleted &&
+        p.Category != null &&
+        !p.Category.IsDeleted
+    )
+    .AsQueryable();
 
         if (!string.IsNullOrWhiteSpace(category) && category != "all")
         {
@@ -54,10 +62,11 @@ public class ShopController : Controller
             "price-asc" => query.OrderBy(p => p.Price),
             "price-desc" => query.OrderByDescending(p => p.Price),
             "rating" => query.OrderByDescending(p =>
-                                p.Reviews.Any() ? p.Reviews.Average(r => r.Rating) : 0),
+                                p.Reviews.Any(r => r.Rating.HasValue && r.Status == "Accepted")
+                                    ? p.Reviews.Where(r => r.Rating.HasValue && r.Status == "Accepted").Average(r => r.Rating)
+                                    : 0),
             _ => query.OrderByDescending(p => p.CreatedAt)
         };
-
         var totalResults = await query.CountAsync();
 
         var products = await query
@@ -75,10 +84,10 @@ public class ShopController : Controller
            ?? p.ProductImages.FirstOrDefault()?.ImageUrl
            ?? "/images/placeholder.jpg",
             IsNew = p.CreatedAt >= DateTime.UtcNow.AddDays(-14),
-            AverageRating = p.Reviews.Any(r => r.Rating.HasValue)
-                ? Math.Round(p.Reviews.Where(r => r.Rating.HasValue).Average(r => r.Rating!.Value), 1)
+            AverageRating = p.Reviews.Any(r => r.Rating.HasValue && r.Status == "Accepted")
+                ? Math.Round(p.Reviews.Where(r => r.Rating.HasValue && r.Status == "Accepted").Average(r => r.Rating!.Value), 1)
                 : 0,
-            ReviewCount = p.Reviews.Count(r => r.Rating.HasValue)
+            ReviewCount = p.Reviews.Count(r => r.Rating.HasValue && r.Status == "Accepted")
         }).ToList();
 
         ViewBag.SelectedCategory = category;
@@ -116,4 +125,65 @@ public class ShopController : Controller
         return View(product);
     }
 
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> AddReview(int productId, int rating, string? comment)
+    {
+        // Server-side guard — حتى لو حدا حاول يبعث request مباشرة بدون تسجيل دخول
+        if (!(User.Identity?.IsAuthenticated ?? false))
+        {
+            return Unauthorized(new
+            {
+                success = false,
+                message = "You must be logged in to write a review."
+            });
+        }
+
+        if (rating < 1 || rating > 5)
+        {
+            return BadRequest(new
+            {
+                success = false,
+                message = "Please select a rating between 1 and 5."
+            });
+        }
+
+        var user = await _userManager.GetUserAsync(User);
+        if (user == null)
+        {
+            return Unauthorized(new { success = false, message = "User not found." });
+        }
+
+        var product = await _context.Products
+            .FirstOrDefaultAsync(p =>
+                p.Id == productId &&
+                p.IsActive &&
+                !p.IsDeleted);
+
+        if (product == null)
+        {
+            return NotFound(new { success = false, message = "Product not found." });
+        }
+
+        
+            _context.Reviews.Add(new Review
+            {
+                UserId = user.Id,
+                ProductId = productId,
+                Rating = rating,
+                Comment = comment,
+                Status = AdminResponse.Pending.ToString(),
+                CreatedAt = DateTime.UtcNow
+            });
+        
+
+        await _context.SaveChangesAsync();
+
+        return Json(new
+        {
+            success = true,
+            message = "Thank you! Your review has been submitted and is pending approval."
+        });
+    }
 }

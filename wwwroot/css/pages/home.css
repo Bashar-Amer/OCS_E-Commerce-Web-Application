@@ -337,3 +337,20 @@
         .template-wishlist-btn.active i::before {
             content: "\f415";
         }
+
+.testimonial-btn {
+    padding: 12px 28px;
+    border-radius: 50px;
+    font-weight: 600;
+    background: var(--primary);
+    border: 1px solid var(--primary);
+    color: var(--white);
+    transition: all 0.3s ease;
+}
+
+    .testimonial-btn:hover {
+        background: var(--primary-dark);
+        border-color: var(--primary-dark);
+        color: var(--white);
+        transform: translateY(-3px);
+    }

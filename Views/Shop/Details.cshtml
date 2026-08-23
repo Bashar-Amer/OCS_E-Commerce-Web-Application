@@ -12,7 +12,7 @@
 
     // Ratings
     var ratings = Model.Reviews
-        .Where(r => r.Rating.HasValue)
+        .Where(r => r.Rating.HasValue && r.Status == "Accepted")
         .Select(r => r.Rating!.Value)
         .ToList();
 
@@ -90,6 +90,7 @@
                 @Model.Name
 
             </h1>
+
 
 
             <!-- Rating -->
@@ -267,20 +268,12 @@
             <!-- Main Image -->
 
             <div class="border p-4 text-center position-relative mb-3 bg-white">
-
-                <button type="button"
-                        class="btn btn-sm btn-light position-absolute top-0 end-0 m-3 border-0"
-                        onclick="openProductImage()">
-
-                    <i class="bi bi-search"></i>
-
-                </button>
-
-
                 <img id="mainDetailImg"
-                     src="@mainImage"
-                     alt="@Model.Name"
-                     class="img-fluid product-detail-main-image">
+     src="@mainImage"
+     alt="@Model.Name"
+     class="img-fluid product-detail-main-image"
+     onclick="openProductImage()"
+     style="cursor: zoom-in;">
 
             </div>
 
@@ -294,17 +287,17 @@
                     @foreach (var image in Model.ProductImages)
                     {
                         <div class="col-3">
-
                             <img src="@image.ImageUrl"
-                                 alt="@Model.Name"
-                                 class="img-fluid border p-1 detail-thumb @(image.ImageUrl == mainImage ? "detail-thumb-active" : "")"
-                                 onclick="changeMainImage(this)"
-                                 style="
-                                    height: 80px;
-                                    width: 100%;
-                                    object-fit: contain;
-                                    cursor: pointer;
-                                 ">
+     data-image="@image.ImageUrl"
+     alt="@Model.Name"
+     class="img-fluid border p-1 detail-thumb @(image.ImageUrl == mainImage ? "detail-thumb-active" : "")"
+     onclick="changeMainImage(this)"
+     style="
+        height: 80px;
+        width: 100%;
+        object-fit: contain;
+        cursor: pointer;
+     ">
 
                         </div>
                     }
@@ -365,10 +358,10 @@
 
             <!-- Reviews List -->
 
-            @if (Model.Reviews.Any(r => r.Rating.HasValue))
-            {
+           @if (Model.Reviews.Any(r => r.Rating.HasValue && r.Status == "Accepted"))
+           {
                 foreach (var review in Model.Reviews
-                    .Where(r => r.Rating.HasValue)
+                    .Where(r => r.Rating.HasValue && r.Status == "Accepted")
                     .OrderByDescending(r => r.CreatedAt))
                 {
                     <div class="py-3 border-bottom">
@@ -439,43 +432,50 @@
                         Your Rating
                     </label>
 
-                    <div class="review-stars mb-3">
+<div class="review-stars mb-3" id="reviewStarsContainer">
 
-                        @for (int i = 1; i <= 5; i++)
-                        {
-                            <input type="radio"
-                                   name="rating"
-                                   id="rating-@i"
-                                   value="@i"
-                                   class="d-none" />
+    @for (int i = 1; i <= 5; i++)
+    {
+        <input type="radio"
+               name="rating"
+               id="rating-@i"
+               value="@i"
+               class="d-none"
+               onchange="updateStarDisplay(@i)" />
 
-                            <label for="rating-@i"
-                                   class="review-star">
+        <label for="rating-@i"
+               class="review-star"
+               data-star="@i">
 
-                                <i class="bi bi-star"></i>
+            <i class="bi bi-star"></i>
 
-                            </label>
-                        }
+        </label>
+    }
 
-                    </div>
+</div>
+
+                
 
 
                     <!-- Comment -->
 
-                    <textarea name="comment"
-                              class="form-control rounded-0 mb-3"
-                              rows="4"
-                              maxlength="1000"
-                              placeholder="Write your comment..."></textarea>
+                    <textarea id="reviewCommentInput"
+          name="comment"
+          class="form-control rounded-0 mb-3"
+          rows="4"
+          maxlength="1000"
+          placeholder="Write your comment..."></textarea>
 
 
                     <button type="button"
-                            class="btn btn-template-add-cart">
+        id="submitReviewBtn"
+        class="btn btn-template-add-cart"
+        onclick="submitProductReview(@Model.Id)">
 
-                        <i class="bi bi-send me-1"></i>
-                        Submit Review
+    <i class="bi bi-send me-1"></i>
+    Submit Review
 
-                    </button>
+</button>
 
                 </div>
             }
@@ -723,29 +723,7 @@
 
     <script>
 
-        function changeMainImage(element) {
-
-            const mainImage =
-                document.getElementById("mainDetailImg");
-
-            if (!mainImage) return;
-
-            mainImage.src = element.src;
-
-            document
-                .querySelectorAll(".detail-thumb")
-                .forEach(img => {
-
-                    img.classList.remove(
-                        "detail-thumb-active"
-                    );
-
-                });
-
-            element.classList.add(
-                "detail-thumb-active"
-            );
-        }
+        
 
 
         function openProductImage() {
@@ -769,6 +747,81 @@
             modal.show();
         }
 
+function updateStarDisplay(selectedRating) {
+    document.querySelectorAll('#reviewStarsContainer .review-star').forEach(label => {
+        const starValue = parseInt(label.getAttribute('data-star'));
+        const icon = label.querySelector('i');
+
+        if (starValue <= selectedRating) {
+            icon.className = 'bi bi-star-fill text-warning';
+        } else {
+            icon.className = 'bi bi-star';
+        }
+    });
+}
+async function submitProductReview(productId) {
+
+    const selectedRating = document.querySelector('input[name="rating"]:checked');
+    const comment = document.getElementById('reviewCommentInput')?.value.trim();
+    const btn = document.getElementById('submitReviewBtn');
+
+    if (!selectedRating) {
+        alert('Please select a rating before submitting.');
+        return;
+    }
+
+    const token = document.querySelector(
+        '#globalAntiForgeryForm input[name="__RequestVerificationToken"]'
+    )?.value;
+
+    btn.disabled = true;
+
+    try {
+        const res = await fetch('/Shop/AddReview', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: new URLSearchParams({
+                productId: productId,
+                rating: selectedRating.value,
+                comment: comment || '',
+                __RequestVerificationToken: token
+            })
+        });
+
+        if (res.status === 401) {
+            window.location.href = '/Account/Login';
+            return;
+        }
+
+        const data = await res.json();
+
+        if (data.success) {
+            if (typeof Swal !== 'undefined') {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Review submitted!',
+                    text: data.message,
+                    timer: 2000,
+                    showConfirmButton: false
+                });
+            } else {
+                alert(data.message);
+            }
+
+            setTimeout(() => window.location.reload(), 1200);
+        } else {
+            alert(data.message || 'Something went wrong.');
+            btn.disabled = false;
+        }
+
+    } catch (e) {
+        console.error(e);
+        alert('Something went wrong. Please try again.');
+        btn.disabled = false;
+    }
+}
     </script>
 
 }
