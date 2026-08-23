@@ -170,10 +170,11 @@ public class HomeController : Controller
 
         return RedirectToAction("Contact");
     }
-
+    [Route("Home/Error404")]
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error404()
     {
+        Response.StatusCode = 404;
         return View();
     }
 }
