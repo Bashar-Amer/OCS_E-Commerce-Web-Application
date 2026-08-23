@@ -1,209 +1,775 @@
+
+@model CampTravelGear.Models.Product
+
 @{
-    ViewData["Title"] = "Yellow Tent - Single Product";
-    int productId = ViewBag.ProductId ?? 2;
+    ViewData["Title"] = Model.Name;
+
+    // Main Product Image
+    var mainImage = Model.ProductImages
+        .FirstOrDefault(x => x.IsMain)?.ImageUrl
+        ?? Model.ProductImages.FirstOrDefault()?.ImageUrl
+        ?? "/images/placeholder.jpg";
+
+    // Ratings
+    var ratings = Model.Reviews
+        .Where(r => r.Rating.HasValue)
+        .Select(r => r.Rating!.Value)
+        .ToList();
+
+    var averageRating = ratings.Any()
+        ? Math.Round(ratings.Average(), 1)
+        : 0;
+
+    var reviewCount = ratings.Count;
 }
+<form id="globalAntiForgeryForm" style="display:none;">
+    @Html.AntiForgeryToken()
+</form>
 
 @section Styles {
-    <link rel="stylesheet" href="~/css/pages/product-details.css" asp-append-version="true" />
+    <link rel="stylesheet"
+          href="~/css/pages/product-details.css"
+          asp-append-version="true" />
 }
 
-<!-- Hero Banner (Matches barrameru-v1-single-product.jpg) -->
-<section class="inner-hero-banner" style="background-image: url('/images/orange-tourist-tent-illuminated-from-inside-stands-in-mountains-above-clouds.jpg');">
+
+<!-- =========================================================
+     HERO BANNER
+========================================================= -->
+
+<section class="inner-hero-banner"
+         style="background-image: url('/images/orange-tourist-tent-illuminated-from-inside-stands-in-mountains-above-clouds.jpg');">
+
     <div class="inner-hero-overlay"></div>
+
     <div class="container position-relative">
+
         <div class="inner-hero-content">
-            <div class="breadcrumbs">HOME / SHOP</div>
-            <h1 id="detailsPageTitle">Yellow Tent</h1>
-            <div class="sub-text" id="detailsPageSubTitle">Tent & Accesories</div>
+
+            <div class="breadcrumbs">
+                HOME / SHOP 
+            </div>
+
+            <h1>
+                @Model.Name
+            </h1>
+
+            <div class="sub-text">
+                @Model.Category?.Name
+            </div>
+
         </div>
+
     </div>
+
 </section>
 
-<!-- Product Summary Section -->
+
+<!-- =========================================================
+     PRODUCT DETAILS
+========================================================= -->
+
 <section class="py-5 bg-white">
+
     <div class="container py-4">
-        <div class="row g-5">
-            <!-- Left Info Column -->
-            <div class="col-lg-6">
-                <h1 class="fw-bold mb-2 text-secondary" id="prodTitle" style="font-size: 2.3rem;">Yellow Tent</h1>
-                <div class="d-flex align-items-center gap-2 mb-3">
-                    <div class="text-warning small">
-                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                    </div>
-                    <span class="text-muted small">(1 customer review)</span>
+        <div class="row g-5 align-items-stretch">
+
+    <!-- =================================================
+         LEFT COLUMN - PRODUCT INFORMATION
+    ================================================== -->
+
+    <div class="col-lg-6 d-flex">
+
+    <div class="w-100 d-flex flex-column h-100">
+<div class="d-flex flex-column h-100 m-4">
+    <!-- Product Name -->
+
+            <h1 class="fw-bold mb-2 text-secondary"
+                style="font-size: 2.3rem;">
+
+                @Model.Name
+
+            </h1>
+
+
+            <!-- Rating -->
+
+            <div class="d-flex align-items-center gap-2 mb-3">
+
+                <div class="template-product-rating">
+
+                    @if (reviewCount > 0)
+                    {
+                        @for (int i = 1; i <= 5; i++)
+                        {
+                            <i class="bi @(i <= Math.Round(averageRating)
+                                ? "bi-star-fill"
+                                : "bi-star")"></i>
+                        }
+
+                        <span class="text-muted small ms-1">
+                            (@reviewCount)
+                        </span>
+                    }
+                    else
+                    {
+                        <span class="text-muted small">
+                            No reviews yet
+                        </span>
+                    }
+
                 </div>
 
-                <p class="text-muted small mb-4" id="prodDesc">
-                    Massa aliquet justo egestas primis suspendisse amet dapibus netus facilisis class montes. Phasellus commodo ultrices integer pellentesque aptent condimentum odio lacus. Mattis elit aenean placerat adipiscing lectus nibh nunc ad scelerisque turpis cubilia.
+            </div>
+
+
+            <!-- Description -->
+
+            @if (!string.IsNullOrWhiteSpace(Model.Description))
+            {
+                <p class="text-muted small mb-4">
+                    @Model.Description
                 </p>
+            }
+            else
+            {
+                <p class="text-muted small mb-4">
+                    No description available for this product.
+                </p>
+            }
 
-                <div class="fs-4 fw-bold mb-4" style="color: #5E959F;">
-                    <span class="text-dark me-2">Price:</span>
-                    <span class="text-muted text-decoration-line-through fs-5 fw-normal me-2" id="prodOldPrice">$70.00</span>
-                    <span id="prodPrice">$65.00</span>
-                </div>
 
-                <!-- Add to cart & Wishlist -->
-                <div class="d-flex align-items-center gap-3 mb-4">
-                    <input type="number" id="detailQtyInput" class="form-control rounded-0 text-center" value="1" min="1" style="width: 65px; height: 44px;">
-                    <button type="button" class="btn btn-barrameru" id="btnAddToCartMain">ADD TO CART</button>
-                    <a href="javascript:void(0)" class="text-dark small fw-bold" id="btnWishlistMain"><i class="bi bi-heart me-1"></i> Whishlist</a>
-                    <a href="javascript:void(0)" class="text-muted small"><i class="bi bi-share me-1"></i> Share</a>
-                </div>
+            <!-- Price -->
 
-                <div class="small text-muted border-top pt-3 mb-4">
-                    <div class="mb-1"><strong>SKU:</strong> <span id="prodSku">0001015-BRO</span></div>
-                    <div class="mb-1"><strong>Category:</strong> <span id="prodCategory">Tent & Accesories</span></div>
-                    <div><strong>Tags:</strong> <span>Adventure, Camping, Outdoor</span></div>
-                </div>
+            <div class="fs-4 fw-bold mb-4"
+                 style="color: #5E959F;">
 
-                <!-- Secure Payment Box -->
-                <div class="border p-3 rounded-0 bg-light d-flex align-items-start gap-3">
-                    <i class="bi bi-shield-check fs-2 text-teal" style="color: #5E959F;"></i>
-                    <div>
-                        <h6 class="fw-bold mb-1">Secure & Easy Payment</h6>
-                        <p class="text-muted small mb-0">Lectus hac tortor congue habitasse consectetur. Nibh id sapien libero mollis vehicula nostra accumsan potenti cras imperdiet.</p>
-                    </div>
-                </div>
+                <span class="text-dark me-2">
+                    Price:
+                </span>
+
+                <span>
+                    @Model.Price.ToString("C")
+                </span>
+
             </div>
 
-            <!-- Right Gallery Column -->
-            <div class="col-lg-6">
-                <div class="border p-4 text-center position-relative mb-3 bg-white">
-                    <button class="btn btn-sm btn-light position-absolute top-0 end-0 m-3 border-0"><i class="bi bi-search"></i></button>
-                    <img id="mainDetailImg" src="/images/orange-tourist-tent-illuminated-from-inside-stands-in-mountains-above-clouds.jpg" alt="Product" class="img-fluid" style="max-height: 380px; object-fit: contain;">
+
+            <!-- ADD TO CART / WISHLIST -->
+
+            @if (Model.Stock > 0)
+            {
+<div class="d-flex align-items-center gap-3 mt-auto ">
+                    <input type="number"
+                           id="detailQtyInput"
+                           class="form-control rounded-0 text-center"
+                           value="1"
+                           min="1"
+                           max="@Model.Stock"
+                           style="width: 65px; height: 44px;">
+
+
+                    <button type="button"
+                            class="btn btn-barrameru"
+                            onclick="BarrameruStore.addToCart(
+                                @Model.Id,
+                                parseInt(document.getElementById('detailQtyInput').value)
+                            )">
+
+                        <i class="bi bi-cart3 me-1"></i>
+
+                        ADD TO CART
+
+                    </button>
+
+
+                                        <button type="button"
+                            class="btn btn-link text-dark small fw-bold text-decoration-none btn-wishlist-toggle"
+                            data-product-id="@Model.Id"
+                            onclick="BarrameruStore.toggleWishlist(@Model.Id, { name: '@Html.Raw(System.Text.Encodings.Web.JavaScriptEncoder.Default.Encode(Model.Name))', price: @Model.Price, image: '@mainImage' }, this)">
+
+                        <i class="bi bi-heart me-1"></i>
+
+                        Wishlist
+
+                    </button>
+
                 </div>
-                <!-- 4 Thumbnails Strip -->
-                <div class="row g-2" id="detailThumbnailsRow">
-                    <div class="col-3">
-                        <img src="~/images/orange-tourist-tent-illuminated-from-inside-stands-in-mountains-above-clouds.jpg" alt="Thumb 1" class="img-fluid border p-1 detail-thumb-active" style="height: 80px; width: 100%; object-fit: contain; cursor: pointer;">
-                    </div>
-                    <div class="col-3">
-                        <img src="~/images/top-view-of-travel-equipment-for-a-mountain-trip-e1664201262219.jpg" alt="Thumb 2" class="img-fluid border p-1" style="height: 80px; width: 100%; object-fit: contain; cursor: pointer;">
-                    </div>
-                    <div class="col-3">
-                        <img src="~/images/sandy-field-in-desert-of-egypt.jpg" alt="Thumb 3" class="img-fluid border p-1" style="height: 80px; width: 100%; object-fit: contain; cursor: pointer;">
-                    </div>
-                    <div class="col-3">
-                        <img src="~/images/camping-in-steppe.jpg" alt="Thumb 4" class="img-fluid border p-1" style="height: 80px; width: 100%; object-fit: contain; cursor: pointer;">
-                    </div>
+            }
+            else
+            {
+                <div class="mb-4">
+
+                    <button type="button"
+                            class="btn btn-secondary rounded-0"
+                            disabled>
+
+                        OUT OF STOCK
+
+                    </button>
+
                 </div>
+            }
             </div>
+
+            <!-- PRODUCT META -->
+
+<div class="small text-muted border-top pt-3 mt-auto pb-2">
+                <div class="mb-1">
+
+                    <strong>
+                        Stock:
+                    </strong>
+
+                    @if (Model.Stock > 0)
+                    {
+                        <span class="text-success">
+                            In Stock (@Model.Stock)
+                        </span>
+                    }
+                    else
+                    {
+                        <span class="text-danger">
+                            Out of Stock
+                        </span>
+                    }
+
+                </div>
+
+
+                <div class="mb-1">
+
+                    <strong>
+                        Category:
+                    </strong>
+
+                    <span>
+                        @Model.Category?.Name
+                    </span>
+
+                </div>
+
+            </div>
+
         </div>
 
-        <!-- Description / Additional Info / Reviews Tabs -->
-        <div class="mt-5 pt-4 border-top">
-            <ul class="nav nav-tabs border-0 gap-2 mb-4" role="tablist">
-                <li class="nav-item">
-                    <button class="nav-link active rounded-0 fw-bold text-dark border px-4 py-2" data-bs-toggle="tab" data-bs-target="#tabDesc" type="button">Description</button>
-                </li>
-                <li class="nav-item">
-                    <button class="nav-link rounded-0 fw-bold text-muted border px-4 py-2" data-bs-toggle="tab" data-bs-target="#tabAddInfo" type="button">Additional information</button>
-                </li>
-                <li class="nav-item">
-                    <button class="nav-link rounded-0 fw-bold text-muted border px-4 py-2" data-bs-toggle="tab" data-bs-target="#tabReviews" type="button">Reviews (1)</button>
-                </li>
-            </ul>
-
-            <div class="tab-content border p-4 bg-white">
-                <div class="tab-pane fade show active" id="tabDesc">
-                    <h5 class="fw-bold mb-3">Description</h5>
-                    <p class="text-muted small">
-                        Interdum quis dignissim nisi lacinia dolor per luctus odio penatibus nostra letius. Scelerisque penatibus facilisis tortor ac tincidunt dui proin nam inceptos ultrices quisque. Tortor finibus sem vulputate lacus sapien letius ultricies lorem. Natoque sociosqu adipiscing volutpat integer mollis tempus scelerisque cubilia litora. Ultrices dictum sodales turpis euismod etiam ultricies quis consectetur mauris. Fames auctor maecenas inceptos sem aenean vitae. Mattis conubia ante sed condimentum quisque.
-                    </p>
-                    <p class="text-muted small">
-                        Sagittis luctus integer primis orci vestibulum mollis non. Nibh fermentum quis fusce elit volutpat maximus aliquam sollicitudin potenti montes. Iaculis integer dui si maecenas ex tellus etiam sagittis duis amet dolor. Torquent quisque tempor penatibus parturient nascetur donec tincidunt dapibus. Proin nostra curabitur ut fringilla tempus dictum pharetra commodo molestie dolor. Praesent nulla viverra aptent sociosqu nascetur eget lectus commodo tristique est litora. Mauris dapibus turpis imperdiet nam molestie erat fusce a facilisis ut.
-                    </p>
-                </div>
-                <div class="tab-pane fade" id="tabAddInfo">
-                    <table class="table table-bordered small">
-                        <tr><th style="width: 30%;">Weight</th><td>2.5 kg</td></tr>
-                        <tr><th>Dimensions</th><td>210 × 140 × 110 cm</td></tr>
-                        <tr><th>Capacity</th><td>2 - 3 Person</td></tr>
-                    </table>
-                </div>
-                <div class="tab-pane fade" id="tabReviews">
-                    <div class="d-flex align-items-center gap-2 mb-3">
-                        <div class="text-warning"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
-                        <strong>Alex H.</strong> <span class="text-muted small">- August 10, 2022</span>
-                    </div>
-                    <p class="small text-muted">"Excellent camping tent, set up took 5 minutes and withstands wind easily."</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Related Products Section -->
-        <div class="mt-5 pt-4">
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <h3 class="fw-bold mb-0">Related Products</h3>
-                <a asp-controller="Shop" asp-action="Index" class="btn btn-barrameru btn-sm">ALL PRODUCTS</a>
-            </div>
-
-            <div class="row g-4">
-                <!-- Left Vertical Banner -->
-                <div class="col-lg-3 col-md-6">
-                    <div class="p-4 text-white text-center position-relative h-100" style="background-image: url('/images/paddling-kayaker-on-the-scenic-lake.jpg'); background-size: cover; min-height: 280px; display: flex; flex-direction: column; justify-content: center;">
-                        <div style="position: absolute; inset: 0; background: rgba(21,42,41,0.75);"></div>
-                        <div class="position-relative" style="z-index: 2;">
-                            <h5 class="text-white fw-bold mb-2">Discover Your Real Existence</h5>
-                            <p class="text-white-50" style="font-size: 11px;">Lorem ipsum dolor sit amet consectetur adipiscing elit dolor</p>
-                            <a href="/Home/About" class="btn btn-barrameru-outline btn-sm">MORE INFO</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 4 Related Products -->
-                <div class="col-lg-9">
-                    <div class="row g-3">
-                        <div class="col-md-3 col-6">
-                            <div class="template-product-card">
-                                <img src="~/images/sandy-field-in-desert-of-egypt.jpg" alt="Orange Camping Mat" class="template-product-img">
-                                <div>
-                                    <h6 class="template-product-title"><a href="/Shop/Details/4">Orange Camping Mat</a></h6>
-                                    <div class="template-product-price mt-3">$20.00</div>
-                                </div>
-                                <button class="btn btn-template-add-cart" onclick="BarrameruStore.addToCart(4, 1)">Add to cart</button>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-6">
-                            <div class="template-product-card">
-                                <span class="template-sale-tag">Sale!</span>
-                                <img src="~/images/high-angle-view-of-confident-couple-climbing-mountain-e1664201089286.jpg" alt="Black Binoculars" class="template-product-img">
-                                <div>
-                                    <h6 class="template-product-title"><a href="/Shop/Details/7">Black Binoculars</a></h6>
-                                    <div class="template-product-price mt-3"><span class="old-price">$75.00</span> $65.00</div>
-                                </div>
-                                <button class="btn btn-template-add-cart" onclick="BarrameruStore.addToCart(7, 1)">Add to cart</button>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-6">
-                            <div class="template-product-card">
-                                <img src="~/images/spending-time-by-the-campfire.jpg" alt="Tin Cups" class="template-product-img">
-                                <div>
-                                    <h6 class="template-product-title"><a href="/Shop/Details/11">Tin Cups</a></h6>
-                                    <div class="template-product-price mt-3">$35.00</div>
-                                </div>
-                                <button class="btn btn-template-add-cart" onclick="BarrameruStore.addToCart(11, 1)">Add to cart</button>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-6">
-                            <div class="template-product-card">
-                                <span class="template-sale-tag">Sale!</span>
-                                <img src="~/images/top-view-of-travel-equipment-for-a-mountain-trip-e1664201262219.jpg" alt="Gas Can" class="template-product-img">
-                                <div>
-                                    <h6 class="template-product-title"><a href="/Shop/Details/3">Gas Can</a></h6>
-                                    <div class="template-product-price mt-3"><span class="old-price">$45.00</span> $35.00</div>
-                                </div>
-                                <button class="btn btn-template-add-cart" onclick="BarrameruStore.addToCart(3, 1)">Add to cart</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
+
+
+    <!-- =================================================
+         RIGHT COLUMN - PRODUCT GALLERY
+    ================================================== -->
+
+    <div class="col-lg-6 d-flex">
+
+        <div class="w-100">
+
+            <!-- Main Image -->
+
+            <div class="border p-4 text-center position-relative mb-3 bg-white">
+
+                <button type="button"
+                        class="btn btn-sm btn-light position-absolute top-0 end-0 m-3 border-0"
+                        onclick="openProductImage()">
+
+                    <i class="bi bi-search"></i>
+
+                </button>
+
+
+                <img id="mainDetailImg"
+                     src="@mainImage"
+                     alt="@Model.Name"
+                     class="img-fluid product-detail-main-image">
+
+            </div>
+
+
+            <!-- Thumbnails -->
+
+            @if (Model.ProductImages.Any())
+            {
+                <div class="row g-2">
+
+                    @foreach (var image in Model.ProductImages)
+                    {
+                        <div class="col-3">
+
+                            <img src="@image.ImageUrl"
+                                 alt="@Model.Name"
+                                 class="img-fluid border p-1 detail-thumb @(image.ImageUrl == mainImage ? "detail-thumb-active" : "")"
+                                 onclick="changeMainImage(this)"
+                                 style="
+                                    height: 80px;
+                                    width: 100%;
+                                    object-fit: contain;
+                                    cursor: pointer;
+                                 ">
+
+                        </div>
+                    }
+
+                </div>
+            }
+
+        </div>
+
+    </div>
+
+</div>
+
+       
+        <!--  REVIEWS ============================ -->
+
+<div class="mt-5 pt-5 border-top">
+
+    <div class="row g-5">
+
+        <!-- Reviews -->
+        <div class="col-lg-7">
+
+            <div class="d-flex align-items-center justify-content-between mb-4">
+
+                <div>
+                    <span class="sub-badge text-teal">
+                        Reviews
+                    </span>
+
+                    <h4 class="fw-bold mb-0 mt-2">
+                        Customer Reviews
+                    </h4>
+                </div>
+
+                <div class="text-end">
+
+                    <div class="text-warning small">
+
+                        @for (int i = 1; i <= 5; i++)
+                        {
+                            <i class="bi @(i <= Math.Round(averageRating)
+                                ? "bi-star-fill"
+                                : "bi-star")"></i>
+                        }
+
+                    </div>
+
+                    <small class="text-muted">
+                        @averageRating.ToString("0.0")
+                        · @reviewCount reviews
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <!-- Reviews List -->
+
+            @if (Model.Reviews.Any(r => r.Rating.HasValue))
+            {
+                foreach (var review in Model.Reviews
+                    .Where(r => r.Rating.HasValue)
+                    .OrderByDescending(r => r.CreatedAt))
+                {
+                    <div class="py-3 border-bottom">
+
+                        <div class="d-flex justify-content-between mb-1">
+
+                            <strong class="small">
+                                @(review.User?.UserName ?? "Customer")
+                            </strong>
+
+                            <small class="text-muted">
+                                @review.CreatedAt.ToLocalTime().ToString("MMM dd, yyyy")
+                            </small>
+
+                        </div>
+
+                        <div class="text-warning small mb-2">
+
+                            @for (int i = 1; i <= 5; i++)
+                            {
+                                <i class="bi @(i <= review.Rating!.Value
+                                    ? "bi-star-fill"
+                                    : "bi-star")"></i>
+                            }
+
+                        </div>
+
+                        @if (!string.IsNullOrWhiteSpace(review.Comment))
+                        {
+                            <p class="text-muted small mb-0">
+                                @review.Comment
+                            </p>
+                        }
+
+                    </div>
+                }
+            }
+            else
+            {
+                <p class="text-muted small mb-0">
+                    No reviews yet. Be the first to review this product.
+                </p>
+            }
+
+        </div>
+
+
+        <!-- Write Review -->
+
+        <div class="col-lg-5">
+
+            @if (User.Identity?.IsAuthenticated == true)
+            {
+                <div class="review-form">
+
+                    <h5 class="fw-bold mb-1">
+                        Write a Review
+                    </h5>
+
+                    <p class="text-muted small mb-3">
+                        Share your experience with this product.
+                    </p>
+
+
+                    <!-- Rating -->
+
+                    <label class="small fw-semibold mb-2">
+                        Your Rating
+                    </label>
+
+                    <div class="review-stars mb-3">
+
+                        @for (int i = 1; i <= 5; i++)
+                        {
+                            <input type="radio"
+                                   name="rating"
+                                   id="rating-@i"
+                                   value="@i"
+                                   class="d-none" />
+
+                            <label for="rating-@i"
+                                   class="review-star">
+
+                                <i class="bi bi-star"></i>
+
+                            </label>
+                        }
+
+                    </div>
+
+
+                    <!-- Comment -->
+
+                    <textarea name="comment"
+                              class="form-control rounded-0 mb-3"
+                              rows="4"
+                              maxlength="1000"
+                              placeholder="Write your comment..."></textarea>
+
+
+                    <button type="button"
+                            class="btn btn-template-add-cart">
+
+                        <i class="bi bi-send me-1"></i>
+                        Submit Review
+
+                    </button>
+
+                </div>
+            }
+            else
+            {
+                <div class="review-login">
+
+                    <h5 class="fw-bold mb-2">
+                        Have something to say?
+                    </h5>
+
+                    <p class="text-muted small mb-3">
+                        Login to leave a rating and review.
+                    </p>
+
+                    <a asp-area="Identity"
+                       asp-page="/Account/Login"
+                       asp-route-returnUrl="@Context.Request.Path"
+                       class="btn btn-template-add-cart">
+
+                        Login to Review
+
+                    </a>
+
+                </div>
+            }
+
+        </div>
+
+    </div>
+
+</div>
+       
+        <!-- ===========  RELATED PRODUCTS  ==================== -->
+
+        <div class="mt-5 pt-4">
+
+            <div class="d-flex justify-content-between align-items-center mb-4">
+
+                <h3 class="fw-bold mb-0">
+                    Related Products
+                </h3>
+
+                <a asp-controller="Shop"
+                   asp-action="Index"
+                   class="btn btn-barrameru btn-sm">
+
+                    ALL PRODUCTS
+
+                </a>
+
+            </div>
+
+
+            @{
+                var relatedProducts = Model.Category?.Products?
+                    .Where(p =>
+                        p.Id != Model.Id &&
+                        p.IsActive &&
+                        !p.IsDeleted)
+                    .Take(4)
+                    .ToList();
+            }
+
+
+            @if (relatedProducts != null && relatedProducts.Any())
+            {
+                <div class="row g-4">
+
+                    @foreach (var product in relatedProducts)
+                    {
+                        var relatedImage = product.ProductImages
+                            .FirstOrDefault(x => x.IsMain)?.ImageUrl
+                            ?? product.ProductImages.FirstOrDefault()?.ImageUrl
+                            ?? "/images/placeholder.jpg";
+
+                        var productRatings = product.Reviews
+                            .Where(r => r.Rating.HasValue)
+                            .Select(r => r.Rating!.Value)
+                            .ToList();
+
+                        var productAverageRating = productRatings.Any()
+                            ? Math.Round(productRatings.Average(), 1)
+                            : 0;
+
+                        var productReviewCount = productRatings.Count;
+
+
+                        <div class="col-lg-3 col-md-6">
+
+                            <div class="template-product-card">
+
+
+                                <!-- Product Image -->
+
+                                <div class="position-relative">
+
+                                    <a href="/Shop/Details/@product.Id">
+
+                                        <img src="@relatedImage"
+                                             alt="@product.Name"
+                                             class="template-product-img"
+                                             loading="lazy">
+
+                                    </a>
+
+
+                                    <!-- Wishlist -->
+                                                                       <button type="button"
+                                        class="template-wishlist-btn" data-product-id="@product.Id"
+                                        onclick="BarrameruStore.toggleWishlist(@product.Id, { name: '@Html.Raw(System.Text.Encodings.Web.JavaScriptEncoder.Default.Encode(product.Name))', price: @product.Price, image: '@relatedImage' }, this)"
+                                        aria-label="Add to wishlist">
+
+                                    <i class="bi bi-heart"></i>
+
+                                </button>
+
+                                </div>
+
+
+                                <!-- Product Info -->
+
+                                <div>
+
+                                    <h6 class="template-product-title">
+
+                                        <a href="/Shop/Details/@product.Id">
+
+                                            @product.Name
+
+                                        </a>
+
+                                    </h6>
+
+
+                                    <!-- Rating -->
+
+                                    <div class="template-product-rating">
+
+                                        @if (productReviewCount > 0)
+                                        {
+                                            @for (int i = 1; i <= 5; i++)
+                                            {
+                                                <i class="bi @(i <= Math.Round(productAverageRating)
+                                                    ? "bi-star-fill"
+                                                    : "bi-star")"></i>
+                                            }
+
+                                            <span class="text-muted ms-1">
+                                                (@productReviewCount)
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">
+                                                No reviews yet
+                                            </span>
+                                        }
+
+                                    </div>
+
+
+                                    <!-- Price -->
+
+                                    <div class="template-product-price">
+
+                                        @product.Price.ToString("C")
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- Add To Cart -->
+
+                                <button type="button"
+                                        class="btn btn-template-add-cart"
+                                        onclick="BarrameruStore.addToCart(@product.Id, 1)">
+
+                                    <i class="bi bi-cart3 me-1"></i>
+
+                                    Add to cart
+
+                                </button>
+
+                            </div>
+
+                        </div>
+                    }
+
+                </div>
+            }
+            else
+            {
+                <p class="text-muted">
+                    No related products found.
+                </p>
+            }
+
+        </div>
+
+    </div>
+
 </section>
+
+
+<!-- ==== IMAGE MODAL=================== -->
+
+<div class="modal fade"
+     id="productImageModal"
+     tabindex="-1"
+     aria-hidden="true">
+
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+
+        <div class="modal-content border-0 rounded-0">
+
+            <div class="modal-body p-0 position-relative">
+
+                <button type="button"
+                        class="btn-close position-absolute top-0 end-0 m-3"
+                        data-bs-dismiss="modal"
+                        aria-label="Close">
+                </button>
+
+                <img id="modalProductImage"
+                     src="@mainImage"
+                     alt="@Model.Name"
+                     class="img-fluid w-100"
+                     style="max-height: 80vh; object-fit: contain;">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
 
 @section Scripts {
-    <script src="~/js/pages/product-details.js" asp-append-version="true"></script>
+
+    <script src="~/js/pages/product-details.js"
+            asp-append-version="true"></script>
+
+    <script>
+
+        function changeMainImage(element) {
+
+            const mainImage =
+                document.getElementById("mainDetailImg");
+
+            if (!mainImage) return;
+
+            mainImage.src = element.src;
+
+            document
+                .querySelectorAll(".detail-thumb")
+                .forEach(img => {
+
+                    img.classList.remove(
+                        "detail-thumb-active"
+                    );
+
+                });
+
+            element.classList.add(
+                "detail-thumb-active"
+            );
+        }
+
+
+        function openProductImage() {
+
+            const mainImage =
+                document.getElementById("mainDetailImg");
+
+            const modalImage =
+                document.getElementById("modalProductImage");
+
+            if (!mainImage || !modalImage) return;
+
+            modalImage.src = mainImage.src;
+
+            const modalElement =
+                document.getElementById("productImageModal");
+
+            const modal =
+                new bootstrap.Modal(modalElement);
+
+            modal.show();
+        }
+
+    </script>
+
 }
+

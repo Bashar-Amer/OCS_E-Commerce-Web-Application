@@ -1,50 +1,293 @@
 /**
- * PAGE SCRIPT: WISHLIST (Index.cshtml)
+ * PAGE SCRIPT: WISHLIST
  */
 
-window.renderWishlistPage = function() {
-    const wishlist = BarrameruStore.getWishlist();
-    const tbody = document.getElementById('wishlistTableBody');
-    if (!tbody) return;
+async function removeWishlistItem(wishlistItemId, button) {
 
-    if (wishlist.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="6" class="text-center py-5 text-muted">Your wishlist is empty. <a href="/Shop" class="text-primary fw-bold">Explore Gear</a></td></tr>';
+    const token = document.querySelector(
+        '#wishlistAntiForgeryForm input[name="__RequestVerificationToken"]'
+    )?.value;
+
+    if (!token) {
+        console.error("Anti-forgery token not found.");
         return;
     }
 
+
+    button.disabled = true;
+
+
+    try {
+
+        const response = await fetch('/Wishlist/Remove', {
+
+            method: 'POST',
+
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+
+            body: new URLSearchParams({
+                wishlistItemId: wishlistItemId,
+                __RequestVerificationToken: token
+            })
+
+        });
+
+
+        if (!response.ok) {
+
+            if (response.status === 401) {
+                window.location.href = '/Account/Login';
+                return;
+            }
+
+            throw new Error('Failed to remove wishlist item.');
+        }
+
+
+        const result = await response.json();
+
+
+        if (result.success) {
+
+            // Remove row from UI
+            const row = button.closest('tr');
+
+            if (row) {
+                row.remove();
+            }
+
+
+            // Check if wishlist is now empty
+            const tbody = document.getElementById('wishlistTableBody');
+
+            if (tbody && tbody.querySelectorAll('tr').length === 0) {
+
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="6" class="text-center py-5">
+
+                            <div class="py-4">
+
+                                <i class="bi bi-heart fs-1 text-muted"></i>
+
+                                <h5 class="fw-bold mt-3">
+                                    Your wishlist is empty
+                                </h5>
+
+                                <p class="text-muted small mb-4">
+                                    Save your favorite camping gear here.
+                                </p>
+
+                                <a href="/Shop"
+                                   class="btn btn-barrameru">
+
+                                    Explore Gear
+
+                                </a>
+
+                            </div>
+
+                        </td>
+                    </tr>
+                `;
+            }
+
+        }
+
+    }
+    catch (error) {
+
+        console.error(error);
+
+        button.disabled = false;
+
+        alert("Something went wrong. Please try again.");
+
+    }
+}
+
+
+/* =========================================================
+   GUEST WISHLIST
+   ========================================================= */
+
+window.renderWishlistPage = function () {
+
+    const wishlist = BarrameruStore.getWishlist();
+
+    const tbody = document.getElementById('wishlistTableBody');
+
+    if (!tbody) return;
+
+
+    if (wishlist.length === 0) {
+
+        tbody.innerHTML = `
+            <tr>
+
+                <td colspan="6"
+                    class="text-center py-5">
+
+                    <div class="py-4">
+
+                        <i class="bi bi-heart fs-1 text-muted"></i>
+
+                        <h5 class="fw-bold mt-3">
+                            Your wishlist is empty
+                        </h5>
+
+                        <p class="text-muted small mb-4">
+                            Save your favorite camping gear here.
+                        </p>
+
+                        <a href="/Shop"
+                           class="btn btn-barrameru">
+
+                            Explore Gear
+
+                        </a>
+
+                    </div>
+
+                </td>
+
+            </tr>
+        `;
+
+        return;
+    }
+
+
     tbody.innerHTML = wishlist.map(item => `
+
         <tr class="border-bottom">
+
+            <!-- Remove -->
+
             <td>
-                <button class="btn btn-sm text-danger border-0" onclick="BarrameruStore.toggleWishlist(${item.id}); window.renderWishlistPage();">
+
+                <button type="button"
+                        class="btn btn-sm text-danger border-0"
+                        onclick="
+                            BarrameruStore.toggleWishlist(${item.id});
+                            window.renderWishlistPage();
+                        "
+                        title="Remove from wishlist">
+
                     <i class="bi bi-x-circle fs-5"></i>
+
                 </button>
+
             </td>
+
+
+            <!-- Image -->
+
             <td>
-                <img src="${item.image}" alt="${item.name}" style="width: 50px; height: 50px; object-fit: contain;">
+
+                <a href="/Shop/Details/${item.id}">
+
+                    <img src="${item.image || '/images/placeholder.jpg'}"
+                         alt="${item.name}"
+                         class="img-fluid"
+                         style="
+                            width: 65px;
+                            height: 65px;
+                            object-fit: contain;
+                         ">
+
+                </a>
+
             </td>
+
+
+            <!-- Product -->
+
             <td>
-                <h6 class="mb-0 small fw-bold"><a href="/Shop/Details/${item.id}">${item.name}</a></h6>
+
+                <h6 class="mb-0 fw-bold">
+
+                    <a href="/Shop/Details/${item.id}"
+                       class="text-dark text-decoration-none">
+
+                        ${item.name}
+
+                    </a>
+
+                </h6>
+
             </td>
-            <td class="small fw-bold text-secondary">$${item.price.toFixed(2)}</td>
+
+
+            <!-- Price -->
+
             <td>
-                <span class="wishlist-stock-in"><i class="bi bi-check-circle-fill me-1"></i> In Stock</span>
+
+                <span class="fw-bold text-secondary">
+
+                    $${Number(item.price).toFixed(2)}
+
+                </span>
+
             </td>
+
+
+            <!-- Stock -->
+
             <td>
-                <button class="btn btn-barrameru btn-sm" onclick="BarrameruStore.addToCart(${item.id}, 1); BarrameruStore.toggleWishlist(${item.id}); window.renderWishlistPage();">
-                    Move to Cart
+
+                <span class="text-success small">
+
+                    <i class="bi bi-check-circle-fill me-1"></i>
+
+                    In Stock
+
+                </span>
+
+            </td>
+
+
+            <!-- Action -->
+
+            <td>
+
+                <button type="button"
+                        class="btn btn-barrameru btn-sm"
+                        onclick="
+                            BarrameruStore.addToCart(${item.id}, 1);
+                            BarrameruStore.toggleWishlist(${item.id});
+                            window.renderWishlistPage();
+                        ">
+
+                    <i class="bi bi-cart3 me-1"></i>
+
+                    Add to Cart
+
                 </button>
+
             </td>
+
         </tr>
+
     `).join('');
 };
 
-document.addEventListener('DOMContentLoaded', () => {
-    // Initialize standard wishlist item if empty
-    if (!localStorage.getItem('barrameru_wishlist')) {
-        BarrameruStore.saveWishlist([
-            { id: 2, name: "Yellow Tent", category: "Tent & Accesories", price: 65.00, image: "/images/orange-tourist-tent-illuminated-from-inside-stands-in-mountains-above-clouds.jpg", stock: 8 },
-            { id: 9, name: "Trekking Backpack", category: "Bags & Pack", price: 150.00, image: "/images/blue-hiking-backpack-with-fitness-mat-isolated-on-2021-09-03-13-40-43-utc-1.jpg", stock: 14 }
-        ]);
+
+/* =========================================================
+   PAGE INITIALIZATION
+   ========================================================= */
+document.addEventListener('DOMContentLoaded', function () {
+
+    const tbody = document.getElementById('wishlistTableBody');
+
+    if (!tbody) return;
+
+    const isLoggedIn = tbody.dataset.loggedIn === "true";
+
+    if (!isLoggedIn) {
+        window.renderWishlistPage();
     }
-    window.renderWishlistPage();
+
 });
