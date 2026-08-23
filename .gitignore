@@ -280,3 +280,6 @@ _Pvt_Extensions
 .idea/
 *.sln.iml
 >>>>>>> 561bb5b36fe4e3eeb379f2eb9b66a657e6587235
+
+
+appsettings*

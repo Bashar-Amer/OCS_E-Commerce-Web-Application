@@ -2,10 +2,19 @@
  * PAGE SCRIPT: CART (Index.cshtml)
  */
 
-window.renderCartPage = function() {
-    const cart = BarrameruStore.getCart();
-    const totals = BarrameruStore.getTotals();
+window.renderCartPage = async function () {
+
     const tbody = document.getElementById('cartTableBodyExact');
+    tbody.innerHTML = `
+        <div class="text-center py-5">
+            <div class="spinner-border text-teal" role="status" style="color: #5E959F;">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>`; 
+
+    const cart = await BarrameruStore.getCart();
+    const totals = BarrameruStore.getTotals(cart);
+    
     if (!tbody) return;
 
     if (cart.length === 0) {
@@ -20,21 +29,29 @@ window.renderCartPage = function() {
     tbody.innerHTML = cart.map(item => `
         <tr class="border-bottom">
             <td>
-                <button class="btn btn-sm text-teal border-0 p-0" style="color: #5E959F;" onclick="BarrameruStore.removeFromCart(${item.id})">
+                <button class="btn btn-sm text-teal border-0 p-0" style="color: #5E959F;"
+                onclick="BarrameruStore.removeFromCart(${item.id}); window.renderCartPage();">
                     <i class="bi bi-x fs-4"></i>
                 </button>
             </td>
             <td>
                 <div class="d-flex align-items-center gap-3">
-                    <img src="${item.image}" alt="${item.name}" style="width: 44px; height: 44px; object-fit: contain;">
-                    <span class="cart-item-title">${item.name}</span>
+                    <img src="${item.imageUrl}" alt="${item.productName}" style="width: 44px;
+                    height: 44px; object-fit: contain;"
+                    onerror="this.onerror=null; this.src='/images/placeholder.png'"
+                    >
+                    <span class="cart-item-title">${item.productName}</span>
                 </div>
             </td>
-            <td class="small text-secondary">$${item.price.toFixed(2)}</td>
+            <td class="small text-secondary">$${item.unitPrice.toFixed(2)}</td>
             <td>
-                <input type="number" class="form-control form-control-sm text-center rounded-0" style="width: 60px;" value="${item.quantity}" min="1" onchange="BarrameruStore.updateCartQuantity(${item.id}, this.value)">
+                <input type="number" class="form-control form-control-sm text-center rounded-0 cart-qty-input"
+                       style="width: 60px;"
+                       data-id="${item.id}" 
+                       value="${item.quantity}" 
+                       min="1">
             </td>
-            <td class="small fw-bold text-secondary">$${(item.price * item.quantity).toFixed(2)}</td>
+            <td class="small fw-bold text-secondary">$${(item.unitPrice * item.quantity).toFixed(2)}</td>
         </tr>
     `).join('');
 

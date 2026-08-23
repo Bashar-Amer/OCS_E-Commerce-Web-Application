@@ -25,6 +25,11 @@
 
     <!-- Page-Specific Stylesheet Section -->
     @await RenderSectionAsync("Styles", required: false)
+
+    <script>
+        window.isUserAuthenticated = @User.Identity.IsAuthenticated.ToString().ToLower();
+    </script>
+
 </head>
 <body>
     <!-- Top Header Navigation Bar (Matches barrameru-v1-header.jpg) -->
@@ -81,7 +86,7 @@
                     </button>
                     <a asp-controller="Cart" asp-action="Index" class="header-icon-link text-decoration-none" title="Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart">
                         <i class="bi bi-cart3"></i>
-                        <span class="header-cart-badge cart-badge-count">3</span>
+                        <span class="header-cart-badge cart-badge-count">0</span>
                     </a>
                     <div class="dropdown">
                         <button class="header-icon-link bg-transparent border-0" type="button" data-bs-toggle="dropdown" title="Account">
@@ -157,11 +162,11 @@
             <div class="border-top pt-3 mt-auto">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <span class="fw-bold">Subtotal:</span>
-                    <strong id="miniCartSubtotal" class="fs-5 text-teal" style="color: #5E959F;">$270.00</strong>
+                    <strong id="miniCartSubtotal" class="fs-5 text-teal" style="color: #5E959F;"></strong>
                 </div>
                 <div class="d-grid gap-2">
                     <a asp-controller="Cart" asp-action="Index" class="btn btn-outline-secondary rounded-0 btn-sm">View Cart</a>
-                    <a asp-controller="Checkout" asp-action="Index" class="btn btn-barrameru btn-sm">Checkout</a>
+                    <a asp-controller="Order" asp-action="Checkout" class="btn btn-barrameru btn-sm">Checkout</a>
                 </div>
             </div>
         </div>
