@@ -97,12 +97,12 @@ namespace CampTravelGear.Data.Migrations
                             ConcurrencyStamp = "con-stamp-admin-001",
                             Email = "admin@barrameru.com",
                             EmailConfirmed = true,
-                            FullName = "Admin Administrator",
+                            FullName = "Rahhala Admin",
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@BARRAMERU.COM",
                             NormalizedUserName = "ADMIN@BARRAMERU.COM",
                             PasswordHash = "AQAAAAIAAYagAAAAEEdaqL9mVLSYIYDQnf3VbN26q7GMI+7eZ1KJyWghZois4i24uitPbuHClLflhAdeGA==",
-                            PhoneNumber = "+1 (555) 019-2834",
+                            PhoneNumber = "+962 6 500 2026",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "sec-stamp-admin-001",
                             TwoFactorEnabled = false,
@@ -161,6 +161,24 @@ namespace CampTravelGear.Data.Migrations
                             SecurityStamp = "sec-stamp-alex-003",
                             TwoFactorEnabled = false,
                             UserName = "alex.h@example.com"
+                        },
+                        new
+                        {
+                            Id = "user-cust-004",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "con-stamp-omar-004",
+                            Email = "omar.khalil@example.com",
+                            EmailConfirmed = true,
+                            FullName = "Omar Al-Khalil",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "OMAR.KHALIL@EXAMPLE.COM",
+                            NormalizedUserName = "OMAR.KHALIL@EXAMPLE.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPvH9DFxtV1m7CiKbFG7DczGEaLFQzYgi5Ckg0OVEzpmEsDORBDjImwoH6IuqeZohA==",
+                            PhoneNumber = "+962 7 9876 5432",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "sec-stamp-omar-004",
+                            TwoFactorEnabled = false,
+                            UserName = "omar.khalil@example.com"
                         });
                 });
 
@@ -213,6 +231,13 @@ namespace CampTravelGear.Data.Migrations
                             City = "Portland",
                             FullAddress = "910 Alpine Ridge Ave",
                             UserId = "user-cust-003"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            City = "Amman",
+                            FullAddress = "Queen Rania St, Building 45",
+                            UserId = "user-cust-004"
                         });
                 });
 
@@ -235,13 +260,6 @@ namespace CampTravelGear.Data.Migrations
                         .IsUnique();
 
                     b.ToTable("Carts");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            UserId = "user-cust-001"
-                        });
                 });
 
             modelBuilder.Entity("CampTravelGear.Models.CartItem", b =>
@@ -272,32 +290,6 @@ namespace CampTravelGear.Data.Migrations
                         .IsUnique();
 
                     b.ToTable("CartItems");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CartId = 1,
-                            ProductId = 7,
-                            Quantity = 1,
-                            UnitPrice = 65.00m
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CartId = 1,
-                            ProductId = 2,
-                            Quantity = 1,
-                            UnitPrice = 65.00m
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CartId = 1,
-                            ProductId = 14,
-                            Quantity = 1,
-                            UnitPrice = 140.00m
-                        });
                 });
 
             modelBuilder.Entity("CampTravelGear.Models.Category", b =>
@@ -413,7 +405,7 @@ namespace CampTravelGear.Data.Migrations
                             CreatedAt = new DateTime(2026, 8, 10, 14, 30, 0, 0, DateTimeKind.Utc),
                             OrderDate = new DateTime(2026, 8, 10, 14, 30, 0, 0, DateTimeKind.Utc),
                             Status = "Completed",
-                            TotalAmount = 270.00m,
+                            TotalAmount = 338.00m,
                             UserId = "user-cust-001"
                         },
                         new
@@ -423,7 +415,7 @@ namespace CampTravelGear.Data.Migrations
                             CreatedAt = new DateTime(2026, 8, 18, 9, 15, 0, 0, DateTimeKind.Utc),
                             OrderDate = new DateTime(2026, 8, 18, 9, 15, 0, 0, DateTimeKind.Utc),
                             Status = "Processing",
-                            TotalAmount = 185.00m,
+                            TotalAmount = 187.00m,
                             UserId = "user-cust-002"
                         },
                         new
@@ -433,8 +425,38 @@ namespace CampTravelGear.Data.Migrations
                             CreatedAt = new DateTime(2026, 8, 19, 16, 45, 0, 0, DateTimeKind.Utc),
                             OrderDate = new DateTime(2026, 8, 19, 16, 45, 0, 0, DateTimeKind.Utc),
                             Status = "Cancelled",
-                            TotalAmount = 85.00m,
+                            TotalAmount = 103.00m,
                             UserId = "user-cust-003"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            AddressId = 4,
+                            CreatedAt = new DateTime(2026, 8, 21, 11, 20, 0, 0, DateTimeKind.Utc),
+                            OrderDate = new DateTime(2026, 8, 21, 11, 20, 0, 0, DateTimeKind.Utc),
+                            Status = "Completed",
+                            TotalAmount = 217.00m,
+                            UserId = "user-cust-004"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            AddressId = 1,
+                            CreatedAt = new DateTime(2026, 8, 23, 13, 10, 0, 0, DateTimeKind.Utc),
+                            OrderDate = new DateTime(2026, 8, 23, 13, 10, 0, 0, DateTimeKind.Utc),
+                            Status = "Processing",
+                            TotalAmount = 171.00m,
+                            UserId = "user-cust-001"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            AddressId = 2,
+                            CreatedAt = new DateTime(2026, 8, 24, 15, 0, 0, 0, DateTimeKind.Utc),
+                            OrderDate = new DateTime(2026, 8, 24, 15, 0, 0, 0, DateTimeKind.Utc),
+                            Status = "Completed",
+                            TotalAmount = 138.00m,
+                            UserId = "user-cust-002"
                         });
                 });
 
@@ -471,9 +493,9 @@ namespace CampTravelGear.Data.Migrations
                         {
                             Id = 1,
                             OrderId = 1,
-                            ProductId = 7,
+                            ProductId = 1,
                             Quantity = 1,
-                            UnitPrice = 65.00m
+                            UnitPrice = 189.00m
                         },
                         new
                         {
@@ -481,47 +503,87 @@ namespace CampTravelGear.Data.Migrations
                             OrderId = 1,
                             ProductId = 2,
                             Quantity = 1,
-                            UnitPrice = 65.00m
+                            UnitPrice = 149.00m
                         },
                         new
                         {
                             Id = 3,
-                            OrderId = 1,
-                            ProductId = 14,
+                            OrderId = 2,
+                            ProductId = 2,
                             Quantity = 1,
-                            UnitPrice = 140.00m
+                            UnitPrice = 149.00m
                         },
                         new
                         {
                             Id = 4,
                             OrderId = 2,
-                            ProductId = 9,
+                            ProductId = 3,
                             Quantity = 1,
-                            UnitPrice = 150.00m
+                            UnitPrice = 38.00m
                         },
                         new
                         {
                             Id = 5,
-                            OrderId = 2,
-                            ProductId = 3,
+                            OrderId = 3,
+                            ProductId = 7,
                             Quantity = 1,
-                            UnitPrice = 35.00m
+                            UnitPrice = 39.00m
                         },
                         new
                         {
                             Id = 6,
                             OrderId = 3,
-                            ProductId = 11,
+                            ProductId = 12,
                             Quantity = 1,
-                            UnitPrice = 60.00m
+                            UnitPrice = 64.00m
                         },
                         new
                         {
                             Id = 7,
-                            OrderId = 3,
-                            ProductId = 5,
+                            OrderId = 4,
+                            ProductId = 4,
                             Quantity = 1,
-                            UnitPrice = 25.00m
+                            UnitPrice = 165.00m
+                        },
+                        new
+                        {
+                            Id = 8,
+                            OrderId = 4,
+                            ProductId = 11,
+                            Quantity = 1,
+                            UnitPrice = 52.00m
+                        },
+                        new
+                        {
+                            Id = 9,
+                            OrderId = 5,
+                            ProductId = 6,
+                            Quantity = 1,
+                            UnitPrice = 135.00m
+                        },
+                        new
+                        {
+                            Id = 10,
+                            OrderId = 5,
+                            ProductId = 9,
+                            Quantity = 1,
+                            UnitPrice = 36.00m
+                        },
+                        new
+                        {
+                            Id = 11,
+                            OrderId = 6,
+                            ProductId = 10,
+                            Quantity = 1,
+                            UnitPrice = 89.00m
+                        },
+                        new
+                        {
+                            Id = 12,
+                            OrderId = 6,
+                            ProductId = 8,
+                            Quantity = 1,
+                            UnitPrice = 49.00m
                         });
                 });
 
@@ -567,7 +629,7 @@ namespace CampTravelGear.Data.Migrations
                         new
                         {
                             Id = 1,
-                            Amount = 270.00m,
+                            Amount = 338.00m,
                             OrderId = 1,
                             PaidAt = new DateTime(2026, 8, 10, 14, 32, 0, 0, DateTimeKind.Utc),
                             PaymentMethod = "Credit Card",
@@ -577,7 +639,7 @@ namespace CampTravelGear.Data.Migrations
                         new
                         {
                             Id = 2,
-                            Amount = 185.00m,
+                            Amount = 187.00m,
                             OrderId = 2,
                             PaidAt = new DateTime(2026, 8, 18, 9, 16, 0, 0, DateTimeKind.Utc),
                             PaymentMethod = "PayPal",
@@ -587,11 +649,40 @@ namespace CampTravelGear.Data.Migrations
                         new
                         {
                             Id = 3,
-                            Amount = 85.00m,
+                            Amount = 103.00m,
                             OrderId = 3,
                             PaymentMethod = "Credit Card",
-                            Status = "Pending",
+                            Status = "Failed",
                             TransactionId = "TXN-109483"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Amount = 217.00m,
+                            OrderId = 4,
+                            PaidAt = new DateTime(2026, 8, 21, 11, 22, 0, 0, DateTimeKind.Utc),
+                            PaymentMethod = "Apple Pay",
+                            Status = "Completed",
+                            TransactionId = "TXN-559124"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Amount = 171.00m,
+                            OrderId = 5,
+                            PaymentMethod = "Cash on Delivery",
+                            Status = "Pending",
+                            TransactionId = "TXN-662391"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Amount = 138.00m,
+                            OrderId = 6,
+                            PaidAt = new DateTime(2026, 8, 24, 15, 5, 0, 0, DateTimeKind.Utc),
+                            PaymentMethod = "Credit Card",
+                            Status = "Completed",
+                            TransactionId = "TXN-773419"
                         });
                 });
 
@@ -646,168 +737,144 @@ namespace CampTravelGear.Data.Migrations
                             Id = 1,
                             CategoryId = 2,
                             CreatedAt = new DateTime(2026, 1, 15, 8, 0, 0, 0, DateTimeKind.Utc),
-                            Description = "Compact aluminum lightweight folding camp stool for hiking trails and campsite relaxation.",
+                            Description = "Engineered for rugged wilderness expeditions and weekend family getaways alike, the Rahhala Horizon 4-Person Tent delivers uncompromising storm protection and exceptional ventilation. Constructed from heavy-duty 210T ripstop polyester with a 3,500mm polyurethane waterproof coating, this tent keeps your camp completely dry even during continuous torrential downpours.\n\nThe freestanding geodesic frame uses 9.5mm aircraft-grade anodized aluminum poles that resist high mountain winds up to 60 km/h. Inside, dual oversized mesh doors and dual vestibules provide generous gear storage and cross-ventilation to prevent condensation. Features factory seam-taped bathtub floors, reflective guy lines, and internal organizer pockets for headlamps and maps.",
                             IsActive = true,
                             IsDeleted = false,
-                            Name = "Black Folding Stool",
-                            Price = 45.00m,
-                            Stock = 25
+                            Name = "Rahhala Horizon 4-Person Geodesic Camping Tent",
+                            Price = 189.00m,
+                            Stock = 28
                         },
                         new
                         {
                             Id = 2,
-                            CategoryId = 2,
+                            CategoryId = 1,
                             CreatedAt = new DateTime(2026, 1, 15, 8, 0, 0, 0, DateTimeKind.Utc),
-                            Description = "Double-layer waterproof 3-person dome camping tent with high-strength fiberglass poles and rainfly.",
+                            Description = "Built for multi-day alpine traverses and rugged backcountry journeys, the Alpine Apex 65L backpack combines maximum load stability with breathable trail ergonomics. The dynamic torso adjustment system fits heights from 5'4\" to 6'4\", transferring 80% of pack weight smoothly to the multi-density contoured hip belt.\n\nFabricated from 420D high-tenacity Cordura nylon with abrasion-resistant Hypalon reinforcement panels, this pack easily withstands jagged rock scrambles. Includes a dedicated sleeping bag bottom compartment with internal divider, integrated 3L hydration bladder sleeve, dual trekking pole attachments, and a stowable high-visibility waterproof rain cover.",
                             IsActive = true,
                             IsDeleted = false,
-                            Name = "Yellow 3-Person Tent",
-                            Price = 65.00m,
-                            Stock = 18
+                            Name = "Alpine Apex 65L Internal Frame Mountain Expedition Backpack",
+                            Price = 149.00m,
+                            Stock = 35
                         },
                         new
                         {
                             Id = 3,
                             CategoryId = 2,
                             CreatedAt = new DateTime(2026, 1, 15, 8, 0, 0, 0, DateTimeKind.Utc),
-                            Description = "Comfortable self-inflating sleeping pad with integrated air pillow and moisture barrier.",
+                            Description = "Weighing merely 580 grams, the Rahhala Trekker Camp Stool is the ultimate lightweight seating solution for backpackers, trail runners, and campfire gatherings. Crafted with 7075 aviation-grade aluminum tubing with shock-corded assembly, it sets up in under 5 seconds and supports weights up to 130 kg (285 lbs).\n\nThe seat is woven from 600D water-repellent oxford canvas with reinforced bar-tack stitching at all stress points. Packs down into an ultra-compact cylinder that slips effortlessly into side water bottle pockets, making it an indispensable companion on every journey.",
                             IsActive = true,
                             IsDeleted = false,
-                            Name = "Inflatable Camping Bed",
-                            Price = 35.00m,
-                            Stock = 30
+                            Name = "Rahhala Trekker Ultra-Compact Aluminum Folding Camp Stool",
+                            Price = 38.00m,
+                            Stock = 45
                         },
                         new
                         {
                             Id = 4,
                             CategoryId = 2,
                             CreatedAt = new DateTime(2026, 1, 15, 8, 0, 0, 0, DateTimeKind.Utc),
-                            Description = "Closed-cell foam moisture-proof ground sleeping pad for rugged outdoor adventures.",
+                            Description = "Engineered for alpine bivouacs and cold mountain nights, the GlacierPeak sleeping bag delivers premium 750-fill-power hydrophobic goose down insulation rated for temperatures down to -10°C (14°F). The anatomically curved mummy profile minimizes dead air space for instant thermal retention.\n\nFeatures a 20D DWR-treated micro-ripstop shell that sheds condensation, a full-length insulated draft tube along the anti-snag YKK two-way zipper, and an ergonomic 3D footbox. Compresses down to the size of a water bottle in the included waterproof compression dry sack.",
                             IsActive = true,
                             IsDeleted = false,
-                            Name = "Orange Ground Camping Mat",
-                            Price = 20.00m,
-                            Stock = 40
+                            Name = "GlacierPeak -10°C Ultralight Goose Down Mummy Sleeping Bag",
+                            Price = 165.00m,
+                            Stock = 20
                         },
                         new
                         {
                             Id = 5,
-                            CategoryId = 4,
+                            CategoryId = 3,
                             CreatedAt = new DateTime(2026, 1, 15, 8, 0, 0, 0, DateTimeKind.Utc),
-                            Description = "High-grade stainless steel multi-tool tactical folding pocket knife with secure locking mechanism.",
+                            Description = "Crafted from precision-machined aerospace titanium, this ultralight 48g backpacking stove boils 1 liter of water in just 3.2 minutes while consuming minimal isobutane fuel. The concave burner head creates a localized micro-tornado flame that resists gusts up to 30 km/h without requiring a bulky windscreen.\n\nFoldable serrated pot supports accommodate cookware from small 500ml titanium mugs to 2-liter camp pots. Fits standard threaded Lindal valve fuel canisters and folds neatly into an included protective hard-shell case for effortless packing.",
                             IsActive = true,
                             IsDeleted = false,
-                            Name = "Multi-Function Folding Knife",
-                            Price = 25.00m,
-                            Stock = 50
+                            Name = "TitanFlame Backcountry Micro Windproof Titanium Camp Stove",
+                            Price = 42.00m,
+                            Stock = 60
                         },
                         new
                         {
                             Id = 6,
-                            CategoryId = 4,
+                            CategoryId = 5,
                             CreatedAt = new DateTime(2026, 1, 15, 8, 0, 0, 0, DateTimeKind.Utc),
-                            Description = "1000-lumen ultra-bright rechargeable waterproof tactical torch with zoomable beam.",
+                            Description = "Conquer demanding rocky terrains, mud trails, and mountain summits with confidence. The TerraGrip boots combine waterproof full-grain nubuck leather with breathable HydroGuard waterproof membrane booties that keep feet completely dry while releasing internal perspiration.\n\nEquipped with custom deep-lug Vibram Megagrip rubber outsoles for exceptional braking power on steep descents. An injected EVA midsole and thermoplastic shank absorb trail shock and protect feet from sharp jagged rocks throughout long trekking days.",
                             IsActive = true,
                             IsDeleted = false,
-                            Name = "Tactical LED Flashlight",
-                            Price = 50.00m,
-                            Stock = 35
+                            Name = "TerraGrip Waterproof Ankle-Support Hiking Trail Boots",
+                            Price = 135.00m,
+                            Stock = 24
                         },
                         new
                         {
                             Id = 7,
                             CategoryId = 4,
                             CreatedAt = new DateTime(2026, 1, 15, 8, 0, 0, 0, DateTimeKind.Utc),
-                            Description = "High-definition compact roof prism binoculars with multi-coated anti-reflective lenses.",
+                            Description = "Light up your entire campsite with 360-degree diffused illumination. The Solaris Lantern outputs up to 1,200 lumens with 4 versatile lighting modes: Warm Campfire Glow, Cool Daylight, Red Night-Vision, and Emergency SOS Flashing.\n\nPowered by an internal 5,200mAh rechargeable lithium battery that provides up to 70 hours of continuous runtime on low mode and doubles as an emergency USB power bank to charge smartphones on the trail. Features an IPX6 waterproof rating, magnetic base, and top carabiner hook.",
                             IsActive = true,
                             IsDeleted = false,
-                            Name = "Black HD Binoculars 10x42",
-                            Price = 65.00m,
-                            Stock = 20
+                            Name = "Solaris 1200-Lumen Rechargeable LED Camp Lantern & Power Bank",
+                            Price = 39.00m,
+                            Stock = 55
                         },
                         new
                         {
                             Id = 8,
                             CategoryId = 4,
                             CreatedAt = new DateTime(2026, 1, 15, 8, 0, 0, 0, DateTimeKind.Utc),
-                            Description = "Heavy-duty metal sighting navigation compass with fluorescent dial and clinometer.",
+                            Description = "Precision crafted from heat-treated 440C stainless steel, this heavy-duty multi-tool integrates 14 essential backcountry tools: spring-loaded needle-nose pliers, wire cutters, wood saw, serrated blade, can opener, bottle opener, Phillips and flat screwdrivers, and a ruler.\n\nEvery individual implement securely locks in place with a safety lever to prevent accidental closure during intense cutting or sawing tasks. Includes a heavy-duty ballistic nylon belt sheath.",
                             IsActive = true,
                             IsDeleted = false,
-                            Name = "Military Navigation Compass",
-                            Price = 50.00m,
-                            Stock = 45
+                            Name = "SwissForge 14-in-1 Tactical Stainless Outdoor Multi-Tool",
+                            Price = 49.00m,
+                            Stock = 40
                         },
                         new
                         {
                             Id = 9,
-                            CategoryId = 1,
+                            CategoryId = 3,
                             CreatedAt = new DateTime(2026, 1, 15, 8, 0, 0, 0, DateTimeKind.Utc),
-                            Description = "Heavy-duty ergonomic internal frame mountain hiking backpack with rain cover and hydration port.",
+                            Description = "Keep hydration icy cold for 36 hours or soup steaming hot for 18 hours. The HydroShield Canteen is manufactured from food-grade 18/8 kitchen stainless steel with TempLock double-wall vacuum insulation that never transfers flavor or creates outer condensation.\n\nFeatures a wide mouth for adding ice cubes, a leakproof twist-lock cap with an integrated stainless carrying handle, and a durable powder-coat exterior finish that resists scuffs and trail drops.",
                             IsActive = true,
                             IsDeleted = false,
-                            Name = "Trekking Expedition Backpack 65L",
-                            Price = 150.00m,
-                            Stock = 15
+                            Name = "HydroShield Double-Wall Vacuum Insulated Camping Canteen 1.5L",
+                            Price = 36.00m,
+                            Stock = 50
                         },
                         new
                         {
                             Id = 10,
-                            CategoryId = 5,
+                            CategoryId = 4,
                             CreatedAt = new DateTime(2026, 1, 15, 8, 0, 0, 0, DateTimeKind.Utc),
-                            Description = "Waterproof full-grain leather hiking boots with high-traction Vibram rubber outsoles.",
+                            Description = "Experience breathtaking clarity on wildlife spotting and trail reconnaissance. The ApexView features fully multi-coated FMC green broadband optics and premium BAK-4 roof prisms that deliver 99.5% light transmission even in low-light twilight conditions.\n\nO-ring sealed and nitrogen purged for 100% fogproof and waterproof performance in all climates. Rugged rubber armor absorbs shocks and provides a non-slip grip in wet weather. Includes neck strap, carrying case, and protective lens caps.",
                             IsActive = true,
                             IsDeleted = false,
-                            Name = "Brown Ankle-High Hiking Boots",
-                            Price = 125.00m,
+                            Name = "ApexView 12x50 HD Waterproof Nitrogen-Purged Binoculars",
+                            Price = 89.00m,
                             Stock = 22
                         },
                         new
                         {
                             Id = 11,
-                            CategoryId = 3,
+                            CategoryId = 2,
                             CreatedAt = new DateTime(2026, 1, 15, 8, 0, 0, 0, DateTimeKind.Utc),
-                            Description = "Double-wall vacuum insulated stainless steel canteen keeping drinks hot for 12h or cold for 24h.",
+                            Description = "Say goodbye to waking up on hard uneven ground. The CloudRest features 3 inches of high-density open-cell memory foam with an insulated R-value of 4.8, providing true 4-season thermal barrier from frozen ground.\n\nDual wide-mouth brass valves inflate the pad in under 60 seconds with zero pumping required. The top surface is soft-touch peached polyester that prevents sleeping bag rustle, while the bottom uses tough 75D puncture-resistant polyester with anti-slip silicone dots.",
                             IsActive = true,
                             IsDeleted = false,
-                            Name = "Insulated Metal Water Bottle 1L",
-                            Price = 60.00m,
-                            Stock = 60
+                            Name = "CloudRest Self-Inflating 3-Inch Ergonomic Camp Sleeping Pad",
+                            Price = 52.00m,
+                            Stock = 32
                         },
                         new
                         {
                             Id = 12,
-                            CategoryId = 3,
-                            CreatedAt = new DateTime(2026, 1, 15, 8, 0, 0, 0, DateTimeKind.Utc),
-                            Description = "Foldable stainless steel tabletop barbecue grill for backcountry cooking and tailgating.",
-                            IsActive = true,
-                            IsDeleted = false,
-                            Name = "Portable Camp Charcoal Grill",
-                            Price = 100.00m,
-                            Stock = 12
-                        },
-                        new
-                        {
-                            Id = 13,
                             CategoryId = 5,
                             CreatedAt = new DateTime(2026, 1, 15, 8, 0, 0, 0, DateTimeKind.Utc),
-                            Description = "9.8mm dynamic UIAA certified climbing rope with dry treatment for alpine ascents.",
+                            Description = "Engineered with 100% 3K carbon fiber shafts, these trekking poles absorb trail vibrations and reduce knee strain by up to 25% on steep mountain descents. Weighs just 210 grams per pole.\n\nAluminum SpeedLock levers allow quick length adjustments from 65cm to 135cm even while wearing thick winter gloves. Features ergonomic natural cork grips that wick sweat, breathable padded wrist straps, carbide tungsten tips, and interchangeable mud and snow baskets.",
                             IsActive = true,
                             IsDeleted = false,
-                            Name = "Dynamic Climbing Ropes 60m",
-                            Price = 80.00m,
-                            Stock = 25
-                        },
-                        new
-                        {
-                            Id = 14,
-                            CategoryId = 1,
-                            CreatedAt = new DateTime(2026, 1, 15, 8, 0, 0, 0, DateTimeKind.Utc),
-                            Description = "Rugged military camo multi-compartment tactical pack with MOLLE webbing and padded harness.",
-                            IsActive = true,
-                            IsDeleted = false,
-                            Name = "Camouflage Tactical Backpack 50L",
-                            Price = 140.00m,
-                            Stock = 18
+                            Name = "TrailFlow Quick-Lock Carbon Fiber Trekking Poles (Pair)",
+                            Price = 64.00m,
+                            Stock = 30
                         });
                 });
 
@@ -840,100 +907,338 @@ namespace CampTravelGear.Data.Migrations
                         new
                         {
                             Id = 1,
-                            ImageUrl = "/images/top-view-of-travel-equipment-for-a-mountain-trip-e1664201262219.jpg",
+                            ImageUrl = "/images/Products/1/img_1.jpg",
                             IsMain = true,
                             ProductId = 1
                         },
                         new
                         {
                             Id = 2,
-                            ImageUrl = "/images/orange-tourist-tent-illuminated-from-inside-stands-in-mountains-above-clouds.jpg",
+                            ImageUrl = "/images/Products/1/img_2.jpg",
+                            IsMain = false,
+                            ProductId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ImageUrl = "/images/Products/1/img_3.jpg",
+                            IsMain = false,
+                            ProductId = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ImageUrl = "/images/Products/1/img_4.jpg",
+                            IsMain = false,
+                            ProductId = 1
+                        },
+                        new
+                        {
+                            Id = 5,
+                            ImageUrl = "/images/Products/2/img_1.jpg",
                             IsMain = true,
                             ProductId = 2
                         },
                         new
                         {
-                            Id = 3,
-                            ImageUrl = "/images/camping-in-steppe.jpg",
+                            Id = 6,
+                            ImageUrl = "/images/Products/2/img_2.jpg",
+                            IsMain = false,
+                            ProductId = 2
+                        },
+                        new
+                        {
+                            Id = 7,
+                            ImageUrl = "/images/Products/2/img_3.jpg",
+                            IsMain = false,
+                            ProductId = 2
+                        },
+                        new
+                        {
+                            Id = 8,
+                            ImageUrl = "/images/Products/2/img_4.jpg",
+                            IsMain = false,
+                            ProductId = 2
+                        },
+                        new
+                        {
+                            Id = 9,
+                            ImageUrl = "/images/Products/3/img_1.jpg",
                             IsMain = true,
                             ProductId = 3
                         },
                         new
                         {
-                            Id = 4,
-                            ImageUrl = "/images/sandy-field-in-desert-of-egypt.jpg",
+                            Id = 10,
+                            ImageUrl = "/images/Products/3/img_2.jpg",
+                            IsMain = false,
+                            ProductId = 3
+                        },
+                        new
+                        {
+                            Id = 11,
+                            ImageUrl = "/images/Products/3/img_3.jpg",
+                            IsMain = false,
+                            ProductId = 3
+                        },
+                        new
+                        {
+                            Id = 12,
+                            ImageUrl = "/images/Products/3/img_4.jpg",
+                            IsMain = false,
+                            ProductId = 3
+                        },
+                        new
+                        {
+                            Id = 13,
+                            ImageUrl = "/images/Products/4/img_1.jpg",
                             IsMain = true,
                             ProductId = 4
                         },
                         new
                         {
-                            Id = 5,
-                            ImageUrl = "/images/43.jpg",
+                            Id = 14,
+                            ImageUrl = "/images/Products/4/img_2.jpg",
+                            IsMain = false,
+                            ProductId = 4
+                        },
+                        new
+                        {
+                            Id = 15,
+                            ImageUrl = "/images/Products/4/img_3.jpg",
+                            IsMain = false,
+                            ProductId = 4
+                        },
+                        new
+                        {
+                            Id = 16,
+                            ImageUrl = "/images/Products/4/img_4.jpg",
+                            IsMain = false,
+                            ProductId = 4
+                        },
+                        new
+                        {
+                            Id = 17,
+                            ImageUrl = "/images/Products/5/img_1.jpg",
                             IsMain = true,
                             ProductId = 5
                         },
                         new
                         {
-                            Id = 6,
-                            ImageUrl = "/images/panoramic-shot-of-two-young-tourists-looking-at-geographic-map-on-grey-background-e1664119398628.jpg",
+                            Id = 18,
+                            ImageUrl = "/images/Products/5/img_2.jpg",
+                            IsMain = false,
+                            ProductId = 5
+                        },
+                        new
+                        {
+                            Id = 19,
+                            ImageUrl = "/images/Products/5/img_3.jpg",
+                            IsMain = false,
+                            ProductId = 5
+                        },
+                        new
+                        {
+                            Id = 20,
+                            ImageUrl = "/images/Products/5/img_4.jpg",
+                            IsMain = false,
+                            ProductId = 5
+                        },
+                        new
+                        {
+                            Id = 21,
+                            ImageUrl = "/images/Products/6/img_1.jpg",
                             IsMain = true,
                             ProductId = 6
                         },
                         new
                         {
-                            Id = 7,
-                            ImageUrl = "/images/high-angle-view-of-confident-couple-climbing-mountain-e1664201089286.jpg",
+                            Id = 22,
+                            ImageUrl = "/images/Products/6/img_2.jpg",
+                            IsMain = false,
+                            ProductId = 6
+                        },
+                        new
+                        {
+                            Id = 23,
+                            ImageUrl = "/images/Products/6/img_3.jpg",
+                            IsMain = false,
+                            ProductId = 6
+                        },
+                        new
+                        {
+                            Id = 24,
+                            ImageUrl = "/images/Products/6/img_4.jpg",
+                            IsMain = false,
+                            ProductId = 6
+                        },
+                        new
+                        {
+                            Id = 25,
+                            ImageUrl = "/images/Products/7/img_1.jpg",
                             IsMain = true,
                             ProductId = 7
                         },
                         new
                         {
-                            Id = 8,
-                            ImageUrl = "/images/tourist-sitting-phu-sub-lek-viewpoint-sunset-lopburi-thailand-e1664089245105.jpg",
+                            Id = 26,
+                            ImageUrl = "/images/Products/7/img_2.jpg",
+                            IsMain = false,
+                            ProductId = 7
+                        },
+                        new
+                        {
+                            Id = 27,
+                            ImageUrl = "/images/Products/7/img_3.jpg",
+                            IsMain = false,
+                            ProductId = 7
+                        },
+                        new
+                        {
+                            Id = 28,
+                            ImageUrl = "/images/Products/7/img_4.jpg",
+                            IsMain = false,
+                            ProductId = 7
+                        },
+                        new
+                        {
+                            Id = 29,
+                            ImageUrl = "/images/Products/8/img_1.jpg",
                             IsMain = true,
                             ProductId = 8
                         },
                         new
                         {
-                            Id = 9,
-                            ImageUrl = "/images/blue-hiking-backpack-with-fitness-mat-isolated-on-2021-09-03-13-40-43-utc-1.jpg",
+                            Id = 30,
+                            ImageUrl = "/images/Products/8/img_2.jpg",
+                            IsMain = false,
+                            ProductId = 8
+                        },
+                        new
+                        {
+                            Id = 31,
+                            ImageUrl = "/images/Products/8/img_3.jpg",
+                            IsMain = false,
+                            ProductId = 8
+                        },
+                        new
+                        {
+                            Id = 32,
+                            ImageUrl = "/images/Products/8/img_4.jpg",
+                            IsMain = false,
+                            ProductId = 8
+                        },
+                        new
+                        {
+                            Id = 33,
+                            ImageUrl = "/images/Products/9/img_1.jpg",
                             IsMain = true,
                             ProductId = 9
                         },
                         new
                         {
-                            Id = 10,
-                            ImageUrl = "/images/tourist-with-a-backpack-against-the-sky-panorama.jpg",
+                            Id = 34,
+                            ImageUrl = "/images/Products/9/img_2.jpg",
+                            IsMain = false,
+                            ProductId = 9
+                        },
+                        new
+                        {
+                            Id = 35,
+                            ImageUrl = "/images/Products/9/img_3.jpg",
+                            IsMain = false,
+                            ProductId = 9
+                        },
+                        new
+                        {
+                            Id = 36,
+                            ImageUrl = "/images/Products/9/img_4.jpg",
+                            IsMain = false,
+                            ProductId = 9
+                        },
+                        new
+                        {
+                            Id = 37,
+                            ImageUrl = "/images/Products/10/img_1.jpg",
                             IsMain = true,
                             ProductId = 10
                         },
                         new
                         {
-                            Id = 11,
-                            ImageUrl = "/images/spending-time-by-the-campfire.jpg",
+                            Id = 38,
+                            ImageUrl = "/images/Products/10/img_2.jpg",
+                            IsMain = false,
+                            ProductId = 10
+                        },
+                        new
+                        {
+                            Id = 39,
+                            ImageUrl = "/images/Products/10/img_3.jpg",
+                            IsMain = false,
+                            ProductId = 10
+                        },
+                        new
+                        {
+                            Id = 40,
+                            ImageUrl = "/images/Products/10/img_4.jpg",
+                            IsMain = false,
+                            ProductId = 10
+                        },
+                        new
+                        {
+                            Id = 41,
+                            ImageUrl = "/images/Products/11/img_1.jpg",
                             IsMain = true,
                             ProductId = 11
                         },
                         new
                         {
-                            Id = 12,
-                            ImageUrl = "/images/paddling-kayaker-on-the-scenic-lake.jpg",
+                            Id = 42,
+                            ImageUrl = "/images/Products/11/img_2.jpg",
+                            IsMain = false,
+                            ProductId = 11
+                        },
+                        new
+                        {
+                            Id = 43,
+                            ImageUrl = "/images/Products/11/img_3.jpg",
+                            IsMain = false,
+                            ProductId = 11
+                        },
+                        new
+                        {
+                            Id = 44,
+                            ImageUrl = "/images/Products/11/img_4.jpg",
+                            IsMain = false,
+                            ProductId = 11
+                        },
+                        new
+                        {
+                            Id = 45,
+                            ImageUrl = "/images/Products/12/img_1.jpg",
                             IsMain = true,
                             ProductId = 12
                         },
                         new
                         {
-                            Id = 13,
-                            ImageUrl = "/images/high-angle-view-of-confident-couple-climbing-mountain-e1664201089286.jpg",
-                            IsMain = true,
-                            ProductId = 13
+                            Id = 46,
+                            ImageUrl = "/images/Products/12/img_2.jpg",
+                            IsMain = false,
+                            ProductId = 12
                         },
                         new
                         {
-                            Id = 14,
-                            ImageUrl = "/images/group-of-friends-with-backpacks-doing-trekking-excursion-on-mountain.jpg",
-                            IsMain = true,
-                            ProductId = 14
+                            Id = 47,
+                            ImageUrl = "/images/Products/12/img_3.jpg",
+                            IsMain = false,
+                            ProductId = 12
+                        },
+                        new
+                        {
+                            Id = 48,
+                            ImageUrl = "/images/Products/12/img_4.jpg",
+                            IsMain = false,
+                            ProductId = 12
                         });
                 });
 
@@ -984,9 +1289,9 @@ namespace CampTravelGear.Data.Migrations
                         {
                             Id = 1,
                             ApprovedAt = new DateTime(2026, 8, 12, 12, 0, 0, 0, DateTimeKind.Utc),
-                            Comment = "Excellent camping tent, set up took 5 minutes and withstands wind easily.",
+                            Comment = "Outstanding 4-person tent! Pitched it during heavy rain in the mountains and stayed bone dry. Setup took under 5 minutes.",
                             CreatedAt = new DateTime(2026, 8, 12, 10, 0, 0, 0, DateTimeKind.Utc),
-                            ProductId = 2,
+                            ProductId = 1,
                             Rating = 5,
                             Status = "Accepted",
                             UserId = "user-cust-001"
@@ -994,32 +1299,76 @@ namespace CampTravelGear.Data.Migrations
                         new
                         {
                             Id = 2,
-                            Comment = "Incredible build quality and very comfortable back padding for multi-day treks.",
+                            ApprovedAt = new DateTime(2026, 8, 15, 15, 0, 0, 0, DateTimeKind.Utc),
+                            Comment = "The weight distribution on this 65L pack is incredible. The lumbar support saved my back on a 4-day ridge traverse.",
                             CreatedAt = new DateTime(2026, 8, 15, 14, 0, 0, 0, DateTimeKind.Utc),
-                            ProductId = 9,
-                            Rating = 4,
-                            Status = "Pending",
+                            ProductId = 2,
+                            Rating = 5,
+                            Status = "Accepted",
                             UserId = "user-cust-002"
                         },
                         new
                         {
                             Id = 3,
-                            Comment = "Arrived with a slight scratch on the outer lens cap.",
+                            ApprovedAt = new DateTime(2026, 8, 16, 12, 0, 0, 0, DateTimeKind.Utc),
+                            Comment = "Surprisingly sturdy for how small it folds down. Fits right into the bottle pocket of my backpack.",
                             CreatedAt = new DateTime(2026, 8, 16, 11, 0, 0, 0, DateTimeKind.Utc),
-                            ProductId = 7,
-                            Rating = 2,
-                            Status = "Rejected",
+                            ProductId = 3,
+                            Rating = 4,
+                            Status = "Accepted",
                             UserId = "user-cust-003"
                         },
                         new
                         {
                             Id = 4,
-                            Comment = "Super warm down sleeping bag for sub-zero mountain nights. Highly recommended!",
+                            ApprovedAt = new DateTime(2026, 8, 20, 10, 0, 0, 0, DateTimeKind.Utc),
+                            Comment = "Super warm goose down sleeping bag for sub-zero mountain nights. Extremely compact when compressed.",
                             CreatedAt = new DateTime(2026, 8, 20, 9, 30, 0, 0, DateTimeKind.Utc),
-                            ProductId = 14,
+                            ProductId = 4,
                             Rating = 5,
+                            Status = "Accepted",
+                            UserId = "user-cust-001"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            ApprovedAt = new DateTime(2026, 8, 22, 17, 0, 0, 0, DateTimeKind.Utc),
+                            Comment = "Exceptional grip on rocky trails in Petra and Wadi Rum. Completely waterproof and comfortable all day.",
+                            CreatedAt = new DateTime(2026, 8, 22, 16, 0, 0, 0, DateTimeKind.Utc),
+                            ProductId = 6,
+                            Rating = 5,
+                            Status = "Accepted",
+                            UserId = "user-cust-004"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Comment = "Terrific camp lantern. The warm campfire mode is great inside the tent and it charged my phone on the trail.",
+                            CreatedAt = new DateTime(2026, 8, 23, 18, 0, 0, 0, DateTimeKind.Utc),
+                            ProductId = 7,
+                            Rating = 4,
                             Status = "Pending",
                             UserId = "user-cust-001"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Comment = "The multi-tool is great quality, but the outer packaging was slightly squished during delivery.",
+                            CreatedAt = new DateTime(2026, 8, 23, 19, 0, 0, 0, DateTimeKind.Utc),
+                            ProductId = 8,
+                            Rating = 2,
+                            Status = "Rejected",
+                            UserId = "user-cust-002"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Comment = "Crisp and clear BAK-4 optics for desert stargazing and mountain wildlife observation.",
+                            CreatedAt = new DateTime(2026, 8, 24, 10, 0, 0, 0, DateTimeKind.Utc),
+                            ProductId = 10,
+                            Rating = 5,
+                            Status = "Pending",
+                            UserId = "user-cust-004"
                         });
                 });
 
@@ -1068,7 +1417,7 @@ namespace CampTravelGear.Data.Migrations
                         {
                             Id = 1,
                             ApprovedAt = new DateTime(2026, 7, 21, 10, 0, 0, 0, DateTimeKind.Utc),
-                            Content = "We've seen amazing results already. Barrameru should be nominated for outdoor brand of the year. Great customer service!",
+                            Content = "Rahhala gear survived our 10-day alpine trek in freezing storms. Best outdoor brand quality and fast delivery!",
                             CreatedAt = new DateTime(2026, 7, 20, 9, 0, 0, 0, DateTimeKind.Utc),
                             Name = "Sara G. Helvey",
                             Status = "Accepted",
@@ -1077,20 +1426,40 @@ namespace CampTravelGear.Data.Migrations
                         new
                         {
                             Id = 2,
-                            Content = "The best camping gear store I have ever used. Fast delivery and authentic rugged equipment.",
+                            ApprovedAt = new DateTime(2026, 7, 26, 10, 0, 0, 0, DateTimeKind.Utc),
+                            Content = "The most reliable camping gear store I have ever used. Authentic rugged equipment and top customer support.",
                             CreatedAt = new DateTime(2026, 7, 25, 11, 0, 0, 0, DateTimeKind.Utc),
                             Name = "John Doe",
-                            Status = "Pending",
+                            Status = "Accepted",
                             UserId = "user-cust-001"
                         },
                         new
                         {
                             Id = 3,
-                            Content = "Spam test message or irrelevant feedback.",
+                            ApprovedAt = new DateTime(2026, 7, 27, 16, 0, 0, 0, DateTimeKind.Utc),
+                            Content = "The top outdoor camping outfitter in Jordan. Genuine technical gear and great customer care at their Amman center!",
+                            CreatedAt = new DateTime(2026, 7, 27, 14, 0, 0, 0, DateTimeKind.Utc),
+                            Name = "Omar Al-Khalil",
+                            Status = "Accepted",
+                            UserId = "user-cust-004"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Content = "Their geodesic tents and titanium stoves are elite level. Highly recommended to any wilderness adventurer.",
                             CreatedAt = new DateTime(2026, 7, 28, 16, 0, 0, 0, DateTimeKind.Utc),
                             Name = "Alex Hunter",
-                            Status = "Rejected",
+                            Status = "Pending",
                             UserId = "user-cust-003"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Content = "Visit this promotional third-party spam link for discounts.",
+                            CreatedAt = new DateTime(2026, 7, 29, 8, 0, 0, 0, DateTimeKind.Utc),
+                            Name = "Spam User",
+                            Status = "Rejected",
+                            UserId = "user-cust-001"
                         });
                 });
 
@@ -1113,13 +1482,6 @@ namespace CampTravelGear.Data.Migrations
                         .IsUnique();
 
                     b.ToTable("Wishlists");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            UserId = "user-cust-001"
-                        });
                 });
 
             modelBuilder.Entity("CampTravelGear.Models.WishlistItem", b =>
@@ -1147,22 +1509,6 @@ namespace CampTravelGear.Data.Migrations
                         .IsUnique();
 
                     b.ToTable("WishlistItems");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AddedAt = new DateTime(2026, 8, 1, 10, 0, 0, 0, DateTimeKind.Utc),
-                            ProductId = 2,
-                            WishlistId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            AddedAt = new DateTime(2026, 8, 2, 11, 0, 0, 0, DateTimeKind.Utc),
-                            ProductId = 9,
-                            WishlistId = 1
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -1315,6 +1661,11 @@ namespace CampTravelGear.Data.Migrations
                         new
                         {
                             UserId = "user-cust-003",
+                            RoleId = "role-customer-002"
+                        },
+                        new
+                        {
+                            UserId = "user-cust-004",
                             RoleId = "role-customer-002"
                         });
                 });
