@@ -371,3 +371,10 @@
     color: #f59e0b;
 }
 
+.product-detail-main-image {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}

@@ -253,23 +253,6 @@
         @RenderBody()
     </main>
 
-    <!-- Floating Newsletter & Footer (Matches barrameru-v1-footer.jpg) -->
-    <div class="container floating-newsletter-wrap">
-        <div class="floating-newsletter-card">
-            <div class="row align-items-center">
-                <div class="col-lg-6 mb-3 mb-lg-0">
-                    <h5 class="fw-bold text-secondary mb-0">Subscribe to our newsletter to get latest news on your inbox</h5>
-                </div>
-                <div class="col-lg-6">
-                    <form class="newsletter-form d-flex gap-2">
-                        <input type="email" class="form-control newsletter-input-field flex-grow-1" placeholder="Enter your email" required>
-                        <button type="submit" class="btn btn-barrameru flex-shrink-0">SUBMIT <i class="bi bi-caret-right-fill small"></i></button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <footer class="footer-exact-dark" style="background-image: url('/images/mountains-in-colorado.jpg'); background-size: cover; background-position: center; position: relative;">
         <div style="position: absolute; inset: 0; background: rgba(21, 42, 41, 0.94); z-index: 1;"></div>
         <div class="container position-relative" style="z-index: 2;">
@@ -292,7 +275,6 @@
                 <div class="col-lg-3 col-md-6">
                     <h6 class="footer-exact-title">Customer Care</h6>
                     <ul class="footer-exact-links">
-                        <li><a asp-area="Identity" asp-page="/Account/Manage/Index">My Account</a></li>
                         <li><a asp-controller="Order" asp-action="Index">Order History</a></li>
                         <li><a asp-controller="Wishlist" asp-action="Index">My Wishlist</a></li>
                         <li><a asp-controller="Cart" asp-action="Index">Shopping Cart</a></li>
@@ -307,17 +289,15 @@
                         <li><a asp-controller="Shop" asp-action="Index">Shop Catalog</a></li>
                         <li><a asp-controller="Home" asp-action="About">About Us</a></li>
                         <li><a asp-controller="Home" asp-action="Contact">Contact Us</a></li>
-                        <li><a asp-controller="Home" asp-action="Privacy">Privacy Policy</a></li>
                     </ul>
                 </div>
 
                 <!-- Col 4: Reach Us -->
                 <div class="col-lg-3 col-md-6">
                     <h6 class="footer-exact-title">Reach Us</h6>
-                    <p class="small text-white-50 mb-2"><i class="bi bi-geo-alt-fill text-primary me-2"></i> Queen Rania St, Amman, Jordan</p>
-                    <p class="small text-white-50 mb-2"><i class="bi bi-telephone-fill text-primary me-2"></i> +962 6 500 2026</p>
-                    <p class="small text-white-50 mb-2"><i class="bi bi-envelope-fill text-primary me-2"></i> support@rahhala.com</p>
-                    <p class="small text-white-50 mb-0"><i class="bi bi-clock-fill text-primary me-2"></i> Mon - Sat: 9:00 AM - 9:00 PM</p>
+                    <p class="small text-white-50 mb-2"><i class="bi bi-geo-alt-fill text-primary me-2"></i> Amman, Jordan</p>
+                    <p class="small text-white-50 mb-2"><i class="bi bi-telephone-fill text-primary me-2"></i> +962 7 9000 1234</p>
+                    <p class="small text-white-50 mb-2"><i class="bi bi-envelope-fill text-primary me-2"></i> info@rahhala.com</p>
                 </div>
             </div>
 
