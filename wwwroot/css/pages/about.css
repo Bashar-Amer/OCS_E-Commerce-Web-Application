@@ -74,3 +74,246 @@
   font-size: 12px;
   color: #6b7280;
 }
+/* =========================================================
+   ABOUT US - INTRO SECTION
+========================================================= */
+
+.about-intro {
+    background: #ffffff;
+    overflow: hidden;
+}
+
+    /* Small label */
+    .about-intro .sub-badge {
+        display: inline-block;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+    }
+
+/* Main heading */
+.about-title {
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    line-height: 1.12;
+    color: #222;
+    max-width: 480px;
+}
+
+/* Paragraph */
+.about-text {
+    color: #6d6d6d;
+    font-size: 15px;
+    line-height: 1.8;
+    max-width: 500px;
+}
+
+
+/* =========================================================
+   FEATURES
+========================================================= */
+
+.about-features {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.about-feature {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.feature-icon {
+    width: 45px;
+    height: 45px;
+    min-width: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #eef7f7;
+    color: var(--primary);
+    border-radius: 50%;
+    font-size: 19px;
+}
+
+.about-feature h6 {
+    margin: 0 0 3px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #222;
+}
+
+.about-feature p {
+    margin: 0;
+    color: #777;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   IMAGE COLLAGE
+========================================================= */
+
+.about-image-grid {
+    position: relative;
+    min-height: 570px;
+    padding: 0 0 70px 70px;
+}
+
+
+/* Main image */
+
+.about-image-main {
+    width: 78%;
+    height: 500px;
+    overflow: hidden;
+}
+
+    .about-image-main img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.5s ease;
+    }
+
+    .about-image-main:hover img {
+        transform: scale(1.04);
+    }
+
+
+/* Small image */
+
+.about-image-small {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 48%;
+    height: 250px;
+    overflow: hidden;
+    border: 10px solid #fff;
+}
+
+    .about-image-small img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.5s ease;
+    }
+
+    .about-image-small:hover img {
+        transform: scale(1.05);
+    }
+
+
+/* =========================================================
+   EXPERIENCE CARD
+========================================================= */
+
+.about-experience-card {
+    position: absolute;
+    left: 0;
+    bottom: 20px;
+    width: 240px;
+    background: var(--primary);
+    color: #fff;
+    padding: 28px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+}
+
+.experience-number {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+    opacity: 0.85;
+}
+
+.about-experience-card h5 {
+    font-size: 22px;
+    line-height: 1.3;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.about-experience-card p {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.6;
+    opacity: 0.9;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 991px) {
+
+    .about-image-grid {
+        min-height: 500px;
+        padding-left: 40px;
+    }
+
+    .about-image-main {
+        width: 82%;
+        height: 450px;
+    }
+
+    .about-image-small {
+        width: 48%;
+        height: 210px;
+    }
+
+    .about-experience-card {
+        width: 210px;
+    }
+}
+
+
+@media (max-width: 575px) {
+
+    .about-intro {
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+
+    .about-title {
+        font-size: 2rem;
+    }
+
+    .about-features {
+        margin-bottom: 30px;
+    }
+
+    .about-image-grid {
+        min-height: 430px;
+        padding: 0 0 60px 20px;
+    }
+
+    .about-image-main {
+        width: 88%;
+        height: 350px;
+    }
+
+    .about-image-small {
+        width: 55%;
+        height: 170px;
+        border-width: 7px;
+    }
+
+    .about-experience-card {
+        width: 190px;
+        padding: 20px;
+        bottom: 5px;
+    }
+
+        .about-experience-card h5 {
+            font-size: 18px;
+        }
+}
