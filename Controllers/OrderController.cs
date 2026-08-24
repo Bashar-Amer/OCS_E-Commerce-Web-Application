@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using CampTravelGear.DTOs;
+using System.Text.Json;
 
 namespace CampTravelGear.Controllers;
 
@@ -45,13 +46,16 @@ public class OrderController : Controller
             .Include(c => c.CartItems)
             .SingleOrDefaultAsync(c => c.UserId == CurrentUserId);
 
+        if (TempData.Peek("CartIssues") != null)
+            return View();
+
+        TempData["CartIssues"] = null;
         if (cart == null || cart.CartItems.Count == 0)
+        {
+            TempData["CartEmpty"] = "Cart is empty";
             return RedirectToAction("Index", "Cart");
+        }
 
-        if (TempData["CartIssues"] is List<string> issues && issues.Count > 0)
-            ViewBag.CartIssues = issues;
-
-        ViewBag.Total = cart.CartItems.Sum(ci => ci.UnitPrice * ci.Quantity);
         return View();
     }
 
@@ -77,7 +81,7 @@ public class OrderController : Controller
         if (!validation.IsValid)
         {
             await _dbContext.SaveChangesAsync(); 
-            TempData["CartIssues"] = validation.Issues;
+            TempData["CartIssues"] = JsonSerializer.Serialize(validation.Issues);
             return RedirectToAction(nameof(Checkout));
         }
 

@@ -623,7 +623,7 @@ const BarrameruStore = {
                 toast: true,
                 position: 'top-end',
                 showConfirmButton: false,
-                timer: 2000,
+                timer: 1500,
                 timerProgressBar: true,
                 iconColor: '#B67961'
             });
