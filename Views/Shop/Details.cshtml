@@ -125,12 +125,11 @@
 
 
             <!-- Description -->
-
             @if (!string.IsNullOrWhiteSpace(Model.Description))
             {
-                <p class="text-muted small mb-4">
+                <div class="text-muted small mb-4" style="white-space: pre-line; line-height: 1.75; color: #4b5563 !important;">
                     @Model.Description
-                </p>
+                </div>
             }
             else
             {
@@ -139,20 +138,14 @@
                 </p>
             }
 
-
             <!-- Price -->
-
-            <div class="fs-4 fw-bold mb-4"
-                 style="color: #5E959F;">
-
-                <span class=" me-2">
+            <div class="fs-4 fw-bold mb-4" style="color: #5E959F;">
+                <span class="me-2">
                     Price:
                 </span>
-
                 <span>
                     @Model.Price.ToString("C")
                 </span>
-
             </div>
 
 
@@ -277,14 +270,13 @@
 
             <!-- Main Image -->
 
-            <div class="border p-4 text-center position-relative mb-3 bg-white">
+            <div class="border p-3 text-center position-relative mb-3 bg-white" style="border-radius: 4px;">
                 <img id="mainDetailImg"
-     src="@mainImage"
-     alt="@Model.Name"
-     class="img-fluid product-detail-main-image"
-     onclick="openProductImage()"
-     style="cursor: zoom-in;">
-
+                     src="@mainImage"
+                     alt="@Model.Name"
+                     class="img-fluid product-detail-main-image"
+                     onclick="openProductImage()"
+                     style="cursor: zoom-in; max-height: 380px; width: 100%; object-fit: contain;">
             </div>
 
 
