@@ -19,152 +19,245 @@
 </section>
 
 <!-- Section 1: Who We Are -->
-<section class="py-5 bg-white">
-    <div class="container py-4">
+<!-- =========================================================
+     SECTION: WHO WE ARE
+========================================================= -->
+<section class="about-intro py-5">
+    <div class="container py-lg-5">
+
         <div class="row align-items-center g-5">
+
+            <!-- =========================
+                 LEFT: CONTENT
+            ========================== -->
             <div class="col-lg-5">
-                <span class="sub-badge text-teal">Who We Are</span>
-                <h2 class="fw-bold mb-3" style="font-size: 2.2rem; line-height: 1.2;">
-                    More than an adventure, its a way of life
+
+                <span class="sub-badge text-teal">
+                    WHO WE ARE
+                </span>
+
+                <h2 class="about-title fw-bold mt-3 mb-4">
+                    Gear up for your next adventure.
                 </h2>
-                <p class="text-muted small mb-3">
-                    Fermentum scelerisque efficitur nostra sociosqu augue elementum litora suscipit dui malesuada. Purus volutpat arcu felis vel libero luctus metus integer.
+
+                <p class="about-text mb-3">
+                    We believe that every adventure starts with the right gear.
+                    Our store brings together reliable outdoor and camping essentials
+                    designed to make every trip more comfortable, practical, and memorable.
                 </p>
-                <p class="text-muted small mb-4">
-                    Enim scelerisque si leo amet vitae cras penatibus semper ornare commodo vestibulum.
+
+                <p class="about-text mb-4">
+                    Whether you're planning a weekend camping trip, a mountain hike,
+                    or simply escaping the everyday routine, we're here to help you
+                    explore more and worry less.
                 </p>
-                <a asp-controller="Shop" asp-action="Index" class="btn btn-barrameru">DISCOVER MORE</a>
+
+                <a asp-controller="Shop"
+                   asp-action="Index"
+                   class="btn btn-barrameru px-4 py-3">
+                    EXPLORE OUR GEAR
+                </a>
+
+              
+            </div>
+            <!-- =========================
+                 RIGHT: IMAGE COLLAGE
+            ========================== -->
+            <div class="col-lg-7">
+
+                <div class="about-image-grid">
+
+                    <!-- Main image -->
+                    <div class="about-image-main">
+                        <img src="~/images/back-view-of-a-couple-of-hikers-with-backpack.jpg"
+                             alt="Hikers exploring the mountains">
+                    </div>
+
+                    <!-- Secondary image -->
+                    <div class="about-image-small">
+                        <img src="~/images/group-of-smiling-friends-hiking-with-backpacks-outdoors-travel-tourism-hike-and-people-concept.jpg"
+                             alt="People enjoying a campfire">
+                    </div>
+                   
+                    <!-- Experience card -->
+                    <div class="about-experience-card">
+
+                        <span class="experience-number">
+                            ADVENTURE
+                        </span>
+
+                        <h5 style="color:var(--secondart)">
+                            Explore more.<br>
+                            Experience more.
+                        </h5>
+
+                        <p>
+                            Your journey starts with the right gear.
+                        </p>
+
+                    </div>
+
+                </div>
+
             </div>
 
-            <div class="col-lg-7">
-                <div class="row g-3">
-                    <div class="col-sm-6">
-                        <img src="~/images/back-view-of-a-couple-of-hikers-with-backpack.jpg" alt="Hikers" class="img-fluid w-100" style="height: 380px; object-fit: cover;">
-                    </div>
-                    <div class="col-sm-6 d-flex flex-column justify-content-between">
-                        <img src="~/images/spending-time-by-the-campfire.jpg" alt="Campfire" class="img-fluid w-100 mb-3" style="height: 190px; object-fit: cover;">
-                        <div class="quote-box-white flex-grow-1">
-                            <div class="quote-mark-teal">“</div>
-                            <div class="quote-text-script">
-                                Fill your life with adventures, not things. Have stories to tell not stuff to show.
-                            </div>
-                            <small class="fw-bold text-muted">Heidi B. Smith</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
+
     </div>
 </section>
 
+
 <!-- Section 2: Stats Counter Strip -->
+<!-- Section 2: Why Choose Us Strip -->
 <section class="stats-counter-strip" style="background-image: url('/images/43.jpg');">
     <div class="container position-relative" style="z-index: 2;">
         <div class="row text-center g-4">
-            <div class="col-6 col-md-3">
-                <h2 class="text-white fw-bold mb-1">20+ Yrs</h2>
-                <span class="small text-uppercase font-monospace text-white-50">OF EXPERIENCE</span>
-            </div>
-            <div class="col-6 col-md-3">
-                <h2 class="text-white fw-bold mb-1">17-Acre</h2>
-                <span class="small text-uppercase font-monospace text-white-50">OUTDOOR AREA</span>
-            </div>
-            <div class="col-6 col-md-3">
-                <h2 class="text-white fw-bold mb-1">14K+</h2>
-                <span class="small text-uppercase font-monospace text-white-50">PRODUCT SOLD</span>
-            </div>
-            <div class="col-6 col-md-3">
-                <h2 class="text-white fw-bold mb-1">97%</h2>
-                <span class="small text-uppercase font-monospace text-white-50">HAPPY CUSTOMER</span>
-            </div>
-        </div>
-    </div>
-</section>
 
-<!-- Section 3: Explore Activities (4 photos) -->
-<section class="py-5 bg-white text-center">
-    <div class="container py-4">
-        <span class="sub-badge text-teal">Select Your Activity</span>
-        <h2 class="fw-bold mb-5">Explore Activities</h2>
-
-        <div class="row g-4 mb-4">
-            <div class="col-md-6">
-                <img src="~/images/spending-time-by-the-campfire.jpg" alt="Campfire Friends" class="img-fluid w-100" style="height: 260px; object-fit: cover;">
-            </div>
-            <div class="col-md-6">
-                <img src="~/images/paddling-kayaker-on-the-scenic-lake.jpg" alt="Kayaker" class="img-fluid w-100" style="height: 260px; object-fit: cover;">
-            </div>
-            <div class="col-md-6">
-                <img src="~/images/group-of-friends-with-backpacks-doing-trekking-excursion-on-mountain.jpg" alt="Trekking" class="img-fluid w-100" style="height: 260px; object-fit: cover;">
-            </div>
-            <div class="col-md-6">
-                <img src="~/images/happy-asian-young-travellers-with-4wd-drive-car-off-road-in-forest--e1664201038495.jpg" alt="4WD Adventure" class="img-fluid w-100" style="height: 260px; object-fit: cover;">
-            </div>
-        </div>
-
-        <a asp-controller="Home" asp-action="Adventures" class="btn btn-barrameru">EXPLORE MORE</a>
-    </div>
-</section>
-
-<!-- Section 4: Go Adventure Banner -->
-<section style="background-image: url('/images/tourist-with-a-backpack-against-the-sky-panorama.jpg'); background-size: cover; background-position: center; min-height: 480px; display: flex; align-items: center; position: relative;">
-    <div style="position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,0,0,0.1) 0%, rgba(21, 42, 41, 0.7) 40%, rgba(21, 42, 41, 0.88) 100%);"></div>
-    <div class="container position-relative" style="z-index: 2;">
-        <div class="row justify-content-end">
-            <div class="col-lg-6 col-md-8 text-white">
-                <span class="sub-badge text-white">Go Adventure</span>
-                <h2 class="text-white fw-bold mb-3" style="font-size: 2.5rem;">
-                    Free your spirit, break the chains, Go camp!
+            <div class="col-6 col-md-3">
+                <h2 class="text-white fw-bold mb-2">
+                    QUALITY
                 </h2>
-                <p class="text-white-50 small mb-4">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.
-                </p>
-                <a asp-controller="Shop" asp-action="Index" class="btn btn-barrameru">
-                    DISCOVER MORE <i class="bi bi-chevron-right small ms-1"></i>
-                </a>
+                <span class="small text-uppercase font-monospace text-white-50">
+                    GEAR YOU CAN TRUST
+                </span>
             </div>
+
+            <div class="col-6 col-md-3">
+                <h2 class="text-white fw-bold mb-2">
+                    ESSENTIAL
+                </h2>
+                <span class="small text-uppercase font-monospace text-white-50">
+                    EVERYTHING YOU NEED
+                </span>
+            </div>
+
+            <div class="col-6 col-md-3">
+                <h2 class="text-white fw-bold mb-2">
+                    SIMPLE
+                </h2>
+                <span class="small text-uppercase font-monospace text-white-50">
+                    EASY ONLINE SHOPPING
+                </span>
+            </div>
+
+            <div class="col-6 col-md-3">
+                <h2 class="text-white fw-bold mb-2">
+                    ADVENTURE
+                </h2>
+                <span class="small text-uppercase font-monospace text-white-50">
+                    MADE TO EXPLORE
+                </span>
+            </div>
+
         </div>
     </div>
 </section>
 
-<!-- Section 5: Our Value -->
+<!-- Section 3: Our Values -->
 <section class="py-5 bg-white">
     <div class="container py-4">
         <div class="row align-items-center g-5">
+
+            <!-- Intro -->
             <div class="col-lg-5">
-                <span class="sub-badge text-teal">Our Value</span>
-                <h2 class="fw-bold mb-3" style="font-size: 2.2rem;">Nobody is too old for a summer camp</h2>
-                <p class="text-muted small mb-4">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.
+
+                <span class="sub-badge text-teal">
+                    OUR VALUES
+                </span>
+
+                <h2 class="fw-bold mb-3" style="font-size: 2.2rem; line-height: 1.2;">
+                    Gear that makes every adventure better
+                </h2>
+
+                <p class="text-muted small mb-4" style="line-height: 1.8;">
+                    We believe outdoor experiences should be simple, comfortable,
+                    and unforgettable. That's why we focus on bringing together
+                    practical, reliable gear for every kind of adventure.
                 </p>
-                <a asp-controller="Shop" asp-action="Index" class="btn btn-barrameru">DISCOVER MORE</a>
+
+                <a asp-controller="Shop"
+                   asp-action="Index"
+                   class="btn btn-barrameru">
+                    SHOP OUR GEAR
+                </a>
+
             </div>
 
+
+            <!-- Values -->
             <div class="col-lg-7">
+
+                <!-- Quality -->
                 <div class="d-flex align-items-start gap-4 p-4 border rounded-0 mb-3 bg-white shadow-sm">
-                    <div class="p-3 text-white rounded-0 flex-shrink-0" style="background-color: #B67961;">
-                        <i class="bi bi-lightbulb fs-3"></i>
+
+                    <div class="p-3 text-white rounded-0 flex-shrink-0"
+                         style="background-color: #B67961;">
+                        <i class="bi bi-shield-check fs-3"></i>
                     </div>
+
                     <div>
-                        <h5 class="fw-bold mb-2">Vision</h5>
-                        <p class="text-muted small mb-0">Quis nibh rhoncus habitasse suscipit semper. Mauris ullamcorper posuere ad netus condimentum taciti.</p>
+                        <h5 class="fw-bold mb-2">
+                            Quality You Can Trust
+                        </h5>
+
+                        <p class="text-muted small mb-0">
+                            We carefully choose products that combine quality,
+                            practicality, and reliability to support you wherever
+                            your adventure takes you.
+                        </p>
                     </div>
+
                 </div>
 
-                <div class="d-flex align-items-start gap-4 p-4 border rounded-0 bg-white shadow-sm">
-                    <div class="p-3 text-white rounded-0 flex-shrink-0" style="background-color: #B67961;">
-                        <i class="bi bi-rocket-takeoff fs-3"></i>
+
+                <!-- Variety -->
+                <div class="d-flex align-items-start gap-4 p-4 border rounded-0 mb-3 bg-white shadow-sm">
+
+                    <div class="p-3 text-white rounded-0 flex-shrink-0"
+                         style="background-color: #B67961;">
+                        <i class="bi bi-grid fs-3"></i>
                     </div>
+
                     <div>
-                        <h5 class="fw-bold mb-2">Mission</h5>
-                        <p class="text-muted small mb-0">Quis nibh rhoncus habitasse suscipit semper. Mauris ullamcorper posuere ad netus condimentum taciti.</p>
+                        <h5 class="fw-bold mb-2">
+                            Everything for the Outdoors
+                        </h5>
+
+                        <p class="text-muted small mb-0">
+                            From camping essentials to outdoor accessories,
+                            we bring the gear you need together in one convenient place.
+                        </p>
                     </div>
+
                 </div>
+
+
+                <!-- Adventure -->
+                <div class="d-flex align-items-start gap-4 p-4 border rounded-0 bg-white shadow-sm">
+
+                    <div class="p-3 text-white rounded-0 flex-shrink-0"
+                         style="background-color: #B67961;">
+                        <i class="bi bi-compass fs-3"></i>
+                    </div>
+
+                    <div>
+                        <h5 class="fw-bold mb-2">
+                            Adventure Comes First
+                        </h5>
+
+                        <p class="text-muted small mb-0">
+                            We are here to help you spend less time worrying about
+                            your equipment and more time enjoying the great outdoors.
+                        </p>
+                    </div>
+
+                </div>
+
             </div>
+
         </div>
     </div>
 </section>
-
 <!-- Section 6: Meet The Team (4 members on dark slate) -->
 <section class="team-section-dark text-center text-white">
     <div class="container">
