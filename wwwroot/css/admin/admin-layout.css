@@ -71,9 +71,10 @@ body.admin-body {
 }
 
 .admin-sidebar-brand img {
-  height: 32px;
+  height: 40px;
+  width: auto;
+  max-width: 160px;
   object-fit: contain;
-  filter: brightness(0) invert(1);
 }
 
 .admin-sidebar-brand .brand-title {

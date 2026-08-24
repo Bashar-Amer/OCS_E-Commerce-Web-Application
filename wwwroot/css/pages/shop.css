@@ -400,3 +400,9 @@
         color: #374151;
         background: #fff;
     }
+
+.shop-sidebar {
+    position: sticky;
+    top: 70px;
+    align-self: flex-start;
+}
