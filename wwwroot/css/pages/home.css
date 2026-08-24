@@ -778,4 +778,52 @@
         gap: 24px;
     }
 }
- 
+
+/* =========================
+   PRODUCT CATEGORIES
+========================= */
+
+.about-category-card {
+    position: relative;
+    overflow: hidden;
+    height: 260px;
+    background: #eee;
+}
+
+    .about-category-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.4s ease;
+    }
+
+    .about-category-card::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient( to top, rgba(0, 0, 0, 0.72), rgba(0, 0, 0, 0.05) );
+    }
+
+    .about-category-card:hover img {
+        transform: scale(1.05);
+    }
+
+.about-category-content {
+    position: absolute;
+    left: 24px;
+    bottom: 22px;
+    z-index: 2;
+    color: var(--white);
+}
+
+    .about-category-content h5 {
+        color: var(--white);
+        font-size: 18px;
+        font-weight: 700;
+        margin-bottom: 4px;
+    }
+
+    .about-category-content span {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 12px;
+    }
