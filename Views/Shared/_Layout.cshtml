@@ -276,56 +276,55 @@
             <div class="row g-4">
                 <!-- Col 1: Logo + Bio -->
                 <div class="col-lg-3 col-md-6">
-                    <img src="~/images/Logo_Barrameru_2.png" alt="Barrameru" style="height: 42px; margin-bottom: 16px;" onerror="this.src='/images/Logo_Barrameru.png'">
+                    <img src="~/images/Logo_Barrameru.png" alt="Rahhala" style="height: 48px; margin-bottom: 16px; mix-blend-mode: multiply; background: #fff; padding: 4px 8px; border-radius: 4px;">
                     <p class="small text-white-50 mb-3">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.
+                        Rahhala is your premier destination for high-quality camping gear, trekking equipment, and wilderness essentials tailored for passionate explorers.
                     </p>
                     <div class="footer-social-bar">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-behance"></i></a>
+                        <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" title="Twitter / X"><i class="fab fa-x-twitter"></i></a>
+                        <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
 
-                <!-- Col 2: Customer Service -->
+                <!-- Col 2: Customer Care -->
                 <div class="col-lg-3 col-md-6">
-                    <h6 class="footer-exact-title">Customer Service</h6>
+                    <h6 class="footer-exact-title">Customer Care</h6>
                     <ul class="footer-exact-links">
                         <li><a asp-area="Identity" asp-page="/Account/Manage/Index">My Account</a></li>
-                        <li><a asp-controller="Order" asp-action="Invoice">Order History</a></li>
-                        <li><a href="#">Newsletter</a></li>
-                        <li><a asp-controller="Shop" asp-action="Index">Brands</a></li>
-                        <li><a href="#">Gift Voucher</a></li>
+                        <li><a asp-controller="Order" asp-action="Index">Order History</a></li>
+                        <li><a asp-controller="Wishlist" asp-action="Index">My Wishlist</a></li>
+                        <li><a asp-controller="Cart" asp-action="Index">Shopping Cart</a></li>
                     </ul>
                 </div>
 
-                <!-- Col 3: Useful Links -->
+                <!-- Col 3: Quick Links -->
                 <div class="col-lg-3 col-md-6">
-                    <h6 class="footer-exact-title">Useful Links</h6>
+                    <h6 class="footer-exact-title">Quick Links</h6>
                     <ul class="footer-exact-links">
+                        <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li><a asp-controller="Shop" asp-action="Index">Shop Catalog</a></li>
                         <li><a asp-controller="Home" asp-action="About">About Us</a></li>
-                        <li><a asp-controller="Home" asp-action="Contact">Contact</a></li>
-                        <li><a asp-controller="Home" asp-action="Adventures">Adventures</a></li>
+                        <li><a asp-controller="Home" asp-action="Contact">Contact Us</a></li>
                         <li><a asp-controller="Home" asp-action="Privacy">Privacy Policy</a></li>
-                        <li><a href="#">Terms of Use</a></li>
                     </ul>
                 </div>
 
                 <!-- Col 4: Reach Us -->
                 <div class="col-lg-3 col-md-6">
                     <h6 class="footer-exact-title">Reach Us</h6>
-                    <p class="small text-white-50 mb-2"><i class="bi bi-geo-alt-fill text-primary me-2"></i> Jln Cempaka Wangi No 22 Jakarta - Indonesia</p>
-                    <p class="small text-white-50 mb-2"><i class="bi bi-telephone-fill text-primary me-2"></i> +6221 2002 2012</p>
-                    <p class="small text-white-50 mb-0"><i class="bi bi-envelope-fill text-primary me-2"></i> hello@yourdomain.tld</p>
+                    <p class="small text-white-50 mb-2"><i class="bi bi-geo-alt-fill text-primary me-2"></i> Queen Rania St, Amman, Jordan</p>
+                    <p class="small text-white-50 mb-2"><i class="bi bi-telephone-fill text-primary me-2"></i> +962 6 500 2026</p>
+                    <p class="small text-white-50 mb-2"><i class="bi bi-envelope-fill text-primary me-2"></i> support@rahhala.com</p>
+                    <p class="small text-white-50 mb-0"><i class="bi bi-clock-fill text-primary me-2"></i> Mon - Sat: 9:00 AM - 9:00 PM</p>
                 </div>
             </div>
 
             <!-- Copyright & Payment Cards -->
             <div class="footer-copyright-bar d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
                 <div class="small text-white-50">
-                    Copyright &copy; 2026 Rahhala, All rights reserved.
+                    Copyright &copy; 2026 Rahhala. All rights reserved.
                 </div>
                 <div class="d-flex gap-2">
                     <img src="~/images/Visa.jpg" alt="Visa" class="bg-white p-1 rounded" style="height: 22px;">

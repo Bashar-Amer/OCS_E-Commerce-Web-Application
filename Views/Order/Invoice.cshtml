@@ -1,7 +1,7 @@
-@model IEnumerable<CampTravelGear.Models.Order>
+@model CampTravelGear.Models.Order
 @{
     ViewData["Title"] = "Order Invoice Receipt";
-    var order = Model?.FirstOrDefault();
+    var order = Model;
     string orderId = order != null ? order.Id.ToString() : (ViewBag.OrderId?.ToString() ?? "0");
     var status = order?.Status ?? "Completed";
     var orderDate = order?.OrderDate ?? DateTime.UtcNow;
@@ -44,7 +44,7 @@
                     <img src="~/images/Logo_Barrameru.png" alt="Rahhala" style="height: 48px;" class="mb-3">
                     <p class="small text-muted mb-0">
                         <strong>Rahhala Outdoor Club & Camping Gear</strong><br>
-                        Jln Cempaka Wangi No 22<br>
+                        Queen Rania St<br>
                         Amman - Jordan<br>
                         +962 6 500 2026
                     </p>

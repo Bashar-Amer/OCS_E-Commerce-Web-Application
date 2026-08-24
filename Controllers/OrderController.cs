@@ -1,4 +1,4 @@
-﻿using CampTravelGear.Data;
+using CampTravelGear.Data;
 using CampTravelGear.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -158,7 +158,7 @@ public class OrderController : Controller
         {
             if (item.Product is null || item.Product.Stock <= 0)
             {
-                issues.Add($"\"{item.Product?.Name ?? "An item"}\" is no longer available and was removed from your cart.");
+                issues.Add($"\"{item.Product?.Name ?? "An item"}\" is out of stock and was removed from your cart.");
                 toRemove.Add(item);
                 continue;
             }
