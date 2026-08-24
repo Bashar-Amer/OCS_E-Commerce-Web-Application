@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="~/css/pages/checkout.css" asp-append-version="true" />
 }
 
+@using System.Text.Json
 @using CampTravelGear.DTOs
 @model CheckoutDto?
 
@@ -26,19 +27,34 @@
 <section class="py-5 bg-white">
     <div class="container py-4">
 
-        <!-- FIX 1: Added code to display TempData Cart Issues (Stock changes, removals, etc.) -->
-        @if (TempData["CartIssues"] is List<string> cartIssues && cartIssues.Count > 0)
-        {
-            <div class="alert alert-warning alert-dismissible fade show mb-4 rounded-0" role="alert">
-                <strong>Notice regarding your cart:</strong>
-                <ul class="mb-0 ps-3">
-                    @foreach (var issue in cartIssues)
-                    {
-                        <li>@issue</li>
-                    }
-                </ul>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
+        @{
+           List<string> cartIssues = new();
+    
+            var rawJson = TempData.Peek("CartIssues") as string;
+
+            if (!string.IsNullOrEmpty(rawJson))
+            {
+                try
+                {
+                    cartIssues = JsonSerializer.Deserialize<List<string>>(rawJson) ?? new();
+                }
+                catch
+                {
+                    cartIssues = new List<string> { rawJson };
+                }
+                <div class="alert alert-warning alert-dismissible fade show mb-4 rounded-0" role="alert">
+                    <strong>Notice regarding your cart:</strong>
+                    <ul class="mb-0 ps-3">
+                        @foreach (var issue in cartIssues)
+                        {
+                            <li>@issue</li>
+                        }
+                    </ul>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+
+            
         }
 
         <form id="exactCheckoutForm" asp-controller="Order" asp-action="Checkout" method="post">
