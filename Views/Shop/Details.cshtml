@@ -8,7 +8,7 @@
     var mainImage = Model.ProductImages
         .FirstOrDefault(x => x.IsMain)?.ImageUrl
         ?? Model.ProductImages.FirstOrDefault()?.ImageUrl
-        ?? "/images/placeholder.png";
+        ?? "/images/placeholder.jpg";
 
     // Ratings
     var ratings = Model.Reviews
@@ -84,7 +84,7 @@
 <div class="d-flex flex-column h-100 m-4">
     <!-- Product Name -->
 
-            <h1 class="fw-bold mb-2 text-primary text-dark"
+            <h1 class="fw-bold mb-2 text-dark"
                 style="font-size: 2.3rem;">
 
                 @Model.Name
@@ -145,7 +145,7 @@
             <div class="fs-4 fw-bold mb-4"
                  style="color: #5E959F;">
 
-                <span class=" me-2">
+                <span class="text-dark me-2">
                     Price:
                 </span>
 
@@ -160,31 +160,21 @@
 
             @if (Model.Stock > 0)
             {
-<div class="d-flex align-items-center gap-3 mt-auto flex-wrap">
-                    <!-- Quantity Stepper (+ - & direct typing) -->
-                    <div class="product-qty-stepper">
-                        <button type="button" class="product-qty-btn" id="btnDetailQtyMinus" aria-label="Decrease quantity">
-                            <i class="bi bi-dash"></i>
-                        </button>
-                        <input type="number"
-                               id="detailQtyInput"
-                               class="product-qty-input"
-                               value="1"
-                               min="1"
-                               max="@Model.Stock"
-                               aria-label="Product quantity">
-                        <button type="button" class="product-qty-btn" id="btnDetailQtyPlus" aria-label="Increase quantity">
-                            <i class="bi bi-plus"></i>
-                        </button>
-                    </div>
+<div class="d-flex align-items-center gap-3 mt-auto ">
+                    <input type="number"
+                           id="detailQtyInput"
+                           class="form-control rounded-0 text-center"
+                           value="1"
+                           min="1"
+                           max="@Model.Stock"
+                           style="width: 65px; height: 44px;">
+
 
                     <button type="button"
                             class="btn btn-barrameru"
                             onclick="BarrameruStore.addToCart(
                                 @Model.Id,
-                                parseInt(document.getElementById('detailQtyInput').value) || 1,
-                                {name:'@Model.Name',price:'@Model.Price',image:'@mainImage'},
-                                this
+                                parseInt(document.getElementById('detailQtyInput').value)
                             )">
 
                         <i class="bi bi-cart3 me-1"></i>
@@ -560,7 +550,7 @@
                         var relatedImage = product.ProductImages
                             .FirstOrDefault(x => x.IsMain)?.ImageUrl
                             ?? product.ProductImages.FirstOrDefault()?.ImageUrl
-                            ?? "/images/placeholder.png";
+                            ?? "/images/placeholder.jpg";
 
                         var productRatings = product.Reviews
                             .Where(r => r.Rating.HasValue)
@@ -663,7 +653,7 @@
 
                                 <button type="button"
                                         class="btn btn-template-add-cart"
-                                        onclick="BarrameruStore.addToCart(@product.Id, 1, {name:'@product.Name',price:'@product.Price',image:'@(product.ProductImages?.FirstOrDefault(pi => pi.IsMain)?.ImageUrl ?? "/images/placeholder.png")' },this)" >
+                                        onclick="BarrameruStore.addToCart(@product.Id, 1)">
 
                                     <i class="bi bi-cart3 me-1"></i>
 
@@ -832,42 +822,7 @@ async function submitProductReview(productId) {
         btn.disabled = false;
     }
 }
-
-// Single Product Quantity Stepper (+ - & direct typing)
-document.addEventListener('DOMContentLoaded', () => {
-    const qtyInput = document.getElementById('detailQtyInput');
-    const btnMinus = document.getElementById('btnDetailQtyMinus');
-    const btnPlus = document.getElementById('btnDetailQtyPlus');
-
-    if (qtyInput && btnMinus && btnPlus) {
-        const maxStock = parseInt(qtyInput.getAttribute('max')) || 9999;
-        const minQty = 1;
-
-        btnMinus.addEventListener('click', () => {
-            let current = parseInt(qtyInput.value) || minQty;
-            if (current > minQty) {
-                qtyInput.value = current - 1;
-            }
-        });
-
-        btnPlus.addEventListener('click', () => {
-            let current = parseInt(qtyInput.value) || minQty;
-            if (current < maxStock) {
-                qtyInput.value = current + 1;
-            }
-        });
-
-        // Ensure typed value stays within valid range [1, maxStock]
-        qtyInput.addEventListener('change', () => {
-            let val = parseInt(qtyInput.value);
-            if (isNaN(val) || val < minQty) {
-                qtyInput.value = minQty;
-            } else if (val > maxStock) {
-                qtyInput.value = maxStock;
-            }
-        });
-    }
-});
     </script>
+
 }
 
