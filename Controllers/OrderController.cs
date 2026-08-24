@@ -21,17 +21,16 @@ public class OrderController : Controller
         _dbContext = dbContext;
     }
 
+
+    private string CurrentUserId => _userManager.GetUserId(User)!;
+
     public async Task<IActionResult> Index() {
-        string? userId = _userManager.GetUserId(User);
         var orders = await _dbContext.Orders
-            .Where(o => o.UserId == userId)
+            .AsNoTracking()
+            .Where(o => o.UserId == CurrentUserId)
             .Include(o => o.Address)
-            .Include(o => o.OrderItems)
-                .ThenInclude(oi => oi.Product)
-                    .ThenInclude(p => p.ProductImages)
-            .Include(o => o.OrderItems)
-                .ThenInclude(oi => oi.Product)
-                    .ThenInclude(p => p.Category)
+            .Include(o => o.OrderItems).ThenInclude(oi => oi.Product).ThenInclude(p => p!.ProductImages)
+            .Include(o => o.OrderItems).ThenInclude(oi => oi.Product).ThenInclude(p => p!.Category)
             .Include(o => o.Payments)
             .OrderByDescending(o => o.OrderDate)
             .ToListAsync();
@@ -41,106 +40,145 @@ public class OrderController : Controller
 
     public async Task<IActionResult> Checkout()
     {
-        string? userId = _userManager.GetUserId(User);
-        if (userId != null)
-        {
-            var userCart = await _dbContext.Carts.SingleOrDefaultAsync(c => c.UserId == userId);
-            if (userCart != null)
-            {
-                await _dbContext.Entry(userCart).Collection(c => c.CartItems).LoadAsync();
+        var cart = await _dbContext.Carts
+            .AsNoTracking()
+            .Include(c => c.CartItems)
+            .SingleOrDefaultAsync(c => c.UserId == CurrentUserId);
 
-                var total = userCart.CartItems.Sum(item => item.UnitPrice * item.Quantity);
-                ViewBag.Total = total;
-                return View(null);
-            }
-        }
-        return NotFound();
+        if (cart == null || cart.CartItems.Count == 0)
+            return RedirectToAction("Index", "Cart");
+
+        if (TempData["CartIssues"] is List<string> issues && issues.Count > 0)
+            ViewBag.CartIssues = issues;
+
+        ViewBag.Total = cart.CartItems.Sum(ci => ci.UnitPrice * ci.Quantity);
+        return View();
     }
 
     [HttpPost]
+    [ValidateAntiForgeryToken]
     public async Task<IActionResult> Checkout(CheckoutDto userData)
     {
-        
-        if (ModelState.IsValid)
+        if (!ModelState.IsValid) return View(userData);
+
+        var cart = await _dbContext.Carts
+            .Include(c => c.CartItems)
+                .ThenInclude(ci => ci.Product)
+            .SingleOrDefaultAsync(c => c.UserId == CurrentUserId);
+
+        if (cart == null || cart.CartItems.Count == 0)
         {
-            string? userId = _userManager.GetUserId(User);
-            if (userId != null)
+            ModelState.AddModelError(string.Empty, "Your cart is empty.");
+            return View(userData);
+        }
+
+        
+        var validation = ValidateAndAdjustCart(cart);
+        if (!validation.IsValid)
+        {
+            await _dbContext.SaveChangesAsync(); 
+            TempData["CartIssues"] = validation.Issues;
+            return RedirectToAction(nameof(Checkout));
+        }
+
+        await using var transaction = await _dbContext.Database.BeginTransactionAsync();
+
+       
+        foreach (var item in cart.CartItems)
+        {
+            var affected = await _dbContext.Products
+                .Where(p => p.Id == item.ProductId && p.Stock >= item.Quantity)
+                .ExecuteUpdateAsync(s => s.SetProperty(p => p.Stock, p => p.Stock - item.Quantity));
+
+            if (affected == 0)
             {
-                var userCart = await _dbContext.Carts.SingleOrDefaultAsync(c => c.UserId == userId);
-                if (userCart != null)
+                await transaction.RollbackAsync();
+                TempData["CartIssues"] = new List<string>
                 {
-                    await _dbContext.Entry(userCart).Collection(c => c.CartItems).LoadAsync();
-
-                    if (await CheckAndValidateCart(userCart.CartItems))
-                        return RedirectToAction("Checkout");
-                    
-                    var total = userCart.CartItems.Sum(item => item.UnitPrice * item.Quantity);
-
-                    var order = new Order
-                    {
-                        UserId = userId,
-                        Address = new Address
-                        {
-                            UserId = userId,
-                            FullAddress = userData.FullAddress,
-                            City = userData.City
-                        },
-                        TotalAmount = total,
-                        OrderItems = userCart.CartItems.Select(ci => new OrderItem
-                        {
-                            ProductId = ci.ProductId,
-                            Quantity = ci.Quantity,
-                            UnitPrice = ci.UnitPrice
-                        }).ToList()
-                    };
-
-                    await _dbContext.Orders.AddAsync(order);
-                    await _dbContext.SaveChangesAsync();
-
-                    _dbContext.CartItems.RemoveRange(userCart.CartItems);
-                    await _dbContext.SaveChangesAsync();
-
-                    return Ok(order.Id);
-                }
+                    "One or more items sold out while you were checking out. Please review your cart."
+                };
+                return RedirectToAction(nameof(Checkout));
             }
         }
-        return View(userData);
+
+        var total = cart.CartItems.Sum(ci => ci.UnitPrice * ci.Quantity);
+
+        var order = new Order
+        {
+            UserId = CurrentUserId,
+            OrderDate = DateTime.UtcNow,
+            Address = new Address
+            {
+                UserId = CurrentUserId,
+                FullAddress = userData.FullAddress,
+                City = userData.City
+            },
+            TotalAmount = total,
+            OrderItems = cart.CartItems.Select(ci => new OrderItem
+            {
+                ProductId = ci.ProductId,
+                Quantity = ci.Quantity,
+                UnitPrice = ci.UnitPrice
+            }).ToList()
+        };
+
+        _dbContext.Orders.Add(order);
+        _dbContext.CartItems.RemoveRange(cart.CartItems);
+
+        await _dbContext.SaveChangesAsync();
+        await transaction.CommitAsync();
+
+        return Ok(new { success = true, orderId = order.Id });
     }
 
     public async Task<IActionResult> Invoice(int id)
     {
         var order = await _dbContext.Orders
-            .Where(o => o.Id == id)
+            .AsNoTracking()
             .Include(o => o.User)
             .Include(o => o.Address)
-            .Include(o => o.OrderItems)
-                .ThenInclude(oi => oi.Product)
-                    .ThenInclude(p => p.ProductImages)
-            .Include(o => o.OrderItems)
-                .ThenInclude(oi => oi.Product)
-                    .ThenInclude(p => p.Category)
+            .Include(o => o.OrderItems).ThenInclude(oi => oi.Product).ThenInclude(p => p!.ProductImages)
+            .Include(o => o.OrderItems).ThenInclude(oi => oi.Product).ThenInclude(p => p!.Category)
             .Include(o => o.Payments)
-            .OrderByDescending(o => o.OrderDate)
-            .ToListAsync();
+            .FirstOrDefaultAsync(o => o.Id == id);
+
+        if (order == null) return NotFound();
+        if (order.UserId != CurrentUserId) return Forbid();
 
         ViewBag.OrderId = id.ToString();
         return View(order);
     }
 
-    [NonAction]
-    public async Task<bool> CheckAndValidateCart(ICollection<CartItem> items)
+    private CartValidationResult ValidateAndAdjustCart(Cart cart)
     {
-        if (items.Count < 0)
-            return false;
-        
-        foreach (var item in items)
+        var issues = new List<string>();
+        var toRemove = new List<CartItem>();
+
+        foreach (var item in cart.CartItems)
         {
-            await _dbContext.Entry(item).Reference(i => i.Product).LoadAsync();
-            if(item!.Product.Stock < 1)
+            if (item.Product is null || item.Product.Stock <= 0)
             {
-                _dbContext.CartItems.Remove(item);
+                issues.Add($"\"{item.Product?.Name ?? "An item"}\" is no longer available and was removed from your cart.");
+                toRemove.Add(item);
+                continue;
+            }
+
+            if (item.Product.Stock < item.Quantity)
+            {
+                issues.Add($"Only {item.Product.Stock} left of \"{item.Product.Name}\" - quantity adjusted.");
+                item.Quantity = item.Product.Stock;
             }
         }
-        return true;
+
+        foreach (var item in toRemove)
+        {
+            cart.CartItems.Remove(item);
+            _dbContext.CartItems.Remove(item);
+        }
+
+        return new CartValidationResult(issues.Count == 0, issues);
     }
+
+    private readonly record struct CartValidationResult(bool IsValid, List<string> Issues);
+
 }
