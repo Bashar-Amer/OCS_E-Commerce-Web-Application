@@ -159,18 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 cutout: '70%',
                 plugins: {
                     legend: {
-                        position: 'bottom',
-                        labels: {
-                            boxWidth: 12,
-                            boxHeight: 12,
-                            padding: 12,
-                            color: '#152A29',
-                            font: {
-                                size: 11,
-                                weight: '600',
-                                family: "'Plus Jakarta Sans', sans-serif"
-                            }
-                        }
+                        display: false
                     },
                     tooltip: {
                         backgroundColor: '#152A29',

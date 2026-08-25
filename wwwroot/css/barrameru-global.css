@@ -214,7 +214,7 @@ a:hover {
 }
 
 /* ==========================================================================
-   BUTTON TO EXPANDABLE SEARCH BAR ANIMATION
+   DESKTOP SEARCH ANIMATION (Inline Expandable >= 768px)
    ========================================================================== */
 .header-search-container {
   position: relative;
@@ -235,7 +235,8 @@ a:hover {
   transition: color 0.2s ease, transform 0.2s ease;
 }
 
-.header-search-trigger:hover {
+.header-search-trigger:hover,
+.header-search-trigger.active {
   color: var(--primary);
   transform: scale(1.1);
 }
@@ -244,7 +245,7 @@ a:hover {
   position: absolute;
   right: 0;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translateY(-50%) scale(0.95);
   display: flex;
   align-items: center;
   width: 0;
@@ -253,21 +254,23 @@ a:hover {
   background: #ffffff;
   border: 1.5px solid transparent;
   border-radius: 24px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
-  transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1), 
-              opacity 0.25s ease, 
-              visibility 0.35s ease, 
-              border-color 0.3s ease;
-  z-index: 100;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.14);
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+              opacity 0.2s ease, 
+              visibility 0.3s ease, 
+              border-color 0.25s ease,
+              transform 0.25s ease;
+  z-index: 1050;
   overflow: hidden;
   white-space: nowrap;
 }
 
 .header-search-container.is-open .header-search-expandable {
-  width: 260px;
+  width: 270px;
   opacity: 1;
   visibility: visible;
   border-color: var(--primary);
+  transform: translateY(-50%) scale(1);
 }
 
 .header-search-container.is-open .header-search-trigger {
@@ -286,8 +289,8 @@ a:hover {
 .header-search-input-field {
   width: 100%;
   height: 38px;
-  padding: 6px 32px 6px 34px;
-  font-size: 12px;
+  padding: 6px 36px 6px 34px;
+  font-size: 12.5px;
   font-family: var(--font-body);
   color: #152A29;
   border: none;
@@ -297,17 +300,18 @@ a:hover {
 
 .header-search-input-field::placeholder {
   color: #888;
-  font-size: 11.5px;
+  font-size: 12px;
 }
 
 .header-search-close {
   position: absolute;
   right: 6px;
+  width: 26px;
+  height: 26px;
   background: transparent;
   border: none;
   color: #888;
-  font-size: 11px;
-  padding: 4px 6px;
+  font-size: 12px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -318,13 +322,123 @@ a:hover {
 
 .header-search-close:hover {
   color: #EF4444;
-  background: #f1f1f1;
+  background: #f1f5f4;
 }
 
-@media (max-width: 576px) {
-  .header-search-container.is-open .header-search-expandable {
-    width: 210px;
-  }
+/* ==========================================================================
+   MOBILE-ONLY UNDER-NAVBAR SLIDE-DOWN SEARCH (< 768px, No Action Button)
+   ========================================================================== */
+.header-search-under-bar {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  width: 100%;
+  background: #ffffff;
+  border-top: 1px solid #f0f3f2;
+  border-bottom: 1.5px solid #dce5e2;
+  box-shadow: 0 12px 30px rgba(21, 42, 41, 0.14);
+  padding: 10px 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-14px);
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 1010;
+  pointer-events: none;
+}
+
+.header-search-under-bar.is-open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.search-under-bar-form {
+  width: 100%;
+}
+
+.search-under-bar-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: #f8faf9;
+  border: 1.5px solid #dce5e2;
+  border-radius: 28px;
+  padding: 2px 6px 2px 14px;
+  transition: all 0.25s ease-in-out;
+}
+
+.search-under-bar-input-wrap:focus-within {
+  border-color: var(--primary);
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(182, 121, 97, 0.15);
+}
+
+.search-under-icon {
+  color: var(--primary);
+  font-size: 15px;
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+
+.search-under-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 7px 4px;
+  font-size: 13px;
+  font-family: var(--font-body);
+  color: #152A29;
+  outline: none;
+}
+
+.search-under-input::placeholder {
+  color: #8a9997;
+  font-size: 12.5px;
+}
+
+.search-under-clear-btn {
+  background: transparent;
+  border: none;
+  color: #8a9997;
+  font-size: 16px;
+  padding: 3px;
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  margin-right: 4px;
+  transition: color 0.2s ease;
+}
+
+.search-under-clear-btn:hover {
+  color: #ef4444;
+}
+
+.search-under-close-btn {
+  background: #eef3f1;
+  border: none;
+  color: #556665;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  cursor: pointer;
+  margin-left: 6px;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.search-under-close-btn:hover {
+  background: #ef4444;
+  color: #ffffff;
+  transform: rotate(90deg);
 }
 
 .header-icon-link {
@@ -420,18 +534,33 @@ a:hover {
 
 /* Footer Dark */
 .footer-exact-dark {
-  background: #152A29;
-  color: #a0aec0;
-  padding-top: 80px;
+  background: #11201F;
+  color: #cbd5e1;
+  padding-top: 60px;
   padding-bottom: 25px;
-  font-size: 13px;
+  font-size: 13.5px;
 }
 
 .footer-exact-title {
   color: var(--white);
-  font-size: 14px;
+  font-size: 14.5px;
   font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
   margin-bottom: 18px;
+  position: relative;
+  padding-bottom: 8px;
+}
+
+.footer-exact-title::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 28px;
+  height: 2px;
+  background-color: var(--primary);
+  border-radius: 2px;
 }
 
 .footer-exact-links {
@@ -441,34 +570,111 @@ a:hover {
 }
 
 .footer-exact-links li {
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
 .footer-exact-links a {
-  color: #a0aec0;
+  color: rgba(255, 255, 255, 0.75);
   font-size: 13px;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+  display: inline-flex;
+  align-items: center;
 }
 
 .footer-exact-links a:hover {
-  color: var(--white);
+  color: var(--primary);
+  transform: translateX(4px);
+}
+
+.footer-social-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
 }
 
 .footer-social-bar a {
-  width: 32px;
-  height: 32px;
-  background: var(--primary);
+  width: 34px;
+  height: 34px;
+  background: rgba(255, 255, 255, 0.08);
   color: var(--white);
+  border-radius: 50%;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin-right: 6px;
   font-size: 13px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  transition: all 0.2s ease-in-out;
+  text-decoration: none;
+}
+
+.footer-social-bar a:hover {
+  background: var(--primary);
+  color: var(--white);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(182, 121, 97, 0.35);
+}
+
+.footer-contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 12px;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 13px;
+}
+
+.footer-contact-item i {
+  color: var(--primary);
+  font-size: 15px;
+  flex-shrink: 0;
+  margin-top: 2px;
 }
 
 .footer-copyright-bar {
   border-top: 1px solid rgba(255,255,255,0.1);
-  padding-top: 20px;
-  margin-top: 40px;
+  padding-top: 22px;
+  margin-top: 45px;
+}
+
+/* Footer Responsive Centering for Tablet & Mobile */
+@media (max-width: 991px) {
+  .footer-exact-dark {
+    padding-top: 45px;
+    padding-bottom: 24px;
+  }
+
+  .footer-exact-dark .row > div {
+    text-align: center !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  .footer-exact-title::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .footer-social-bar {
+    justify-content: center;
+  }
+
+  .footer-contact-item {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .footer-exact-links a:hover {
+    transform: translateY(-2px);
+  }
+
+  .footer-copyright-bar {
+    text-align: center;
+    gap: 14px;
+  }
 }
 
 /* ==========================================================================

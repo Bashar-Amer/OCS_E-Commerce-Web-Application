@@ -233,7 +233,7 @@
             </div>
 
             <!-- Reviews Pagination Partial -->
-            <partial name="_AdminPagination" model="Model.Reviews" />
+            <partial name="_AdminPagination" model="Model.Reviews" view-data='new ViewDataDictionary(ViewData) { { "PageParamName", "rPage" }, { "Fragment", "#reviews-pane" } }' />
         </div>
     </div>
 
@@ -393,7 +393,7 @@
             </div>
 
             <!-- Testimonials Pagination Partial -->
-            <partial name="_AdminPagination" model="Model.Testimonials" />
+            <partial name="_AdminPagination" model="Model.Testimonials" view-data='new ViewDataDictionary(ViewData) { { "PageParamName", "tPage" }, { "Fragment", "#testimonials-pane" } }' />
         </div>
     </div>
 </div>
