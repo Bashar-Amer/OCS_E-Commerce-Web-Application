@@ -117,28 +117,39 @@ public class CartController : Controller
 
         var cart = await GetOrCreateCartAsync();
 
-        var item = await _dbContext.CartItems
-            .FirstOrDefaultAsync(ci => ci.CartId == cart.Id && ci.ProductId == product.Id);
+        await AddOrUpdateCartItemAsync(cart, product.Id, userData.Quantity, product.Price);
 
-        if (item == null)
+        await _dbContext.SaveChangesAsync();
+        return Ok(new { success = true });
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> MergeGuestCart([FromBody] List<CartItemAddDto> items)
+    {
+        if (items == null || !items.Any())
+            return Ok(new { success = true });
+
+        var cart = await GetOrCreateCartAsync();
+
+        var productIds = items.Select(i => i.ProductId).Distinct().ToList();
+        var products = await _dbContext.Products
+            .Where(p => productIds.Contains(p.Id))
+            .ToDictionaryAsync(p => p.Id);
+
+        foreach (var userData in items)
         {
-            _dbContext.CartItems.Add(new CartItem
-            {
-                CartId = cart.Id,
-                ProductId = product.Id,
-                Quantity = userData.Quantity,
-                UnitPrice = product.Price
-            });
-        }
-        else
-        {
-            item.Quantity += userData.Quantity;
+            if (!products.TryGetValue(userData.ProductId, out var product))
+                continue;
+
+            await AddOrUpdateCartItemAsync(cart, product.Id, userData.Quantity, product.Price);
         }
 
         await _dbContext.SaveChangesAsync();
         return Ok(new { success = true });
     }
 
+    // Helper methods
 
     private async Task<Cart> GetOrCreateCartAsync()
     {
@@ -152,4 +163,26 @@ public class CartController : Controller
         return cart;
     }
 
+    
+
+    private async Task AddOrUpdateCartItemAsync(Cart cart, int productId, int quantity, decimal unitPrice)
+    {
+        var item = await _dbContext.CartItems
+            .FirstOrDefaultAsync(ci => ci.CartId == cart.Id && ci.ProductId == productId);
+
+        if (item == null)
+        {
+            _dbContext.CartItems.Add(new CartItem
+            {
+                CartId = cart.Id,
+                ProductId = productId,
+                Quantity = quantity,
+                UnitPrice = unitPrice
+            });
+        }
+        else
+        {
+            item.Quantity += quantity;
+        }
+    }
 }

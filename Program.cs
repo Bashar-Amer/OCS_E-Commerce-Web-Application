@@ -28,6 +28,11 @@ builder.Services.AddSession();
 builder.Services.AddMemoryCache();
 builder.Services.AddHttpClient();
 
+builder.Services.AddAntiforgery(options =>
+{
+    options.HeaderName = "RequestVerificationToken";
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

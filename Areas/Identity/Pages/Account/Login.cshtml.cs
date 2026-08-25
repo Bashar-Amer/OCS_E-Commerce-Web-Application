@@ -114,7 +114,8 @@ public class LoginModel : PageModel
                     !returnUrl.Contains("/Identity/Account/Login", StringComparison.OrdinalIgnoreCase) && 
                     !returnUrl.Contains("/Identity/Account/Register", StringComparison.OrdinalIgnoreCase))
                 {
-                    return LocalRedirect(returnUrl);
+                    return RedirectToPage("PostLoginSync", new { returnUrl });
+                    //return LocalRedirect(returnUrl);
                 }
 
                 return LocalRedirect("~/");

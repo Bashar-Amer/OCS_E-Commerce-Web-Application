@@ -1,0 +1,63 @@
+﻿@page
+@model PostLoginSyncModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Signing you in…</title>
+
+    @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Antiforgery
+    @{
+        var token = Antiforgery.GetAndStoreTokens(HttpContext).RequestToken;
+    }
+    <meta name="request-verification-token" content="@token" />
+</head>
+<body>
+    <p>Finishing sign in…</p>
+
+    <script>
+            async function getAntiForgeryToken() {
+                const res = await fetch('/Cart/GetAntiForgeryToken');
+                const data = await res.json();
+                return data.token;
+            }
+
+            async function mergeGuestCart() {
+                const raw = localStorage.getItem('barrameru_cart_guest');
+                if (!raw) return;
+
+                const items = JSON.parse(raw);
+                if (!items || !items.length) return;
+
+                const token = await getAntiForgeryToken();
+
+                const res = await fetch('/Cart/MergeGuestCart', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'RequestVerificationToken': token
+                    },
+                    body: JSON.stringify(items)
+                });
+
+                if (res.ok) {
+                    localStorage.removeItem('cart');
+                } else {
+                    console.error('Merge failed with status', res.status);
+                }
+            }
+
+            (async function() {
+                try {
+                    await mergeGuestCart();
+                } catch (e) {
+                    console.error('Cart merge failed', e);
+                } finally {
+                    window.location.href = @Html.Raw(Json.Serialize(Model.ReturnUrl));
+                }
+            })();
+    </script>
+</body>
+</html>

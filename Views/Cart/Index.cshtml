@@ -81,18 +81,9 @@
                     </div>
 
                     <div class="d-grid">
-                        @if (Model.count > 0)
-                        {
                             <a asp-controller="Order" asp-action="Checkout" class="btn btn-barrameru py-2">
                                 Proceed to Checkout
                             </a>
-                        }
-                        else
-                        {
-                            <a class="btn btn-barrameru py-2 disabled" >
-                                Proceed to Checkout
-                            </a>
-                        }
                     </div>
                 </div>
             </div>

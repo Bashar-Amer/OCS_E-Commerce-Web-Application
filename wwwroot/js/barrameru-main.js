@@ -77,24 +77,24 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // 5. Global Newsletter Form Submission
-  const newsletterForms = document.querySelectorAll('.newsletter-form');
-  newsletterForms.forEach(form => {
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const emailInput = form.querySelector('input[type="email"]');
-      if (emailInput && emailInput.value.trim() !== '') {
-        if (typeof Swal !== 'undefined') {
-          Swal.fire({
-            icon: 'success',
-            title: 'Thank you for subscribing!',
-            text: 'You will receive our latest outdoor deals and camping tips directly in your inbox.',
-            confirmButtonColor: '#B67961'
-          });
-        }
-        form.reset();
-      }
-    });
-  });
+  // const newsletterForms = document.querySelectorAll('.newsletter-form');
+  // newsletterForms.forEach(form => {
+  //   form.addEventListener('submit', (e) => {
+  //     e.preventDefault();
+  //     const emailInput = form.querySelector('input[type="email"]');
+  //     if (emailInput && emailInput.value.trim() !== '') {
+  //       if (typeof Swal !== 'undefined') {
+  //         Swal.fire({
+  //           icon: 'success',
+  //           title: 'Thank you for subscribing!',
+  //           text: 'You will receive our latest outdoor deals and camping tips directly in your inbox.',
+  //           confirmButtonColor: '#B67961'
+  //         });
+  //       }
+  //       form.reset();
+  //     }
+  //   });
+  // });
 
   // 6. Global Contact Form Submission
   const contactForm = document.getElementById('barrameruContactForm');
