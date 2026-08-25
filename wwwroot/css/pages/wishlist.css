@@ -3,15 +3,15 @@
    ========================================================================== */
 
 .wishlist-stock-in {
-  color: #10B981;
-  font-weight: 600;
-  font-size: 12px;
+    color: #10B981;
+    font-weight: 600;
+    font-size: 12px;
 }
 
 .wishlist-stock-out {
-  color: #EF4444;
-  font-weight: 600;
-  font-size: 12px;
+    color: #EF4444;
+    font-weight: 600;
+    font-size: 12px;
 }
 
 .table-responsive {
@@ -43,6 +43,7 @@
         color: #6B7280;
         border: none;
         vertical-align: middle;
+        white-space: nowrap;
     }
 
     /* Rows */
@@ -124,6 +125,7 @@
         border-radius: 20px;
         font-size: 11px;
         font-weight: 600;
+        white-space: nowrap;
     }
 
     .table.align-middle td span.text-success.small {
@@ -145,6 +147,7 @@
         font-weight: 600;
         padding: 7px 16px;
         border-radius: 20px;
+        white-space: nowrap;
         transition: filter 0.2s ease, transform 0.2s ease;
     }
 
@@ -162,23 +165,225 @@
         padding: 7px 16px;
         border-radius: 20px;
         opacity: 1;
+        white-space: nowrap;
     }
 
     /* Empty state */
-    .table.align-middle td[colspan] .bi-heart {
-        color: #D1D5DB;
+    .table.align-middle td[colspan] {
+        text-align: center;
     }
 
-    .table.align-middle td[colspan] .btn-barrameru {
-        background: var(--primary);
-        border-color: var(--primary);
-        color: #fff;
-        padding: 9px 22px;
-        border-radius: 20px;
-        font-weight: 600;
+        .table.align-middle td[colspan] .bi-heart {
+            color: #D1D5DB;
+        }
+
+        .table.align-middle td[colspan] .btn-barrameru {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: #fff;
+            padding: 9px 22px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+            .table.align-middle td[colspan] .btn-barrameru:hover {
+                filter: brightness(0.92);
+            }
+
+/* ==========================================================================
+   RESPONSIVE ADJUSTMENTS - WISHLIST PAGE
+   ========================================================================== */
+
+@media (max-width: 991.98px) {
+    .inner-hero-banner {
+        height: 220px;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .inner-hero-banner {
+        height: 190px;
+    }
+
+    .inner-hero-content h1 {
+        font-size: 1.8rem;
+    }
+
+    .inner-hero-content .sub-text {
         font-size: 13px;
     }
+}
 
-        .table.align-middle td[colspan] .btn-barrameru:hover {
-            filter: brightness(0.92);
+/* ==========================================================================
+   CARD LAYOUT — turns each product row into a stacked card on small screens
+   Grid layout:
+     Row 1: [image] [name]          [price]
+     Row 2: [image] [stock] [add-to-cart]
+
+   IMPORTANT: every rule below is scoped to `tr.border-bottom` (real product
+   rows) only, so it never touches the empty-state row (which has no
+   .border-bottom class and just a single colspan td).
+   ========================================================================== */
+@media (max-width: 767.98px) {
+
+    .table-responsive {
+        border: none;
+        overflow: visible;
+    }
+
+    .table.align-middle thead {
+        display: none;
+    }
+
+    .table.align-middle,
+    .table.align-middle tbody {
+        display: block;
+        width: 100%;
+    }
+
+        .table.align-middle tbody tr {
+            display: block;
+            width: 100%;
         }
+
+            /* Product row → card */
+            .table.align-middle tbody tr.border-bottom {
+                position: relative;
+                display: grid;
+                grid-template-columns: 64px 1fr minmax(0, auto);
+                grid-template-areas:
+                    "img  name  price"
+                    "img  stock action";
+                column-gap: 12px;
+                row-gap: 8px;
+                align-items: center;
+                background: #fff;
+                border: 1px solid #E9EAEC !important;
+                border-radius: 10px;
+                padding: 14px 14px 14px 44px;
+                margin-bottom: 12px;
+            }
+
+                .table.align-middle tbody tr.border-bottom td {
+                    padding: 0;
+                    border: none;
+                    min-width: 0; /* allows text to shrink/wrap inside grid tracks */
+                }
+
+                    /* 1. Remove button */
+                    .table.align-middle tbody tr.border-bottom td:nth-child(1) {
+                        position: absolute;
+                        top: 10px;
+                        left: 6px;
+                    }
+
+                    /* 2. Image */
+                    .table.align-middle tbody tr.border-bottom td:nth-child(2) {
+                        grid-area: img;
+                        align-self: center;
+                    }
+
+                        .table.align-middle tbody tr.border-bottom td:nth-child(2) img.img-fluid {
+                            width: 64px !important;
+                            height: 64px !important;
+                        }
+
+                    /* 3. Product name */
+                    .table.align-middle tbody tr.border-bottom td:nth-child(3) {
+                        grid-area: name;
+                        min-width: 0;
+                        align-self: start;
+                    }
+
+                .table.align-middle tbody tr.border-bottom h6.fw-bold a {
+                    display: -webkit-box;
+                    -webkit-line-clamp: 2;
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
+                    font-size: 13px;
+                    line-height: 1.3;
+                }
+
+                /* 4. Price */
+                .table.align-middle tbody tr.border-bottom td:nth-child(4) {
+                    grid-area: price;
+                    align-self: start;
+                    justify-self: end;
+                    text-align: right;
+                    white-space: nowrap;
+                }
+
+                    .table.align-middle tbody tr.border-bottom td:nth-child(4) span.fw-bold.text-secondary {
+                        font-size: 13px;
+                    }
+
+                /* 5. Stock */
+                .table.align-middle tbody tr.border-bottom td:nth-child(5) {
+                    grid-area: stock;
+                    align-self: center;
+                    justify-self: start;
+                }
+
+                    .table.align-middle tbody tr.border-bottom td:nth-child(5) span.text-success.small,
+                    .table.align-middle tbody tr.border-bottom td:nth-child(5) span.text-danger.small {
+                        font-size: 10.5px;
+                        padding: 3px 9px;
+                    }
+
+                /* 6. Action — compact, sized to its content, right aligned */
+                .table.align-middle tbody tr.border-bottom td:nth-child(6) {
+                    grid-area: action;
+                    align-self: center;
+                    justify-self: end;
+                }
+
+                    .table.align-middle tbody tr.border-bottom td:nth-child(6) button {
+                        width: auto;
+                        padding: 7px 12px;
+                        font-size: 10px;
+                        letter-spacing: 0.02em;
+                        gap: 4px;
+                    }
+
+                        .table.align-middle tbody tr.border-bottom td:nth-child(6) button i {
+                            font-size: 11px;
+                        }
+
+            /* Empty state → plain centered block, untouched by the grid/absolute rules above */
+            .table.align-middle tbody tr:not(.border-bottom) {
+                display: block;
+            }
+
+                .table.align-middle tbody tr:not(.border-bottom) td {
+                    display: block;
+                    padding: 40px 16px;
+                }
+}
+
+/* Extra-small phones */
+@media (max-width: 400px) {
+    .table.align-middle tbody tr.border-bottom {
+        grid-template-columns: 56px 1fr minmax(0, auto);
+        padding: 12px 12px 12px 38px;
+        column-gap: 10px;
+    }
+
+        .table.align-middle tbody tr.border-bottom td:nth-child(2) img.img-fluid {
+            width: 56px !important;
+            height: 56px !important;
+        }
+
+        .table.align-middle tbody tr.border-bottom h6.fw-bold a {
+            font-size: 12.5px;
+        }
+
+        .table.align-middle tbody tr.border-bottom td:nth-child(4) span.fw-bold.text-secondary {
+            font-size: 12.5px;
+        }
+
+        .table.align-middle tbody tr.border-bottom td:nth-child(6) button {
+            padding: 6px 10px;
+            font-size: 9.5px;
+        }
+}
