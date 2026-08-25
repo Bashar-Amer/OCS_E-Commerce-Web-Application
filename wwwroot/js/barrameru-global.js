@@ -4,23 +4,23 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     // Newsletter Submit Event
-    document.querySelectorAll('.newsletter-form').forEach(form => {
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const emailInput = form.querySelector('input[type="email"]');
-            if (emailInput && emailInput.value) {
-                if (typeof Swal !== 'undefined') {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Thank you for subscribing!',
-                        text: `We've sent a confirmation to ${emailInput.value}`,
-                        confirmButtonColor: '#B67961'
-                    });
-                }
-                emailInput.value = '';
-            }
-        });
-    });
+    // document.querySelectorAll('.newsletter-form').forEach(form => {
+    //     form.addEventListener('submit', (e) => {
+    //         e.preventDefault();
+    //         const emailInput = form.querySelector('input[type="email"]');
+    //         if (emailInput && emailInput.value) {
+    //             if (typeof Swal !== 'undefined') {
+    //                 Swal.fire({
+    //                     icon: 'success',
+    //                     title: 'Thank you for subscribing!',
+    //                     text: `We've sent a confirmation to ${emailInput.value}`,
+    //                     confirmButtonColor: '#B67961'
+    //                 });
+    //             }
+    //             emailInput.value = '';
+    //         }
+    //     });
+    // });
 
     // Sticky Header Scroll Shadow
     const header = document.querySelector('.header-barrameru');
