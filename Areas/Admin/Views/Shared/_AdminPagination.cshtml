@@ -10,11 +10,14 @@
     var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
     var nextDisabled = !Model.HasNextPage ? "disabled" : "";
 
-    // Retain current query parameters except 'page'
+    var pageParam = ViewData["PageParamName"]?.ToString() ?? "page";
+    var fragment = ViewData["Fragment"]?.ToString() ?? "";
+
+    // Retain current query parameters except current pageParam
     var routeData = new Dictionary<string, string>();
     foreach (var key in Context.Request.Query.Keys)
     {
-        if (!string.IsNullOrEmpty(key) && key.ToLower() != "page")
+        if (!string.IsNullOrEmpty(key) && key.ToLower() != pageParam.ToLower())
         {
             routeData[key] = Context.Request.Query[key].ToString();
         }
@@ -23,9 +26,9 @@
     string GetPageUrl(int pageNumber)
     {
         var queryParams = new Dictionary<string, string>(routeData);
-        queryParams["page"] = pageNumber.ToString();
+        queryParams[pageParam] = pageNumber.ToString();
         var queryString = string.Join("&", queryParams.Select(kvp => $"{kvp.Key}={Uri.EscapeDataString(kvp.Value)}"));
-        return $"{Context.Request.Path}?{queryString}";
+        return $"{Context.Request.Path}?{queryString}{fragment}";
     }
 }
 
@@ -45,20 +48,28 @@
                     </a>
                 </li>
 
-                <!-- Page Numbers -->
+                <!-- Max 3 Sliding Page Numbers -->
                 @{
-                    int startPage = Math.Max(1, Model.PageIndex - 2);
-                    int endPage = Math.Min(Model.TotalPages, Model.PageIndex + 2);
-
-                    if (startPage > 1)
+                    int startPage, endPage;
+                    if (Model.TotalPages <= 3)
                     {
-                        <li class="page-item">
-                            <a class="page-link" href="@GetPageUrl(1)">1</a>
-                        </li>
-                        if (startPage > 2)
-                        {
-                            <li class="page-item disabled"><span class="page-link">…</span></li>
-                        }
+                        startPage = 1;
+                        endPage = Model.TotalPages;
+                    }
+                    else if (Model.PageIndex <= 1)
+                    {
+                        startPage = 1;
+                        endPage = 3;
+                    }
+                    else if (Model.PageIndex >= Model.TotalPages)
+                    {
+                        startPage = Model.TotalPages - 2;
+                        endPage = Model.TotalPages;
+                    }
+                    else
+                    {
+                        startPage = Model.PageIndex - 1;
+                        endPage = Model.PageIndex + 1;
                     }
 
                     for (int i = startPage; i <= endPage; i++)
@@ -66,17 +77,6 @@
                         var activeClass = i == Model.PageIndex ? "active" : "";
                         <li class="page-item @activeClass">
                             <a class="page-link" href="@GetPageUrl(i)">@i</a>
-                        </li>
-                    }
-
-                    if (endPage < Model.TotalPages)
-                    {
-                        if (endPage < Model.TotalPages - 1)
-                        {
-                            <li class="page-item disabled"><span class="page-link">…</span></li>
-                        }
-                        <li class="page-item">
-                            <a class="page-link" href="@GetPageUrl(Model.TotalPages)">@Model.TotalPages</a>
                         </li>
                     }
                 }

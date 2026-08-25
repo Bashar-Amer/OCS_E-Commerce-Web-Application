@@ -68,15 +68,16 @@
 
                 <!-- Right Actions: Animated Search + Cart + User -->
                 <div class="header-right-actions">
-                    <!-- Expandable Button-to-Bar Search -->
+                    <!-- Expandable Search (Desktop inline / Mobile under-bar) -->
                     <div class="header-search-container" id="headerSearchContainer">
-                        <button type="button" class="header-icon-link header-search-trigger" id="headerSearchTrigger" title="Search Store">
+                        <button type="button" class="header-icon-link header-search-trigger" id="headerSearchTrigger" title="Search Outdoor Gear">
                             <i class="bi bi-search"></i>
                         </button>
-                        <form asp-controller="Shop" asp-action="Index" method="get" class="header-search-expandable" id="headerSearchForm">
+                        <!-- Desktop Expandable Inline Form (>= 768px) -->
+                        <form asp-controller="Shop" asp-action="Index" method="get" class="header-search-expandable d-none d-md-flex" id="headerSearchFormDesktop">
                             <i class="bi bi-search search-inner-icon"></i>
-                            <input type="text" name="search" id="headerSearchInput" class="header-search-input-field" placeholder="Search gear, tents, boots..." autocomplete="off" />
-                            <button type="button" class="header-search-close" id="headerSearchClose" title="Close Search">
+                            <input type="text" name="search" id="headerSearchInputDesktop" class="header-search-input-field" placeholder="Search gear, tents, boots..." autocomplete="off" />
+                            <button type="button" class="header-search-close" id="headerSearchCloseDesktop" title="Close Search">
                                 <i class="bi bi-x-lg"></i>
                             </button>
                         </form>
@@ -174,6 +175,24 @@
                 </div>
             </div>
         </div>
+
+        <!-- Under-Navbar Dropdown Search (Mobile Only < 768px, Smooth Slide-Down Animation) -->
+        <div class="header-search-under-bar d-md-none" id="headerSearchUnderBar">
+            <div class="container">
+                <form asp-controller="Shop" asp-action="Index" method="get" class="search-under-bar-form" id="headerSearchFormMobile">
+                    <div class="search-under-bar-input-wrap">
+                        <i class="bi bi-search search-under-icon"></i>
+                        <input type="text" name="search" id="headerSearchInputMobile" class="search-under-input" placeholder="Search gear, tents, backpacks, boots..." autocomplete="off" />
+                        <button type="button" class="search-under-clear-btn" id="headerSearchClearMobile" title="Clear input">
+                            <i class="bi bi-x-circle-fill"></i>
+                        </button>
+                        <button type="button" class="search-under-close-btn" id="headerSearchCloseMobile" title="Close Search">
+                            <i class="bi bi-x-lg"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </header>
 
     <!-- Mobile Offcanvas Menu -->
@@ -259,7 +278,7 @@
             <div class="row g-4">
                 <!-- Col 1: Logo + Bio -->
                 <div class="col-lg-3 col-md-6">
-                    <img src="~/images/Logo_Rahhala_White.svg" alt="Rahhala" style="height: 48px; width: auto; margin-bottom: 16px;">
+                    <img src="~/images/Logo_Barrameru_2.png" alt="Rahhala" style="height: 48px; width: auto; margin-bottom: 16px;">
                     <p class="small text-white-50 mb-3">
                         Rahhala is your premier destination for high-quality camping gear, trekking equipment, and wilderness essentials tailored for passionate explorers.
                     </p>
@@ -295,9 +314,18 @@
                 <!-- Col 4: Reach Us -->
                 <div class="col-lg-3 col-md-6">
                     <h6 class="footer-exact-title">Reach Us</h6>
-                    <p class="small text-white-50 mb-2"><i class="bi bi-geo-alt-fill text-primary me-2"></i> Amman, Jordan</p>
-                    <p class="small text-white-50 mb-2"><i class="bi bi-telephone-fill text-primary me-2"></i> +962 7 9000 1234</p>
-                    <p class="small text-white-50 mb-2"><i class="bi bi-envelope-fill text-primary me-2"></i> info@rahhala.com</p>
+                    <div class="footer-contact-item">
+                        <i class="bi bi-geo-alt-fill"></i>
+                        <span>Queen Rania St, Amman, Jordan</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="bi bi-telephone-fill"></i>
+                        <span>+962 6 500 2026</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="bi bi-envelope-fill"></i>
+                        <span>support@rahhala.com</span>
+                    </div>
                 </div>
             </div>
 

@@ -13,7 +13,7 @@ namespace CampTravelGear.Areas.Admin.Controllers
         }
 
         // GET: /Admin/Reviews
-        public IActionResult Index(int page = 1)
+        public IActionResult Index(int rPage = 1, int tPage = 1, string tab = "reviews")
         {
             int pageSize = 8;
 
@@ -27,8 +27,12 @@ namespace CampTravelGear.Areas.Admin.Controllers
                 .Include(r => r.User)
                 .OrderByDescending(r => r.CreatedAt);
 
-            var reviews = PaginatedList<Review>.Create(query, page, pageSize);
-            var testimonials = PaginatedList<Testimonial>.Create(query2, page, pageSize);
+            var reviews = PaginatedList<Review>.Create(query, rPage, pageSize);
+            var testimonials = PaginatedList<Testimonial>.Create(query2, tPage, pageSize);
+
+            ViewBag.ActiveTab = tab;
+            ViewBag.ReviewPage = rPage;
+            ViewBag.TestimonialPage = tPage;
 
             return View((Reviews: reviews, Testimonials: testimonials));
         }

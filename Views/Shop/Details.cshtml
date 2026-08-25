@@ -207,42 +207,23 @@
             </div>
 
             <!-- PRODUCT META -->
-
-<div class="small text-muted border-top pt-3 mt-auto pb-2">
-                <div class="mb-1">
-
-                    <strong>
-                        Stock:
-                    </strong>
-
+            <div class="small text-muted border-top pt-3 mt-auto pb-2">
+                <div class="mb-1 d-flex align-items-center gap-1">
+                    <strong>Stock:</strong>
                     @if (Model.Stock > 0)
                     {
-                        <span class="text-success">
-                            In Stock (@Model.Stock)
-                        </span>
+                        <span class="text-success fw-semibold">In Stock (@Model.Stock)</span>
                     }
                     else
                     {
-                        <span class="text-danger">
-                            Out of Stock
-                        </span>
+                        <span class="text-danger fw-semibold">Out of Stock</span>
                     }
-
                 </div>
 
-
-                <div class="mb-1">
-
-                    <strong>
-                        Category:
-                    </strong>
-
-                    <span>
-                        @Model.Category?.Name
-                    </span>
-
+                <div class="mb-1 d-flex align-items-center gap-1">
+                    <strong>Category:</strong>
+                    <span>@(Model.Category?.Name ?? "Uncategorized")</span>
                 </div>
-
             </div>
 
         </div>

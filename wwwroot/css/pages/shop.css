@@ -401,8 +401,21 @@
         background: #fff;
     }
 
-.shop-sidebar {
-    position: sticky;
-    top: 70px;
-    align-self: flex-start;
+@media (min-width: 992px) {
+    .shop-sidebar {
+        position: sticky;
+        top: 80px;
+        align-self: flex-start;
+        z-index: 10;
+    }
+}
+
+@media (max-width: 991px) {
+    .shop-sidebar {
+        position: static !important;
+        top: auto !important;
+        align-self: auto !important;
+        z-index: auto !important;
+        margin-bottom: 24px;
+    }
 }
