@@ -46,15 +46,38 @@ namespace CampTravelGear.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, OrderStatus status)
         {
-            var order = _context.Orders.Find(id);
+            var order = _context.Orders
+                .Include(o => o.OrderItems)
+                    .ThenInclude(oi => oi.Product)
+                .FirstOrDefault(o => o.Id == id);
 
             if (ModelState.IsValid)
             {
 
                 if (order == null) return NotFound();
 
-
+                string prevStatus = order.Status;
                 order.Status = status.ToString();
+
+                if (order.Status != prevStatus && order.Status == OrderStatus.Cancelled.ToString())
+                {
+
+                    var items = order.OrderItems;
+                    foreach (OrderItem item in items)
+                    {
+                        if(item.Product != null)
+                            item.Product.Stock += item.Quantity;
+                    }
+                }
+                else if (prevStatus == OrderStatus.Cancelled.ToString() && order.Status != prevStatus) {
+                    var items = order.OrderItems;
+                    foreach (OrderItem item in items)
+                    {
+                        if (item.Product != null)
+                            item.Product.Stock = Math.Max(0,item.Product.Stock - item.Quantity);
+                    }
+                }
+
 
                 _context.SaveChanges();
                 TempData["Success"] = "Order updated successfully!";

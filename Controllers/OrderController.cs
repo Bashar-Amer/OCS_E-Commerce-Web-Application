@@ -4,9 +4,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using CampTravelGear.DTOs;
 using System.Text.Json;
+
 
 namespace CampTravelGear.Controllers;
 
@@ -42,18 +42,23 @@ public class OrderController : Controller
     public async Task<IActionResult> Checkout()
     {
         var cart = await _dbContext.Carts
-            .AsNoTracking()
             .Include(c => c.CartItems)
             .SingleOrDefaultAsync(c => c.UserId == CurrentUserId);
 
-        if (TempData.Peek("CartIssues") != null)
-            return View();
-
-        TempData["CartIssues"] = null;
         if (cart == null || cart.CartItems.Count == 0)
         {
             TempData["CartEmpty"] = "Cart is empty";
             return RedirectToAction("Index", "Cart");
+        }
+
+        foreach (var item in cart.CartItems)
+            await _dbContext.Entry(item).Reference(i => i.Product).LoadAsync();
+        
+        var validation = ValidateAndAdjustCart(cart);
+        if (!validation.IsValid)
+        {
+            await _dbContext.SaveChangesAsync();
+            TempData["CartIssues"] = JsonSerializer.Serialize(validation.Issues);
         }
 
         return View();
@@ -80,9 +85,8 @@ public class OrderController : Controller
         var validation = ValidateAndAdjustCart(cart);
         if (!validation.IsValid)
         {
-            await _dbContext.SaveChangesAsync(); 
-            TempData["CartIssues"] = JsonSerializer.Serialize(validation.Issues);
-            return RedirectToAction(nameof(Checkout));
+            await _dbContext.SaveChangesAsync();
+            return BadRequest(new { success = false, issues = validation.Issues });
         }
 
         await using var transaction = await _dbContext.Database.BeginTransactionAsync();
@@ -97,11 +101,11 @@ public class OrderController : Controller
             if (affected == 0)
             {
                 await transaction.RollbackAsync();
-                TempData["CartIssues"] = new List<string>
+                return BadRequest(new
                 {
-                    "One or more items sold out while you were checking out. Please review your cart."
-                };
-                return RedirectToAction(nameof(Checkout));
+                    success = false,
+                    issues = new List<string> { "One or more items sold out while you were checking out. Please review your cart." }
+                });
             }
         }
 

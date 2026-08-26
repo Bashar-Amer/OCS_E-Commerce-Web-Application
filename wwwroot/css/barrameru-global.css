@@ -502,6 +502,7 @@ a:hover {
   font-size: 3.2rem;
   font-weight: 700;
   margin-bottom: 4px;
+  word-break: break-word;
 }
 
 .inner-hero-content .sub-text {
@@ -509,6 +510,24 @@ a:hover {
   color: #e2e8f0;
   font-size: 16px;
   font-weight: 600;
+}
+
+@media (max-width: 767px) {
+  .inner-hero-banner {
+    padding: 60px 0 45px 0;
+  }
+
+  .inner-hero-content h1 {
+    font-size: 2rem !important;
+  }
+
+  .inner-hero-content .breadcrumbs {
+    font-size: 13px;
+  }
+
+  .inner-hero-content .sub-text {
+    font-size: 14px;
+  }
 }
 
 /* Floating Newsletter Card */
@@ -523,6 +542,12 @@ a:hover {
   padding: 30px 40px;
   box-shadow: 0 10px 25px rgba(0,0,0,0.08);
   border: 1px solid #eaeaea;
+}
+
+@media (max-width: 767px) {
+  .floating-newsletter-card {
+    padding: 20px;
+  }
 }
 
 .newsletter-input-field {

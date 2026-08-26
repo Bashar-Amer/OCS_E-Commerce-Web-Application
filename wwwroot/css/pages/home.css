@@ -765,6 +765,53 @@
         line-height: 1.4;
     }
 
+/* Responsive */
+@media (max-width: 767px) {
+    .home-hero {
+        min-height: 78vh;
+    }
+
+    .home-hero-content {
+        padding: 44px 0;
+    }
+
+    .home-hero-corner {
+        width: 24px;
+        height: 24px;
+    }
+
+    .home-hero-corner-tl,
+    .home-hero-corner-br {
+        display: none;
+    }
+
+    .home-hero-stats {
+        gap: 24px;
+    }
+}
+
+@media (max-width: 576px) {
+    .home-hero-stats {
+        gap: 16px;
+        flex-wrap: wrap;
+        margin-left: 0;
+        padding: 16px 12px;
+    }
+
+    .home-hero-stat {
+        flex: 1 1 30%;
+        min-width: 80px;
+    }
+
+    .home-hero-stat strong {
+        font-size: 16px;
+    }
+
+    .home-hero-stat span {
+        font-size: 11px;
+    }
+}
+
 /* =========================
    PRODUCT CATEGORIES
 ========================= */

@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
     <title>Signing you in…</title>
 
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Antiforgery
@@ -15,23 +16,39 @@
     <meta name="request-verification-token" content="@token" />
 </head>
 <body>
-    <p>Finishing sign in…</p>
+    <div class="text-center" style="margin-top: 20vh;">
+        <div class="spinner-border text-primary" role="status" style="width: 4rem; height: 4rem;">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <h2 class="mt-4">Please wait...</h2>
+        <p class="text-muted">We are processing your request. This may take a few moments.</p>
+    </div>
 
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    
     <script>
-            async function getAntiForgeryToken() {
-                const res = await fetch('/Cart/GetAntiForgeryToken');
-                const data = await res.json();
-                return data.token;
-            }
+            // async function getAntiForgeryToken() {
+            //     const res = await fetch('/Cart/GetAntiForgeryToken');
+            //     const data = await res.json();
+            //     return data.token;
+            // }
 
             async function mergeGuestCart() {
                 const raw = localStorage.getItem('barrameru_cart_guest');
                 if (!raw) return;
 
-                const items = JSON.parse(raw);
-                if (!items || !items.length) return;
+                const guestItems = JSON.parse(raw);
+                if (!guestItems || !guestItems.length) {
+                    console.log("No items");
+                    return;
+                }
 
-                const token = await getAntiForgeryToken();
+                const items = guestItems.map(item => ({
+                    ProductId: item.id,
+                    Quantity: item.quantity
+                }));
+
+                const token = document.querySelector('meta[name="request-verification-token"]').content;
 
                 const res = await fetch('/Cart/MergeGuestCart', {
                     method: 'POST',
@@ -42,11 +59,12 @@
                     body: JSON.stringify(items)
                 });
 
-                if (res.ok) {
-                    localStorage.removeItem('cart');
-                } else {
-                    console.error('Merge failed with status', res.status);
+                if (res.ok){
+                    localStorage.removeItem('barrameru_cart_guest');
+                    console.log("MergeGuestCart success");
                 }
+                 else 
+                    throw new Error(`MergeGuestCart failed with status ${res.status}`);
             }
 
             (async function() {

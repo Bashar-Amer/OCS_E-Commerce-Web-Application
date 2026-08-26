@@ -3,6 +3,23 @@
  */
 
 
+function renderCartIssues(issues) {
+    const container = document.getElementById('cartIssuesContainer');
+    if (!container) return;
+
+    container.innerHTML = `
+        <div class="alert alert-warning alert-dismissible fade show mb-4 rounded-0" role="alert">
+            <strong>Notice regarding your cart:</strong>
+            <ul class="mb-0 ps-3">
+                ${issues.map(issue => `<li>${issue}</li>`).join('')}
+            </ul>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    `;
+
+    container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
 
     const container = document.getElementById('checkoutOrderItemsList');
@@ -56,44 +73,37 @@ document.addEventListener('DOMContentLoaded', async () => {
                         'X-Requested-With': 'XMLHttpRequest'
                     }
                 });
-                if (response.redirected) {
-                    window.location.href = response.url;
-                    return;
-                }
-                const contentType = response.headers.get("content-type");
 
-                if (contentType && contentType.includes("text/html")) {
-                    const html = await response.text();
-                    document.open();
-                    document.write(html);
-                    document.close();
-                    return;
+                const contentType = response.headers.get("content-type");
+                const data = contentType && contentType.includes("application/json")
+                    ? await response.json()
+                    : null;
+
+                if (!response.ok || !data || !data.success) {
+                    const issues = (data && data.issues) ? data.issues : ['Failed to place order. Please try again.'];
+                    renderCartIssues(issues);
+                    throw new Error(issues.join(' '));
                 }
-                if (!response.ok) {
-                    console.log(response);
-                    throw new Error('Failed to place order. Please try again.');
+                
+                if (data.orderId) {
+                    if (typeof Swal !== 'undefined') {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Order Placed Successfully!',
+                            text: `Thank you for your order #${data.orderId}. Redirecting to your invoice...`,
+                            confirmButtonColor: '#B67961',
+                            timer: 2000,
+                            showConfirmButton: false
+                        }).then(() => {
+                            window.location.href = `/Order/Invoice?id=${data.orderId}`;
+                        });
+                    } else window.location.href = `/Order/Invoice?id=${data.orderId}`;
                 }
-                else {
-                    const data = await response.json();
-                    if (data.success && data.orderId) {
-                        if (typeof Swal !== 'undefined') {
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Order Placed Successfully!',
-                                text: `Thank you for your order #${data.orderId}. Redirecting to your invoice...`,
-                                confirmButtonColor: '#B67961',
-                                timer: 2000,
-                                showConfirmButton: false
-                            }).then(() => {
-                                window.location.href = `/Order/Invoice?id=${data.orderId}`;
-                            });
-                        } else window.location.href = `/Order/Invoice?id=${data.orderId}`;
-                    }
-                    else throw new Error('Invalid response from server.');
-                }
+                else throw new Error('Invalid response from server.');
+                
             } catch (error) {
                 console.error("Checkout Error:", error);
-                alert("An error occurred while processing your order. Please review your cart and try again.");
+                // alert("An error occurred while processing your order. Please review your cart and try again.");
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'PLACE ORDER';
             }
