@@ -78,7 +78,7 @@
          LEFT COLUMN - PRODUCT INFORMATION
     ================================================== -->
 
-    <div class="col-lg-6 d-flex">
+    <div class="col-lg-6 d-flex order-2 order-lg-1">
 
     <div class="w-100 d-flex flex-column h-100">
 <div class="d-flex flex-column h-100 m-4">
@@ -152,35 +152,31 @@
             <!-- ADD TO CART / WISHLIST -->
             @if (Model.Stock > 0)
             {
-                <div class="d-flex align-items-center gap-2 mt-auto flex-wrap pt-2">
-                    <div class="d-flex align-items-center gap-2 flex-grow-1" style="min-width: 220px;">
-                        <input type="number"
-                               id="detailQtyInput"
-                               class="form-control rounded-0 text-center"
-                               value="1"
-                               min="1"
-                               max="@Model.Stock"
-                               style="width: 65px; height: 44px;">
-
-                        <button type="button"
-                                class="btn btn-barrameru flex-grow-1"
-                                style="height: 44px;"
-                                onclick="BarrameruStore.addToCart(
-                                    @Model.Id,
-                                    parseInt(document.getElementById('detailQtyInput').value)
-                                )">
-                            <i class="bi bi-cart3 me-1"></i>
-                            ADD TO CART
-                        </button>
-                    </div>
+                <div class="d-flex align-items-center gap-3 mt-auto flex-wrap">
+                    <input type="number"
+                           id="detailQtyInput"
+                           class="form-control rounded-0 text-center"
+                           value="1"
+                           min="1"
+                           max="@Model.Stock"
+                           style="width: 65px; height: 44px;">
 
                     <button type="button"
-                            class="btn btn-outline-secondary rounded-0 px-3 small fw-bold text-decoration-none btn-wishlist-toggle d-inline-flex align-items-center justify-content-center"
-                            style="height: 44px;"
+                            class="btn btn-barrameru"
+                            onclick="BarrameruStore.addToCart(
+                                @Model.Id,
+                                parseInt(document.getElementById('detailQtyInput').value)
+                            )">
+                        <i class="bi bi-cart3 me-1"></i>
+                        ADD TO CART
+                    </button>
+
+                    <button type="button"
+                            class="btn btn-link text-dark small fw-bold text-decoration-none btn-wishlist-toggle"
                             data-product-id="@Model.Id"
                             onclick="BarrameruStore.toggleWishlist(@Model.Id, { name: '@Html.Raw(System.Text.Encodings.Web.JavaScriptEncoder.Default.Encode(Model.Name))', price: @Model.Price, image: '@mainImage' }, this)">
                         <i class="bi bi-heart me-1"></i>
-                        <span>Wishlist</span>
+                        Wishlist
                     </button>
                 </div>
             }
@@ -229,7 +225,7 @@
          RIGHT COLUMN - PRODUCT GALLERY
     ================================================== -->
 
-    <div class="col-lg-6 d-flex">
+    <div class="col-lg-6 d-flex order-1 order-lg-2">
 
         <div class="w-100">
 
@@ -288,7 +284,7 @@
         <!-- Reviews -->
         <div class="col-lg-7">
 
-            <div class="d-flex align-items-center justify-content-between mb-4">
+            <div class="d-flex align-items-center justify-content-between mb-4 flex-wrap">
 
                 <div>
                     <span class="sub-badge text-teal">
@@ -531,7 +527,7 @@
                         var productReviewCount = productRatings.Count;
 
 
-                        <div class="col-lg-3 col-md-6">
+                        <div class="col-6 col-md-6 col-lg-3">
 
                             <div class="template-product-card">
 
