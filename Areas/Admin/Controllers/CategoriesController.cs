@@ -2,6 +2,7 @@ using CampTravelGear.Data;
 using CampTravelGear.Helpers;
 using CampTravelGear.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CampTravelGear.Areas.Admin.Controllers
 {
@@ -68,10 +69,15 @@ namespace CampTravelGear.Areas.Admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Remove(int id) {
-            var category = _context.Categories.Find(id);
+            var category = _context.Categories.Include(c => c.Products).FirstOrDefault(o => o.Id == id);
             if (category == null) return NotFound();
             
             category.IsDeleted = true;
+
+            if(category.Products != null)
+                foreach (Product product in category.Products)
+                    product.IsDeleted = true;
+
             _context.Categories.Update(category);
             _context.SaveChanges();
             TempData["Success"] = "Category removed successfully!";
