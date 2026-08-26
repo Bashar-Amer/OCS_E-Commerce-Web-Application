@@ -3,25 +3,25 @@
    ========================================================================== */
 
 .detail-thumb-active {
-  border-color: var(--primary) !important;
-  opacity: 0.9;
+    border-color: var(--primary) !important;
+    opacity: 0.9;
 }
 
 .nav-tabs .nav-link.active {
-  background-color: var(--primary) !important;
-  color: var(--white) !important;
-  border-color: var(--primary) !important;
+    background-color: var(--primary) !important;
+    color: var(--white) !important;
+    border-color: var(--primary) !important;
 }
 
 .template-product-card {
     background: var(--white);
-    border: 2px solid #E9EAEC;
+    border: 1px solid #E9EAEC;
     border-radius: 4px;
     overflow: visible; /* corner brackets live outside the box */
     text-align: left;
     padding: 0;
     position: relative;
-    height: 90%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     transition: border-color 0.3s ease, transform 0.35s ease;
@@ -37,8 +37,8 @@
     .template-product-card::after {
         content: '';
         position: absolute;
-        width: 50px;
-        height: 50px;
+        width: 20px;
+        height: 20px;
         opacity: 0;
         transform: scale(0.6);
         transition: opacity 0.3s ease, transform 0.3s ease;
@@ -124,7 +124,7 @@
     z-index: 2;
 }
 
-/* Wishlist — becomes a dropped map-pin on hover, evokes "mark this spot" */
+/* Wishlist */
 .template-wishlist-btn {
     position: absolute;
     top: 12px;
@@ -209,6 +209,7 @@
     color: #f59e0b;
     font-size: 11px;
     margin-bottom: 10px;
+    flex-wrap: wrap;
 }
 
     .template-product-rating .text-muted {
@@ -217,7 +218,7 @@
         margin-left: 4px;
     }
 
-/* --- Signature 2: price as a die-cut hangtag --- */
+/* Price hangtag */
 .template-product-price {
     position: relative;
     display: inline-flex;
@@ -231,9 +232,9 @@
     margin-bottom: 16px;
     margin-top: auto;
     border-radius: 0 4px 4px 0;
+    max-width: 100%;
 }
 
-    /* the punched hole */
     .template-product-price::before {
         content: '';
         position: absolute;
@@ -247,7 +248,6 @@
         border-radius: 50%;
     }
 
-    /* the tag's cut edge */
     .template-product-price::after {
         content: '';
         position: absolute;
@@ -271,7 +271,7 @@
 .btn-template-add-cart {
     background: var(--white);
     color: #1F2937;
-    border-top: 2px solid #EDEEF0;
+    border-top: 1px solid #EDEEF0;
     font-size: 12px;
     font-weight: 600;
     letter-spacing: 0.03em;
@@ -296,41 +296,6 @@
     .btn-template-add-cart i {
         font-size: 13px;
     }
-
-.template-wishlist-btn {
-    position: absolute;
-    top: 4px;
-    right: 4px;
-    width: 36px;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--white);
-    color: var(--secondary);
-    border: 1px solid #e5e5e5;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: var(--transition);
-}
-
-    .template-wishlist-btn:hover {
-        background: var(--primary);
-        border-color: var(--primary);
-        color: var(--white);
-    }
-
-    .template-wishlist-btn.active {
-        background: var(--primary);
-        border-color: var(--primary);
-        color: var(--white);
-    }
-
-        .template-wishlist-btn.active i::before {
-            content: "\f415";
-        }
-
 
 /* =========================
    Reviews
@@ -377,4 +342,112 @@
     object-fit: cover;
     object-position: center;
     display: block;
+}
+
+/* ==========================================================================
+   RESPONSIVE ADJUSTMENTS - PRODUCT DETAILS PAGE
+   ========================================================================== */
+
+/* Tablets */
+@media (max-width: 991.98px) {
+    .inner-hero-banner {
+        height: 220px;
+    }
+
+    .product-detail-main-image {
+        height: 400px;
+    }
+}
+
+/* Small tablets / large phones */
+@media (max-width: 767.98px) {
+    .inner-hero-banner {
+        height: 190px;
+    }
+
+    .inner-hero-content h1 {
+        font-size: 1.8rem;
+    }
+
+    .inner-hero-content .sub-text {
+        font-size: 13px;
+    }
+
+    .product-detail-main-image {
+        height: 320px;
+    }
+
+    /* Product name (inline font-size: 2.3rem) */
+    h1[style*="2.3rem"] {
+        font-size: 1.6rem !important;
+    }
+
+    /* Qty + Add to cart + Wishlist row */
+    .d-flex.align-items-center.gap-3.mt-auto {
+        flex-wrap: wrap;
+        row-gap: 10px;
+    }
+
+        .d-flex.align-items-center.gap-3.mt-auto .btn-barrameru {
+            flex: 1 1 auto;
+        }
+
+    /* Reviews header (title + stars) */
+    .d-flex.align-items-center.justify-content-between.mb-4 {
+        flex-wrap: wrap;
+        row-gap: 10px;
+    }
+
+    .review-form,
+    .review-login {
+        padding: 18px;
+    }
+}
+
+/* Phones */
+@media (max-width: 575.98px) {
+    .inner-hero-banner {
+        height: 160px;
+    }
+
+    .inner-hero-content h1 {
+        font-size: 1.5rem;
+    }
+
+    .product-detail-main-image {
+        height: 260px;
+    }
+
+    h1[style*="2.3rem"] {
+        font-size: 1.4rem !important;
+    }
+
+    .fs-4.fw-bold.mb-4 {
+        font-size: 1.15rem !important;
+    }
+
+    /* Thumbnails smaller on phones */
+    .detail-thumb {
+        height: 60px !important;
+    }
+
+    /* Qty input + buttons stack cleanly */
+    #detailQtyInput {
+        width: 60px !important;
+        height: 42px !important;
+    }
+
+    .template-product-title {
+        font-size: 13px;
+    }
+
+    .template-product-price {
+        font-size: 13px;
+        padding: 5px 12px 5px 16px;
+    }
+
+    .btn-template-add-cart {
+        font-size: 11px;
+        padding: 11px 10px;
+    }
 }

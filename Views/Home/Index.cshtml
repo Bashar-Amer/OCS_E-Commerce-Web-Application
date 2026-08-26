@@ -81,8 +81,9 @@
     </a>
 
 </section>
+
 <!-- 2. New Arrivals -->
-<section class="py-5 bg-white text-center">
+<section class="py-5 bg-white text-center" id="featured">
     <div class="container py-4">
 
         <span class="sub-badge text-teal">New Arrival</span>
@@ -97,7 +98,7 @@
             {
                 @foreach (var p in Model.NewArrivals)
                 {
-                    <div class="col-lg-3 col-md-6">
+                    <div class="col-6 col-md-6 col-lg-3">
 
                         <div class="template-product-card">
 
@@ -136,6 +137,7 @@
                                     </a>
 
                                 </h6>
+
                                 <!-- Rating -->
                                 <div class="template-product-rating">
 
@@ -143,68 +145,63 @@
                                     {
                                         @for (int i = 1; i <= 5; i++)
                                         {
-                                            <i class="bi @(i <= Math.Round(p.AverageRating.Value)
-                                                                                            ? "bi-star-fill"
-                                                                                            : "bi-star")"></i>
+                                            <i class="bi @(i <= Math.Round(p.AverageRating.Value) ? "bi-star-fill" : "bi-star")"></i>
+                                        }
+
+                                        <span class="text-muted ms-1">
+                                            (@p.ReviewCount)
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted">
+                                            No reviews yet
+                                        </span>
                                     }
 
-                                    <span class="text-muted ms-1">
-                                        (@p.ReviewCount)
-                                    </span>
-                                }
-                                    else
-                                {
-                                    <span class="text-muted">
-                                        No reviews yet
-                                    </span>
-                                }
+                                </div>
+
+                                <!-- Price -->
+                                <div class="template-product-price">
+                                    @p.Price.ToString("C")
+                                </div>
 
                             </div>
 
+                            <!-- Add To Cart -->
+                            <button type="button"
+                                    class="btn btn-template-add-cart"
+                                    onclick="BarrameruStore.addToCart(@p.Id, 1, {name:'@p.Name',price:'@p.Price',image:'@(p.ImageUrl ?? "/images/placeholder.png")' },this)">
 
-                            <!-- Price -->
-                            <div class="template-product-price">
-                                @p.Price.ToString("C")
-                            </div>
+                                <i class="bi bi-cart3 me-1"></i>
+                                Add to cart
+
+                            </button>
 
                         </div>
 
-
-                        <!-- Add To Cart -->
-                        <button type="button"
-                                class="btn btn-template-add-cart"
-                                onclick="BarrameruStore.addToCart(@p.Id, 1, {name:'@p.Name',price:'@p.Price',image:'@(p.ImageUrl ?? "/images/placeholder.png")' },this)">
-
-                            <i class="bi bi-cart3 me-1"></i>
-                            Add to cart
-
-                        </button>
-
                     </div>
+                }
+            }
+            else
+            {
+                <div class="col-12">
+
+                    <p class="text-muted">
+                        No new arrivals yet — check back soon.
+                    </p>
 
                 </div>
             }
-        }
-            else
-        {
-            <div class="col-12">
+        </div>
 
-                <p class="text-muted">
-                    No new arrivals yet — check back soon.
-                </p>
-
-            </div>
-        }
+        <!-- View All -->
+        <a asp-controller="Shop"
+           asp-action="Index"
+           class="btn btn-barrameru mt-4">
+            VIEW ALL PRODUCTS
+        </a>
     </div>
-
-
-    <!-- View All -->
-    <a asp-controller="Shop"
-       asp-action="Index"
-       class="btn btn-barrameru mt-4">
-        VIEW ALL PRODUCTS
-    </a>
-</div>
 </section>
 
 <!-- 3. Who We Are -->
@@ -213,7 +210,7 @@
         <div class="row align-items-center g-5">
             <div class="col-lg-5">
                 <span class="sub-badge text-teal">Who We Are</span>
-                <h2 class="fw-bold mb-3" style="font-size: 2.2rem; line-height: 1.2;">
+                <h2 class="fw-bold mb-3 home-section-title">
                     Adventure Starts Here
                 </h2>
                 <p class="text-muted small mb-3">
@@ -232,11 +229,11 @@
                 <div class="row g-3">
                     <div class="col-sm-6">
                         <img src="~/images/back-view-of-a-couple-of-hikers-with-backpack.jpg"
-                             alt="Hikers" class="img-fluid w-100" style="height: 380px; object-fit: cover;">
+                             alt="Hikers" class="img-fluid w-100 home-who-img-tall">
                     </div>
                     <div class="col-sm-6 d-flex flex-column justify-content-between">
                         <img src="~/images/spending-time-by-the-campfire.jpg"
-                             alt="Campfire" class="img-fluid w-100 mb-3" style="height: 190px; object-fit: cover;">
+                             alt="Campfire" class="img-fluid w-100 mb-3 home-who-img-short">
                         <div class="quote-box-white flex-grow-1">
                             <div class="quote-mark-teal">&ldquo;</div>
                             <div class="quote-text-script">
@@ -263,13 +260,14 @@
                 <h2 class="text-white fw-bold mb-1">@Model.Stats.TotalCategories</h2>
                 <span class="fs-5 text-uppercase font-monospace text-white-50">GEAR CATEGORIES</span>
             </div>
-            <div class="col-6 col-md-4">
+            <div class="col-12 col-md-4">
                 <h2 class="text-white fw-bold mb-1">@Model.Stats.HappyCustomers+</h2>
                 <span class="fs-5 text-uppercase font-monospace text-white-50">CUSTOMERS SERVED</span>
             </div>
         </div>
     </div>
 </section>
+
 <!-- 6. Why Choose Us -->
 <section class="py-5 bg-white">
 
@@ -296,107 +294,94 @@
         <div class="row g-4">
 
             <!-- CAMPING -->
-            <div class="col-md-6">
+            <div class="col-sm-6">
+                <div class="about-category-card">
 
-                    <div class="about-category-card">
+                    <img src="~/images/spending-time-by-the-campfire.jpg"
+                         alt="Camping gear">
 
-                        <img src="~/images/spending-time-by-the-campfire.jpg"
-                             alt="Camping gear">
+                    <div class="about-category-content">
 
-                        <div class="about-category-content">
+                        <h5>
+                            Camping Gear
+                        </h5>
 
-                            <h5>
-                                Camping Gear
-                            </h5>
-
-                            <span>
-                                Essentials for comfortable outdoor stays
-                            </span>
-
-                        </div>
+                        <span>
+                            Essentials for comfortable outdoor stays
+                        </span>
 
                     </div>
 
-                </a>
-
+                </div>
             </div>
 
 
             <!-- HIKING -->
-            <div class="col-md-6">
-                    <div class="about-category-card">
+            <div class="col-sm-6">
+                <div class="about-category-card">
 
-                        <img src="~/images/group-of-friends-with-backpacks-doing-trekking-excursion-on-mountain.jpg"
-                             alt="Hiking gear">
+                    <img src="~/images/group-of-friends-with-backpacks-doing-trekking-excursion-on-mountain.jpg"
+                         alt="Hiking gear">
 
-                        <div class="about-category-content">
+                    <div class="about-category-content">
 
-                            <h5>
-                                Hiking Gear
-                            </h5>
+                        <h5>
+                            Hiking Gear
+                        </h5>
 
-                            <span>
-                                Gear for trails, mountains and long walks
-                            </span>
-
-                        </div>
+                        <span>
+                            Gear for trails, mountains and long walks
+                        </span>
 
                     </div>
 
-                </a>
-
+                </div>
             </div>
 
 
             <!-- WATER ADVENTURES -->
-            <div class="col-md-6">
-                    <div class="about-category-card">
+            <div class="col-sm-6">
+                <div class="about-category-card">
 
-                        <img src="~/images/paddling-kayaker-on-the-scenic-lake.jpg"
-                             alt="Outdoor adventure gear">
+                    <img src="~/images/paddling-kayaker-on-the-scenic-lake.jpg"
+                         alt="Outdoor adventure gear">
 
-                        <div class="about-category-content">
+                    <div class="about-category-content">
 
-                            <h5>
-                                Outdoor Essentials
-                            </h5>
+                        <h5>
+                            Outdoor Essentials
+                        </h5>
 
-                            <span>
-                                Practical equipment for outdoor activities
-                            </span>
-
-                        </div>
+                        <span>
+                            Practical equipment for outdoor activities
+                        </span>
 
                     </div>
 
-                </a>
-
+                </div>
             </div>
 
 
             <!-- TRAVEL -->
-            <div class="col-md-6">
-                    <div class="about-category-card">
+            <div class="col-sm-6">
+                <div class="about-category-card">
 
-                        <img src="~/images/happy-asian-young-travellers-with-4wd-drive-car-off-road-in-forest--e1664201038495.jpg"
-                             alt="Travel gear">
+                    <img src="~/images/happy-asian-young-travellers-with-4wd-drive-car-off-road-in-forest--e1664201038495.jpg"
+                         alt="Travel gear">
 
-                        <div class="about-category-content">
+                    <div class="about-category-content">
 
-                            <h5>
-                                Travel Essentials
-                            </h5>
+                        <h5>
+                            Travel Essentials
+                        </h5>
 
-                            <span>
-                                Smart gear for your next journey
-                            </span>
-
-                        </div>
+                        <span>
+                            Smart gear for your next journey
+                        </span>
 
                     </div>
 
-                </a>
-
+                </div>
             </div>
 
         </div>
@@ -417,6 +402,7 @@
     </div>
 
 </section>
+
 <!-- 8. Testimonials -->
 <section class="testimonial-section">
     <div class="testimonial-bg"
@@ -443,7 +429,7 @@
             <div class="row g-4">
                 @foreach (var t in Model.Testimonials)
                 {
-                    <div class="col-lg-4">
+                    <div class="col-md-6 col-lg-4">
                         <div class="testimonial-card">
 
                             <i class="bi bi-quote testimonial-quote-icon"></i>
@@ -488,7 +474,7 @@
 <!-- 9. Frequently Asked Questions -->
 <section class="py-5 bg-white">
     <div class="container py-4">
-        <div class="row g-5">
+        <div class="row g-5 align-items-center">
 
             <div class="col-lg-5">
                 <span class="sub-badge text-teal">FAQs</span>
@@ -499,11 +485,6 @@
                     Find answers to the most common questions about our camping
                     and travel gear, orders, shipping, and returns.
                 </p>
-
-                <img src="~/images/blue-hiking-backpack-with-fitness-mat-isolated-on-2021-09-03-13-40-43-utc-1.jpg"
-                     alt="Camping Backpack"
-                     class="img-fluid"
-                     style="max-height: 280px; object-fit: contain;">
             </div>
 
             <div class="col-lg-7">
