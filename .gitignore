@@ -283,3 +283,5 @@ _Pvt_Extensions
 
 
 appsettings*
+
+appsettings.Production.json

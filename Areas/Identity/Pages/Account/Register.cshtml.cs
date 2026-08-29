@@ -119,8 +119,8 @@ public class RegisterModel : PageModel
                 }
                 else
                 {
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-                    return LocalRedirect(returnUrl);
+                    TempData["Success"] = "Account created successfully! Please sign in with your credentials.";
+                    return RedirectToPage("Login", new { returnUrl = returnUrl });
                 }
             }
             foreach (var error in result.Errors)

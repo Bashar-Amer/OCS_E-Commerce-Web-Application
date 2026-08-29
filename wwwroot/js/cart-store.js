@@ -589,12 +589,12 @@ const BarrameruStore = {
           </div>
           <div class="small text-muted mb-1">$${(parseFloat(item.price) || 0).toFixed(2)} each</div>
           <div class="d-flex justify-content-between align-items-center mt-1">
-            <div class="mini-cart-qty-ctrl d-inline-flex align-items-center">
-              <button type="button" class="mini-cart-qty-btn" onclick="BarrameruStore.updateCartQuantity(${item.id}, ${(item.quantity || 1) - 1})" title="Decrease quantity">
+            <div class="mini-cart-qty-ctrl d-inline-flex align-items-center border bg-white rounded-1" style="height: 28px;">
+              <button type="button" class="mini-cart-qty-btn border-0 bg-transparent px-1 text-secondary" onclick="BarrameruStore.updateCartQuantity(${item.id}, Math.max(1, ${(item.quantity || 1) - 1}))" title="Decrease quantity">
                 <i class="bi bi-dash"></i>
               </button>
-              <span class="mini-cart-qty-val">${item.quantity || 1}</span>
-              <button type="button" class="mini-cart-qty-btn" onclick="BarrameruStore.updateCartQuantity(${item.id}, ${(item.quantity || 1) + 1})" title="Increase quantity">
+              <input type="number" class="border-0 text-center px-0 shadow-none fw-bold" style="width: 32px; height: 100%; font-size: 12px; background: transparent;" value="${item.quantity || 1}" min="1" onchange="BarrameruStore.updateCartQuantity(${item.id}, Math.max(1, parseInt(this.value) || 1))">
+              <button type="button" class="mini-cart-qty-btn border-0 bg-transparent px-1 text-secondary" onclick="BarrameruStore.updateCartQuantity(${item.id}, ${(item.quantity || 1) + 1})" title="Increase quantity">
                 <i class="bi bi-plus"></i>
               </button>
             </div>

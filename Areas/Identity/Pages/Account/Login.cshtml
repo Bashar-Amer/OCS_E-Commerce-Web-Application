@@ -71,6 +71,14 @@
                 <p>Enter your credentials to access your account & orders.</p>
             </div>
 
+            @if (TempData["Success"] != null)
+            {
+                <div class="alert alert-success rounded-0 small py-2 mb-3 d-flex align-items-center gap-2" role="alert">
+                    <i class="bi bi-check-circle-fill text-success fs-6"></i>
+                    <span>@TempData["Success"]</span>
+                </div>
+            }
+
             <!-- Validation Errors -->
             <div asp-validation-summary="ModelOnly" class="alert alert-danger rounded-0 small py-2 mb-3" role="alert"></div>
 

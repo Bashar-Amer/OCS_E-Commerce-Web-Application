@@ -810,6 +810,26 @@
         font-size: 12px;
     }
 
+/* Laptops (13"-15" screens, e.g. 1366x768 / 1440x900) */
+@media (min-width: 992px) and (max-width: 1440px) {
+    .home-hero {
+        min-height: 68vh;
+    }
+
+    .home-hero-content {
+        max-width: 560px;
+        padding: 48px 0;
+    }
+
+    .home-hero-title {
+        font-size: clamp(2rem, 5vw, 3.1rem);
+    }
+
+    .home-hero-actions {
+        margin-bottom: 36px;
+    }
+}
+
 /* Tablets / small laptops */
 @media (max-width: 991.98px) {
     .home-hero {

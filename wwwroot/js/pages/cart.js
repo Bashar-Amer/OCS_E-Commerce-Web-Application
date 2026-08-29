@@ -46,8 +46,16 @@ function renderRows(tbody, cart) {
                 </td>
                 <td class="small text-secondary">${money(item.price)}</td>
                 <td>
-                    <input type="number" class="form-control form-control-sm text-center rounded-0 cart-qty-input"
-                           style="width: 60px;" data-id="${item.id}" value="${item.quantity}" min="1">
+                    <div class="d-inline-flex align-items-center border bg-white" style="height: 36px;">
+                        <button type="button" class="btn btn-sm px-2 py-0 border-0 text-secondary btn-cart-step-minus" data-id="${item.id}" style="height: 100%; width: 28px;" title="Decrease">
+                            <i class="bi bi-dash"></i>
+                        </button>
+                        <input type="number" class="form-control form-control-sm border-0 text-center rounded-0 cart-qty-input shadow-none px-1 fw-bold"
+                               style="width: 44px; height: 100%; background: transparent;" data-id="${item.id}" value="${item.quantity}" min="1">
+                        <button type="button" class="btn btn-sm px-2 py-0 border-0 text-secondary btn-cart-step-plus" data-id="${item.id}" style="height: 100%; width: 28px;" title="Increase">
+                            <i class="bi bi-plus"></i>
+                        </button>
+                    </div>
                 </td>
                 <td class="small fw-bold text-secondary">${money(item.price * item.quantity)}</td>
             </tr>
@@ -73,8 +81,6 @@ window.renderCartPage = async function () {
 
     const cart = BarrameruStore.getCart();
 
-    // console.log(cart);
-
     if (cart.length === 0) {
         renderEmpty(tbody);
         updateSummary({ subtotal: 0, total: 0 });
@@ -85,7 +91,6 @@ window.renderCartPage = async function () {
     updateSummary(BarrameruStore.getTotals());
 };
 
-
 async function handleUpdateCartClick(btn) {
     btn.disabled = true;
     try {
@@ -95,17 +100,53 @@ async function handleUpdateCartClick(btn) {
     }
 }
 
-
 document.addEventListener('DOMContentLoaded', () => {
     window.renderCartPage();
 
     const tbody = document.getElementById('cartTableBodyExact');
     if (tbody) {
         tbody.addEventListener('click', (e) => {
+            const minusBtn = e.target.closest('.btn-cart-step-minus');
+            if (minusBtn) {
+                const id = parseInt(minusBtn.dataset.id);
+                const input = tbody.querySelector(`.cart-qty-input[data-id="${id}"]`);
+                if (input) {
+                    let val = parseInt(input.value) || 1;
+                    if (val > 1) {
+                        input.value = val - 1;
+                        BarrameruStore.updateCartQuantity(id, val - 1);
+                    }
+                }
+                return;
+            }
+
+            const plusBtn = e.target.closest('.btn-cart-step-plus');
+            if (plusBtn) {
+                const id = parseInt(plusBtn.dataset.id);
+                const input = tbody.querySelector(`.cart-qty-input[data-id="${id}"]`);
+                if (input) {
+                    let val = parseInt(input.value) || 1;
+                    input.value = val + 1;
+                    BarrameruStore.updateCartQuantity(id, val + 1);
+                }
+                return;
+            }
+
             const btn = e.target.closest('.btn-remove-cart-item');
             if (!btn) return;
             const id = parseInt(btn.dataset.id);
             if (!isNaN(id)) BarrameruStore.removeFromCart(id);
+        });
+
+        tbody.addEventListener('change', (e) => {
+            const input = e.target.closest('.cart-qty-input');
+            if (input) {
+                const id = parseInt(input.dataset.id);
+                let val = parseInt(input.value) || 1;
+                if (val < 1) val = 1;
+                input.value = val;
+                BarrameruStore.updateCartQuantity(id, val);
+            }
         });
     }
 
